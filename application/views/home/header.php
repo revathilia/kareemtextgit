@@ -41,24 +41,7 @@
                                         </li>
                                         <li class="menu-icon"><a href="<?php echo base_url()?>home/contact">Contact Us</a>
                                            
-                                                </li>
-                                             
-                                                <li  class="menu-icon"> 
-                                                <div class=" switch_sec">
-            <!-- <a href="">AR</a> -->
-        <?php 
- $session = $this->session->userdata('lang'); 
- if($session =='eng') {?>
-       <a class=" menu-icon lang_switch" onclick="langAjax('ar')"><img src="<?php echo base_url()?>assets/home_assets/img/sa.png"></a>
-    <?php } else {?>
-
-      <a class=" menu-icon lang_switch" onclick="langAjax('eng')"> <img src="<?php echo base_url()?>assets/home_assets/img/en.png"></a>
-    <?php } ?>
-        </div>
-      
-      </li>
-                                            
-                                        
+                                                      
                                     </ul>
                                 </div>
                             </nav>
@@ -70,6 +53,19 @@
                         <!-- user-menu -->
                         <div class="ltn__drop-menu user-menu">
                             <ul>
+                            <li> 
+                                                <div class=" switch_sec">
+            <!-- <a href="">AR</a> -->
+        <?php 
+ $session = $this->session->userdata('lang'); 
+ if($session =='eng') {?>
+       <a class=" menu-icon lang_switch" onclick="langAjax('ar')"><img src="<?php echo base_url()?>assets/home_assets/img/sa.png" width="30px" height="30px"></a>
+    <?php } else {?>
+
+      <a class=" menu-icon lang_switch" onclick="langAjax('eng')"> <img src="<?php echo base_url()?>assets/home_assets/img/uk.png" width="30px" height="30px"></a>
+    <?php } ?>
+        </div>
+        </li>
                                 <li>
                                     <a href="#"><i class="icon-user"></i></a>
                                     <ul>

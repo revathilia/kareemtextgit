@@ -35,21 +35,8 @@
                                         </li>
                                         
                                         <li><a href="<?php echo base_url()?>home/contact">Contact Us</a></li>
-                                       
-                                     <li  class="menu-icon"> 
-                                                <div class=" switch_sec">
-            <!-- <a href="">AR</a> -->
-        <?php 
- $session = $this->session->userdata('lang'); 
- if($session =='eng') {?>
-       <a class=" menu-icon lang_switch" onclick="langAjax('ar')"><img src="<?php echo base_url()?>assets/home_assets/img/sa.png"></a>
-    <?php } else {?>
-
-      <a class=" menu-icon lang_switch" onclick="langAjax('eng')"> <img src="<?php echo base_url()?>assets/home_assets/img/en.png"></a>
-    <?php } ?>
-        </div>
-      
-      </li>
+                                 
+    
                                         
                                     </ul>
                                 </div>
@@ -58,22 +45,20 @@
                     </div>
                     <div class="col--- ltn__header-options ltn__header-options-2 mb-sm-20">
                         <!-- header-search-1 -->
-                        <div class="header-search-wrap search-whi">
-                            <div class="header-search-1">
-                                <div class="search-icon">
-                                    <i class="icon-search for-search-show"></i>
-                                    <i class="icon-cancel  for-search-close"></i>
-                                </div>
-                            </div>
-                            <div class="header-search-1-form">
-                                <form id="#" method="get"  action="#">
-                                    <input type="text" name="search" value="" placeholder="Search here..."/>
-                                    <button type="submit">
-                                        <span style="color:#fff"><i class="icon-search"></i></span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                             
+                        <li> 
+                                                <div class=" switch_sec">
+            <!-- <a href="">AR</a> -->
+        <?php 
+ $session = $this->session->userdata('lang'); 
+ if($session =='eng') {?>
+       <a class=" menu-icon lang_switch" onclick="langAjax('ar')"><img src="<?php echo base_url()?>assets/home_assets/img/sa.png" width="30px" height="30px"></a>
+    <?php } else {?>
+
+      <a class=" menu-icon lang_switch" onclick="langAjax('eng')"> <img src="<?php echo base_url()?>assets/home_assets/img/en.png" width="30px" height="30px"></a>
+    <?php } ?>
+        </div>
+        </li>
                         <!-- user-menu -->
                         <div class="ltn__drop-menu user-menu">
                             <ul>

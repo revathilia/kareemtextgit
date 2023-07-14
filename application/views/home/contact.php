@@ -1,5 +1,13 @@
-<!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<?php
+$session = $this->session->userdata('lang');
+if (empty($session)) {
+	# code...
+$this->session->set_userdata('lang', 'eng');
+$this->session->set_userdata('dir', 'ltr');
+}
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->session->userdata('lang') ?>" dir="<?php echo $this->session->userdata('dir') ?>">
 
 
 <head>
@@ -20,6 +28,10 @@
     <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <?php if($this->session->userdata('lang') !='eng') {?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+	<?php } ?>
 </head>
 
 <body>
@@ -62,7 +74,7 @@
                 <div class="col-lg-4">
                     <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                         <div class="ltn__contact-address-icon">
-                            <img src="<?php echo base_url()?>assets/home_assets/img/icons/10.png" alt="Icon Image">
+                            <img src="<?php echo base_url()?>assets/home_assets/img/icons/10.svg" alt="Icon Image">
                         </div>
                         <h3>Email Address</h3>
                         <p>Kareemtex@webmail.com <br>
@@ -72,7 +84,7 @@
                 <div class="col-lg-4">
                     <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                         <div class="ltn__contact-address-icon">
-                            <img src="<?php echo base_url()?>assets/home_assets/img/icons/11.png" alt="Icon Image">
+                            <img src="<?php echo base_url()?>assets/home_assets/img/icons/11.svg" alt="Icon Image">
                         </div>
                         <h3>Phone Number</h3>
                         <p>+0123-456789 <br> +987-6543210</p>
@@ -81,7 +93,7 @@
                 <div class="col-lg-4">
                     <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                         <div class="ltn__contact-address-icon">
-                            <img src="<?php echo base_url()?>assets/home_assets/img/icons/12.png" alt="Icon Image">
+                            <img src="<?php echo base_url()?>assets/home_assets/img/icons/12.svg" alt="Icon Image">
                         </div>
                         <h3>Office Address</h3>
                         <p>18/A, New Born Town Hall <br>
@@ -124,8 +136,9 @@
                                 </div>
                             </div>
                             <div class="input-item input-item-textarea ltn__custom-icon">
-                                <textarea name="message" placeholder="Enter message"></textarea>
+                                <textarea name="message" placeholder="Enter message" rows="9" cols="70"></textarea>
                             </div>
+                            <br>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-item  ">
@@ -152,11 +165,20 @@
     <!-- CONTACT MESSAGE AREA END -->
 
     <!-- GOOGLE MAP AREA START -->
+    <section style="margin-top:50px">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+    
     <div class="google-map mb-120">
     <br><br><br><br>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.271551495209!2d-73.97198251485975!3d40.668170674982946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b0456b5a2e7%3A0x68bdf865dda0b669!2sBrooklyn%20Botanic%20Garden%20Shop!5e0!3m2!1sen!2sbd!4v1590597267201!5m2!1sen!2sbd" width="100%" height="100%" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 
     </div>
+    </div>
+    </div>
+        </div>
+    </section>
     <!-- GOOGLE MAP AREA END -->
 
    
