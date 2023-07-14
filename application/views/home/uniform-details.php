@@ -160,7 +160,33 @@ if($this->session->userdata('lang') == 'ar'){
     }
     
     ?>
-                                                <p class="input-box"><?php echo $this->Admin_model->get_type_name_by_id('school_master','id',$schoolid,'school_name')?></p>
+
+     <select  name="school_selected" class="size-select selectschool">
+      <option>Select</option>
+                       <?php  
+
+
+ 
+                       foreach ($schools as $sch) { ?>
+                        <option value="<?php echo $sch['school_id'] ?>" >
+                         
+
+                          <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $this->Admin_model->get_type_name_by_id('school_master','id',$sch['school_id'],'ar_school_name') ;
+}else{
+     echo $this->Admin_model->get_type_name_by_id('school_master','id',$sch['school_id'],'school_name') ;
+
+}
+                                                    ?>
+
+                            
+                          </option>
+                           
+                      <?php   } ?>
+                    </select>
+
+                                               
 </div>
 <div class="col-md-6">
                                                 <p>Gender</p>
@@ -171,10 +197,11 @@ if($this->session->userdata('lang') == 'ar'){
                        <?php  
 
 
+ 
 $genders = $uniformdata->genders ;
 $genders = explode( ',', $genders) ;
                        foreach ($genders as $gender) { ?>
-                        <option value="<?php echo $gender ?>" <?php if($gender_selected ==$gender ) { echo "selected" ;}?>><?php echo $this->Admin_model->get_type_name_by_id('genders','id',$gender,'gender_name')  ?></option>
+                        <option value="<?php echo $gender ?>" <?php if(sizeof($genders)==1 ) { echo "selected" ;}?>><?php echo $this->Admin_model->get_type_name_by_id('genders','id',$gender,'gender_name')  ?></option>
                            
                       <?php   } ?>
                     </select>
@@ -207,7 +234,7 @@ $sizes = explode( ',', $sizes) ;
                                                 <p>check school emblem</p>
 </div>
 <div class="col-md-6">
-                                                <p class="input-box text-center"><img src="<?php echo base_url()?>uploads/images/school/<?php echo $this->Admin_model->get_type_name_by_id('school_master','id',$schoolid,'school_logo')?>" width="150px" height="150px"></p>
+                                                <p class="input-box text-center"><img id="school_logo" width="150px" height="150px"></p>
 </div>
 </div>
 
@@ -497,6 +524,33 @@ $("#cartitem").html( status.items) ;
 
       $('#price_det1').html(JSON.price_det1);
       $('#price_det2').html(JSON.price_det2);
+    }
+    
+    });
+ 
+
+
+   });
+
+
+ $(document).on('change',".selectschool", function()
+   { 
+    var school  = $(this).val();
+ 
+
+    
+    $.ajax({  
+    url:"<?php echo base_url(); ?>home/get_school_logo",  
+    method:"POST",  
+    data:{school:school},  
+    success:function(data)
+    { 
+
+      $('#school_logo').attr('src', '<?php echo base_url()?>uploads/images/school/'+data);
+
+ 
+
+
     }
     
     });

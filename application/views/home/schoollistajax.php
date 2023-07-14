@@ -26,7 +26,7 @@
                                             </div>
                                             <div class="product-info">
                                                 <br><br>
-                                                <h2 class="product-title"><a href="<?php echo base_url()  ?>home/uniforms/<?php echo  $school['id'] ?>">
+                                                <h2 class="product-title"><a href="javascript:void(0)" class="addtocart" data-productid="<?php echo $school['id'] ; ?>">
 
                                                  
                                                     
@@ -48,7 +48,7 @@ if($this->session->userdata('lang') == 'ar'){
  <div class="ltn__shop-options">
                         <ul>
                             <li>
-                                 No Result Found !!
+                                 <?php echo $this->Admin_model->translate("No Result Found !!") ?>
                             </li>
                         </ul>
                     </div>

@@ -557,6 +557,30 @@ if(!empty($lev)){
   }
 
 
+
+
+  public function uniform_det()
+  {   
+     $id = $this->uri->segment(3) ;
+     $data['uniformdata'] = $this->Admin_model->get_single_data('school_products',array('id'=>$id));
+         
+      $data['schools'] = $this->Admin_model->get_all_data('uniform_school_relation',array('uniform_id'=>$id,'status'=>1 ));
+
+
+     $pimages  = array();
+     $pimage = '' ;
+     $product_images = $this->Admin_model->get_all_data('school_product_images',array('product_id'=>$id)); 
+    foreach($product_images as $images){
+     $pimage .= "," .$images['product_images'];
+    }
+    $pimages  = explode(',',$pimage) ; 
+    $data['product_images'] = $pimages ;
+      $data['product_price'] = $this->Admin_model->get_single_data('school_product_price_size_det',array('product_id'=>$id,'status'=>'Y'));  
+   //  $data['inventory'] = $this->get_stock_det($id); 
+     $this->load->view('home/uniform-details', $data);
+  }
+
+
   public function confirm_uniform(){
     $uniformsession = $this->session->userdata('uniformdata');
     if(!empty($uniformsession)){
@@ -923,6 +947,13 @@ $this->output($Return);
 exit;
 
 
+}
+
+function get_school_logo(){
+  $school = $this->input->post('school');
+ $logo = $this->Admin_model->get_type_name_by_id('school_master','id',$school,'school_logo');
+
+ echo $logo ;
 }
 
   public function get_stock_det($product_id){
