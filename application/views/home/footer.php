@@ -6,11 +6,12 @@
                         <div class="footer-widget footer-about-widget">
                             <div class="footer-logo">
                                 <div class="site-logo">
-                                    <img src="<?php echo base_url()?>assets/home_assets/img/foo-logo.png" alt="Logo">
-                                    <br>
+                                    <img src="<?php echo base_url()?>assets/home_assets/img/foo-logo.png" alt="Logo" style="margin-top:-15px;">
+                                    
                                 </div>
                             </div>
-                            <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.</p>
+                          
+                                                       <p style="margin-top:10px">Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.</p>
                            
                             <div class="ltn__social-media mt-20">
                                 <ul>

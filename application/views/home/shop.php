@@ -1,5 +1,14 @@
-<!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<?php
+$session = $this->session->userdata('lang');
+if (empty($session)) {
+	# code...
+$this->session->set_userdata('lang', 'eng');
+$this->session->set_userdata('dir', 'ltr');
+}
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->session->userdata('lang') ?>" dir="<?php echo $this->session->userdata('dir') ?>">
+
 
 
 
@@ -21,7 +30,10 @@
     <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
-
+    <?php if($this->session->userdata('lang') !='eng') {?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+	<?php } ?>
      <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css'> 
 <style>
@@ -87,13 +99,36 @@
      background-color: #fc9200 !important ;
         color:  #fff !important ;
 }
-
-
-
-
-</style>
-
-<style>
+.nice-select {
+    -webkit-tap-highlight-color: transparent;
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #e8e8e8;
+    box-sizing: border-box;
+    clear: both;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    height: 42px;
+    line-height: 40px;
+    outline: 0;
+    width: 200px !important;
+    padding-left: 18px;
+    padding-right: 30px;
+    position: relative;
+    text-align: left!important;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    width: auto;
+}
     input[type="search"] {
   -webkit-appearance: none !important;
   background-clip: padding-box;
@@ -104,7 +139,7 @@
   font-size: 1rem;
   position: relative;
   top:-20px;
-  
+  left:10px;
   width: 100%;
   height:40px;
   line-height: 2;

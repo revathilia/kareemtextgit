@@ -1,8 +1,14 @@
-<!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<?php
+$session = $this->session->userdata('lang');
+if (empty($session)) {
+	# code...
+$this->session->set_userdata('lang', 'eng');
+$this->session->set_userdata('dir', 'ltr');
+}
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->session->userdata('lang') ?>" dir="<?php echo $this->session->userdata('dir') ?>">
 
-
-<!-- Mirrored from tunatheme.com/tf/html/vicodin-preview/vicodin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Mar 2023 08:39:14 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -22,7 +28,11 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
-</head>
+    <?php if($this->session->userdata('lang') !='eng') {?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+	<?php } ?>
+  </head>
 
 <body>
 
@@ -55,7 +65,7 @@
   <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-11">
       
             <p class="text-left in-box"><img src="<?php echo base_url()?>assets/home_assets/img/icons/fb.png" width="30px" height="30px">&nbsp;&nbsp;Continue with Facebook</p>
 

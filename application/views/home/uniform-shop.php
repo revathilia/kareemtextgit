@@ -593,8 +593,6 @@ $(".standards a").each(function(){
    
 });
 
-console.log(standards);
-
 
 
 var colors = []

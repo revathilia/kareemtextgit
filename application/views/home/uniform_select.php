@@ -40,13 +40,13 @@
 <div class="radio-container2">
 <div class="row">
        <?php foreach ($classes as $class) { ?>
-          <div class="col-md-6"><input type="radio" name="selected_class" class="selected_class"  value="<?php echo $class['id'] ?>" id="choice_<?php echo $class['id'] ?>" >
+          <div class="col-md-4"><input type="radio" name="selected_class" class="selected_class"  value="<?php echo $class['id'] ?>" id="choice_<?php echo $class['id'] ?>" >
       <label for="choice_<?php echo $class['id'] ?>"> <?php if($class['standard_name'] == 'LKG' || $class['standard_name'] == 'UKG') { echo '' ; } else { echo 'Class' ;} ?><?php echo $class['standard_name'] ?></label></div>
      <?php  } ?>
 </div>
 </div>
 </div>
-<div class="form-group clearfix" style="margin-left:-50px;">
+<div class="form-group clearfix next-b">
                                 <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
                                 <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
                             </div>
@@ -72,7 +72,7 @@
                             </div>
 </div>
 </div>
-                            <div class="form-group clearfix" style="margin-left:-50px;margin-top:-30px">
+                            <div class="form-group clearfix next-b">
                                 <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
                                 <a href="javascript:;" class="form-wizard-submit float-right">Submit</a>
                             </div>

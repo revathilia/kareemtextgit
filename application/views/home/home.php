@@ -341,7 +341,7 @@ $this->session->set_userdata('dir', 'ltr');
                     </div>
                 </div>
             </div>
-            <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal">
+            <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal" dir="rtl">
                 <!-- Blog Item -->
                 <div class="col-lg-12">
                     <div class="ltn__blog-item ltn__blog-item-3">

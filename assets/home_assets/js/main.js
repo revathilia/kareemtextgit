@@ -356,6 +356,7 @@
             arrows: true,
             dots: true,
             fade: true,
+            rtl:true,
             cssEase: 'linear',
             infinite: true,
             speed: 300,
@@ -914,6 +915,7 @@
             infinite: true,
             speed: 300,
             slidesToShow: 3,
+            rtl:true,
             slidesToScroll: 1,
             prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
             nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
@@ -1847,9 +1849,9 @@
         --------------------------------------------------------- */
          $( ".slider-range" ).slider({
             range: true,
-            min: 0,
+            min: 50,
             max: 5000,
-            values: [ 0 , 1500 ],
+            values: [ 50, 1500 ],
             slide: function( event, ui ) {
                 $( ".amount" ).val( "SAR " + ui.values[ 0 ] + " - SAR " + ui.values[ 1 ] );
             }
