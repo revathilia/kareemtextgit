@@ -57,13 +57,14 @@ $this->session->set_userdata('dir', 'ltr');
 }
 .swatch > [type=radio] + label,
 .swatch > [type=checkbox] + label {
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
-  line-height: 30px;
-  text-align: center;
-  position: absolute;
-  transition: all 0.5s ease-in-out;
+    width: 30px;
+    border: 1px solid #00000029;
+    height: 30px;
+    border-radius: 30px;
+    line-height: 30px;
+    text-align: center;
+    position: absolute;
+    transition: all 0.5s ease-in-out;
 }
 .swatch > [type=radio] + label i,
 .swatch > [type=checkbox] + label i {
@@ -246,7 +247,7 @@ button[type="submit"]{
 
     <div class="ltn__utilize-overlay"></div>
  <!-- BREADCRUMB AREA START -->
- <div class="ltn__breadcrumb-area2 text-left "  >
+ <div class="ltn__breadcrumb-area2 text-left">
         <div class="container-fluid">
             <div class="row">
             
@@ -256,8 +257,8 @@ button[type="submit"]{
                         <img src="<?php echo base_url()?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid" width="540px" height="550px">
                     </div>
                 </div>
-                <div class="col-lg-6 align-self-center">
-                    <div class="orange-back" style="margin-left:-40px">
+                <div class="col-lg-6 align-self-center orange-back">
+                    <div class="">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">Industrial <br> Uniforms</h4>

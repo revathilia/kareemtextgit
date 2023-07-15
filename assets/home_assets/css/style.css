@@ -1,4 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family:regular;
+  src: url(../../home_assets/fonts/regular.ttf);
+}
+@font-face {
+  font-family:pop;
+  src: url(../../home_assets/fonts/pop.ttf);
+}
+
+body {
+    font-family:pop;
+}
+
+html[dir="rtl"] body{
+  font-family: regular;
+}
 :root{
   --main-color:#FC9200;
   --primary-color:#0063B0;
@@ -285,12 +301,7 @@ html {
   -webkit-font-smoothing: antialiased;
   /* WebKit  */ }
 
-body {
- 
-  font-family: 'Poppins', sans-serif;
 
-  line-height: 1.8;
-  margin: 0 auto; }
 
 h1, .h1 {
   font-size: 36px;
@@ -4333,6 +4344,9 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   .menu-header2 > ul {
    margin-left:60px;
   }
+  html[dir="rtl"] .menu-header2 > ul {
+    margin-right: 135px;
+}
   .menu-header2 > ul > li > a {
 color:var(--color-white) !important;
    }
@@ -13082,9 +13096,21 @@ background: #FFFFFF 0% 0% no-repeat padding-box;
 box-shadow: 0px 2px 6px #47474752;
 opacity: 1;
 } 
+html[dir="rtl"] .ltn__brand-logo-active .slick-arrow .fa-angle-right{
+  position: absolute;
+  top:-65%;
+  left:128px;
+  width: 47px;
+  border-radius:50%;
+  height: 47px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 6px #47474752;
+  opacity: 1;
+  } 
 html[dir="rtl"] .ltn__brand-logo-active .slick-arrow .fa-angle-left {
   position: absolute;
-  top: -80%;
+  top: -65%;
+  right:90%;
   left: 28px !important;
   width: 47px;
   border-radius: 50%;
@@ -13150,6 +13176,16 @@ opacity: 1;
   top: 17px;
   left: 41%;
   z-index:2;
+  border: 1px solid var(--main-color);
+  width: 18%;
+  opacity: 1;
+  background: var(--main-color);
+}
+html[dir="rtl"] .li-orangees {
+  position: relative;
+  top: 17px;
+  right: 41%;
+  z-index: 2;
   border: 1px solid var(--main-color);
   width: 18%;
   opacity: 1;
@@ -14895,7 +14931,8 @@ opacity: 1;
     margin-left: 222px;
 }
 html[dir="rtl"] .log .nav-pills li+li {
-  margin-right: 192px !important;
+  margin-right: 172px !important;
+  margin-left:0px;
 }
 .log #pills-profile-tab{
  
@@ -14939,6 +14976,17 @@ html[dir="rtl"] .log .nav-pills li+li {
     left:50%;
     bottom: 0;
 }
+html[dir="rtl"] .hero:after {
+  position: absolute;
+  content: "";
+  width: 50%;
+  z-index:-2;
+  background: #92ADFC 0% 0% no-repeat padding-box;
+  opacity: 1;
+  top: 0;
+  right:50%;
+  bottom: 0;
+}
 .hero2:before {
   position: absolute;
   content: "";
@@ -14974,7 +15022,31 @@ html[dir="rtl"] .log .nav-pills li+li {
   box-shadow: none;
   border: none;
 }
+.blue-header {
+  background: url(../img/banner/k_img.png);
+  background-repeat: no-repeat;
+  background-position:left;
+  background-size:73% 118%;
+    height:580px;
+  padding-bottom: 80px;
+ 
+}
+.blue-header .navbar {
+  background: transparent;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  color: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+}
 .btn-blue{
+  background:var(--primary-color);
+padding:10px;
+color: var(--color-white);
+font-weight:800;
+}
+html[dir="rtl"] .btn-blue{
   background:var(--primary-color);
 padding:10px;
 color: var(--color-white);
@@ -15044,7 +15116,13 @@ font-weight:800;
 }
 .ri-text{
   margin-top:60px;
-  margin-left:150px
+  margin-left:130px
+}
+html[dir="rtl"] .ri-text img{
+  rotate: -180deg;
+}
+html[dir="rtl"] .btn-orange img{
+  rotate: -180deg;
 }
   .im-dd{
   position: absolute;
@@ -15078,6 +15156,19 @@ opacity: 1;
 }
 .uni{
   text-align: left;
+letter-spacing: NaNpx;
+color:var(--blue-color);
+font-size:50px;
+opacity: 1;
+}
+html[dir="rtl"] .ind{
+  text-align: right;
+color:var(--blue-color);
+font-size:30px;
+opacity: 1;
+}
+html[dir="rtl"] .uni{
+  text-align: right;
 letter-spacing: NaNpx;
 color:var(--blue-color);
 font-size:50px;
@@ -15989,6 +16080,10 @@ margin-bottom:30px;
   margin-right: 40px;
 }
 
+html[dir="rtl"] .value .nav-pills li {
+  margin-right: 10px !important;
+}
+
 .value .nav-link.active {
   color: var(--color-white);
   background: var(--main-color);
@@ -16181,6 +16276,14 @@ margin-top:30px;
   padding-bottom: 80px;
  
 }
+.blue-header {
+  background: url(../img/banner/k_img.png);
+  background-repeat: no-repeat;
+  background-position:left;
+  background-size:72% 118%;
+    height:700px;
+  padding-bottom: 80px;
+}
 @media only screen and (min-width: 1024px) and (max-width: 1366px) { 
 .box-header .box-header-title {
   display: flex;
@@ -16195,6 +16298,19 @@ margin-top:30px;
   height: 50px;
   opacity:0.5;
 }
+html[dir="rtl"] .box-header .box-header-title {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  position: absolute;
+  bottom: -2px;
+  right: 692px;
+  transform-origin: bottom left 40px;
+  transform: rotate(-90deg);
+  width: 500px;
+  height: 50px;
+  opacity: 0.5;
+}
 .box-header .box-header-title h1 {
   margin: 0;
   font-size: 1.5rem;
@@ -16205,6 +16321,16 @@ opacity: 0.4;
 margin-top:20px;
     text-align: right;
 }
+html[dir="rtl"] .box-header .box-header-title h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 5.8px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-top: 20px;
+  text-align: left;
+}
 .header-blue {
   background: url(../img/banner/land.svg);
   background-repeat: no-repeat;
@@ -16214,10 +16340,19 @@ margin-top:20px;
   padding-bottom: 80px;
  
 }
+.blue-header {
+  background: url(../img/banner/k_img.png);
+    background-repeat: no-repeat;
+    background-position: center right 40%;
+    background-size: 33% 98%;
+    height: 592px;
+    padding-bottom: 80px
+
+}
 .im-dd {
     margin-top: 50px;
     width: 450px;
-    height: 390px;
+    height: 350px;
 }
 }
 
@@ -16264,6 +16399,43 @@ html[dir="rtl"] .modal-header .btn-close {
   position: relative;
   left:-70px;
 }
+.de-phone{
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 5px;
+  border: 1px solid #CBCBCB !important;
+  border-right: 0px;
+}
+html[dir="rtl"] .de-phone{
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 7px;
+  border: 1px solid #CBCBCB !important;
+  border-right: 0px;
+}
+.ph{
+  margin-left:-30px;
+}
+.ph-s{
+  margin-left:-30px;
+}
+html[dir="rtl"] .ph-s .form-control{
+  border-left: none !important;
+  border-radius:0px ;
+  height:44px !important;
+}
+html[dir="rtl"] .ph{
+  margin-left: 0px;
+}
+.ph .form-control{
+  border-left: none !important;
+  border-radius:0px ;
+}
+.r-ph{
+  direction: ltr;
+}
+.switch_sec a{
+  padding-left: 10px;
+}
+
 /* ----------------------------------------------------
     END
 ---------------------------------------------------- */

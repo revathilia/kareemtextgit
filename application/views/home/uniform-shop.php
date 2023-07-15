@@ -1,5 +1,15 @@
-<!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<?php
+$session = $this->session->userdata('lang');
+if (empty($session)) {
+	# code...
+$this->session->set_userdata('lang', 'eng');
+$this->session->set_userdata('dir', 'ltr');
+}
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->session->userdata('lang') ?>" dir="<?php echo $this->session->userdata('dir') ?>">
+
+
 
 
 
@@ -21,7 +31,10 @@
     <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
-
+    <?php if($this->session->userdata('lang') !='eng') {?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+	<?php } ?>
      <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css'> 
 <style>

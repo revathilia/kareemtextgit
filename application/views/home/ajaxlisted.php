@@ -41,18 +41,7 @@
                                             </div>
                                             <div class="product-info">
                                                
-                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>">
-
-                                                     <?php 
-if($this->session->userdata('lang') == 'ar'){
-     echo $product['ar_product_name'] ;
-}else{
-     echo $product['product_name'] ;
-}
-                                                    ?>
-                                                        
-
-                                                    </a></h2>
+                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>"><?php echo $product['product_name'] ?></a></h2>
                                                 <?php  $product_price = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$product['id'],'status'=>'Y'));  
   ?>
                                                 <div class="product-price">
@@ -71,7 +60,7 @@ if($this->session->userdata('lang') == 'ar'){
                                      <div class="ltn__shop-options">
                         <ul>
                             <li>
-                                <?php echo $this->Admin_model->translate("No Result Found !!") ?> 
+                                 No Result Found !!
                             </li>
                         </ul>
                     </div>
@@ -128,7 +117,7 @@ if($this->session->userdata('lang') == 'ar'){
                                      <div class="ltn__shop-options">
                         <ul>
                             <li>
-                                 <?php echo $this->Admin_model->translate("No Result Found !!") ?> 
+                                 No Result Found !!
                             </li>
                         </ul>
                     </div>

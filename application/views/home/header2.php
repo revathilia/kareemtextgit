@@ -45,7 +45,11 @@
                     </div>
                     <div class="col--- ltn__header-options ltn__header-options-2 mb-sm-20">
                         <!-- header-search-1 -->
-                             
+                       
+                        <!-- user-menu -->
+                        <div class="ltn__drop-menu user-menu">
+                            <ul>
+                                      
                         <li> 
                                                 <div class=" switch_sec">
             <!-- <a href="">AR</a> -->
@@ -55,13 +59,10 @@
        <a class=" menu-icon lang_switch" onclick="langAjax('ar')"><img src="<?php echo base_url()?>assets/home_assets/img/sa.png" width="30px" height="30px"></a>
     <?php } else {?>
 
-      <a class=" menu-icon lang_switch" onclick="langAjax('eng')"> <img src="<?php echo base_url()?>assets/home_assets/img/en.png" width="30px" height="30px"></a>
+      <a class=" menu-icon lang_switch" onclick="langAjax('eng')"> <img src="<?php echo base_url()?>assets/home_assets/img/uk.png" width="30px" height="30px"></a>
     <?php } ?>
         </div>
         </li>
-                        <!-- user-menu -->
-                        <div class="ltn__drop-menu user-menu">
-                            <ul>
                                 <li>
                                     <a href="#"><i class="icon-user" style="color:#fff"></i></a>
                                    <ul>

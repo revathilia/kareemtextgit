@@ -112,6 +112,9 @@ echo form_close();
                                             </div>
                                         </td>
                                         <td>
+                                            <button class="btn btn-blue">Continue shopping</button>
+                                        </td>
+                                        <td>
                                             <button type="submit" class="btn theme-btn-2 btn-effect-2-- disabled">Update Cart</button>
                                         </td>
                                     </tr>

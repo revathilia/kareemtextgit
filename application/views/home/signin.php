@@ -46,7 +46,14 @@
                                <fieldset>
      <label class="forget">PHONE NUMBER</label>
      <br>
-      <input placeholder="" type="tel" tabindex="3" name="phone" class="form-control" required>
+     <div class="row g-0 r-ph">
+      <div class="col-md-3">
+        <p class="de-phone"><img src="<?php echo base_url()?>assets/home_assets/img/sa.png" width="20px" height="20px">&nbsp;&nbsp;+966</p></div>
+      <div class="col-md-9 ph-s">
+    <input placeholder="" type="tel" tabindex="3" name="phone" id="phone" class="form-control" required>
+    </div>
+    </div> 
+ 
     </fieldset>
     
     <fieldset>
