@@ -48,7 +48,7 @@ foreach ($cart as $item){
 <?php if(!empty($item['color'])){ ?>
 <div class="swatch" style="background:<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$item['color'],'color_code')  ?>;color:#fff;">
     <input type="radio" name="color_selected" checked id="swatch_<?php echo $item['color'] ?>" value="<?php echo $item['color'] ?>" />
-    <label for="swatch_<?php echo $item['color'] ?>"><i class=" fa fa-check" title="<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$item['color'],'color_name')  ?>"></i></label>
+    <label for="swatch_<?php echo $item['color'] ?>" title="<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$item['color'],'color_name')  ?>"></label>
   </div>,
 <?php } ?>
                                                 
@@ -89,16 +89,16 @@ echo form_close();
 ?>
 
 
-                                          <!--   <div class="cart-plus-minus">
+                                        <div class="cart-plus-minus">
                                                 <input type="text" value=" <?php echo $item['qty']; ?>" name="qtybutton" class="cart-plus-minus-box">
-                                            </div> -->
+                                        </div> 
                                         </td>
                                         <td class="cart-product-subtotal">SAR <?php echo $item['subtotal']; ?></td>
                                     </tr>
 
                                      <?php $sutotal = $item['subtotal'] + $sutotal ;
-                                        $shipping = 0 ;
-                                        $vat = 0 ;?>
+                                        $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
+                                        $vat = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;?>
 
 
                                    <?php }  ?>
@@ -112,7 +112,8 @@ echo form_close();
                                             </div>
                                         </td>
                                         <td>
-                                            <button class="btn btn-blue">Continue shopping</button>
+                                            <?php  $prodType = $this->session->userdata('prouctType'); ?>
+                                           <a href="<?php echo base_url()?>home/<?php echo $prodType ;?>" class="theme-btn-1 btn btn-effect-1">Continue Shopping</a>
                                         </td>
                                         <td>
                                             <button type="submit" class="btn theme-btn-2 btn-effect-2-- disabled">Update Cart</button>

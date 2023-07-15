@@ -6591,6 +6591,63 @@ $this->output($Return);
     
   }
 
+  public function settings(){
+    $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+
+    $data['settings'] = $this->Admin_model->get_single_data('site_settings','');
+    $this->load->view('admin/settings',$data);
+  }
+
+    public function update_settings()
+  {   
+     $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+
+   $Return = array('result'=>'', 'error'=>'');
+       
+    /* Server side PHP input validation */    
+    if($this->input->post('shipping_charge')==='') {
+          $Return['error'] = $this->Admin_model->translate("Add shipping charge");
+    }else if($this->input->post('vat_val')==='') {
+          $Return['error'] = $this->Admin_model->translate("Add VAT");
+    }  
+        
+    if($Return['error']!=''){
+          $this->output($Return);
+      }
+  
+
+  $id =$this->input->post('settingid') ;
+      
+   
+    $data = array(   
+   
+    'shipping_charge' => $this->input->post('shipping_charge'),
+
+    'vat_val' => $this->input->post('vat_val'),
+     
+    );
+
+    
+    $result = $this->Admin_model->update_data('site_settings',array('id'=>$id), $data);
+    if ($result == TRUE) {
+      
+      //get setting info 
+       
+       $Return['result'] = $this->Admin_model->translate('settings updated successfully.');
+      
+    } else {
+      $Return['error'] =  $this->Admin_model->translate('Bug. Something went wrong, please try again');
+    }
+    $this->output($Return);
+    exit;
+  }
+
 
 
   public function update_measurement()

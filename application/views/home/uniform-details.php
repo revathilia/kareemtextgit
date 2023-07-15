@@ -526,6 +526,17 @@ if(status.session == false){
     window.location.href="<?php echo base_url();?>home/login";
     return false;
 }
+if (status.error != '') {
+            toastr.error(status.error);
+           
+               setInterval(function() {
+                   window.location.href="<?php echo base_url();?>home/viewcart";
+                }, 3000); //3 seconds
+
+ return false ;
+
+        }
+
 if (status.result = false) {
 toastr.error("Error");
 } else {
@@ -578,6 +589,19 @@ if(status.session == false){
     window.location.href="<?php echo base_url();?>home/login";
     return false;
 }
+
+
+if (status.error != '') {
+            toastr.error(status.error);
+           
+               setInterval(function() {
+                   window.location.href="<?php echo base_url();?>home/viewcart";
+                }, 3000); //3 seconds
+
+ return false ;
+
+        }
+
 if (status.result = false) {
 toastr.error("Error");
 } else {

@@ -98,6 +98,14 @@ $this->session->set_userdata('dir', 'ltr');
   transition: opacity 0.5s;
 }
 </style>
+
+ <style type="text/css">
+      .pac-container {
+    z-index: 10000 !important;
+}
+
+    </style>
+    
 </head>
 
 <body>
@@ -621,14 +629,22 @@ if($this->session->userdata('lang') == 'ar'){
         <div class="row">
            
 <div class="col-md-12">
-<form id="contact" action="" method="post">
+<form id="shipping" action="" method="post">
    
-    <fieldset>
-      <input placeholder="location" type="text" tabindex="1" class="form-control" required autofocus>
-    </fieldset>
+   
+
+ <fieldset>
+      
+      <input id="autocomplete_search" name="autocomplete_search" type="text" class="form-control" placeholder="Search location" />
+
+                    <input type="hidden" name="lat" id="lat">
+
+                    <input type="hidden" name="long" id="long">
+
+  </fieldset>
        <fieldset>
-      <textarea placeholder="add address" tabindex="5" required class="form-control text-ar"></textarea>
-    </fieldset>
+      <textarea placeholder="add address" id="address" name="address" tabindex="5" required class="form-control text-ar"></textarea>
+</fieldset>
 
    
   </form>
@@ -642,7 +658,7 @@ if($this->session->userdata('lang') == 'ar'){
     </div>
 <div class="col-md-12">
  
-<a href="javascript:void(0)" class="btn btn-ori checkoutbtn">Checkout</a>
+<a href="javascript:void(0)" class="btn btn-ori shippingbtn">Checkout</a>
 </div>
 </div>
 </div>
@@ -683,6 +699,18 @@ var status = JSON.parse(data);
 //     window.location.href="<?php echo base_url();?>home/login";
 //     return false;
 // }
+
+if (status.error != '') {
+            toastr.error(status.error);
+           
+               setInterval(function() {
+                   window.location.href="<?php echo base_url();?>home/viewcart";
+                }, 3000); //3 seconds
+
+ return false ;
+
+        }
+
 if (status.result = false) {
 toastr.error("Error");
 } else {
@@ -698,6 +726,73 @@ $("#cartitem").html( status.items) ;
 });  
 }  )          
  
+
+ $(document).on('click', '.shippingbtn', function(){  
+
+
+ 
+if( !$('#autocomplete_search').val() ) {
+    
+toastr.error("Please select your shipping address");
+return false ;
+}
+
+ if( !$('#address').val() ) {
+toastr.error("Add your address");
+
+return false ;
+}
+
+
+var formdata = $('#productpage,#shipping').serialize();
+
+ 
+
+
+
+
+$.ajax({  
+url:"<?php echo base_url() ?>home/addtocart",  
+method:"POST",  
+data:{formdata: formdata,type:'industry',pagetype: 'detail',purchase:'shipping' },  
+success:function(data){ 
+
+var data = JSON.stringify(data)
+var status = JSON.parse(data); 
+
+if(status.session == false){
+    window.location.href="<?php echo base_url();?>home/login";
+    return false;
+}
+
+
+if (status.error != '') {
+            toastr.error(status.error);
+           
+               setInterval(function() {
+                   window.location.href="<?php echo base_url();?>home/viewcart";
+                }, 3000); //3 seconds
+
+ return false ;
+
+        }
+
+if (status.result = false) {
+toastr.error("Error");
+} else {
+toastr.success("Selected Item Added to Cart"); 
+$("#cartitem").html( status.items) ;
+//$("#carttext").text(status.items+' Item(s) in Shopping Cart');
+
+   window.location.href="<?php echo base_url();?>home/viewcart";
+
+}
+
+}  
+});  
+}  )          
+ 
+
 
 $(document).on('change',".sizeval", function()
    { 
@@ -763,5 +858,53 @@ function langAjax($lang){
 }
 
 </script>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdN3jFlH_QSn5f3JaHzDYaEoVifCWMsto&libraries=places"></script>
+
+<script>
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+    function initialize() {
+
+      var input = document.getElementById('autocomplete_search');
+
+      var autocomplete = new google.maps.places.Autocomplete(input);
+
+      autocomplete.addListener('place_changed', function () {
+
+      var place = autocomplete.getPlace();
+
+      // place variable will have all the information you are looking for.
+
+      $('#lat').val(place.geometry['location'].lat());
+
+      $('#long').val(place.geometry['location'].lng());
+
+
+      var lat =  $('#lat').val() ;
+      var long = $('#long').val() ;
+
+     
+
+      $.ajax({
+        url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&key=AIzaSyDdN3jFlH_QSn5f3JaHzDYaEoVifCWMsto',
+         success: function(data){
+
+          var response = data.results;
+          $('#address').val(response[0].formatted_address);
+            
+        }
+})
+
+
+
+    });
+
+  }
+
+</script>
+
 </html>
 

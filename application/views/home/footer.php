@@ -365,6 +365,8 @@ url: '<?php echo base_url(); ?>'+'home/loadcartqty',
 success: function (data) {
   
 $("#cartitem").html(data) ;
+ 
+
 },
 
 });
@@ -382,6 +384,8 @@ data: {rowid:$rowid,viewname:'viewcart'},
 }).done(function(response){
  
 $("#cart").html(response);
+//$("#ltn__utilize-cart-menu").load(location.href + " #ltn__utilize-cart-menu");
+
 cartupdate();
  
 });

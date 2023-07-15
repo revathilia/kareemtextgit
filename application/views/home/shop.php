@@ -657,6 +657,12 @@ $.ajax({
             window.location.href = "<?php echo base_url();?>home/login";
             return false;
         }
+
+        if (status.error !='') {
+            toastr.error(status.error);
+            return false ;
+        }
+
         if (status.result = false) {
             toastr.error("Error");
         } else {

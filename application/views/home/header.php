@@ -27,19 +27,19 @@
                             <nav>
                                 <div class="ltn__main-menu">
                                     <ul>
-                                        <li class="menu-icon"><a href="<?php echo base_url()?>home">Home</a>
+                                        <li class="menu-icon"><a href="<?php echo base_url()?>home"><?php echo $this->Admin_model->translate("Home") ?></a>
                                             
                                         </li>
-                                        <li class="menu-icon"><a href="<?php echo base_url()?>home/about">About</a>
+                                        <li class="menu-icon"><a href="<?php echo base_url()?>home/about"><?php echo $this->Admin_model->translate("About") ?></a>
                                             
                                         </li>
-                                        <li class="menu-icon"><a href="<?php echo base_url()?>home/industry">Industrial Uniforms</a>
+                                        <li class="menu-icon"><a href="<?php echo base_url()?>home/industry"><?php echo $this->Admin_model->translate("Industrial Uniforms") ?></a>
                                             
                                         </li>
-                                        <li class="menu-icon"><a href="<?php echo base_url()?>home/school">School Uniforms</a>
+                                        <li class="menu-icon"><a href="<?php echo base_url()?>home/school"><?php echo $this->Admin_model->translate("School Uniforms") ?></a>
                                            
                                         </li>
-                                        <li class="menu-icon"><a href="<?php echo base_url()?>home/contact">Contact Us</a>
+                                        <li class="menu-icon"><a href="<?php echo base_url()?>home/contact"><?php echo $this->Admin_model->translate("Contact Us") ?></a>
                                            
                                                       
                                     </ul>
@@ -132,9 +132,18 @@ if ($cart = $this->cart->contents()):
             <div class="mini-cart-product-area ltn__scrollbar">
                 <div class="mini-cart-item clearfix">
                     <div class="mini-cart-img">
-                        <a href="#"><img src="<?php echo base_url()?>assets/home_assets/img/product/1.png" alt="Image"></a>
+                        <a href="#">
+
+
+                           <?php if($item['type'] == 'industry'){
+                           $imagename = $this->Admin_model->get_type_name_by_id('industry_products','id',$item['id'],'product_image') ;
+                           }else{
+ $imagename = $this->Admin_model->get_type_name_by_id('industry_products','id',$item['id'],'product_image') ;
+                           } ?>
 
                         
+                        <img src="<?php echo base_url()?>uploads/images/<?php echo $item['type']?>/<?php echo $imagename  ?>">
+
 
 
                         <span class="mini-cart-item-delete" onclick="itemremove('<?php echo $item['rowid'] ; ?>');  return false ;" ><i class="icon-cancel"></i></span>
@@ -161,7 +170,7 @@ if ($cart = $this->cart->contents()):
                     <a href="<?php echo base_url()?>home/viewcart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
                     <a href="<?php echo base_url()?>home/checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
                 </div>
-                <p>Free Shipping on All Orders Over $100!</p>
+                 
             </div>
 
         <?php endif; ?>

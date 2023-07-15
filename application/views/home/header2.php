@@ -129,8 +129,14 @@ if ($cart = $this->cart->contents()):
             <div class="mini-cart-product-area ltn__scrollbar">
                 <div class="mini-cart-item clearfix">
                     <div class="mini-cart-img">
-                        <a href="#"><img src="<?php echo base_url()?>assets/home_assets/img/product/1.png" alt="Image"></a>
+                         <?php if($item['type'] == 'industry'){
+                           $imagename = $this->Admin_model->get_type_name_by_id('industry_products','id',$item['id'],'product_image') ;
+                           }else{
+ $imagename = $this->Admin_model->get_type_name_by_id('industry_products','id',$item['id'],'product_image') ;
+                           } ?>
 
+                        
+                        <img src="<?php echo base_url()?>uploads/images/<?php echo $item['type']?>/<?php echo $imagename  ?>">
                         
 
 
@@ -159,7 +165,7 @@ if ($cart = $this->cart->contents()):
                     <a href="<?php echo base_url()?>home/viewcart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
                     <a href="<?php echo base_url()?>home/checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
                 </div>
-                <p>Free Shipping on All Orders Over $100!</p>
+                 
             </div>
 
         <?php endif; ?>

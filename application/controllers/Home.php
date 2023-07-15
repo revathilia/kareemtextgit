@@ -966,17 +966,29 @@ function get_school_logo(){
     function addtocart()
   {
     
+
    $pagetype =  $this->input->post('pagetype');
    $type =  $this->input->post('type');
+
+  $Return = array('result'=>'', 'error'=>'');
+   
+
+  $prodType = $this->session->userdata('prouctType');
+if(!empty( $prodType)){
+  if($type != $prodType){
+    $Return['error'] = 'You have a '.$prodType.' item in your cart. You are not allowed to purchase School and Industry products together. Complete the '.$prodType.' product purchase to proceed to buy the '. $type .' product.' ;
+    $this->output($Return);
+    exit;
+  }
+}else{
+  $this->session->set_userdata('prouctType', $type);
+}
+
 
    $purchaseType =  $this->input->post('purchase');
 
   if($pagetype == "detail"){
     parse_str($this->input->post('formdata'), $data_array);
-
-     
-
-    
 
 
    }else if($pagetype == "home" && $type == "industry")
@@ -1081,13 +1093,28 @@ function get_school_logo(){
         $data['product'] = $this->Admin_model->get_single_data('school_products',array('id'=>$productid));
       }
       $data['folder'] = $from  ;
+      $data['exists'] = false ;
 
+
+      $exists = $this->Admin_model->get_single_data('wishlist',array('user_id'=> $homesession['user_id'],
+'type' => $from,
+'product_id'=> $productid)) ;
+
+       
+
+      if(empty($exists)){
 $wishlist = array('user_id'=> $homesession['user_id'],
 'type' => $from,
 'product_id'=> $productid,
 'created_on'=> date('Y-m-d H:i')
 );
-     $this->Admin_model->insert_data('wishlist',$wishlist) ;
+$this->Admin_model->insert_data('wishlist',$wishlist) ;
+      }else{
+
+        $data['exists'] = true ;
+      }
+
+
 
 
       $this->load->view('home/added_to_wishlist',$data) ;
@@ -1112,6 +1139,11 @@ $wishlist = array('user_id'=> $homesession['user_id'],
   function viewcart()
   {
     $this->session->set_userdata('lastpage', $this->router->fetch_method());
+
+    if(count($this->cart->contents()) ==0){
+        $this->session->set_userdata('prouctType', '');
+    }
+
     $this->load->view('home/cart');
   }
 
@@ -1135,6 +1167,8 @@ $wishlist = array('user_id'=> $homesession['user_id'],
       // Update cart data, after cancle.
       $this->cart->update($data);
       }
+
+
       if($viewname=="checkout"){
           //echo $viewname ;
         $this->load->view('home/loadcheckout');
@@ -1284,8 +1318,8 @@ $cart = $this->cart->contents() ;
                     'identity_card' => $fname ,
                     'paymentType' => $paymentType ,
                     'payment_status' => 'N',
-                    'vat_amount' => 0,
-                    'shipping_charge' => 0,
+                    'vat_amount' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val'),
+                    'shipping_charge' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge'),
                     'created_on' => date('Y-m-d H:i:s'), 
                     'status' => 1,
                     'notes' => $this->input->post('ltn__message')
@@ -1319,8 +1353,8 @@ $cart = $this->cart->contents() ;
                     'identity_card' => $fname ,
                     'payment_type' => $paymentType ,
                     'payment_status' => 'N',
-                    'vat_amount' => 0,
-                    'shipping_charge' => 0,
+                    'vat_amount' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val'),
+                    'shipping_charge' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge'),
                     'created_on' => date('Y-m-d H:i:s'), 
                     'status' => 1,
                     'notes' => $this->input->post('ltn__message')
@@ -1562,7 +1596,7 @@ $Return['result'] = 'User already signed-up. Please Login';
         if( $success == 'success'){
 
            if ($result == TRUE) {
-              $Return['result'] = $queryres->phone;
+              $Return['result'] = $queryres->phone_no;
             } else {
               $Return['error'] =  'Bug. Something went wrong, please try again';
             }
@@ -1582,7 +1616,7 @@ $Return['result'] = 'User already signed-up. Please Login';
     $resotp = $this->input->post('otp');
     $this->db->where('phone_no',$phone);
     $this->db->where('otp',$resotp);
-    $this->db->where('status',1);
+    $this->db->where('status','Y');
     $query = $this->db->get('customer_master');
     if ($query->num_rows() == 0){
       $Return['error'] = "Invalid otp";
@@ -1678,6 +1712,22 @@ if ($status_code == 200) {
     return "محظور بواسطة كلاودفلير. Status code: {$status_code}";
 }
 }
+
+public function delete_entry()
+  {  
+   $session = $this->session->userdata('customerdet');
+    if(empty($session)){ 
+      redirect('home');
+    } 
+    
+    $id = $this->input->post('id');
+    $table = $this->input->post('table');
+    $this->Admin_model->delete_data($table,array('id'=>$id));
+    
+    return true ;
+    
+  }
+
 
 public function logout() {
   $session = $this->session->userdata('customerdet'); 

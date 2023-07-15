@@ -14,7 +14,7 @@
                                             <img src="<?php echo base_url()?>uploads/images/<?php echo $folder ?>/<?php echo $product->product_image ?>" alt="#">
                                         </div>
                                          <div class="modal-product-info">
-                                            <h5><a href="product-details.html">
+                                            <h5><a href="<?php echo base_url()?>home/product_details/<?php echo $product->id ?>">
                                                  <?php 
 if($this->session->userdata('lang') == 'ar'){
      echo  $product->ar_product_name ;
@@ -23,7 +23,18 @@ if($this->session->userdata('lang') == 'ar'){
 }
                                                     ?>
                                                     </a></h5>
-                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  <?php echo $this->Admin_model->translate("Successfully added to your Wishlist") ?>
+                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  
+
+                                                <?php
+if($exists == true) {
+    echo $this->Admin_model->translate("Item already exists in wishlist") ;
+}else{
+     echo $this->Admin_model->translate("Successfully added to your Wishlist") ;
+}
+
+                                                
+
+                                                  ?>
                                         </p>
                                             <div class="btn-wrapper">
                                                 <a href="<?php echo base_url()?>home/wishlist" class="theme-btn-1 btn btn-effect-1"><?php echo $this->Admin_model->translate("View Wishlist") ?></a>

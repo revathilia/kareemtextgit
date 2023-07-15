@@ -46,11 +46,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ltn__breadcrumb-inner">
-                        <h1 class="page-title">Wishlist</h1>
+                        <h1 class="page-title"><?php echo $this->Admin_model->translate("Wishlist") ?></h1>
                         <div class="ltn__breadcrumb-list">
                             <ul>
-                                <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
-                                <li>Wishlist</li>
+                                <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> <?php echo $this->Admin_model->translate("Home") ?>  </a></li>
+                                <li><?php echo $this->Admin_model->translate("Wishlist") ?> </li>
                             </ul>
                         </div>
                     </div>
@@ -71,14 +71,21 @@
                                
                                 <tbody>
 
-                                    <?php foreach ($wishlist as $value) { ?>
+
+                                    <?php  if(!empty($wishlist)){ foreach ($wishlist as $value) { ?>
 
                                     <?php 
 
+
+
 if($value['type'] == 'school'){
+
+$detailspage = 'uniform_det' ;
   $product  = $this->Admin_model->get_single_data('school_products',array('id'=>$value['product_id'])) ;
   $product_price = $this->Admin_model->get_single_data('school_product_price_size_det',array('product_id'=>$product->id,'status'=>'Y'));  
 }else{
+
+    $detailspage = 'product_details' ;
  $product  = $this->Admin_model->get_single_data('industry_products',array('id'=>$value['product_id'])) ;
  $product_price = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$product->id,'status'=>'Y'));  
 }
@@ -89,23 +96,41 @@ $stock = $this->Admin_model->get_product_stock($value['type'],$value['product_id
                                     
                                     
                                     <tr>
-                                        <td class="cart-product-remove">x</td>
+                                        <td class="cart-product-remove wishlistremove" >
+                                        <a onclick="deleteentry(<?php echo $value['id'] ?>,'wishlist');  return false ;" href="javascript:void(0)"> <i class="ico fa fa-times"></i> </a>
+                                    </td>
                                         <td class="cart-product-image">
-                                            <a href="<?php echo base_url()?>home/product_details/<?php echo $product->id ?>"><img src="<?php echo base_url()?>uploads/images/<?php echo $value['type'] ?>/<?php echo $product->product_image ?>" alt="#"></a>
+                                            <a href="<?php echo base_url()?>home/<?php echo $detailspage ?>/<?php echo $product->id ?>"><img src="<?php echo base_url()?>uploads/images/<?php echo $value['type'] ?>/<?php echo $product->product_image ?>" alt="#"></a>
                                         </td>
                                         <td class="cart-product-info">
-                                            <h4><a href="product-details.html"><?php echo $product->product_name ?></a></h4>
+                                            <h4><a href="<?php echo base_url()?>home/<?php echo $detailspage ?>/<?php echo $product->id ?>">
+
+                                               
+
+                                                  <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $product->ar_product_name ;
+}else{
+     echo $product->product_name ;
+}
+                                                    ?>
+
+                                                    
+
+                                                </a></h4>
                                         </td>
                                         <td class="cart-product-price">SAR <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></td>
                                         <td class="cart-product-stock"><?php if($stock > 0){  ?>
-                                              <a class="submit-button-1" href="<?php echo base_url()?>home/product_details/<?php echo $product->id ?>" title="Add to Cart" >Add to Cart</a>
+                                              <a class="submit-button-1" href="<?php echo base_url()?>home/<?php echo $detailspage ?>/<?php echo $product->id ?>" title="Add to Cart" ><?php echo $this->Admin_model->translate("Add to Cart") ?></a>
 
                                      <?php   } else {
-                                        echo "Out of Stock" ;
+                                        echo $this->Admin_model->translate("Out of Stock")  ;
                                      } ?></td>
                                          
                                     </tr>
-                                    <?php } ?> 
+                                    <?php } } else{
+                                      echo $this->Admin_model->translate("Your wishlist is empty !!") ;
+                                    } ?> 
                                     
                                 </tbody>
                             </table>
@@ -129,6 +154,24 @@ $stock = $this->Admin_model->get_product_stock($value['type'],$value['product_id
     <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
     <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+
+    <script type="text/javascript">
+
+function deleteentry($id,$table){
+
+$.ajax({ 
+type: "POST",
+url: "<?php echo base_url(); ?>"+'admin/delete_entry/',
+data: {id:$id,table:$table},
+}).done(function(response){
+
+location.reload();
+
+});
+
+}
+
+    </script>
   
 </body>
 

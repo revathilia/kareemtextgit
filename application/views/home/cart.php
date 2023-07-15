@@ -111,7 +111,9 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-12">
 <div id="cart">
 
- <?php $this->load->view('home/loadcart'); ?> 
+ <?php 
+ 
+ $this->load->view('home/loadcart'); ?> 
 
 </div>
 

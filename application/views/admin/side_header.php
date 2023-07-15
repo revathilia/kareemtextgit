@@ -152,15 +152,18 @@ $logged_in_role =  $this->Admin_model->get_type_name_by_id('user_roles','id',$se
 <a class="waves-effect" href="<?php echo base_url() ?>admin/enquiries"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/dashboard.png">
 <span> <?php echo $this->Admin_model->translate("Enquiries") ?>   </span></a></li>
 
+<li id="8">
+<a class="waves-effect" href="<?php echo base_url() ?>admin/settings"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/settings.png">
+<span> <?php echo $this->Admin_model->translate("Site Settings") ?>   </span></a></li>
 
 
- <li id="8">
+ <li id="9">
 <a class="waves-effect" href="<?php echo base_url() ?>admin/translation"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/dashboard.png">
 <span> <?php echo $this->Admin_model->translate("Translation") ?>   </span></a></li>
-
 <li >
 <a class="waves-effect" href="<?php echo base_url() ?>admin/logout"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/logout.png">
 <span> <?php echo $this->Admin_model->translate("Logout") ?>   </span></a></li>
+
 </ul>
  
 </div>

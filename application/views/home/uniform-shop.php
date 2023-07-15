@@ -454,7 +454,7 @@ var productid = $(this).data('productid') ;
 $.ajax({  
 url:"<?php echo base_url() ?>home/quick_view",  
 method:"POST",  
-data:{productid:productid,from:'industry' },  
+data:{productid:productid,from:'school' },  
 success:function(html){ 
 
 $('#quick_view_modal').html(html);  
@@ -472,7 +472,7 @@ var productid = $(this).data('productid') ;
 $.ajax({  
 url:"<?php echo base_url() ?>home/add_to_wishlist",  
 method:"POST",  
-data:{productid:productid,from:'industry' },  
+data:{productid:productid,from:'school' },  
 success:function(html){ 
 
     if(html == false){
@@ -496,7 +496,7 @@ $.ajax({
     method: "POST",
     data: {
         formdata: formdata,
-        type: 'industry',
+        type: 'school',
         pagetype: 'home'
         ,purchase:'collect'
     },
@@ -509,6 +509,13 @@ $.ajax({
             window.location.href = "<?php echo base_url();?>home/login";
             return false;
         }
+
+        if (status.error !='') {
+            toastr.error(status.error);
+            return false ;
+        }
+
+
         if (status.result = false) {
             toastr.error("Error");
         } else {
@@ -516,7 +523,7 @@ $.ajax({
             $("#cartitem").html(status.items);
             //$("#carttext").text(status.items+' Item(s) in Shopping Cart');
 
-            window.location.href = "<?php echo base_url();?>home/viewcart";
+        //    window.location.href = "<?php echo base_url();?>home/viewcart";
 
         }
 
