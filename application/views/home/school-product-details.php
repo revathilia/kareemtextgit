@@ -144,6 +144,8 @@ if($this->session->userdata('lang') == 'ar'){
     }
     
     ?>
+
+    <input type="hidden" name="school_selected" value="<?php echo $schoolid ?>">
                                                 <p class="input-box"><?php echo $this->Admin_model->get_type_name_by_id('school_master','id',$schoolid,'school_name')?></p>
 </div>
 <div class="col-md-6">
@@ -440,7 +442,7 @@ var formdata = $('#formdata').val() ;
 $.ajax({  
 url:"<?php echo base_url() ?>home/addtocart",  
 method:"POST",  
-data:{formdata: formdata,type:'school',pagetype: 'detail' },  
+data:{formdata: formdata,type:'school',pagetype: 'detail',purchase:'collect' },  
 success:function(data){ 
 
 var data = JSON.stringify(data)

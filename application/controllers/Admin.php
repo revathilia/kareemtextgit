@@ -3247,11 +3247,13 @@ if(is_uploaded_file($_FILES['product_image']['tmp_name'])) {
           $Return['error'] = $this->Admin_model->translate("Add school name - Arabic");
     }  else if(empty($_FILES['school_logo']['name'])){
       $Return['error'] = $this->Admin_model->translate("Logo Required");
-    }else if($levels[0] == ''){
+    }else if($levels[0] == '0'){
       $Return['error'] = $this->Admin_model->translate("Select class level(s)");
-    }else if($standards[0] == ''){
+    }else if(empty($standards) || $standards[0] == ''){
       $Return['error'] = $this->Admin_model->translate("Select standard(s)");
     }
+
+    
 
 
         
@@ -3400,7 +3402,7 @@ $data['data_standards'] =  $this->Admin_model->get_all_data('standard_master');
 
     $fname =  $this->input->post('iconname') ;
 
-     $standards = $this->input->post('standards');
+    $standards = $this->input->post('standards');
     $levels = $this->input->post('class_levels');
 
 
@@ -3412,9 +3414,9 @@ $data['data_standards'] =  $this->Admin_model->get_all_data('standard_master');
           $Return['error'] = $this->Admin_model->translate("School name - Arabic required");
     }   else if(empty($fname) && empty($_FILES['school_logo']['name'])){
       $Return['error'] = $this->Admin_model->translate("School logo Required");
-    }else if($levels[0] == ''){
+    }else if(empty($levels) || $levels[0] == ''){
       $Return['error'] = $this->Admin_model->translate("Select class level(s)");
-    }else if($standards[0] == ''){
+    }else if(empty($standards) || $standards[0] == '' ){
       $Return['error'] = $this->Admin_model->translate("Select standard(s)");
     }
 
@@ -3973,7 +3975,7 @@ if (isset($products)){
       $Return['error'] = $this->Admin_model->translate("Product Image Required");
     }else if($schools[0] == ''){
       $Return['error'] = $this->Admin_model->translate("Select school(s)");
-    }else if($levels[0] == ''){
+    }else if(empty($levels) || $levels[0] == ''){
       $Return['error'] = $this->Admin_model->translate("Select level(s)");
     }
         

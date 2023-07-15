@@ -962,13 +962,22 @@ function get_school_logo(){
     //    }
   }
 
-  function addtocart()
+    function addtocart()
   {
     
    $pagetype =  $this->input->post('pagetype');
    $type =  $this->input->post('type');
+
+   $purchaseType =  $this->input->post('purchase');
+
   if($pagetype == "detail"){
     parse_str($this->input->post('formdata'), $data_array);
+
+     
+
+    
+
+
    }else if($pagetype == "home" && $type == "industry")
    {
     $data_array['product_id']= $this->input->post('formdata');
@@ -979,6 +988,8 @@ function get_school_logo(){
     $product_price= $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$data_array['product_id'],'status'=>'Y','size_id'=>$data_array['size_selected']));  
     $data_array['product_price'] =  $product_price->product_price;
    } //echo  $data_array->product_id;
+
+   
    if( $type == 'industry'){
   // Set array for send data.
     $data = array(
@@ -986,7 +997,7 @@ function get_school_logo(){
       'name' => htmlspecialchars($this->Admin_model->get_type_name_by_id('industry_products','id',$data_array['product_id'],'product_name') ),
       'price' => $data_array['product_price'],
       'qty' => 1,
-        'color' =>$data_array['color_selected'],
+      'color' =>$data_array['color_selected'],
       'size' =>$data_array['size_selected'],
       'gender'=>$data_array['gender_selected'],      
       'type' => 'industry'
@@ -999,12 +1010,22 @@ function get_school_logo(){
         'name' => htmlspecialchars($this->Admin_model->get_type_name_by_id('school_products','id',$data_array['product_id'],'product_name') ),
         'price' => $data_array['product_price'],
         'qty' => 1,
-         // 'color' =>$data_array['color_selected'],
+        'school' =>$data_array['school_selected'],
         'size' =>$data_array['size_selected'],
         'gender'=>$data_array['gender_selected'],          
         'type' => 'school'
         );   
     }
+
+    if($purchaseType == 'shipping'){
+   $data['location'] = $data_array['autocomplete_search'];
+   $data['lat'] = $data_array['lat'];
+   $data['long'] = $data_array['long'];
+   $data['address'] = $data_array['address'];
+    }
+
+    
+
     $result = $this->cart->insert($data);
     if($result) {
       $Return['result'] = true;
@@ -1017,6 +1038,8 @@ function get_school_logo(){
     exit;
    
   }
+
+ 
   function quick_view(){
    $productid = $this->input->post('productid');
    $from = $this->input->post('from');

@@ -485,6 +485,7 @@ $.ajax({
         formdata: formdata,
         type: 'industry',
         pagetype: 'home'
+        ,purchase:'collect'
     },
     success: function (data) {
 

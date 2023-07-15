@@ -22,6 +22,15 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <style type="text/css">
+      .pac-container {
+    z-index: 10000 !important;
+}
+
+    </style>
+
+      <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
+
 </head>
 
 <body>
@@ -119,7 +128,7 @@
                             <div class="col-md-6">
                                 <div class="modal-product-info shop-details-info pl-0">
                                    
-                                    <input type="hidden" name="product_id" value="<?php echo $uniformdata->id ; ?> ">
+                                    <input type="hidden" name="product_id" value="<?php echo $uniformdata->id ; ?>">
 
                                     <h3> 
                                       
@@ -145,29 +154,26 @@ if($this->session->userdata('lang') == 'ar'){
                                     </div>
                                     <p><?php echo $uniformdata->description ;?></p>
                                     <div class="modal-product-meta ltn__product-details-menu-1">
+                                     
                                       <div class="box-cat">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <p>School</p>
 </div>
 <div class="col-md-6">
-    <?php  $uniformsession = $this->session->userdata('uniformdata'); 
-    $schoolid = $uniformsession['schoolid'] ;
-    if($uniformsession['gender'] == 'male'){
-        $gender_selected = 1 ;
-    }else if($uniformsession['gender'] == 'female'){
-        $gender_selected = 2 ;
-    }
     
-    ?>
 
-     <select  name="school_selected" class="size-select selectschool">
-      <option>Select</option>
+     <select  name="school_selected" id="school_selected" class="size-select selectschool">
+      <option value=''>Select</option>
                        <?php  
 
 
  
                        foreach ($schools as $sch) { ?>
+
+                         <?php if($this->Admin_model->check_id_exists('school_master',$sch['school_id'])){ ?>
+
+
                         <option value="<?php echo $sch['school_id'] ?>" >
                          
 
@@ -183,7 +189,7 @@ if($this->session->userdata('lang') == 'ar'){
                             
                           </option>
                            
-                      <?php   } ?>
+                      <?php }  } ?>
                     </select>
 
                                                
@@ -193,7 +199,7 @@ if($this->session->userdata('lang') == 'ar'){
 </div>
 <div class="col-md-6">
                                                <p>
-                                                 <select  name="gender_selected" class="size-select ">
+                                                 <select id="gender_selected"  name="gender_selected" class="size-select ">
                        <?php  
 
 
@@ -216,7 +222,7 @@ $genders = explode( ',', $genders) ;
   
 
 <p>
-                                               <select name="size_selected" id="cars" class="size-select sizeval ">
+                                               <select id="size_selected" name="size_selected"   class="size-select sizeval ">
                        <?php  
 
 
@@ -259,7 +265,7 @@ $sizes = explode( ',', $sizes) ;
                                     
 </div>
 </div>
-
+ 
                                     </div>
                                   
                                    
@@ -432,14 +438,22 @@ if(!empty(   $uniform)){
         <div class="row">
            
 <div class="col-md-12">
-<form id="contact" action="" method="post">
+<form id="shipping" action="" method="post">
    
-    <fieldset>
-      <input placeholder="location" type="text" tabindex="1" class="form-control" required autofocus>
-    </fieldset>
+   
+
+ <fieldset>
+      
+      <input id="autocomplete_search" name="autocomplete_search" type="text" class="form-control" placeholder="Search location" />
+
+                    <input type="hidden" name="lat" id="lat">
+
+                    <input type="hidden" name="long" id="long">
+
+  </fieldset>
        <fieldset>
-      <textarea placeholder="add address" tabindex="5" required class="form-control text-ar"></textarea>
-    </fieldset>
+      <textarea placeholder="add address" id="address" name="address" tabindex="5" required class="form-control text-ar"></textarea>
+</fieldset>
 
    
   </form>
@@ -452,7 +466,7 @@ if(!empty(   $uniform)){
 </p>
     </div>
 <div class="col-md-12">
-<a href="javascript:void(0)" class="btn btn-orib checkoutbtn">Checkout</a>
+<a href="javascript:void(0)" class="btn btn-orib shippingbtn">Checkout</a>
 </div>
 </div>
 </div>
@@ -467,7 +481,23 @@ if(!empty(   $uniform)){
 
 <script type="text/javascript">
     
-$(document).on('click', ' .addtocart', function(){  
+$(document).on('click', ' .addtocart', function(){ 
+
+if( !$('#school_selected').val() ) {    
+toastr.error("Please select school");
+return false ;
+}
+
+if( !$('#gender_selected').val() ) {
+toastr.error("Select gender");
+return false ;
+}
+
+if( !$('#size_selected').val() ) {
+toastr.error("Select size");
+return false ;
+}
+
    
  
 var data = $('#productpage').serialize() ;
@@ -475,15 +505,19 @@ var data = $('#productpage').serialize() ;
 $('#formdata').val(data);  
 $('#exampleModal').modal('show');
 } ); 
-         
+
 
 $(document).on('click', '.checkoutbtn', function(){  
+
+
+
+
 
 var formdata = $('#formdata').val() ;
 $.ajax({  
 url:"<?php echo base_url() ?>home/addtocart",  
 method:"POST",  
-data:{formdata: formdata,type:'school',pagetype: 'detail' },  
+data:{formdata: formdata,type:'school',pagetype: 'detail',purchase:'collect' },  
 success:function(data){ 
 
 var data = JSON.stringify(data)
@@ -500,6 +534,58 @@ $("#cartitem").html( status.items) ;
 //$("#carttext").text(status.items+' Item(s) in Shopping Cart');
 
   window.location.href="<?php echo base_url();?>home/viewcart";
+
+}
+
+}  
+});  
+}  )  
+         
+
+$(document).on('click', '.shippingbtn', function(){  
+
+
+ 
+if( !$('#autocomplete_search').val() ) {
+    
+toastr.error("Please select your shipping address");
+return false ;
+}
+
+ if( !$('#address').val() ) {
+toastr.error("Add your address");
+
+return false ;
+}
+
+
+var formdata = $('#productpage,#shipping').serialize();
+
+ 
+
+
+
+
+$.ajax({  
+url:"<?php echo base_url() ?>home/addtocart",  
+method:"POST",  
+data:{formdata: formdata,type:'school',pagetype: 'detail',purchase:'shipping' },  
+success:function(data){ 
+
+var data = JSON.stringify(data)
+var status = JSON.parse(data);  
+if(status.session == false){
+    window.location.href="<?php echo base_url();?>home/login";
+    return false;
+}
+if (status.result = false) {
+toastr.error("Error");
+} else {
+toastr.success("Selected Item Added to Cart"); 
+$("#cartitem").html( status.items) ;
+//$("#carttext").text(status.items+' Item(s) in Shopping Cart');
+
+   window.location.href="<?php echo base_url();?>home/viewcart";
 
 }
 
@@ -576,6 +662,52 @@ function langAjax($lang){
     });
 
 }
+
+</script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdN3jFlH_QSn5f3JaHzDYaEoVifCWMsto&libraries=places"></script>
+
+<script>
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+    function initialize() {
+
+      var input = document.getElementById('autocomplete_search');
+
+      var autocomplete = new google.maps.places.Autocomplete(input);
+
+      autocomplete.addListener('place_changed', function () {
+
+      var place = autocomplete.getPlace();
+
+      // place variable will have all the information you are looking for.
+
+      $('#lat').val(place.geometry['location'].lat());
+
+      $('#long').val(place.geometry['location'].lng());
+
+
+      var lat =  $('#lat').val() ;
+      var long = $('#long').val() ;
+
+     
+
+      $.ajax({
+        url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&key=AIzaSyDdN3jFlH_QSn5f3JaHzDYaEoVifCWMsto',
+         success: function(data){
+
+          var response = data.results;
+          $('#address').val(response[0].formatted_address);
+            
+        }
+})
+
+
+
+    });
+
+  }
 
 </script>
 </body>

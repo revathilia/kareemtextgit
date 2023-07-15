@@ -438,7 +438,7 @@ var formdata = $('#formdata').val() ;
 $.ajax({  
 url:"<?php echo base_url() ?>home/addtocart",  
 method:"POST",  
-data:{formdata: formdata,type:'school',pagetype: 'detail' },  
+data:{formdata: formdata,type:'school',pagetype: 'detail',purchase:'collect' },  
 success:function(data){ 
 
 var data = JSON.stringify(data)

@@ -22,7 +22,7 @@
                                     <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="<?php echo base_url()?>home/uniform_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url()?>uploads/images/school/<?php echo $product['product_image'] ?>" alt="#" width="160px" ></a>
+                                                <a href="<?php echo base_url()?>home/uniform_det/<?php echo $product['id'] ?>"><img src="<?php echo base_url()?>uploads/images/school/<?php echo $product['product_image'] ?>" alt="#" width="160px" ></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -41,7 +41,7 @@
                                             </div>
                                             <div class="product-info">
                                                
-                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/uniform_details/<?php echo $product['id'] ?>"><?php echo $product['product_name'] ?></a></h2>
+                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/uniform_det/<?php echo $product['id'] ?>"><?php echo $product['product_name'] ?></a></h2>
                                                 <?php  $product_price = $this->Admin_model->get_single_data('school_product_price_size_det',array('product_id'=>$product['id'],'status'=>'Y'));  
   ?>
                                                 <div class="product-price">
@@ -77,11 +77,11 @@
                                        <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                              <div class="product-img">
-                                                <a href="<?php echo base_url()?>home/uniform_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url()?>uploads/images/school/<?php echo $product['product_image'] ?>" alt="#"></a>
+                                                <a href="<?php echo base_url()?>home/uniform_det/<?php echo $product['id'] ?>"><img src="<?php echo base_url()?>uploads/images/school/<?php echo $product['product_image'] ?>" alt="#"></a>
                                                 
                                             </div>
                                             <div class="product-info">
-                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/uniform_details/<?php echo $product['id'] ?>"><?php echo $product['product_name'] ?></a></h2>
+                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/uniform_det/<?php echo $product['id'] ?>"><?php echo $product['product_name'] ?></a></h2>
                                              
 
                                               <?php  $product_price = $this->Admin_model->get_single_data('school_product_price_size_det',array('product_id'=>$product['id'],'status'=>'Y'));  
