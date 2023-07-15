@@ -38,7 +38,7 @@ $this->session->set_userdata('dir', 'ltr');
 <body>
 
 <div class="body-wrapper">    
-<div class="header-blue">
+<div class="<?php if($session == 'eng'){ echo "header-blue" ;} else{ echo "blue-header" ;}?>">
     <!-- HEADER AREA START (header-5) -->
   <?php $this->load->view('home/header2')  ?>
     <!-- HEADER AREA END -->
@@ -68,7 +68,13 @@ $this->session->set_userdata('dir', 'ltr');
                 </div>
             </div>
              <div class="iphone-mockup">
-						<img src="<?php echo base_url()?>assets/home_assets/img/home/m1.png" class="im-dd">
+             <?php if($_SESSION["lang"]!='eng') {?>
+              <img src="<?php echo base_url()?>assets/home_assets/img/peo.png" class="im-dd">
+    <?php } ?>
+    <?php if($_SESSION["lang"]=='eng') {?>
+      <img src="<?php echo base_url()?>assets/home_assets/img/home/m1.png" class="im-dd">
+    <?php } ?>
+						
                           <!--  <div class="screen">
 							</div>
 							
