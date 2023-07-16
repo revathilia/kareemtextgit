@@ -393,6 +393,42 @@ cartupdate();
 }
 
 
+function itemremove_modal($id){
+
+$rowid = $id ;
+    
+
+$.ajax({ 
+type: "POST",
+url: "<?php echo base_url(); ?>"+'home/remove/'+$rowid,
+data: {rowid:$rowid,viewname:'removemodal'},
+}).done(function(response){
+ 
+
+ 
+  //$("#ltn__utilize-cart-menu").addClass('ltn__utilize-open');
+
+  
+
+// //$("#cart").html(response);
+//  $("#ltn__utilize-cart-menu").load(location.href + " #ltn__utilize-cart-menu");
+
+//   $('#ltn__utilize-cart-menu').toggle(); 
+// $('#ltn__utilize-cart-menu').show(); 
+  // $("#myModal").reload();
+
+cartupdate();
+ $("#ltn__utilize-cart-menu").html(response); 
+
+//location.reload();
+
+
+ //window.location.href="<?php echo base_url();?>home/viewcart#ltn__utilize-cart-menu";
+ 
+});
+
+}
+
 </script>
 <script type="text/javascript">
 function langAjax($lang){

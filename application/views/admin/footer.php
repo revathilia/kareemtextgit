@@ -177,4 +177,17 @@ location.reload();
 
 </script>
 
+<script type="text/javascript">
+   $(document).ready( function() {
+  $( '#example' ).dataTable( {
+            lengthChange: false,
+            buttons: [ 'copy', 'excel', 'csv', 'pdf' ],
+            "bDestroy": true,
+            "paging":   true,
+            "ordering": false,
+            stateSave: true
+ } );
+ } );
+ </script>
+
 </html>

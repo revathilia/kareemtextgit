@@ -547,9 +547,22 @@ if(!empty($lev)){
      $pimages  = array();
      $pimage = '' ;
      $product_images = $this->Admin_model->get_all_data('school_product_images',array('product_id'=>$id)); 
-    foreach($product_images as $images){
-     $pimage .= "," .$images['product_images'];
+    
+
+
+ foreach($product_images as $images){
+
+     
+      $colors = explode( ',', $data['uniformdata']->colors_available) ;
+
+      if(in_array($images['color_id'], $colors) ||  $images['color_id'] == 0 ){
+         $pimage .= "," .$images['product_images'];
+      }
+ 
     }
+
+   
+
     $pimages  = explode(',',$pimage) ; 
     $data['product_images'] = $pimages ;
       $data['product_price'] = $this->Admin_model->get_single_data('school_product_price_size_det',array('product_id'=>$id,'status'=>'Y'));  
@@ -571,9 +584,18 @@ if(!empty($lev)){
      $pimages  = array();
      $pimage = '' ;
      $product_images = $this->Admin_model->get_all_data('school_product_images',array('product_id'=>$id)); 
-    foreach($product_images as $images){
-     $pimage .= "," .$images['product_images'];
+    
+ foreach($product_images as $images){
+
+      $colors = explode( ',', $data['uniformdata']->colors_available) ;
+
+      if(in_array($images['color_id'], $colors) ||  $images['color_id'] == 0 ){
+         $pimage .= "," .$images['product_images'];
+      }
+ 
     }
+
+
     $pimages  = explode(',',$pimage) ; 
     $data['product_images'] = $pimages ;
       $data['product_price'] = $this->Admin_model->get_single_data('school_product_price_size_det',array('product_id'=>$id,'status'=>'Y'));  
@@ -1002,12 +1024,14 @@ if(!empty( $prodType)){
     $data_array['product_price'] =  $product_price->product_price;
    } //echo  $data_array->product_id;
 
+ 
+$this->cart->product_name_rules = '[:print:]';
    
    if( $type == 'industry'){
   // Set array for send data.
     $data = array(
       'id' => (int) $data_array['product_id'],
-      'name' => htmlspecialchars($this->Admin_model->get_type_name_by_id('industry_products','id',$data_array['product_id'],'product_name') ),
+      'name' =>  htmlspecialchars($this->Admin_model->get_type_name_by_id('industry_products','id',$data_array['product_id'],'product_name') ),
       'price' => $data_array['product_price'],
       'qty' => 1,
       'color' =>$data_array['color_selected'],
@@ -1036,7 +1060,7 @@ if(!empty( $prodType)){
    $data['long'] = $data_array['long'];
    $data['address'] = $data_array['address'];
     }
-
+ 
     
 
     $result = $this->cart->insert($data);
@@ -1168,7 +1192,7 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
       $this->cart->update($data);
       }
 
-
+      
       if($viewname=="checkout"){
           //echo $viewname ;
         $this->load->view('home/loadcheckout');
@@ -1179,6 +1203,8 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
       else if($viewname=="cart"){
           $this->viewcart();
           //echo $viewname ;
+      }else if($viewname=="removemodal" ){
+        $this->load->view('home/loadmodalcart');
       }
       // This will show cancle data in cart.
       //redirect('user/home/viewcart');

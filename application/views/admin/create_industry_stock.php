@@ -61,7 +61,7 @@
                
 
                <div class="row" > 
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <div class="form-group"  >   
 
                                    <label for="xin_employee_password"><?php echo $this->Admin_model->translate("Stock Entry Type") ?> </label>
@@ -75,7 +75,7 @@
                     </div>
                   </div>                
               
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <div class="form-group" >       
                     <label for="xin_employee_password"><?php echo $this->Admin_model->translate("Quantity") ?> </label>
 
@@ -84,7 +84,7 @@
 
                     </div>
                   </div>   
-                  <div class="col-md-4">
+                  <!-- <div class="col-md-4">
                     <div class="form-group" >       
                     <label for="xin_employee_password"><?php echo $this->Admin_model->translate("Unit Price") ?> </label>
 
@@ -92,7 +92,7 @@
                      <input class="form-control" placeholder="<?php echo $this->Admin_model->translate("Unit Price") ?>" name="unit_price" type="text" value="">     
 
                     </div>
-                  </div>              
+                  </div>  -->             
               </div>
                
 

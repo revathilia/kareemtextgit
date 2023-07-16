@@ -161,7 +161,7 @@ function deleteentry($id,$table){
 
 $.ajax({ 
 type: "POST",
-url: "<?php echo base_url(); ?>"+'admin/delete_entry/',
+url: "<?php echo base_url(); ?>"+'home/delete_entry/',
 data: {id:$id,table:$table},
 }).done(function(response){
 

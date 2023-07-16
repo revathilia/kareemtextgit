@@ -2674,11 +2674,7 @@ public function add_industry_stock()
     $Return['error'] = "Select Available Size";
 }  else if($this->input->post('quantity')==='') {
   $Return['error'] = "Add Quantity";
-} 
-else if($this->input->post('unit_price')==='') {
-  $Return['error'] = "Add unit price";
 }  
-     
   
 
 
@@ -2699,7 +2695,7 @@ if($Return['error']!=''){
   'color'=>implode(',',$this->input->post('colors')),
   'size'=>implode(',',$this->input->post('sizes')),
   'quantity' => $this->input->post('quantity'),
-  'price' => $this->input->post('unit_price'),
+  
   'type' => $this->input->post('entry_type'),
    
   'created_on'=>date('Y-m-d'),
@@ -4514,9 +4510,6 @@ public function add_uniform_stock()
     $Return['error'] = "Select Available Size";
 }  else if($this->input->post('quantity')==='') {
   $Return['error'] = "Add Quantity";
-} 
-else if($this->input->post('unit_price')==='') {
-  $Return['error'] = "Add unit price";
 }  
      
   
@@ -4538,7 +4531,7 @@ if($Return['error']!=''){
   'color'=>implode(',',$this->input->post('colors')),
   'size'=>implode(',',$this->input->post('sizes')),
   'quantity' => $this->input->post('quantity'),
-  'price' => $this->input->post('unit_price'),
+   
   'type' => $this->input->post('entry_type'),
    
   'created_on'=>date('Y-m-d'),

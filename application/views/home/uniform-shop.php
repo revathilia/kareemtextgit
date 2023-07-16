@@ -214,7 +214,18 @@ button[type="submit"]{
   margin-bottom: 30px;
   border-radius: 0;
   padding-right: 40px; }
-    </style>
+
+
+.nice-select {
+   width: 180px !important;
+   aut
+ }
+
+
+
+      </style>
+
+
 
 
 </head>
@@ -307,29 +318,31 @@ button[type="submit"]{
                         <!-- Category Widget -->
                         <div class="widget ltn__menu-widget">
                             <h4 class="ltn__widget-title">School List</h4>
-                            
 
-                             <?php foreach ($schools as $svalue) { ?>
-                                <div class="form-check">
-  <input class="form-check-input schools" type="checkbox" name="selectsch" value="<?php echo $svalue['id'] ?>" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
- 
- <?php 
-if($this->session->userdata('lang') == 'ar'){
-     echo  $svalue['ar_school_name'] ;
-}else{
-     echo  $svalue['school_name'] ;
-}
-                                                    ?>
-                                                        
+ <div class="form-check">
+                              <select class="nice-select2 btn-blue2 schools" name="selectsch" >
 
+                                  <option value ='' >All Schools</option>
 
-  </label>
+                                          <?php foreach ($schools as $svalue) { ?>
+
+                                              <option value ="<?php echo $svalue['id'] ?>" >
+                                               <?php 
+  if($this->session->userdata('lang') == 'ar'){
+       echo  $svalue['ar_school_name'] ;
+  }else{
+       echo  $svalue['school_name'] ;
+  }
+  ?>
+                                                      
+                                                    </option>
+                                      
+                                      <?php } ?>
+                                    </select>
 </div>
 
-                               
-                          <?php  } ?>
-
+ 
+ 
 
                         </div>
                         <!-- Price Filter Widget -->
@@ -415,7 +428,8 @@ if($this->session->userdata('lang') == 'ar'){
     <!-- PRODUCT DETAILS AREA END -->
 
     <!-- FOOTER AREA START -->
-   <?php include 'footer.php '?>
+   <?php $this->load->view('home/footer')  ?>
+
     <!-- FOOTER AREA END -->
 
       <!-- MODAL AREA START (Quick View Modal) -->
@@ -540,7 +554,8 @@ searchFilter();
 
 });
 
-$(".schools").on('click', function(e){
+ 
+$(".schools").change(function(e){
 
 searchFilter();
 })
@@ -597,9 +612,13 @@ var searchtext = $('#searchtext').val();
 
 var school = []
  
-$(".schools:checkbox:checked").each(function(){
-    school.push($(this).val());
-});
+
+$('.schools option').each(function() {
+    if($(this).is(':selected')){
+school.push($(this).val());
+
+    }
+    })
  
 
 var standards = []

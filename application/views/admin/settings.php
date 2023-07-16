@@ -34,7 +34,7 @@
 <div class="col-md-12">
 <div class="form-group">
 <label for="first_name"><?php echo $this->Admin_model->translate("Shipping Charge") ?></label>
-<input class="form-control " placeholder="Shipping Charge" name="shipping_charge" type="text" value="<?php echo $settings->shipping_charge ?>" >
+<input class="form-control " placeholder="Shipping Charge" name="shipping_charge" type="number" value="<?php echo $settings->shipping_charge ?>" >
 </div>
 </div>
 </div>
@@ -44,8 +44,8 @@
 <div class="row"> 
 <div class="col-md-12">
 <div class="form-group">
-<label for="first_name"><?php echo $this->Admin_model->translate("VAT") ?></label>
-<input class="form-control " placeholder="VAT" name="vat_val" type="text" value="<?php echo $settings->vat_val ?>" >
+<label for="first_name"><?php echo $this->Admin_model->translate("VAT") ?> %</label>
+<input class="form-control " placeholder="VAT" name="vat_val" type="number" value="<?php echo $settings->vat_val ?>" >
 </div>
 </div>
 </div>

@@ -601,7 +601,12 @@ if($this->session->userdata('lang') == 'ar'){
   <div class="box-sha">
         <div class="row">
             <div class="col-md-3">
-                <img src="<?php echo base_url()?>assets/home_assets/img/product/1.png" width="80px" height="80px">
+                 <?php
+               $imagename = $this->Admin_model->get_type_name_by_id('industry_products','id',$product->id,'product_image') ;
+                ?>
+
+                        
+                        <img src="<?php echo base_url()?>uploads/images/industry/<?php echo $imagename  ?>">
 </div>
 <div class="col-md-6">
     <h6>
@@ -653,7 +658,7 @@ if($this->session->userdata('lang') == 'ar'){
 <div class="col-md-6">
     <p class="product-pricee">
         <br>
-        SAR 10
+        SAR <?php echo  $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ; ?>
 </p>
     </div>
 <div class="col-md-12">

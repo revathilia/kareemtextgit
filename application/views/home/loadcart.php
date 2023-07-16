@@ -2,9 +2,16 @@
 <?php  $cart_check = $this->cart->contents();
 
 // If cart is empty, this will show below message.
-if(empty($cart_check)) {
-echo 'Your cart is empty !!!'; 
-}  ?> </div>
+if(empty($cart_check)) { ?>
+
+
+    <div class="container-fluid">
+        <div class="col-md-12">
+<?php echo 'Your cart is empty !!!'; 
+}  ?> 
+</div>
+</div>
+</div>
 
 <?php
 // All values of cart store in "$cart". 
@@ -33,16 +40,18 @@ foreach ($cart as $item){
                                         <td class="cart-product-image">
                                             <?php $productID = $item['id'] ;
                                            if($item['type']=='industry'){
+                                             $detailspage = 'product_details' ;
  $productImage = $this->Admin_model->get_type_name_by_id('industry_products','id',$item['id'],'product_image') ;
                                            }else{
+                                             $detailspage = 'uniform_det' ;
  $productImage = $this->Admin_model->get_type_name_by_id('school_products','id',$item['id'],'product_image') ;
                                            }
 
                                              ?>
-                                            <a href="product-details.php"><img src="<?php echo base_url()?>uploads/images/<?php echo $item['type']?>/<?php echo $productImage ?>" alt="#"></a>
+                                            <a href="<?php echo base_url()?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>"><img src="<?php echo base_url()?>uploads/images/<?php echo $item['type']?>/<?php echo $productImage ?>" alt="#"></a>
                                         </td>
                                         <td class="cart-product-info">
-                                            <h4><a href="product-details.php">
+                                            <h4><a href="<?php echo base_url()?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>">
                                                 <?php echo $item['name']; ?></a></h4>
                                                 <small><?php echo  $this->Admin_model->get_type_name_by_id('size_master','id',$item['size'],'size') ;?>,
 <?php if(!empty($item['color'])){ ?>
@@ -74,31 +83,35 @@ echo form_hidden('cart[' . $item['id'] . '][qty]', $item['qty']);
 
  
 
-
- <div class="cart-plus-minus loadqty" data-id="btn_<?php echo $i ;?>">
-    <input type="text" id = "qty_<?php echo $i ;?>" data-id = "qty_<?php echo $i ;?>" class = "qty  cart-plus-minus-box" data-product ="<?php echo 'tocart'.$item['id'] ?>" data-rowid = "<?php echo $item['rowid'] ;?>"  data-price = "<?php echo $item['price'] ;?>"  name="cart[<?php echo $item['id'] ?>][qty]"  value="<?php echo $item['qty'] ?>" >
-</div>
-                                         
-
-
  
+                                         
+<div class="container">
+<input type="button" onclick="decrementValue(<?php echo $i ;?>)" value="-" />
+<input type="text" class="cart-plus-minus-box" id = "qty_<?php echo $i ;?>" data-id = "qty_<?php echo $i ;?>" class = "qty  cart-plus-minus-box" data-product ="<?php echo 'tocart'.$item['id'] ?>" data-rowid = "<?php echo $item['rowid'] ;?>"  data-price = "<?php echo $item['price'] ;?>"  name="cart[<?php echo $item['id'] ?>][qty]"  value="<?php echo $item['qty'] ?>" />
+<input type="button" onclick="incrementValue(<?php echo $i ;?>)" value="+" />
+</div>
 
-<!--   <button type="submit" data-prod_name="'<?php echo 'tocart'.$item['id'] ?>'" class="updatecart btn btn-success btn-xs"><i class="fa fa-refresh"></i></button> -->
+  
 <?php
 echo form_close();
 ?>
 
 
-                                        <div class="cart-plus-minus">
-                                                <input type="text" value=" <?php echo $item['qty']; ?>" name="qtybutton" class="cart-plus-minus-box">
-                                        </div> 
-                                        </td>
+ </td>
                                         <td class="cart-product-subtotal">SAR <?php echo $item['subtotal']; ?></td>
                                     </tr>
 
                                      <?php $sutotal = $item['subtotal'] + $sutotal ;
                                         $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
-                                        $vat = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;?>
+                                        $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
+                                        $vat = 0 ;
+
+                                        if(!empty($vat_percentage) && $vat_percentage != 0 ){
+                                            $vat = $sutotal * $vat_percentage /100 ;
+                                        }
+                                        ?>
+
+                                       
 
 
                                    <?php }  ?>

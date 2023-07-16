@@ -255,8 +255,16 @@ $subtotal = 0 ; ?>
 
  
                                      <?php $subtotal = $item['subtotal'] + $subtotal ;
-                                        $shipping = 0 ;
-                                        $vat = 0 ;?>
+                                        
+
+                                        $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
+                                        $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
+                                        $vat = 0 ;
+
+                                        if(!empty($vat_percentage) && $vat_percentage != 0 ){
+                                            $vat = $subtotal * $vat_percentage /100 ;
+                                        }
+                                        ?>
 
 
                                    <?php }  ?>
@@ -265,15 +273,19 @@ $subtotal = 0 ; ?>
                                
                                 <tr>
                                     <td>Shipping</td>
-                                    <td>SAR 00.00</td>
+                                    <td>SAR <?php echo $shipping ?></td>
                                 </tr>
                                 <tr>
                                     <td>Vat</td>
-                                    <td>SAR 00.00</td>
+                                    <td>SAR <?php echo $vat ?></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Order Total</strong></td>
-                                    <td><strong>SAR <?php echo $subtotal ;?></strong></td>
+
+                                    <?php $total =  $subtotal + $shipping+ $vat  ;
+                                       ?>
+
+                                    <td><strong>SAR <?php echo $total ;?></strong></td>
                                 </tr>
                             </tbody>
                         </table>
