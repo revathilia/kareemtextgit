@@ -17,11 +17,11 @@
 <div class="radio-container">
     <?php if($type == 'mixed' || $type == 'boys'){ ?>
     <input type="radio" name="gender" class="selected_gender"  value="male" id="male" />
-    <label for="male">Male</label>
+    <label for="male"><?php echo $this->Admin_model->translate("Male") ; ?></label>
     <?php } ?>
     <?php if($type == 'mixed' || $type == 'girls'){ ?>
     <input type="radio" name="gender" value="female" id="female"  class="selected_gender"  />
-    <label for="female">Female</label>
+    <label for="female"><?php echo $this->Admin_model->translate("Female") ; ?></label>
      <?php } ?>
 </div>
 </div>
@@ -30,7 +30,7 @@
                             
                             
                             <div class="form-group clearfix">
-                                <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
+                                <a href="javascript:;" class="form-wizard-next-btn float-right"><?php echo $this->Admin_model->translate("Next") ; ?></a>
                             </div>
                         </fieldset> 
                         <fieldset class="wizard-fieldset">
@@ -47,15 +47,15 @@
 </div>
 </div>
 <div class="form-group clearfix next-b">
-                                <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
+                                <a href="javascript:;" class="form-wizard-previous-btn float-left"><?php echo $this->Admin_model->translate("Previous") ; ?> </a>
+                                <a href="javascript:;" class="form-wizard-next-btn float-right"><?php echo $this->Admin_model->translate("Next") ; ?></a>
                             </div>
                             
                         </fieldset> 
                         
                         <fieldset class="wizard-fieldset">
                             <p class="text-center"><img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $logo ?>" width="200px" height="200px"></p>
-                            <h6 class="text-center">Selected Choices</h6>
+                            <h6 class="text-center"><?php echo $this->Admin_model->translate("Selected Choices") ; ?></h6>
                             <div class="row">
                                 <div class="col-md-6">
                             <div class="form-group">
@@ -73,8 +73,8 @@
 </div>
 </div>
                             <div class="form-group clearfix next-b">
-                                <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                <a href="javascript:;" class="form-wizard-submit float-right">Submit</a>
+                                <a href="javascript:;" class="form-wizard-previous-btn float-left"><?php echo $this->Admin_model->translate("Previous") ; ?></a>
+                                <a href="javascript:;" class="form-wizard-submit float-right"><?php echo $this->Admin_model->translate("Submit") ; ?> </a>
                             </div>
                         </fieldset> 
                         <div class="form-wizard-header">
@@ -240,7 +240,7 @@ success:function(data){
                 }
  
         }else{
-             toastr.error('Select gender to proceed');
+             toastr.error(<?php echo $this->Admin_model->translate("Select gender to proceed") ; ?>);
              return false;
                    
         }
@@ -253,7 +253,7 @@ success:function(data){
                  $('#class').val($(this).next('label').text());
  
         }else{
-             toastr.error('Select gender to proceed');
+             toastr.error('Select class to proceed');
              return false;
                    
         }

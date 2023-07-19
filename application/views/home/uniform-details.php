@@ -164,7 +164,7 @@ if($this->session->userdata('lang') == 'ar'){
     
 
      <select  name="school_selected" id="school_selected" class="size-select selectschool">
-      <option value=''>Select</option>
+      <option value=''><?php echo $this->Admin_model->translate("Select") ; ?></option>
                        <?php  
 
 
@@ -195,7 +195,7 @@ if($this->session->userdata('lang') == 'ar'){
                                                
 </div>
 <div class="col-md-6">
-                                                <p>Gender</p>
+                                                <p><?php echo $this->Admin_model->translate("Gender") ; ?></p>
 </div>
 <div class="col-md-6">
                                                <p>
@@ -215,7 +215,7 @@ $genders = explode( ',', $genders) ;
 </div>
  
 <div class="col-md-6">
-                                                <p>Size</p>
+                                                <p><?php echo $this->Admin_model->translate("Size") ; ?></p>
 </div>
 <div class="col-md-6">
                                                
@@ -237,7 +237,7 @@ $sizes = explode( ',', $sizes) ;
                                                 
 </div>
 <div class="col-md-6">
-                                                <p>check school emblem</p>
+                                                <p><?php echo $this->Admin_model->translate("check school emblem") ; ?></p>
 </div>
 <div class="col-md-6">
                                                 <p class="input-box text-center"><img id="school_logo" width="150px" height="150px"></p>
@@ -248,7 +248,7 @@ $sizes = explode( ',', $sizes) ;
                                     <div class="col-md-6">
  
 
-<button type ="button" class="btn-blue-pro single addtocart">  Single product purchase </button>
+<button type ="button" class="btn-blue-pro single addtocart"> <?php echo $this->Admin_model->translate("Single product purchase") ; ?>  </button>
 
 <!-- Button trigger modal -->
 
@@ -257,7 +257,8 @@ $sizes = explode( ',', $sizes) ;
                                     </div>
                                     <div class="col-md-6">
                                         <p class="btn-bl">
-                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'">Bulk Purchase</a> 
+                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'"><?php echo $this->Admin_model->translate("Bulk Purchase") ; ?>
+                                         </a> 
                                      </p>
 
 
@@ -281,8 +282,16 @@ $sizes = explode( ',', $sizes) ;
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="liton_tab_details_1_1">
                                 <div class="ltn__shop-details-tab-content-inner">
-                                    <h4 class="title-2">Description.</h4>
-                                    <p><?php echo $uniformdata->long_description ;?></p>
+                                    <h4 class="title-2"><?php echo $this->Admin_model->translate("Description") ; ?></h4>
+                                    <p>
+                                    <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $uniformdata->ar_product_name ;
+}else{
+     echo $uniformdata->product_name ;
+}
+                                                    ?>
+                                                   </p>
                                 </div>
                             </div>
                            
@@ -303,7 +312,7 @@ $sizes = explode( ',', $sizes) ;
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title-area ltn__section-title-2">
-                        <h4 class="title-2">Related Products<span>.</span></h1>
+                        <h4 class="title-2"><?php echo $this->Admin_model->translate("Related Products") ; ?><span>.</span></h1>
                     </div>
                 </div>
             </div>
@@ -436,14 +445,24 @@ if($this->session->userdata('lang') == 'ar'){
   ?>
 
 
-    <h6><?php echo $uniformdata->product_name ; ?></h6>
+    <h6> 
+  
+    <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $uniformdata->ar_product_name ;
+}else{
+     echo $uniformdata->product_name ;
+}
+                                                    ?>
+                                                    
+                                                  </h6>
     <div class="product-pricee" id="price_det2">
 <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != 0) ? $product_price->offer_price : $product_price->product_price ; ?></span>
 </div>
 </div>
 <div class="col-md-12">
  
-<a href="javascript:void(0)" class="btn btn-orib checkoutbtn">Checkout</a>
+<a href="javascript:void(0)" class="btn btn-orib checkoutbtn"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
  
 </div>
 </div>
@@ -461,7 +480,7 @@ if($this->session->userdata('lang') == 'ar'){
 
  <fieldset>
       
-      <input id="autocomplete_search" name="autocomplete_search" type="text" class="form-control" placeholder="Search location" />
+      <input id="autocomplete_search" name="autocomplete_search" type="text" class="form-control" placeholder="<?php echo $this->Admin_model->translate("Search location") ; ?>" />
 
                     <input type="hidden" name="lat" id="lat">
 
@@ -469,7 +488,7 @@ if($this->session->userdata('lang') == 'ar'){
 
   </fieldset>
        <fieldset>
-      <textarea placeholder="add address" id="address" name="address" tabindex="5" required class="form-control text-ar"></textarea>
+      <textarea placeholder="<?php echo $this->Admin_model->translate("Add address") ; ?>" id="address" name="address" tabindex="5" required class="form-control text-ar"></textarea>
 </fieldset>
 
    

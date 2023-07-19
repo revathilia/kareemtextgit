@@ -275,7 +275,7 @@ button[type="submit"]{
                 <div class="col-md-12">
               
                     <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-3">
                 <h3 style="margin-left:14px;">School</h3>
 </div>
 
@@ -303,6 +303,14 @@ button[type="submit"]{
           
        
                             </div>
+                            <div class="col-md-2">
+                            <div class="ltn__grid-list-tab-menu" style="margin-left:40px;margin-top:-10px">
+                                    <div class="nav">
+                                        <a class="active show" data-bs-toggle="tab" href="#liton_product_grid"><i class="fas fa-th-large"></i></a>
+                                        <a data-bs-toggle="tab" href="#liton_product_list"><i class="fas fa-list"></i></a>
+                                    </div>
+                                </div>
+</div>
 
 </div>
 <hr>

@@ -44,7 +44,7 @@
             <br>
             <form id="signin-form" action="<?php echo base_url() ?>home/submitsignup" method="post" class="signin">
                                <fieldset>
-     <label class="forget">PHONE NUMBER</label>
+     <label class="forget"><?php echo $this->Admin_model->translate("PHONE NUMBER") ; ?></label>
      <br>
      <div class="row g-0 r-ph">
       <div class="col-md-3">
@@ -64,7 +64,9 @@
          
 </div>
 <div class="col-md-6">
-        <a href="<?php echo base_url() ; ?>home/login" style="float: right" class="forget">Already Registered ? Login</a>
+        <a href="<?php echo base_url() ; ?>home/login" style="float: right" class="forget">
+        <?php echo $this->Admin_model->translate(" Already Registered ? Login") ; ?>
+       </a>
 </div>
 </div>
                         </form>

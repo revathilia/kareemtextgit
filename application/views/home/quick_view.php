@@ -61,7 +61,7 @@ if($this->session->userdata('lang') == 'ar'){
                                                     <li>
                                                         <a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product->id ?>" class="theme-btn-1 btn btn-effect-1" title="View Details">
                                                             <i class="fas fa-eye"></i>
-                                                            <span>VIEW PRODUCT</span>
+                                                            <span><?php echo $this->Admin_model->translate("VIEW PRODUCT") ; ?></span>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -72,7 +72,7 @@ if($this->session->userdata('lang') == 'ar'){
                                                        
 
                                                          <a href="#" title="Wishlist"  class="add_to_wishlist" data-productid="<?php echo $product->id ?>" >
-                                                                <i class="far fa-heart"></i> <span>Add to Wishlist</span></a>
+                                                                <i class="far fa-heart"></i> <span><?php echo $this->Admin_model->translate("Add to Wishlist") ; ?></span></a>
 
                                                     </li>
                                                      
@@ -81,7 +81,7 @@ if($this->session->userdata('lang') == 'ar'){
                                             <hr>
                                             <div class="ltn__social-media">
                                                 <ul>
-                                                    <li>Share:</li>
+                                                    <li><?php echo $this->Admin_model->translate("Share") ; ?>:</li>
                                                     <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                                                     <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
                                                     <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>

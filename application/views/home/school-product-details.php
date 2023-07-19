@@ -449,7 +449,7 @@ if($this->session->userdata('lang') == 'ar'){
 
   </fieldset>
        <fieldset>
-      <textarea placeholder="add address" id="address" name="address" tabindex="5" required class="form-control text-ar"></textarea>
+      <textarea placeholder="<?php echo $this->Admin_model->translate("Add address") ; ?>" id="address" name="address" tabindex="5" required class="form-control text-ar"></textarea>
 </fieldset>
 
    

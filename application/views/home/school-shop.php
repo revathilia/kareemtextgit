@@ -381,7 +381,7 @@ data:{schoolid:schoolid },
 success:function(html){ 
     if(html == 0){
 
-        toastr.error('No uniform available for the selection, please contact admin !');
+        toastr.error("No uniform available for the selection, please contact admin !");
         // setInterval(function() {
         //     window.location = "<?php echo base_url(); ?>"+'home/school';  
         //         }, 3000); //3 seconds

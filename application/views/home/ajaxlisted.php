@@ -112,7 +112,13 @@ if($this->session->userdata('lang') == 'ar'){
                                                 <?php echo  ($product_price->offer_price != '0') ? '<del>' .$this->Admin_model->translate("SAR").' '. $product_price->product_price .'</del>' :  '' ; ?> 
                                                 </div>
                                                 <div class="product-brief">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores sit odit nesciunt,  aliquid, deleniti non et ut dolorem!</p>
+                                                    <p><?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $product['ar_description'] ;
+}else{
+     echo $product['description'] ;
+}
+                                                    ?></p>
                                                 </div>
                                                 <div class="product-hover-action">
                                                     <ul>

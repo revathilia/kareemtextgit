@@ -261,8 +261,8 @@ button[type="submit"]{
                     <div class="">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
-                            <h4 class="section-title-in">Industrial <br> Uniforms</h4>
-                           <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
+                            <h4 class="section-title-in"><?php echo $this->Admin_model->translate("Industrial") ; ?>  <br> <?php echo $this->Admin_model->translate("Uniforms") ; ?></h4>
+                           <p class="sec-ab-or"><?php echo $this->Admin_model->translate("Industry Uniforms Banner Text") ; ?> </p>
                            <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
@@ -284,18 +284,18 @@ button[type="submit"]{
                 
                     <div class="row">
                 <div class="col-md-3">
-                <h3>Industrial Uniforms</h3>
+                <h3><?php echo $this->Admin_model->translate("Industrial Uniforms") ; ?></h3>
 </div>
  
  
 <div class="col-md-2">
 <select class="nice-select " id="sortby">
-     <option>Sort By</option>
+     <option><?php echo $this->Admin_model->translate("Sort By") ; ?></option>
                                        
-                                        <option value="popularity">Popularity</option>
-                                        <option value="latest">New arrivals</option>
-                                        <option value="low_high">Price: low to high</option>
-                                        <option value="high_low">Price: high to low</option>
+                                        <option value="popularity"><?php echo $this->Admin_model->translate("Popularity") ; ?></option>
+                                        <option value="latest"><?php echo $this->Admin_model->translate("New arrivals") ; ?></option>
+                                        <option value="low_high"><?php echo $this->Admin_model->translate("Price: low to high") ; ?> </option>
+                                        <option value="high_low"><?php echo $this->Admin_model->translate("Price: high to low") ; ?></option>
                                     </select>
 
 
@@ -305,9 +305,9 @@ button[type="submit"]{
                                
         <label>
             <span class="screen-reader-text">Search for...</span>
-            <input type="search" class="search-field" placeholder="Type here to search.." value=""  title="Type here to search.." id="searchtext" />
+            <input type="search" class="search-field" placeholder="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" value=""  title="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" id="searchtext" />
         </label>
-        <button  type="submit" class="search-submit button"> Search </button>
+        <button  type="submit" class="search-submit button"><?php echo $this->Admin_model->translate("Search") ; ?>  </button>
           
        
                             </div>
@@ -425,7 +425,16 @@ if($this->session->userdata('lang') == 'ar'){
                                                 <?php echo  ($product_price->offer_price != '0') ? '<del>'.$this->Admin_model->translate("SAR").' ' . $product_price->product_price .'</del>' :  '' ; ?> 
                                                 </div>
                                                 <div class="product-brief">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores sit odit nesciunt,  aliquid, deleniti non et ut dolorem!</p>
+                                                    <p>
+                                                    <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $product['ar_description'] ;
+}else{
+     echo $product['description'] ;
+}
+                                                    ?>
+
+                                                    </p>
                                                 </div>
                                                 <div class="product-hover-action">
                                                     <ul>
@@ -466,7 +475,7 @@ if($this->session->userdata('lang') == 'ar'){
                     <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
                         <!-- Category Widget -->
                         <div class="widget ltn__menu-widget">
-                            <h4 class="ltn__widget-title">Categories</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Categories") ; ?></h4>
                             <?php foreach ($categories as $cvalue) { ?>
                                 <div class="form-check">
   <input class="form-check-input category" type="checkbox" name="selectcat" value="<?php echo $cvalue['id'] ?>" id="flexCheckDefault">
@@ -492,10 +501,10 @@ if($this->session->userdata('lang') == 'ar'){
                         </div>
                         <!-- Price Filter Widget -->
                         <div class="widget ltn__price-filter-widget">
-                            <h4 class="ltn__widget-title">Price</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Price") ; ?></h4>
                             <div class="price_filter">
                                 <div class="price_slider_amount">
-                                    <input type="submit"  value="Your range:"/> 
+                                    <input type="submit"  value="<?php echo $this->Admin_model->translate("Your range:") ; ?>"/> 
                                     <input type="text" class="amount" name="price"  placeholder="Add Your Price" /> 
                                 </div>
                                 <div class="slider-range"></div>
@@ -503,17 +512,17 @@ if($this->session->userdata('lang') == 'ar'){
                         </div>
                         <!-- Top Rated Product Widget -->
                         <div class="widget ltn__top-rated-product-widget">
-                        <h4 class="ltn__widget-title ">Gender</h4>
+                        <h4 class="ltn__widget-title "><?php echo $this->Admin_model->translate("Gender") ; ?></h4>
                         <div class="form-check">
   <input class="form-check-input selectgender" type="checkbox" value="1" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-  Male
+  Ma<?php echo $this->Admin_model->translate("Male") ; ?>le
   </label>
 </div>
 <div class="form-check">
   <input class="form-check-input selectgender" type="checkbox" value="2" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-  Female
+  <?php echo $this->Admin_model->translate("Female") ; ?>
   </label>
 </div>
 
@@ -521,7 +530,7 @@ if($this->session->userdata('lang') == 'ar'){
                        
                         <!-- Color Widget -->
                         <div class="widget ltn__color-widget">
-                            <h4 class="ltn__widget-title ">Product Color</h4>
+                            <h4 class="ltn__widget-title "> <?php echo $this->Admin_model->translate("Product Color") ; ?></h4>
                             
 
                             <?php if(!empty($colors)){
@@ -537,7 +546,7 @@ if($this->session->userdata('lang') == 'ar'){
                     </div>
                         <!-- Size Widget -->
                         <div class="widget ltn__tagcloud-widget ltn__size-widget">
-                            <h4 class="ltn__widget-title">Size</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Size") ; ?></h4>
                             <ul>
                                 <?php if(!empty($sizes)){
                                     foreach ($sizes as $svalue) { ?>

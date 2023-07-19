@@ -735,7 +735,7 @@ if (status.error != '') {
 if (status.result = false) {
 toastr.error("Error");
 } else {
-toastr.success("<?php echo $this->Admin_model->translate("Selected Item Added to Cart") ; ?>"); 
+toastr.success("Selected Item Added to Cart"); 
 $("#cartitem").html( status.items) ;
 //$("#carttext").text(status.items+' Item(s) in Shopping Cart');
 
@@ -754,7 +754,7 @@ $("#cartitem").html( status.items) ;
  
 if( !$('#autocomplete_search').val() ) {
     
-toastr.error("<?php echo $this->Admin_model->translate("Please select your shipping address") ; ?>");
+toastr.error("Please select your shipping address");
 return false ;
 }
 
