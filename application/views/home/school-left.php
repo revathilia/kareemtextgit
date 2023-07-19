@@ -1,26 +1,26 @@
 <!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<html class="no-js" dir="<?php echo $this->session->userdata('dir') ; ?>" lang="<?php echo $this->session->userdata('lang') ; ?>">
 
 
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
 </head>
 
 <body>
@@ -44,7 +44,7 @@
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">School  <br> Uniforms</h4>
                            <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-lg-6 align-self-center">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/home/m2.png" alt="About Us Image" class="img-fluid" width="370px" height="370px">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/m2.png" alt="About Us Image" class="img-fluid" width="370px" height="370px">
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                                     <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -154,7 +154,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -189,7 +189,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -224,7 +224,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -259,7 +259,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -294,7 +294,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -329,7 +329,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -364,7 +364,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -399,7 +399,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -434,7 +434,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -469,7 +469,7 @@
                                        <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -512,7 +512,7 @@
                                       <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                             </div>
                                             <div class="product-info">
                                                 <h2 class="product-title"><a href="school-product-details.php">Cosmetic Containers</a></h2>
@@ -549,7 +549,7 @@
                                     <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                             </div>
                                             <div class="product-info">
                                                 <h2 class="product-title"><a href="school-product-details.php">Cosmetic Containers</a></h2>
@@ -587,7 +587,7 @@
                                      <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                             </div>
                                             <div class="product-info">
                                                 <h2 class="product-title"><a href="school-product-details.php">Cosmetic Containers</a></h2>
@@ -625,7 +625,7 @@
                                      <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                             </div>
                                             <div class="product-info">
                                                 <h2 class="product-title"><a href="school-product-details.php">Cosmetic Containers</a></h2>
@@ -663,7 +663,7 @@
                                      <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                             </div>
                                             <div class="product-info">
                                                 <h2 class="product-title"><a href="school-product-details.php">Cosmetic Containers</a></h2>
@@ -701,7 +701,7 @@
                                      <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                             </div>
                                             <div class="product-info">
                                                 <h2 class="product-title"><a href="school-product-details.php">Cosmetic Containers</a></h2>
@@ -738,7 +738,7 @@
                                     <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                             <div class="product-img">
-                                                <a href="school-product-details.php"><img src="<?php echo base_url()?>assets/home_assets/img/product/sch.png" alt="#"></a>
+                                                <a href="school-product-details.php"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/sch.png" alt="#"></a>
                                             </div>
                                             <div class="product-info">
                                                 <h2 class="product-title"><a href="school-product-details.php">Cosmetic Containers</a></h2>
@@ -856,7 +856,7 @@
                         <!-- Tagcloud Widget -->
                         <div class="widget ltn__tagcloud-widget">
                             <h4 class="ltn__widget-title ">logo</h4>
-                          <img src="<?php echo base_url()?>assets/home_assets/img/product/badge.png">
+                          <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/badge.png">
                         </div>
                         
                         <!-- Color Widget -->
@@ -912,7 +912,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/4.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/4.png" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -1015,7 +1015,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/1.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/1.png" alt="#">
                                         </div>
                                          <div class="modal-product-info">
                                             <h5><a href="school-product-details.php">Digital Stethoscope</a></h5>
@@ -1029,7 +1029,7 @@
                                          <div class="additional-info d-none">
                                             <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
                                             <div class="payment-method">
-                                                <img src="<?php echo base_url()?>assets/home_assets/img/icons/payment.png" alt="#">
+                                                <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/payment.png" alt="#">
                                             </div>
                                          </div>
                                     </div>
@@ -1059,7 +1059,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/7.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/7.png" alt="#">
                                         </div>
                                          <div class="modal-product-info">
                                             <h5><a href="school-product-details.php">Digital Stethoscope</a></h5>
@@ -1072,7 +1072,7 @@
                                          <div class="additional-info d-none">
                                             <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
                                             <div class="payment-method">
-                                                <img src="<?php echo base_url()?>assets/home_assets/img/icons/payment.png" alt="#">
+                                                <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/payment.png" alt="#">
                                             </div>
                                          </div>
                                     </div>
@@ -1090,9 +1090,9 @@
 <!-- Body main wrapper end -->
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
 
       <script type="text/javascript">
 function langAjax($lang){

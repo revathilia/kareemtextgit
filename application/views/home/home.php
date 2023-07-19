@@ -14,24 +14,24 @@ $this->session->set_userdata('dir', 'ltr');
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
       <?php if($_SESSION["lang"]!='eng') {?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
         <?php } ?>
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
 </head>
 
 <body>
@@ -50,7 +50,7 @@ $this->session->set_userdata('dir', 'ltr');
     <div class="ltn__slider-area ltn__slider-3  section-bg-1">
         <div class="ltn__slide-one-active slick-slide-arrow-1 slick-slide-dots-1">
             <!-- ltn__slide-item -->
-            <div class="ltn__slide-item ltn__slide-item-2  ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---" data-bs-bg="<?php echo base_url()?>assets/home_assets/img/slider/slide1.png" style="height:600px">
+            <div class="ltn__slide-item ltn__slide-item-2  ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---" data-bs-bg="<?php echo base_url() ; ?>assets/home_assets/img/slider/slide1.png" style="height:600px">
                 <div class="ltn__slide-item-inner  text-left hero2">
                     <div class="container">
                         <div class="row">
@@ -70,7 +70,7 @@ $this->session->set_userdata('dir', 'ltr');
                 </div>
             </div>
             <!-- ltn__slide-item -->
-            <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---" data-bs-bg="<?php echo base_url()?>assets/home_assets/img/slider/slide1.png" style="height:600px">
+            <div class="ltn__slide-item ltn__slide-item-2 ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---" data-bs-bg="<?php echo base_url() ; ?>assets/home_assets/img/slider/slide1.png" style="height:600px">
                 <div class="ltn__slide-item-inner text-left hero2">
                     <div class="container">
                         <div class="row">
@@ -90,7 +90,7 @@ $this->session->set_userdata('dir', 'ltr');
                 </div>
             </div>
             <!-- ltn__slide-item -->
-            <div class="ltn__slide-item ltn__slide-item-2  ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---" data-bs-bg="<?php echo base_url()?>assets/home_assets/img/slider/slide1.png" style="height:600px">
+            <div class="ltn__slide-item ltn__slide-item-2  ltn__slide-item-3-normal--- ltn__slide-item-3 bg-image bg-overlay-theme-black-60---" data-bs-bg="<?php echo base_url() ; ?>assets/home_assets/img/slider/slide1.png" style="height:600px">
                 <div class="ltn__slide-item-inner  text-left hero2">
                     <div class="container">
                         <div class="row">
@@ -121,7 +121,7 @@ $this->session->set_userdata('dir', 'ltr');
                     <div class="row">
                         <div class="col-md-3">
                             <div class="ltn__feature-icon">
-                              <p class="text-center">  <img src="<?php echo base_url()?>assets/home_assets/img/home/icon1.png" alt="#"></p>
+                              <p class="text-center">  <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/icon1.png" alt="#"></p>
                             </div>
                             <div class="ltn__feature-info">
                                 <h4  class="text-center">Pickup at any Store</h4>
@@ -130,7 +130,7 @@ $this->session->set_userdata('dir', 'ltr');
                          </div>
                        <div class="col-md-3">
                             <div class="ltn__feature-icon">
-                            <p class="text-center">  <img src="<?php echo base_url()?>assets/home_assets/img/home/icon2.png" alt="#"></p>
+                            <p class="text-center">  <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/icon2.png" alt="#"></p>
                             </div>
                             <div class="ltn__feature-info">
                                 <h4 class="text-center">Free returns</h4>
@@ -139,7 +139,7 @@ $this->session->set_userdata('dir', 'ltr');
                         </div>
                         <div class="col-md-3">
                             <div class="ltn__feature-icon">
-                            <p class="text-center"> <img src="<?php echo base_url()?>assets/home_assets/img/home/icon3.png" alt="#"></p>
+                            <p class="text-center"> <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/icon3.png" alt="#"></p>
                             </div>
                             <div class="ltn__feature-info">
                                 <h4  class="text-center">Secured payments</h4>
@@ -148,7 +148,7 @@ $this->session->set_userdata('dir', 'ltr');
                         </div>
                         <div class="col-md-3">
                             <div class="ltn__feature-icon">
-                            <p class="text-center">  <img src="<?php echo base_url()?>assets/home_assets/img/home/icon4.png" alt="#"></p>
+                            <p class="text-center">  <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/icon4.png" alt="#"></p>
                             </div>
                             <div class="ltn__feature-info">
                                 <h4  class="text-center">Customer service</h4>
@@ -169,7 +169,7 @@ $this->session->set_userdata('dir', 'ltr');
             <div class="row">
                 <div class="col-lg-6 align-self-center">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-6 align-self-center">
@@ -227,7 +227,7 @@ $this->session->set_userdata('dir', 'ltr');
 
 <div class="col-md-6">
 
-        <img src="<?php echo base_url()?>assets/home_assets/img/blog/1.jpg">
+        <img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/1.jpg">
 
 <br><br>
 
@@ -243,7 +243,7 @@ $this->session->set_userdata('dir', 'ltr');
             <div class="row">
                 <div class="col-lg-6 align-self-center">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-6 align-self-center">
@@ -252,7 +252,7 @@ $this->session->set_userdata('dir', 'ltr');
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">Industrial <br> Uniforms</h4>
                            <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -274,7 +274,7 @@ $this->session->set_userdata('dir', 'ltr');
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">School  <br> Uniforms</h4>
                            <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -283,7 +283,7 @@ $this->session->set_userdata('dir', 'ltr');
                 </div>
                 <div class="col-lg-6 align-self-center">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/home/m2.png" alt="About Us Image" class="img-fluid" width="350px" height="350px">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/m2.png" alt="About Us Image" class="img-fluid" width="350px" height="350px">
                     </div>
                 </div>
                
@@ -346,7 +346,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-12">
                     <div class="ltn__blog-item ltn__blog-item-3">
                         <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/blog/1.jpg" alt="#"></a>
+                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/1.jpg" alt="#"></a>
                         </div>
                         <div class="ltn__blog-brief">
                             
@@ -368,7 +368,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-12">
                     <div class="ltn__blog-item ltn__blog-item-3">
                         <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/blog/2.jpg" alt="#"></a>
+                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/2.jpg" alt="#"></a>
                         </div>
                         <div class="ltn__blog-brief">
                            
@@ -390,7 +390,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-12">
                     <div class="ltn__blog-item ltn__blog-item-3">
                         <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/blog/3.jpg" alt="#"></a>
+                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/3.jpg" alt="#"></a>
                         </div>
                         <div class="ltn__blog-brief">
                            
@@ -412,7 +412,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-12">
                     <div class="ltn__blog-item ltn__blog-item-3">
                         <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/blog/4.jpg" alt="#"></a>
+                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/4.jpg" alt="#"></a>
                         </div>
                         <div class="ltn__blog-brief">
                           
@@ -434,7 +434,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-12">
                     <div class="ltn__blog-item ltn__blog-item-3">
                         <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/blog/5.jpg" alt="#"></a>
+                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/5.jpg" alt="#"></a>
                         </div>
                         <div class="ltn__blog-brief">
                           
@@ -471,32 +471,32 @@ $this->session->set_userdata('dir', 'ltr');
             <div class="row ltn__brand-logo-active"  dir="rtl">
                 <div class="col-lg-12">
                     <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/brand-logo/1.png" alt="Brand Logo">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/1.png" alt="Brand Logo">
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/brand-logo/2.png" alt="Brand Logo">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/2.png" alt="Brand Logo">
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/brand-logo/3.png" alt="Brand Logo">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/3.png" alt="Brand Logo">
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/brand-logo/4.png" alt="Brand Logo">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/4.png" alt="Brand Logo">
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/brand-logo/5.png" alt="Brand Logo">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/5.png" alt="Brand Logo">
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/brand-logo/3.png" alt="Brand Logo">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/3.png" alt="Brand Logo">
                     </div>
                 </div>
             </div>
@@ -520,14 +520,14 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="col-lg-12">
                             <div class="ltn__banner-item">
                                 <div class="ltn__banner-img">
-                                    <a href="shop.html"><img src="<?php echo base_url()?>assets/home_assets/img/banner/13.jpg" alt="Banner Image"></a>
+                                    <a href="shop.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/banner/13.jpg" alt="Banner Image"></a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="ltn__banner-item">
                                 <div class="ltn__banner-img">
-                                    <a href="shop.html"><img src="<?php echo base_url()?>assets/home_assets/img/banner/12.jpg" alt="Banner Image"></a>
+                                    <a href="shop.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/banner/12.jpg" alt="Banner Image"></a>
                                 </div>
                             </div>
                         </div>
@@ -539,7 +539,7 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="ltn__product-item ltn__product-item-2 text-left">
                                 <div class="product-img">
-                                    <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/1.png" alt="#"></a>
+                                    <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/1.png" alt="#"></a>
                                     <div class="product-badge">
                                         <ul>
                                             <li class="sale-badge">New</li>
@@ -586,7 +586,7 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="ltn__product-item ltn__product-item-2 text-left">
                                 <div class="product-img">
-                                    <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/2.png" alt="#"></a>
+                                    <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/2.png" alt="#"></a>
                                     <div class="product-hover-action">
                                         <ul>
                                             <li>
@@ -628,7 +628,7 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="ltn__product-item ltn__product-item-2 text-left">
                                 <div class="product-img">
-                                    <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/3.png" alt="#"></a>
+                                    <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/3.png" alt="#"></a>
                                     <div class="product-badge">
                                         <ul>
                                             <li class="sale-badge">New</li>
@@ -675,7 +675,7 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="ltn__product-item ltn__product-item-2 text-left">
                                 <div class="product-img">
-                                    <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/4.png" alt="#"></a>
+                                    <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/4.png" alt="#"></a>
                                     <div class="product-badge">
                                         <ul>
                                             <li class="sale-badge">New</li>
@@ -722,7 +722,7 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="ltn__product-item ltn__product-item-2 text-left">
                                 <div class="product-img">
-                                    <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/5.png" alt="#"></a>
+                                    <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/5.png" alt="#"></a>
                                     <div class="product-badge">
                                         <ul>
                                             <li class="sale-badge">New</li>
@@ -769,7 +769,7 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="ltn__product-item ltn__product-item-2 text-left">
                                 <div class="product-img">
-                                    <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/6.png" alt="#"></a>
+                                    <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/6.png" alt="#"></a>
                                     <div class="product-badge">
                                         <ul>
                                             <li class="sale-badge">New</li>
@@ -816,7 +816,7 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="ltn__product-item ltn__product-item-2 text-left">
                                 <div class="product-img">
-                                    <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/7.png" alt="#"></a>
+                                    <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/7.png" alt="#"></a>
                                     <div class="product-badge">
                                         <ul>
                                             <li class="sale-badge">New</li>
@@ -863,7 +863,7 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                             <div class="ltn__product-item ltn__product-item-2 text-left">
                                 <div class="product-img">
-                                    <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/8.png" alt="#"></a>
+                                    <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/8.png" alt="#"></a>
                                     <div class="product-badge">
                                         <ul>
                                             <li class="sale-badge">New</li>
@@ -929,7 +929,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                            <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/1.png" alt="#"></a>
+                            <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/1.png" alt="#"></a>
                             <div class="product-badge">
                                 <ul>
                                     <li class="sale-badge">New</li>
@@ -976,7 +976,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                            <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/2.png" alt="#"></a>
+                            <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/2.png" alt="#"></a>
                             <div class="product-hover-action">
                                 <ul>
                                     <li>
@@ -1018,7 +1018,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                            <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/3.png" alt="#"></a>
+                            <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/3.png" alt="#"></a>
                             <div class="product-badge">
                                 <ul>
                                     <li class="sale-badge">New</li>
@@ -1065,7 +1065,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                            <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/4.png" alt="#"></a>
+                            <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/4.png" alt="#"></a>
                             <div class="product-badge">
                                 <ul>
                                     <li class="sale-badge">New</li>
@@ -1112,7 +1112,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                            <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/5.png" alt="#"></a>
+                            <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/5.png" alt="#"></a>
                             <div class="product-badge">
                                 <ul>
                                     <li class="sale-badge">New</li>
@@ -1159,7 +1159,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                            <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/6.png" alt="#"></a>
+                            <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/6.png" alt="#"></a>
                             <div class="product-badge">
                                 <ul>
                                     <li class="sale-badge">New</li>
@@ -1206,7 +1206,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                            <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/7.png" alt="#"></a>
+                            <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/7.png" alt="#"></a>
                             <div class="product-badge">
                                 <ul>
                                     <li class="sale-badge">New</li>
@@ -1253,7 +1253,7 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                            <a href="product-details.html"><img src="<?php echo base_url()?>assets/home_assets/img/product/8.png" alt="#"></a>
+                            <a href="product-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/product/8.png" alt="#"></a>
                             <div class="product-badge">
                                 <ul>
                                     <li class="sale-badge">New</li>

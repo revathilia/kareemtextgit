@@ -6690,6 +6690,409 @@ $this->output($Return);
     exit;
   }
     
+    //website CMS
+
+     public function clients()
+      {
+       
+       $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+          $data['data'] = $this->Admin_model->get_all_data('client_logos'); 
+        $this->load->view('admin/clients', $data);
+        
+      }
+
+      
+      public function new_client()
+      {
+       
+       $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+         
+        $this->load->view('admin/add_client');
+        
+      }
+    
+    
+        public function add_client()
+      {   
+         $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+       $Return = array('result'=>'', 'error'=>'');
+           
+         if(empty($_FILES['image']['name'])){
+          $Return['error'] = "Image Required ";
+        }
+            
+        if($Return['error']!=''){
+              $this->output($Return);
+               exit ;
+          }
+          
+      
+    
+        if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["image"]["tmp_name"];
+          $profile = "uploads/images/clients/";
+          $set_img = base_url()."uploads/images//";
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image  = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+        
+    
+ 
+       
+        $data = array(   
+         
+        'image' => $image,
+        'status' => 'Y'
+          );
+      //  $result = $this->Admin_model->insert_data('supp_org', $data);
+        $result = $this->db->insert('client_logos',$data);
+       $inserid =  $this->db->insert_id();
+    
+     
+    
+        if ($result == TRUE) {
+          
+          //get setting info 
+           
+           $Return['result'] = 'Logo added successfully.';
+          
+        } else {
+          $Return['error'] =  'Bug. Something went wrong, please try again';
+        }
+        $this->output($Return);
+        exit;
+      }
+        public function edit_client()
+        {
+        $session = $this->session->userdata('superadmindet');
+            if(empty($session)){ 
+              redirect('admin');
+            }
+         $id = $this->uri->segment(3) ;
+         $data['data'] = $this->Admin_model->get_single_data('client_logos',array('id'=>$id)) ;
+    
+           $this->load->view('admin/edit_client', $data);
+            
+        }
+
+      public function update_client()
+      {   
+         $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+    
+        $id = $this->input->post('id');
+    
+       $Return = array('result'=>'', 'error'=>'');
+           
+        /* Server side PHP input validation */    
+         
+        
+         if(empty($_FILES['image']['name'])){
+          $Return['error'] = "Image Required ";
+        }
+            
+        if($Return['error']!=''){
+              $this->output($Return);
+               exit ;
+          }
+          
+      
+      $image = $this->input->post('old_image');
+        if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["image"]["tmp_name"];
+          $profile = "uploads/images/clients/";
+      
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image  = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+       
+       
+        $data = array(   
+         
+        'image' => $image,
+        'status' => 'Y'
+          );
+      //  $result = $this->Admin_model->insert_data('supp_org', $data);
+        $result = $this->Admin_model->update_data('client_logos',array('id'=>$id),$data);
+       $inserid =  $this->db->insert_id();
+    
+       
+    
+        if ($result == TRUE) {
+          
+          //get setting info 
+           
+           $Return['result'] = 'Logo updated successfully.';
+          
+        } else {
+          $Return['error'] =  'Bug. Something went wrong, please try again';
+        }
+        $this->output($Return);
+        exit;
+      }
+
+      
+
+  public function new_news() {
+    
+     $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+    
+    
+    $data['data'] = $this->Admin_model->get_all_data('news_and_events');
+    $this->load->view('admin/add_news', $data);
+  }
+
+  public function add_news()
+      {   
+         $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+    
+        $id = $this->input->post('id');
+    
+       $Return = array('result'=>'', 'error'=>'');
+           
+        /* Server side PHP input validation */    
+         
+        
+      if($this->input->post('heading')==='') {
+            $Return['error'] = "News heading Required";
+      }else if($this->input->post('content')==='') {
+            $Return['error'] = "Content Required ";
+      }
+        
+            
+        if($Return['error']!=''){
+              $this->output($Return);
+               exit ;
+          }
+          
+
+       if(is_uploaded_file($_FILES['news_image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['news_image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["news_image"]["tmp_name"];
+          $profile = "uploads/images/news/";
+          $set_img = base_url()."uploads/images/";
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["news_image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image1 = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+
+      
+       
+        $data = array(   
+         
+          'title' => $this->input->post('heading'),
+          'title_ar' => $this->input->post('heading_ar'),
+          'content' => $this->input->post('content'),
+          'content_ar' => $this->input->post('content_ar'),
+          'image' => $image1,
+          'date' => $this->input->post('date'),
+          'created_on' => date('Y-m-d h:i:s'),
+          );
+      //  $result = $this->Admin_model->insert_data('supp_org', $data);
+        $result = $this->Admin_model->insert_data('news_and_events',$data);
+       $inserid =  $this->db->insert_id();
+    
+       
+    
+        if ($result == TRUE) {
+          
+          //get setting info 
+           
+           $Return['result'] = 'News added successfully.';
+          
+        } else {
+          $Return['error'] =  'Bug. Something went wrong, please try again';
+        }
+        $this->output($Return);
+        exit;
+      }
+
+  public function editnews() {
+    
+     $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+     
+    
+    $id = $this->uri->segment(3) ;
+    $data['data'] = $this->Admin_model->get_single_data('news_and_events',array('id'=>$id));
+    $this->load->view('admin/edit_news', $data);
+  }
+
+  public function update_news()
+      {   
+         $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+    
+        $id = $this->input->post('id');
+    
+       $Return = array('result'=>'', 'error'=>'');
+           
+        /* Server side PHP input validation */    
+         
+        
+      if($this->input->post('heading')==='') {
+            $Return['error'] = "News heading Required";
+      }else if($this->input->post('content')==='') {
+            $Return['error'] = "Content Required ";
+      }
+        
+            
+        if($Return['error']!=''){
+              $this->output($Return);
+               exit ;
+          }
+          
+
+$image1 = $this->input->post('oldimage');
+  
+       if(is_uploaded_file($_FILES['news_image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['news_image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["news_image"]["tmp_name"];
+          $profile = "uploads/images/news/";
+          $set_img = base_url()."uploads/images/";
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["news_image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image1 = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+      
+       
+        $data = array(   
+         
+          'title' => $this->input->post('heading'),
+          'title_ar' => $this->input->post('heading_ar'),
+          'content' => $this->input->post('content'),
+          'content_ar' => $this->input->post('content_ar'),
+          'image' => $image1,
+          'date' => $this->input->post('date'),
+          'created_on' => date('Y-m-d h:i:s'),
+
+          );
+      //  $result = $this->Admin_model->insert_data('supp_org', $data);
+        $result = $this->Admin_model->update_data('news_and_events',array('id'=>$id),$data);
+       $inserid =  $this->db->insert_id();
+    
+       
+    
+        if ($result == TRUE) {
+          
+          //get setting info 
+           
+           $Return['result'] = 'News updated successfully.';
+          
+        } else {
+          $Return['error'] =  'Bug. Something went wrong, please try again';
+        }
+        $this->output($Return);
+        exit;
+      }
+
+
+
+  public function news() {
+    
+     $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+     
+    
+    $data['news'] = $this->Admin_model->get_all_data('news_and_events');
+    $this->load->view('admin/news', $data);
+  }
+
 
  
 }

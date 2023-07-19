@@ -133,20 +133,43 @@ $this->session->set_userdata('dir', 'ltr');
                                        <div class="ltn__shop-details-large-img">
 
 
-                                      <?php   array_unshift($product_images,$product->product_image);
+                                      <?php   
+                                      //array_unshift($product_images,$product->product_image);
   ?>
-                                      <?php if(!empty($product_images)){ foreach ($product_images as $images) { 
-                                            if(!empty($images)){ ?>
-                                       
-                                        
+                                      <?php 
+                                      
+                                      //print_r($pimages);
+                                      if(!empty($pimages)){ foreach ($pimages as $colimages) { 
 
+                                        // echo 'color array <br>' ;
+                                        print_r($colimages);
+                                     
+                                        // echo 'color array <br>' ;
+                                            if(!empty($colmages)){
+                                               
+                                                // echo  '<br>'. $colimages['colorid'] . '<br>' ;
+                                                // echo  '<br>'. $colimages['images'] . '<br>' ;
+
+                                                  $color = $colimages['colorid'];
+                                                  $imgarray = explode(',', $colimages['images']);
+
+                                        if(!empty($imgarray)){
+
+                                           echo $colimages['colorid'] .'<br>' ;
+                                           print_r($imgarray);
+
+                                        foreach ($imgarray as $images) {   
+                                            
+                                            
+                                            ?>
+                                       
                                          <div class="single-large-img" dir="rtl">
                                             <div class="row single-bg">
                                             <div class="col-md-6">
                                                 <div class="btn_bg">
                                         <a href="#" title="Wishlist" 
                                         class="add_to_wishlist" data-productid="<?php echo $product->id  ?>" >
-                                            <i class="far fa-heart"></i><?php echo $this->Admin_model->translate("Favourites") ; ?></a>
+                                            <i class="far fa-heart"></i>Favourites</a>
 </div>
 </div>
 <div class="col-md-6">
@@ -163,33 +186,37 @@ $this->session->set_userdata('dir', 'ltr');
 </div>
 
                                             <a href="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" data-rel="lightcase:myCollection">
-                                                <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" alt="Image">
+                                                <img  class="img_<?php echo $color ?>" src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" alt="Image">
                                             </a>
                                         </div>
 
 
                                                  
-                                       <?php } }} ?>  
+                                       <?php } }}  } }  ?>  
 
                                          
                                     </div>
                                     <div class="ltn__shop-details-small-img slick-arrow-2" >
 
-                                          <?php 
- 
-                                         if(!empty($product_images)){ foreach ($product_images as $images) { 
-                                            if(!empty($images)){ ?>
+                                    <?php if(!empty($pimages)){ foreach ($pimages as $colimages) { 
+                                            if(!empty($colmages)){
+
+
+                                                  $color = $colimages['colorid'];
+                                                  $imgarray = explode(',', $colimages['images']);
+
+                                        if(!empty($imgarray)){
+
+                                        foreach ($imgarray as $images) {   ?>
                                       
 
                                           
 
                                          <div class="single-small-img">
-                                            <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" alt="Image">
+                                            <img class="img_<?php echo $color ?>" src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" alt="Image">
                                         </div>
 
-
-                                                 
-                                       <?php } }} ?>    
+                                        <?php } }}  } }  ?>   
 
                                        
                                         
@@ -217,7 +244,7 @@ if($this->session->userdata('lang') == 'ar'){
                                          
                                          <input type="hidden" name="product_price" value="<?php echo  $product_price->offer_price ? $product_price->offer_price : $product_price->product_price ; ?>">
 
-                                         <?php echo  ($product_price->offer_price != '0') ? '<del> ' .$this->Admin_model->translate("SAR").' '. $product_price->product_price .'</del>' :  '' ; ?> 
+                                         <?php echo  ($product_price->offer_price != '0') ? '<del>'.$this->Admin_model->translate("SAR"). ' ' . $product_price->product_price .'</del>' :  '' ; ?> 
 
 
                                     </div>
@@ -238,29 +265,13 @@ if($this->session->userdata('lang') == 'ar'){
                                       <div class="box-cat">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <p><?php echo $this->Admin_model->translate("PRODUCT TYPE") ; ?> </p>
+                                                <p>PRODUCT TYPE</p>
 </div>
 <div class="col-md-6">
-                                                <p class="input-box">
-                                                    
-                                                
-                                                
-
-
-                                                <?php 
-if($this->session->userdata('lang') == 'ar'){
-    echo $this->Admin_model->get_type_name_by_id('categories','id',$product->category,'ar_category_name') ;
-}else{
-    echo $this->Admin_model->get_type_name_by_id('categories','id',$product->category,'category_name')  ;
-}
-                                                    ?>
-
-                                            
-                                            
-                                            </p>
+                                                <p class="input-box"><?php echo $this->Admin_model->get_type_name_by_id('categories','id',$product->category,'category_name') ; ?></p>
 </div>
 <div class="col-md-6">
-                                                <p><?php echo $this->Admin_model->translate("Gender") ; ?> </p>
+                                                <p>Gender</p>
 </div>
 <div class="col-md-6">
                                            <p>
@@ -279,7 +290,7 @@ if($this->session->userdata('lang') == 'ar'){
                     </select>   </p>
 </div>
 <div class="col-md-6">
-                                                <p><?php echo $this->Admin_model->translate("Color") ; ?> </p>
+                                                <p>Color</p>
 </div>
 <div class="col-md-6">
 
@@ -294,7 +305,7 @@ $colors = explode( ',', $colors) ;
                      
 
  <div class="swatch" style="background:<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$color,'color_code')  ?>;color:#fff;">
-    <input type="radio" name="color_selected" checked class="colorselect" data-color="color_<?php echo $color ?>" id="swatch_<?php echo $color ?>" value="<?php echo $color ?>" />
+    <input type="radio" name="color_selected" class="colorselect" data-color="color_<?php echo $color ?>" id="swatch_<?php echo $color ?>" value="<?php echo $color ?>" />
     <label for="swatch_<?php echo $color ?>"><i class=" fa fa-check" title="<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$color,'color_name')  ?>"></i></label>
   </div>
                            
@@ -303,7 +314,7 @@ $colors = explode( ',', $colors) ;
          </p>                                    
 </div>
 <div class="col-md-6">
-                                                <p><?php echo $this->Admin_model->translate("Size") ; ?> </p>
+                                                <p>Size</p>
 </div>
 <div class="col-md-6"><p>
                                                <select name="size_selected" class="size-select sizeval">
@@ -323,7 +334,7 @@ $sizes = explode( ',', $sizes) ;
                                   <div class="col-md-6">
                               <div class="form-group">  
  
-<button type ="button" class="btn-orange single addtocart"> <?php echo $this->Admin_model->translate("Single product purchase") ; ?>  </button>
+<button type ="button" class="btn-orange single addtocart">  Single product purchase </button>
 <!-- Button trigger modal -->
 
 </div>
@@ -332,7 +343,7 @@ $sizes = explode( ',', $sizes) ;
                                     <div class="col-md-6">
                                          <div class="form-group">  
                                         <p class="btn-or" >
-                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'"><?php echo $this->Admin_model->translate("Bulk Purchase") ; ?></a> 
+                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'">Bulk Purchase</a> 
                                      </p>
 
                                       
@@ -341,7 +352,7 @@ $sizes = explode( ',', $sizes) ;
                                     <div class="col-md-12">
                                         <p class="input-box con">
                                          <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'">
-                                         <?php echo $this->Admin_model->translate("Contact Customer Service for Customized Logo") ; ?> </a></p>
+                                         Contact Customer Service for Customized Logo</a></p>
 </div>
 </div>
 </div>
@@ -361,7 +372,7 @@ $sizes = explode( ',', $sizes) ;
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="liton_tab_details_1_1">
                                 <div class="ltn__shop-details-tab-content-inner">
-                                    <h4 class="title-2"><?php echo $this->Admin_model->translate("Description") ; ?>.</h4>
+                                    <h4 class="title-2">Description.</h4>
                                     <p>
                                         <?php 
 if($this->session->userdata('lang') == 'ar'){
@@ -656,7 +667,7 @@ if($this->session->userdata('lang') == 'ar'){
 
  <fieldset>
       
-      <input id="autocomplete_search" name="autocomplete_search" type="text" class="form-control" placeholder="<?php echo $this->Admin_model->translate("Search Location") ; ?>" />
+      <input id="autocomplete_search" name="autocomplete_search" type="text" class="form-control" placeholder="Search location" />
 
                     <input type="hidden" name="lat" id="lat">
 
@@ -664,13 +675,13 @@ if($this->session->userdata('lang') == 'ar'){
 
   </fieldset>
        <fieldset>
-      <textarea placeholder="<?php echo $this->Admin_model->translate("Add address") ; ?>" id="address" name="address" tabindex="5" required class="form-control text-ar"></textarea>
+      <textarea placeholder="add address" id="address" name="address" tabindex="5" required class="form-control text-ar"></textarea>
 </fieldset>
 
    
   </form>
 </div>
-<div class="col-md-6"><h6 class="forget"><?php echo $this->Admin_model->translate("Shipping cost") ; ?></h6></div>
+<div class="col-md-6"><h6 class="forget">Shipping cost</h6></div>
 <div class="col-md-6">
     <p class="product-pricee">
         <br>
@@ -679,7 +690,7 @@ if($this->session->userdata('lang') == 'ar'){
     </div>
 <div class="col-md-12">
  
-<a href="javascript:void(0)" class="btn btn-ori shippingbtn"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
+<a href="javascript:void(0)" class="btn btn-ori shippingbtn">Checkout</a>
 </div>
 </div>
 </div>
@@ -735,7 +746,7 @@ if (status.error != '') {
 if (status.result = false) {
 toastr.error("Error");
 } else {
-toastr.success("<?php echo $this->Admin_model->translate("Selected Item Added to Cart") ; ?>"); 
+toastr.success("Selected Item Added to Cart"); 
 $("#cartitem").html( status.items) ;
 //$("#carttext").text(status.items+' Item(s) in Shopping Cart');
 
@@ -754,12 +765,12 @@ $("#cartitem").html( status.items) ;
  
 if( !$('#autocomplete_search').val() ) {
     
-toastr.error("<?php echo $this->Admin_model->translate("Please select your shipping address") ; ?>");
+toastr.error("Please select your shipping address");
 return false ;
 }
 
  if( !$('#address').val() ) {
-toastr.error("<?php echo $this->Admin_model->translate("Add your address") ; ?>");
+toastr.error("Add your address");
 
 return false ;
 }

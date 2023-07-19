@@ -11,10 +11,10 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>uploads/images/<?php echo $folder ?>/<?php echo $product->product_image ?>" alt="#">
+                                            <img src="<?php echo base_url() ; ?>uploads/images/<?php echo $folder ?>/<?php echo $product->product_image ?>" alt="#">
                                         </div>
                                          <div class="modal-product-info">
-                                            <h5><a href="<?php echo base_url()?>home/product_details/<?php echo $product->id ?>">
+                                            <h5><a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product->id ?>">
                                                  <?php 
 if($this->session->userdata('lang') == 'ar'){
      echo  $product->ar_product_name ;
@@ -37,14 +37,14 @@ if($exists == true) {
                                                   ?>
                                         </p>
                                             <div class="btn-wrapper">
-                                                <a href="<?php echo base_url()?>home/wishlist" class="theme-btn-1 btn btn-effect-1"><?php echo $this->Admin_model->translate("View Wishlist") ?></a>
+                                                <a href="<?php echo base_url() ; ?>home/wishlist" class="theme-btn-1 btn btn-effect-1"><?php echo $this->Admin_model->translate("View Wishlist") ?></a>
                                             </div>
                                          </div>
                                          <!-- additional-info -->
                                          <div class="additional-info d-none">
                                             <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
                                             <div class="payment-method">
-                                                <img src="<?php echo base_url()?>assets/home_assets/img/icons/payment.png" alt="#">
+                                                <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/payment.png" alt="#">
                                             </div>
                                          </div>
                                     </div>

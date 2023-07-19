@@ -59,9 +59,12 @@ $(document).ready(function(){
 <script type="text/javascript">
  $('#language').on("click",function(){
 
+    var change = $(this).data('change');
+
     $.ajax({ 
         type: "POST",
           url : "<?php echo base_url(); ?>admin/changelanguage",
+          data : {lang:change},
             
  
     }).done(function(response){

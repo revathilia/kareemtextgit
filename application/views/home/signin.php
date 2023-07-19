@@ -1,26 +1,26 @@
 <!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<html class="no-js" dir="<?php echo $this->session->userdata('dir') ; ?>" lang="<?php echo $this->session->userdata('lang') ; ?>">
 
 
 <!-- Mirrored from tunatheme.com/tf/html/vicodin-preview/vicodin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Mar 2023 08:39:14 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
         <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
 
 </head>
@@ -48,7 +48,7 @@
      <br>
      <div class="row g-0 r-ph">
       <div class="col-md-3">
-        <p class="de-phone"><img src="<?php echo base_url()?>assets/home_assets/img/sa.png" width="20px" height="20px">&nbsp;&nbsp;+966</p></div>
+        <p class="de-phone"><img src="<?php echo base_url() ; ?>assets/home_assets/img/sa.png" width="20px" height="20px">&nbsp;&nbsp;+966</p></div>
       <div class="col-md-9 ph-s">
     <input placeholder="" type="tel" tabindex="3" name="phone" id="phone" class="form-control" required>
     </div>
@@ -64,7 +64,7 @@
          
 </div>
 <div class="col-md-6">
-        <a href="<?php echo base_url()?>home/login" style="float: right" class="forget">Already Registered ? Login</a>
+        <a href="<?php echo base_url() ; ?>home/login" style="float: right" class="forget">Already Registered ? Login</a>
 </div>
 </div>
                         </form>
@@ -88,9 +88,9 @@
     <!-- preloader area end -->
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/toastr/toastr.min.js"></script> 
     <script type="text/javascript">
     $(document).ready(function(){

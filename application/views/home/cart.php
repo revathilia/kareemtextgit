@@ -15,21 +15,21 @@ $this->session->set_userdata('dir', 'ltr');
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
 
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700'>
     <?php if($this->session->userdata('lang') !='eng') {?>
@@ -105,7 +105,7 @@ $this->session->set_userdata('dir', 'ltr');
  <?php $this->load->view('home/header'); ?> 
 
 <!-- BREADCRUMB AREA START -->
-    <div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image "  data-bs-bg="<?php echo base_url()?>assets/home_assets/img/bg/14.jpg">
+    <div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image "  data-bs-bg="<?php echo base_url() ; ?>assets/home_assets/img/bg/14.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -128,11 +128,9 @@ $this->session->set_userdata('dir', 'ltr');
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-<div id="cart">
+<div id="cartdata">
 
- <?php 
- 
- $this->load->view('home/loadcart'); ?> 
+ <?php $this->load->view('home/loadcart') ; ?> 
 
 </div>
 
@@ -152,43 +150,11 @@ $this->session->set_userdata('dir', 'ltr');
 <!-- Body main wrapper end -->
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
 
-       <script type="text/javascript">
-                        
-        
-// $(document).on('input propertychange paste', '.loadqty', function(){
      
-//  $(document).ready(function(){
-
-//      $('.loadqty .qtybutton').click(function(e) {  
-
-        
-  
-//   var id=$(this).closest('.loadqty').attr('data-id');;
-//   var res = id.split("_")[1];
-    
-// //var res = $id ;
-// $quantity = $('#qty_'+res).val() ;
-// $rowid = $('#qty_'+res).data('rowid');
-// $price = $('#qty_'+res).data('price');
-
- 
-//  $.ajax({ 
-// type: "POST",
-// url: "<?php echo base_url(); ?>"+'home/update_cart',
-// data: {qty:$quantity,rowid:$rowid,price:$price,viewname:'viewcart'},
-// }).done(function(response){
- 
-//  $("#cart").html(response); 
-//  cartupdate();
-// });     
-
-// });
-//      });
-    </script>
 
     <script type="text/javascript">
 function incrementValue(id)
@@ -231,7 +197,9 @@ url: "<?php echo base_url(); ?>"+'home/update_cart',
 data: {qty:$quantity,rowid:$rowid,price:$price,viewname:'viewcart'},
 }).done(function(response){
  
- $("#cart").html(response); 
+ $("#cartdata").html(""); 
+ $("#cartdata").html(response); 
+ 
  cartupdate();
 });
 

@@ -12,21 +12,21 @@ $this->session->set_userdata('dir', 'ltr');
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
     <?php if($this->session->userdata('lang') !='eng') {?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
@@ -67,11 +67,11 @@ $this->session->set_userdata('dir', 'ltr');
   <div class="row">
     <div class="col-md-11">
       
-            <p class="text-left in-box"><img src="<?php echo base_url()?>assets/home_assets/img/icons/fb.png" width="30px" height="30px">&nbsp;&nbsp;Continue with Facebook</p>
+            <p class="text-left in-box"><img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/fb.png" width="30px" height="30px">&nbsp;&nbsp;Continue with Facebook</p>
 
-            <p class="text-left in-box"><img src="<?php echo base_url()?>assets/home_assets/img/icons/goo.png" width="30px" height="30px">&nbsp;&nbsp;Continue with Google</p>
-            <p class="text-left in-box"><img src="<?php echo base_url()?>assets/home_assets/img/icons/app.png" width="30px" height="30px">&nbsp;&nbsp;Continue with Apple</p>
-            <p class="text-left in-box"><img src="<?php echo base_url()?>assets/home_assets/img/icons/ph.png" width="30px" height="30px">&nbsp;&nbsp;Continue with Mobile Number</p>
+            <p class="text-left in-box"><img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/goo.png" width="30px" height="30px">&nbsp;&nbsp;Continue with Google</p>
+            <p class="text-left in-box"><img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/app.png" width="30px" height="30px">&nbsp;&nbsp;Continue with Apple</p>
+            <p class="text-left in-box"><img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/ph.png" width="30px" height="30px">&nbsp;&nbsp;Continue with Mobile Number</p>
           
 
 </div>
@@ -82,11 +82,11 @@ $this->session->set_userdata('dir', 'ltr');
     <form id="login-form" action="<?php echo base_url() ?>home/sentotp" method="post">
     
      <fieldset>
-     <label class="forget">PHONE NUMBER</label>
+     <label class="forget"><?php echo $this->Admin_model->translate("PHONE NUMBER") ; ?></label>
      <br>
      <div class="row g-0 r-ph">
       <div class="col-md-3">
-        <p class="de-phone"><img src="<?php echo base_url()?>assets/home_assets/img/sa.png" width="20px" height="20px">&nbsp;&nbsp;+966</p></div>
+        <p class="de-phone"><img src="<?php echo base_url() ; ?>assets/home_assets/img/sa.png" width="20px" height="20px">&nbsp;&nbsp;+966</p></div>
       <div class="col-md-9 ph">
     <input placeholder="" type="tel" tabindex="3" name="phone" id="phone" class="form-control" required>
     </div>
@@ -94,14 +94,14 @@ $this->session->set_userdata('dir', 'ltr');
   </fieldset>
     
     <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="btn-ori">Proceed</button>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" class="btn-ori"><?php echo $this->Admin_model->translate("Proceed") ; ?></button>
     </fieldset>
     <div class="row">
       <div class="col-md-6">
          
 </div>
 <div class="col-md-6">
-        <a href="<?php echo base_url()?>home/signup" style="float: right" class="forget">Create an Account</a>
+        <a href="<?php echo base_url() ; ?>home/signup" style="float: right" class="forget"><?php echo $this->Admin_model->translate("Create an Account") ; ?></a>
 </div>
 </div>
   </form>
@@ -127,9 +127,9 @@ $this->session->set_userdata('dir', 'ltr');
     <!-- preloader area end -->
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
      <script type="text/javascript" src="<?php echo base_url();?>assets/toastr/toastr.min.js"></script> 
     <script type="text/javascript">
     $(document).ready(function(){

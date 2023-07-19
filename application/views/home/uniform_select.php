@@ -7,7 +7,7 @@
        <!--multisteps-form-->
        <div class="col-lg-12 col-md-12">
                 <div class="form-wizard">
-                    <form action="<?php base_url()?>home/uniform" method="post" id="uniformdata" role="form">
+                    <form action="<?php base_url() ; ?>home/uniform" method="post" id="uniformdata" role="form">
                         
                         <fieldset class="wizard-fieldset show">
                             
@@ -54,7 +54,7 @@
                         </fieldset> 
                         
                         <fieldset class="wizard-fieldset">
-                            <p class="text-center"><img src="<?php echo base_url()?>uploads/images/school/<?php echo $logo ?>" width="200px" height="200px"></p>
+                            <p class="text-center"><img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $logo ?>" width="200px" height="200px"></p>
                             <h6 class="text-center">Selected Choices</h6>
                             <div class="row">
                                 <div class="col-md-6">

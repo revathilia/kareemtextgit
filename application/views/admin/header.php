@@ -1,5 +1,5 @@
 <DOCTYPE html>
-<html  dir="<?php echo $this->session->userdata('dir')?>">
+<html dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>"> >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,3 +57,4 @@ legend {
 </style>
 </head>
 
+<?php echo 'direction here' . $this->session->userdata('dir')?>

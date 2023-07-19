@@ -12,7 +12,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>uploads/images/<?php echo $folder ?>/<?php echo $product->product_image ?>" alt="#">
+                                            <img src="<?php echo base_url() ; ?>uploads/images/<?php echo $folder ?>/<?php echo $product->product_image ?>" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -27,11 +27,22 @@
                                                     <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
                                                 </ul>
                                             </div>
-                                            <h3><?php echo $product->product_name ?></h3>
+                                            <h3> 
+
+                                            <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $product->ar_product_name ;
+}else{
+     echo $product->product_name ;
+}
+                                                    ?>
+
+                                        
+                                        </h3>
                                             <div class="product-price">
-                                                 <span>SAR <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
+                                                 <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                          
-                                                <?php echo  ($product_price->offer_price != '0') ? '<del>SAR ' . $product_price->product_price .'</del>' :  '' ; ?>
+                                                <?php echo  ($product_price->offer_price != '0') ? '<del>'.$this->Admin_model->translate("SAR").' ' . $product_price->product_price .'</del>' :  '' ; ?>
                                             </div>
                                             <div class="modal-product-meta ltn__product-details-menu-1">
                                                 <ul>
@@ -48,7 +59,7 @@
                                                 <ul>
                                                     
                                                     <li>
-                                                        <a href="<?php echo base_url()?>home/product_details/<?php echo $product->id ?>" class="theme-btn-1 btn btn-effect-1" title="View Details">
+                                                        <a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product->id ?>" class="theme-btn-1 btn btn-effect-1" title="View Details">
                                                             <i class="fas fa-eye"></i>
                                                             <span>VIEW PRODUCT</span>
                                                         </a>

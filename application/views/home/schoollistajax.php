@@ -20,7 +20,7 @@
                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center" >
                                             <div class="product-img">
-                                                <a  href="javascript:void(0)" class="addtocart" data-productid="<?php echo $school['id'] ; ?>"  ><img src="<?php echo base_url()?>uploads/images/school/<?php echo $school['school_logo'] ?>" alt="#" width="160px" ></a>
+                                                <a  href="javascript:void(0)" class="addtocart" data-productid="<?php echo $school['id'] ; ?>"  ><img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $school['school_logo'] ?>" alt="#" width="160px" ></a>
                                                 
                                                
                                             </div>
@@ -48,7 +48,7 @@ if($this->session->userdata('lang') == 'ar'){
  <div class="ltn__shop-options">
                         <ul>
                             <li>
-                                 No Result Found !!
+                                 <?php echo $this->Admin_model->translate("No Result Found !!") ; ?>
                             </li>
                         </ul>
                     </div>
@@ -69,7 +69,7 @@ if($this->session->userdata('lang') == 'ar'){
                                    <div class="col-lg-12" >
                                         <div class="ltn__product-item ltn__product-item-3">
                                             <div class="product-img" >
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" ><img src="<?php echo base_url()?>uploads/images/school/<?php echo $school['school_logo'] ?>" alt="#"></a>
+                                                <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" ><img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $school['school_logo'] ?>" alt="#"></a>
                                                 
                                             </div>
                                             <div class="product-info">

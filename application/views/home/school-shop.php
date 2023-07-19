@@ -13,21 +13,21 @@ $this->session->set_userdata('dir', 'ltr');
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
     <?php if($this->session->userdata('lang') !='eng') {?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
 		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
@@ -162,7 +162,7 @@ button[type="submit"]{
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">School  <br> Uniforms</h4>
                            <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -171,7 +171,7 @@ button[type="submit"]{
                 </div>
                 <div class="col-lg-6 align-self-center">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/home/m2.png" alt="About Us Image" class="img-fluid" width="370px" height="370px">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/m2.png" alt="About Us Image" class="img-fluid" width="370px" height="370px">
                     </div>
                 </div>
             </div>
@@ -187,7 +187,7 @@ button[type="submit"]{
                     <div class="ltn__shop-options">
                         <div class="row">
                                <div class="col-md-4">
-                               <a href="<?php echo base_url()?>home/alluniforms" class="btn-blue2" style="width:40%;padding:20px;">
+                               <a href="<?php echo base_url() ; ?>home/alluniforms" class="btn-blue2" style="width:40%;padding:20px;">
                                         All School
                                         
             </a>
@@ -254,7 +254,7 @@ button[type="submit"]{
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/4.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/4.png" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -365,9 +365,9 @@ button[type="submit"]{
    
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
 
     <script type="text/javascript">
       $(document).on('click', ' .addtocart', function(){  

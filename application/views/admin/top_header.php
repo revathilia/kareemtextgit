@@ -33,12 +33,19 @@ $query= $this->db->query($sql)->row();
   <a href="#" class="ico-item"><span class="ico-item fa fa-bell js__toggle_open" data-target="#notification-popup" onclick="notifications()" style="font-size: 20px;color: #A5A5A5;"></span><span id = "neworder" class="badge"><?php echo $query->ct?></span></a>
 
 
- <div class="ico-item "><a href="javascript:void(0)" class = "language" id="language"><i class="fa fa-language"></i></a>
- 	 <?php $session = $this->session->userdata('language');
+<?php $session = $this->session->userdata('lang');
 if(!empty($session)){
-	//echo $session ;
+	 if($session == 'eng'){
+    $change = 'ar' ;
+   }else{
+    $change = 'eng' ;
+   }
 }
  	  ?>
+
+
+ <div class="ico-item "><a href="javascript:void(0)" data-change="<?php echo $change ; ?>" class = "language" id="language"><i class="fa fa-language"></i></a>
+ 	
  	
  </div>
 

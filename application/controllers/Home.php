@@ -87,6 +87,11 @@ class Home extends CI_Controller {
 
     $data['addresses'] = $this->Admin_model->get_single_data('customer_address',array('customer_id'=>$homesession['user_id'])) ;
 
+    $data['orders'] = $this->Admin_model->get_all_data('order_master',array('customer_id'=>$homesession['user_id']),'id desc');
+    
+    $data['wishlist_i'] = $this->Admin_model->get_all_data('wishlist',array('user_id'=>$homesession['user_id'],'type'=>'industry')) ;
+    $data['wishlist_s'] = $this->Admin_model->get_all_data('wishlist',array('user_id'=>$homesession['user_id'],'type'=>'school')) ;
+
 
        $this->load->view('home/profile',$data);
   }
@@ -915,17 +920,22 @@ $level = 0 ;
      $product_images = $this->Admin_model->get_all_data('industry_product_images',array('product_id'=>$id)); 
     foreach($product_images as $images){
 
-     
       $colors = explode( ',', $data['product']->colors_available) ;
 
       if(in_array($images['color_id'], $colors)){
          $pimage .= "," .$images['product_images'];
+
+        // $imagelist[] = array('colorid'=>$images['color_id'],'images'=>$images['product_images']) ;
       }
  
     }
 
     $pimages  = explode(',',$pimage) ; 
     $data['product_images'] = $pimages ;
+
+    // $data['pimages'] = $imagelist ;
+ 
+
     $data['product_price'] = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$id,'status'=>'Y'),'product_price asc');  
    //  $data['inventory'] = $this->get_stock_det($id); 
      $this->load->view('home/product-details', $data);
@@ -1197,15 +1207,14 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
           //echo $viewname ;
         $this->load->view('home/loadcheckout');
       }else if($viewname=="viewcart"){
+    
           $this->load->view('home/loadcart');
           //echo $viewname ;
       }
       else if($viewname=="cart"){
           $this->viewcart();
           //echo $viewname ;
-      }else if($viewname=="removemodal" ){
-        $this->load->view('home/loadmodalcart');
-      }
+      } 
       // This will show cancle data in cart.
       //redirect('user/home/viewcart');
   }

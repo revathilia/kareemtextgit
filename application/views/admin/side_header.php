@@ -139,6 +139,10 @@ $logged_in_role =  $this->Admin_model->get_type_name_by_id('user_roles','id',$se
 
 <li id="6_1"><a href="<?php echo base_url()?>admin/users"> <?php echo $this->Admin_model->translate("Home") ?>  </a></li>
 <li id="6_2"><a href="<?php echo base_url()?>admin/changepassword"> <?php echo $this->Admin_model->translate("About Us") ?> </a></li>
+
+<li id="6_3_1"><a href="<?php echo base_url()?>admin/clients"> <?php echo $this->Admin_model->translate("Client Logos") ?> </a></li>
+<li id="6_3_2"><a href="<?php echo base_url()?>admin/news"> <?php echo $this->Admin_model->translate("News & Events") ?> </a></li>
+
 <li id="6_3"><a href="<?php echo base_url()?>admin/changepassword"> <?php echo $this->Admin_model->translate("Industry") ?> </a></li>
 <li id="6_4"><a href="<?php echo base_url()?>admin/changepassword"> <?php echo $this->Admin_model->translate("School") ?> </a></li>
 <li id="6_5"><a href="<?php echo base_url()?>admin/changepassword"> <?php echo $this->Admin_model->translate("Contact Us") ?> </a></li>

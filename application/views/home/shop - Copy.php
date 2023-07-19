@@ -1,25 +1,25 @@
 <!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<html class="no-js" dir="<?php echo $this->session->userdata('dir') ; ?>" lang="<?php echo $this->session->userdata('lang') ; ?>">
 
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
 </head>
 
 <body>
@@ -40,7 +40,7 @@
             <div class="row">
             <div class="col-lg-6 align-self-center">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-6 align-self-center">
@@ -49,7 +49,7 @@
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">Industrial <br> Uniforms</h4>
                            <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -127,7 +127,7 @@
                                     <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url()?>uploads/images/industry/<?php echo $product['product_image'] ?>" alt="#" width="160px" ></a>
+                                                <a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $product['product_image'] ?>" alt="#" width="160px" ></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -146,14 +146,14 @@
                                             </div>
                                             <div class="product-info">
                                                 
-                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>"><?php echo $product['product_name'] ?></a></h2>
+                                                <h2 class="product-title"><a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product['id'] ?>"><?php echo $product['product_name'] ?></a></h2>
                                                 <?php  $product_price = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$product['id'],'status'=>'Y'));  
   ?>
                                                 <div class="product-price">
 <?php  if($product_price){  ?>
                                                 <span>SAR <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                          
-                                                <?php echo  ($product_price->offer_price != '0') ? '<del>SAR ' . $product_price->product_price .'</del>' :  '' ; ?> 
+                                                <?php echo  ($product_price->offer_price != '0') ? '<del>'.$this->Admin_model->translate("SAR").' ' .$product_price->product_price .'</del>' :  '' ; ?> 
 
 <?php } ?>
  
@@ -176,11 +176,11 @@
                                     <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                             <div class="product-img">
-                                                <a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url()?>uploads/images/industry/<?php echo $product['product_image'] ?>" alt="#"></a>
+                                                <a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $product['product_image'] ?>" alt="#"></a>
                                                 
                                             </div>
                                             <div class="product-info">
-                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>"><?php echo $product['product_name'] ?></a></h2>
+                                                <h2 class="product-title"><a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product['id'] ?>"><?php echo $product['product_name'] ?></a></h2>
                                              
 
                                               <?php  $product_price = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$product['id'],'status'=>'Y'));  
@@ -190,7 +190,7 @@
                                                 <div class="product-price">
                                                    <span>SAR <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                          
-                                                <?php echo  ($product_price->offer_price != '0') ? '<del>SAR ' . $product_price->product_price .'</del>' :  '' ; ?> 
+                                                <?php echo  ($product_price->offer_price != '0') ? '<del>'.$this->Admin_model->translate("SAR").' ' .$product_price->product_price .'</del>' :  '' ; ?> 
                                                 </div>
                                                 <div class="product-brief">
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores sit odit nesciunt,  aliquid, deleniti non et ut dolorem!</p>
@@ -268,7 +268,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/1.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/1.png" alt="#">
                                         </div>
                                          <div class="modal-product-info">
                                             <h5><a href="product-details.html">Digital Stethoscope</a></h5>
@@ -282,7 +282,7 @@
                                          <div class="additional-info d-none">
                                             <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
                                             <div class="payment-method">
-                                                <img src="<?php echo base_url()?>assets/home_assets/img/icons/payment.png" alt="#">
+                                                <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/payment.png" alt="#">
                                             </div>
                                          </div>
                                     </div>
@@ -312,7 +312,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/7.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/7.png" alt="#">
                                         </div>
                                          <div class="modal-product-info">
                                             <h5><a href="product-details.html">Digital Stethoscope</a></h5>
@@ -325,7 +325,7 @@
                                          <div class="additional-info d-none">
                                             <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
                                             <div class="payment-method">
-                                                <img src="<?php echo base_url()?>assets/home_assets/img/icons/payment.png" alt="#">
+                                                <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/payment.png" alt="#">
                                             </div>
                                          </div>
                                     </div>
@@ -343,9 +343,9 @@
 <!-- Body main wrapper end -->
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
 
     <script type="text/javascript">
      
@@ -379,7 +379,7 @@ data:{productid:productid,from:'industry' },
 success:function(html){ 
 
     if(html == false){
-window.location.href="<?php echo base_url()?>home/login"
+window.location.href="<?php echo base_url() ; ?>home/login"
     }else{
     $('#liton_wishlist_modal').html(html);  
     $('#liton_wishlist_modal').modal('show'); 

@@ -1,26 +1,26 @@
 <!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<html class="no-js" dir="<?php echo $this->session->userdata('dir') ; ?>" lang="<?php echo $this->session->userdata('lang') ; ?>">
 
 
 <!-- Mirrored from tunatheme.com/tf/html/vicodin-preview/vicodin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Mar 2023 08:39:14 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
         <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
 
 </head>
@@ -35,7 +35,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h5 class="text-center">Account</h5>
+                <h5 class="text-center"><?php echo $this->Admin_model->translate("Account") ; ?></h5>
                 
                 <hr>
 </div>
@@ -45,11 +45,11 @@
       <div class="col-md-4 text-center">
         <br>
         <div class="row bg-grey">
-            <h6>OTP</h6>
+            <h6><?php echo $this->Admin_model->translate("OTP") ; ?></h6>
             <hr class="li-orangees">
           <div class="col-sm-12  bgWhite">
         
-            <p class="text-left enter">ENTER OTP</p>
+            <p class="text-left enter"><?php echo $this->Admin_model->translate("ENTER OTP") ; ?></p>
             <form action="">
             <input id="otp-first" type="number" min="0" max="9" step="1" aria-label="first digit" value="" />
   <input id="otp-second" type="number" min="0" max="9" step="1" aria-label="second digit" value=""/>
@@ -58,9 +58,9 @@
 
             </form>
             <br>
-            <button class='btn btn-orange' id="submitotp">Proceed</button>
+            <button class='btn btn-orange' id="submitotp"><?php echo $this->Admin_model->translate("Proceed") ; ?></button>
             <br>   <br> 
-            <a style="cursor:pointer" id="resendotp"><p>Didn’t rececive OTP ?<span>RESEND</span></p></a>
+            <a style="cursor:pointer" id="resendotp"><p> <?php echo $this->Admin_model->translate("Didn’t rececive OTP ?") ; ?> <span><?php echo $this->Admin_model->translate("RESEND") ; ?></span></p></a>
           </div>
         </div>
       </div>
@@ -129,9 +129,9 @@ function hasNoValue(index) {
 }
     </script>
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/toastr/toastr.min.js"></script> 
     <script type="text/javascript">
     $(document).ready(function(){
@@ -154,7 +154,7 @@ function hasNoValue(index) {
         if(d1 != "" && d2 != "" && d3 != "" && d4 != ""  && phone != undefined) {
           var otp = d1+d2+d3+d4
           $.ajax( {
-                  url:'<?php echo  base_url()?>home/verifyotp',
+                  url:'<?php echo  base_url() ; ?>home/verifyotp',
                   type: "POST",
                   data:{phone:phone,otp:otp},
                   success:function(JSON) {
@@ -175,7 +175,7 @@ function hasNoValue(index) {
     $('#resendotp').click(function(){
       var phone = localStorage.phone
       $.ajax( {
-                  url:'<?php echo  base_url()?>home/sentotp',
+                  url:'<?php echo  base_url() ; ?>home/sentotp',
                   type: "POST",
                   data:{phone:phone},
                   success:function(JSON) {

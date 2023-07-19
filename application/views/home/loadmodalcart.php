@@ -8,7 +8,7 @@
 
 // If cart is empty, this will show below message.
 if(empty($cart_check)) {
-echo 'Your cart is empty !!!'; 
+echo  $this->Admin_model->translate("Your cart is empty !") ;
 }  ?>
 
 <?php
@@ -33,15 +33,15 @@ if ($cart = $this->cart->contents()):
                            } ?>
 
                         
-                       <a href="<?php echo base_url()?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>">  <img src="<?php echo base_url()?>uploads/images/<?php echo $item['type']?>/<?php echo $imagename  ?>"></a>
+                       <a href="<?php echo base_url() ; ?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>">  <img src="<?php echo base_url() ; ?>uploads/images/<?php echo $item['type']?>/<?php echo $imagename  ?>"></a>
 
 
 
                         <span class="mini-cart-item-delete" onclick="itemremove('<?php echo $item['rowid'] ; ?>');  return false ;" ><i class="icon-cancel"></i></span>
                     </div>
                     <div class="mini-cart-info">
-                        <h6><a href="<?php echo base_url()?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>"><?php echo $item['name'] ;?></a></h6>
-                        <span class="mini-cart-quantity"><?php echo $item['qty'] ;?> x SAR <?php echo $item['price'] ;?> </span>
+                        <h6><a href="<?php echo base_url() ; ?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>"><?php echo $item['name'] ;?></a></h6>
+                        <span class="mini-cart-quantity"><?php echo $item['qty'] ;?> x <?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $item['price'] ;?> </span>
                     </div>
                 </div>
                  
@@ -55,11 +55,11 @@ if ($cart = $this->cart->contents()):
         <?php } ?>
             <div class="mini-cart-footer">
                 <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>SAR <?php echo  $subtotal ;?> </span></h5>
+                    <h5>Subtotal: <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  $subtotal ;?> </span></h5>
                 </div>
                 <div class="btn-wrapper">
-                    <a href="<?php echo base_url()?>home/viewcart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="<?php echo base_url()?>home/checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                    <a href="<?php echo base_url() ; ?>home/viewcart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                    <a href="<?php echo base_url() ; ?>home/checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
                 </div>
                  
             </div>

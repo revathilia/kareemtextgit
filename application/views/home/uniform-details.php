@@ -1,27 +1,27 @@
 <!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<html class="no-js" dir="<?php echo $this->session->userdata('dir') ; ?>" lang="<?php echo $this->session->userdata('lang') ; ?>">
 
 
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
     <style type="text/css">
       .pac-container {
     z-index: 10000 !important;
@@ -91,8 +91,8 @@
 </div>
 </div>
 
-                                            <a href="<?php echo base_url()?>uploads/images/school/<?php echo $images ?>" data-rel="lightcase:myCollection">
-                                                <img src="<?php echo base_url()?>uploads/images/school/<?php echo $images ?>" alt="Image">
+                                            <a href="<?php echo base_url() ; ?>uploads/images/school/<?php echo $images ?>" data-rel="lightcase:myCollection">
+                                                <img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $images ?>" alt="Image">
                                             </a>
                                         </div>
 
@@ -113,7 +113,7 @@
                                           
 
                                          <div class="single-small-img">
-                                            <img src="<?php echo base_url()?>uploads/images/school/<?php echo $images ?>" alt="Image">
+                                            <img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $images ?>" alt="Image">
                                         </div>
 
 
@@ -145,11 +145,11 @@ if($this->session->userdata('lang') == 'ar'){
                                     </h3>
                                     <div class="product-price" id="price_det1">
                                     <?php if($product_price){ ?>
-                                        <span class="blue">SAR <?php echo 
+                                        <span class="blue"><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo 
                                         ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                         <input type="hidden" name="product_price" value="<?php echo  $product_price->offer_price ? $product_price->offer_price : $product_price->product_price ; ?>">
 
-                                         <?php echo  ($product_price->offer_price != '0') ? '<del>SAR ' . $product_price->product_price .'</del>' :  '' ; ?> 
+                                         <?php echo  ($product_price->offer_price != '0') ? '<del>'.$this->Admin_model->translate("SAR").' ' .$product_price->product_price .'</del>' :  '' ; ?> 
 <?php } ?>
                                     </div>
                                     <p><?php echo $uniformdata->description ;?></p>
@@ -257,7 +257,7 @@ $sizes = explode( ',', $sizes) ;
                                     </div>
                                     <div class="col-md-6">
                                         <p class="btn-bl">
-                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url()?>home/contact#getQuote'">Bulk Purchase</a> 
+                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'">Bulk Purchase</a> 
                                      </p>
 
 
@@ -324,20 +324,31 @@ if(!empty(   $uniform)){
                  <div class="col-lg-12">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                        <a href="<?php echo base_url()?>home/uniform_details/<?php echo $uniform->id ?>"><img src="<?php echo base_url()?>uploads/images/school/<?php echo $uniform->product_image ?>" alt="#" width="160px" ></a>
+                        <a href="<?php echo base_url() ; ?>home/uniform_details/<?php echo $uniform->id ?>"><img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $uniform->product_image ?>" alt="#" width="160px" ></a>
                             
                             
                         </div>
                          <div class="product-info">
                                                 
-                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/uniform_details/<?php echo $uniform->id ?>"><?php echo $uniform->product_name ?></a></h2>
+                                                <h2 class="product-title"><a href="<?php echo base_url() ; ?>home/uniform_details/<?php echo $uniform->id ?>">
+                                                 
+
+                                                <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $uniform->ar_product_name ;
+}else{
+     echo $uniform->product_name ;
+}
+                                                    ?>
+                                              
+                                              </a></h2>
                                                 <?php  $product_price = $this->Admin_model->get_single_data('school_product_price_size_det',array('product_id'=>$uniform->id,'status'=>'Y'),'product_price asc');  
   ?>
                                                 <div class="product-price">
 <?php  if($product_price){  ?>
-                                                <span>SAR <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
+                                                <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                          
-                                                <?php echo  ($product_price->offer_price != '0') ? '<del>SAR ' . $product_price->product_price .'</del>' :  '' ; ?> 
+                                                <?php echo  ($product_price->offer_price != '0') ? '<del>'.$this->Admin_model->translate("SAR").' ' .$product_price->product_price .'</del>' :  '' ; ?> 
 
 <?php } ?>
  
@@ -378,9 +389,9 @@ if(!empty(   $uniform)){
 <!-- Body main wrapper end -->
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
   <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -414,7 +425,7 @@ if(!empty(   $uniform)){
                 ?>
 
                         
-                        <img src="<?php echo base_url()?>uploads/images/school/<?php echo $imagename  ?>">
+                        <img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $imagename  ?>">
  
 </div>
 <div class="col-md-6">
@@ -427,7 +438,7 @@ if(!empty(   $uniform)){
 
     <h6><?php echo $uniformdata->product_name ; ?></h6>
     <div class="product-pricee" id="price_det2">
-<span>SAR <?php echo  ($product_price->offer_price != 0) ? $product_price->offer_price : $product_price->product_price ; ?></span>
+<span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != 0) ? $product_price->offer_price : $product_price->product_price ; ?></span>
 </div>
 </div>
 <div class="col-md-12">
@@ -468,7 +479,7 @@ if(!empty(   $uniform)){
 <div class="col-md-6">
     <p class="product-pricee">
         <br>
-        SAR <?php echo  $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ; ?>
+        <?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ; ?>
 </p>
     </div>
 <div class="col-md-12">
@@ -662,7 +673,7 @@ $("#cartitem").html( status.items) ;
     success:function(data)
     { 
 
-      $('#school_logo').attr('src', '<?php echo base_url()?>uploads/images/school/'+data);
+      $('#school_logo').attr('src', '<?php echo base_url() ; ?>uploads/images/school/'+data);
 
  
 

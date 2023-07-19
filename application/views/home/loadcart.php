@@ -7,10 +7,13 @@ if(empty($cart_check)) { ?>
 
     <div class="container-fluid">
         <div class="col-md-12">
-<?php echo 'Your cart is empty !!!'; 
-}  ?> 
+<?php  echo  $this->Admin_model->translate("Your cart is empty !") ; ?>
+
 </div>
 </div>
+
+<?php }  ?> 
+
 </div>
 
 <?php
@@ -41,18 +44,33 @@ foreach ($cart as $item){
                                             <?php $productID = $item['id'] ;
                                            if($item['type']=='industry'){
                                              $detailspage = 'product_details' ;
- $productImage = $this->Admin_model->get_type_name_by_id('industry_products','id',$item['id'],'product_image') ;
-                                           }else{
-                                             $detailspage = 'uniform_det' ;
- $productImage = $this->Admin_model->get_type_name_by_id('school_products','id',$item['id'],'product_image') ;
-                                           }
+                                             $prod = $this->Admin_model->get_single_data('industry_products',array('id'=>$item['id'])) ;
+                                             $productImage = $prod->product_image ;
+                                             $prod_name = $prod->product_name ;
+                                             $ar_prod_name  = $prod->ar_product_name ;
+                  
+                                             }else{
+                                              $detailspage = 'uniform_det' ;
+                                              $prod = $this->Admin_model->get_single_data('school_products' ,array('id'=>$item['id'])) ;
+                                              $productImage = $prod->product_image ;
+                                              $prod_name = $prod->product_name ;
+                                              $ar_prod_name  = $prod->ar_product_name ;
+                                            }                              
 
                                              ?>
-                                            <a href="<?php echo base_url()?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>"><img src="<?php echo base_url()?>uploads/images/<?php echo $item['type']?>/<?php echo $productImage ?>" alt="#"></a>
+                                            <a href="<?php echo base_url() ; ?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>"><img src="<?php echo base_url() ; ?>uploads/images/<?php echo $item['type']?>/<?php echo $productImage ?>" alt="#"></a>
                                         </td>
                                         <td class="cart-product-info">
-                                            <h4><a href="<?php echo base_url()?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>">
-                                                <?php echo $item['name']; ?></a></h4>
+                                            <h4><a href="<?php echo base_url() ; ?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>">
+                                                
+                                            <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $ar_prod_name ;
+}else{
+     echo $prod_name ;
+}
+                                                    ?>
+                                                    </a></h4>
                                                 <small><?php echo  $this->Admin_model->get_type_name_by_id('size_master','id',$item['size'],'size') ;?>,
 <?php if(!empty($item['color'])){ ?>
 <div class="swatch" style="background:<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$item['color'],'color_code')  ?>;color:#fff;">
@@ -66,7 +84,7 @@ foreach ($cart as $item){
                                                
                                                 <?php echo $this->Admin_model->get_type_name_by_id('genders','id',$item['gender'],'gender_name') ;?></small>
                                         </td>
-                                        <td class="cart-product-price">SAR <?php echo $item['price']; ?></td>
+                                        <td class="cart-product-price"><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $item['price']; ?></td>
                                         <td class="cart-product-quantity">
 
                                              <?php
@@ -98,7 +116,7 @@ echo form_close();
 
 
  </td>
-                                        <td class="cart-product-subtotal">SAR <?php echo $item['subtotal']; ?></td>
+                                        <td class="cart-product-subtotal"><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $item['subtotal']; ?></td>
                                     </tr>
 
                                      <?php $sutotal = $item['subtotal'] + $sutotal ;
@@ -116,20 +134,22 @@ echo form_close();
 
                                    <?php }  ?>
                                     
+
+                                   
                                    
                                     <tr class="cart-coupon-row">
                                         <td colspan="6">
                                             <div class="cart-coupon">
-                                                <input type="text" name="cart-coupon" placeholder="Coupon code">
-                                                <button type="submit" class="btn theme-btn-2 btn-effect-2">Apply Coupon</button>
+                                                <input type="text" name="cart-coupon" placeholder="<?php echo $this->Admin_model->translate("Coupon Code") ; ?>">
+                                                <button type="submit" class="btn theme-btn-2 btn-effect-2"><?php echo $this->Admin_model->translate("Apply Coupon") ; ?></button>
                                             </div>
                                         </td>
                                         <td>
                                             <?php  $prodType = $this->session->userdata('prouctType'); ?>
-                                           <a href="<?php echo base_url()?>home/<?php echo $prodType ;?>" class="theme-btn-1 btn btn-effect-1">Continue Shopping</a>
+                                           <a href="<?php echo base_url() ; ?>home/<?php echo $prodType ;?>" class="theme-btn-1 btn btn-effect-1"><?php echo $this->Admin_model->translate("Continue Shopping") ; ?></a>
                                         </td>
                                         <td>
-                                            <button type="submit" class="btn theme-btn-2 btn-effect-2-- disabled">Update Cart</button>
+                                            <button type="submit" class="btn theme-btn-2 btn-effect-2-- disabled"><?php echo $this->Admin_model->translate("Update Cart") ; ?></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -141,29 +161,29 @@ echo form_close();
                                 <tbody>
                                     <tr>
                                        
-                                        <td>Cart Subtotal</td>
-                                        <td>SAR <?php echo  $sutotal  ;?></td>
+                                        <td><?php echo $this->Admin_model->translate("Cart Subtotal") ; ?></td>
+                                        <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  $sutotal  ;?></td>
                                     </tr>
                                     <tr>
-                                        <td>Shipping and Handing</td>
-                                        <td>SAR <?php echo $shipping ; ?></td>
+                                        <td><?php echo $this->Admin_model->translate("Shipping and Handing") ; ?></td>
+                                        <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $shipping ; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Vat</td>
-                                        <td>SAR <?php echo $vat ; ?></td>
+                                        <td><?php echo $this->Admin_model->translate("VAT") ; ?></td>
+                                        <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $vat ; ?></td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Order Total</strong></td>
+                                        <td><strong><?php echo $this->Admin_model->translate("Order Total") ; ?></strong></td>
 
                                          <?php $total =  $sutotal + $shipping+ $vat  ;
                                        ?>
 
-                                        <td><strong>SAR <?php echo  $total ; ?></strong></td>
+                                        <td><strong><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  $total ; ?></strong></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="btn-wrapper text-right">
-                                <a href="<?php echo base_url()?>home/checkout" class="theme-btn-1 btn btn-effect-1">Proceed to checkout</a>
+                                <a href="<?php echo base_url() ; ?>home/checkout" class="theme-btn-1 btn btn-effect-1"><?php echo $this->Admin_model->translate("Proceed to checkout") ; ?></a>
                             </div>
                         </div>
                     </div>

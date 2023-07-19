@@ -13,21 +13,21 @@ $this->session->set_userdata('dir', 'ltr');
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
     <?php if($this->session->userdata('lang') !='eng') {?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
 		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
@@ -48,7 +48,7 @@ $this->session->set_userdata('dir', 'ltr');
     <div class="ltn__utilize-overlay"></div>
 
     <!-- BREADCRUMB AREA START -->
-    <div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image "  data-bs-bg="<?php echo base_url()?>assets/home_assets/img/banner/bg.jpg">
+    <div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image "  data-bs-bg="<?php echo base_url() ; ?>assets/home_assets/img/banner/bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -57,7 +57,7 @@ $this->session->set_userdata('dir', 'ltr');
                         <div class="ltn__breadcrumb-list">
                             <ul>
                                 <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
-                                <li>Contact</li>
+                                <li><?php echo $this->Admin_model->translate("Contact") ; ?></li>
                             </ul>
                         </div>
                     </div>
@@ -74,9 +74,9 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-4">
                     <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                         <div class="ltn__contact-address-icon">
-                            <img src="<?php echo base_url()?>assets/home_assets/img/icons/10.svg" alt="Icon Image">
+                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/10.svg" alt="Icon Image">
                         </div>
-                        <h3>Email Address</h3>
+                        <h3><?php echo $this->Admin_model->translate("Email Address") ; ?></h3>
                         <p>Kareemtex@webmail.com <br>
                         Kareemtex@webexample.com</p>
                     </div>
@@ -84,18 +84,18 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-4">
                     <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                         <div class="ltn__contact-address-icon">
-                            <img src="<?php echo base_url()?>assets/home_assets/img/icons/11.svg" alt="Icon Image">
+                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/11.svg" alt="Icon Image">
                         </div>
-                        <h3>Phone Number</h3>
+                        <h3><?php echo $this->Admin_model->translate("Phone Number") ; ?></h3>
                         <p>+0123-456789 <br> +987-6543210</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                         <div class="ltn__contact-address-icon">
-                            <img src="<?php echo base_url()?>assets/home_assets/img/icons/12.svg" alt="Icon Image">
+                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/12.svg" alt="Icon Image">
                         </div>
-                        <h3>Office Address</h3>
+                        <h3><?php echo $this->Admin_model->translate("Office Address") ; ?></h3>
                         <p>18/A, New Born Town Hall <br>
                         Kareemtex, US</p>
                     </div>
@@ -111,38 +111,38 @@ $this->session->set_userdata('dir', 'ltr');
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ltn__form-box contact-form-box box-shadow white-bg">
-                        <h4 class="title-2">Get A Quote</h4>
+                        <h4 class="title-2"><?php echo $this->Admin_model->translate("Get A Quote") ; ?></h4>
                         <form id="contact-form" method="post" >
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-item input-item-name ltn__custom-icon">
-                                        <input type="text" name="name" placeholder="Enter your name">
+                                        <input type="text" name="name" placeholder="<?php echo $this->Admin_model->translate("Enter your name") ; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-item-email ltn__custom-icon">
-                                        <input type="email" name="email" placeholder="Enter email address">
+                                        <input type="email" name="email" placeholder="<?php echo $this->Admin_model->translate("Enter email address") ; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-item-subject ltn__custom-icon">
-                                        <input type="text" name="subject" placeholder="Enter the subject">
+                                        <input type="text" name="subject" placeholder="<?php echo $this->Admin_model->translate("Enter the subject") ; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-item-phone ltn__custom-icon">
-                                        <input type="text" name="phone" placeholder="Enter phone number">
+                                        <input type="text" name="phone" placeholder="<?php echo $this->Admin_model->translate("Enter phone number") ; ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="input-item input-item-textarea ltn__custom-icon">
-                                <textarea name="message" placeholder="Enter message" rows="9" cols="70"></textarea>
+                                <textarea name="message" placeholder="<?php echo $this->Admin_model->translate("Enter message") ; ?>" rows="9" cols="70"></textarea>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-item  ">
-                                        <h5 class="title-1">Add Attachemnt(s) if any</h5>
+                                        <h5 class="title-1"><?php echo $this->Admin_model->translate("Add attachment, if any") ; ?></h5>
                                         <input type="file" name="attachment" >
                                     </div>
                                 </div>
@@ -151,9 +151,9 @@ $this->session->set_userdata('dir', 'ltr');
                             <br>
                               
 
-                            <p><label class="input-info-save mb-0"><input type="checkbox" name="agree"> Save my name, email, and website in this browser for the next time I comment.</label></p>
+                            <p><label class="input-info-save mb-0"><input type="checkbox" name="agree"> <?php echo $this->Admin_model->translate("Save my name, email, and website in this browser for the next time I comment.") ; ?></label></p>
                             <div class="btn-wrapper mt-0">
-                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase save" id="btnsubmit" type="submit">get a free service</button>
+                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase save" id="btnsubmit" type="submit"><?php echo $this->Admin_model->translate("Get a free service") ; ?></button>
                             </div>
                             <p class="form-messege mb-0 mt-20"></p>
                         </form>
@@ -190,11 +190,11 @@ $this->session->set_userdata('dir', 'ltr');
 <!-- Body main wrapper end -->
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Contact Form -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/contact.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/contact.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
  
 
