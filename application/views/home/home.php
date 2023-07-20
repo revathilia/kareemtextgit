@@ -57,10 +57,12 @@ $this->session->set_userdata('dir', 'ltr');
                             <div class="col-lg-12 align-self-center">
                                 <div class="slide-item-info">
                                     <div class="slide-item-info-inner ltn__slide-animation">
-                                        <h5 class="ab">About Kareemtex</h5>
+                                        <h5 class="ab"><?php echo $this->Admin_model->translate("About Kareemtex") ; ?></h5>
                                         <h4 class="ab2"> Lorem ipsum <br>dolor sit amet consectetur</h4>
                                         <div class="btn-wrapper animated">
-                                            <a href="" class=" btn btn-orange btn-h" >Contact Us</a>
+                                            <a href="<?php echo base_url()?>home/contact" class=" btn btn-orange btn-h" ><?php echo $this->Admin_model->translate("Contact Us") ; ?></a>
+                                          
+                                
                                         </div>
                                     </div>
                                 </div>
@@ -77,10 +79,10 @@ $this->session->set_userdata('dir', 'ltr');
                             <div class="col-lg-12 align-self-center">
                                 <div class="slide-item-info">
                                 <div class="slide-item-info-inner ltn__slide-animation">
-                                        <h5 class="ab">About Kareemtex</h5>
+                                        <h5 class="ab"><?php echo $this->Admin_model->translate("About Kareemtex") ; ?></h5>
                                         <h4 class="ab2"> Lorem ipsum <br>dolor sit amet consectetur</h4>
                                         <div class="btn-wrapper animated">
-                                            <a href="" class=" btn btn-orange btn-h" >Contact Us</a>
+                                            <a href="<?php echo base_url()?>home/contact" class=" btn btn-orange btn-h" ><?php echo $this->Admin_model->translate("Contact Us") ; ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -97,10 +99,10 @@ $this->session->set_userdata('dir', 'ltr');
                             <div class="col-lg-12 align-self-center">
                                 <div class="slide-item-info">
                                 <div class="slide-item-info-inner ltn__slide-animation">
-                                        <h5 class="ab">About Kareemtex</h5>
+                                        <h5 class="ab"><?php echo $this->Admin_model->translate("About Kareemtex") ; ?></h5>
                                         <h4 class="ab2"> Lorem ipsum <br>dolor sit amet consectetur</h4>
                                         <div class="btn-wrapper animated">
-                                            <a href="" class=" btn btn-orange btn-h" >Contact Us</a>
+                                            <a href="<?php echo base_url()?>home/contact" class=" btn btn-orange btn-h" ><?php echo $this->Admin_model->translate("Contact Us") ; ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -252,7 +254,7 @@ $this->session->set_userdata('dir', 'ltr');
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">Industrial <br> Uniforms</h4>
                            <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?>&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -274,7 +276,7 @@ $this->session->set_userdata('dir', 'ltr');
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">School  <br> Uniforms</h4>
                            <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?>&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         

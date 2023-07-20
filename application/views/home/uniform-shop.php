@@ -248,10 +248,10 @@ button[type="submit"]{
                 <div class="col-lg-6 align-self-center">
                     <div class="blue-back" style="margin-left:-40px">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
-                            <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
-                            <h4 class="section-title-in">School  <br> Uniforms</h4>
-                           <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                            <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none"><?php echo $this->Admin_model->translate("About Us") ; ?></h6>
+                            <h4 class="section-title-in"><?php echo $this->Admin_model->translate("School") ; ?>  <br><?php echo $this->Admin_model->translate("Uniforms") ; ?> </h4>
+                           <p class="sec-ab-or"><?php echo $this->Admin_model->translate("School Uniform Banner Text") ; ?></p>
+                           <a href="" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?>&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -276,17 +276,17 @@ button[type="submit"]{
               
                     <div class="row">
                 <div class="col-md-3">
-                <h3 style="margin-left:14px;">School</h3>
+                <h3 style="margin-left:14px;"><?php echo $this->Admin_model->translate("School") ; ?></h3>
 </div>
 
 <div class="col-md-2">
 <select class="nice-select " id="sortby">
-     <option>Sort By</option>
+<option><?php echo $this->Admin_model->translate("Sort By") ; ?></option>
                                        
-                                        <option value="popularity">Popularity</option>
-                                        <option value="latest">New arrivals</option>
-                                        <option value="low_high">Price: low to high</option>
-                                        <option value="high_low">Price: high to low</option>
+                                       <option value="popularity"><?php echo $this->Admin_model->translate("Popularity") ; ?></option>
+                                       <option value="latest"><?php echo $this->Admin_model->translate("New arrivals") ; ?></option>
+                                       <option value="low_high"><?php echo $this->Admin_model->translate("Price: low to high") ; ?> </option>
+                                       <option value="high_low"><?php echo $this->Admin_model->translate("Price: high to low") ; ?></option>
                                     </select>
 
 
@@ -297,9 +297,9 @@ button[type="submit"]{
                                
         <label>
             <span class="screen-reader-text">Search for...</span>
-            <input type="search" class="search-field" placeholder="Type here to search.." value=""  title="Type here to search.." id="searchtext" />
+            <input type="search" class="search-field" placeholder="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" value=""  title="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" id="searchtext" />
         </label>
-        <button  type="submit" class="search-submit btn-blue2 button"> Search </button>
+        <button  type="submit" class="search-submit btn-blue2 button"> <?php echo $this->Admin_model->translate("Search") ; ?> </button>
           
        
                             </div>
@@ -325,12 +325,12 @@ button[type="submit"]{
                     <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
                         <!-- Category Widget -->
                         <div class="widget ltn__menu-widget">
-                            <h4 class="ltn__widget-title">School List</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("School List") ; ?></h4>
 
  <div class="form-check">
                               <select class="nice-select2 btn-blue2 schools" name="selectsch" >
 
-                                  <option value ='' >All Schools</option>
+                                  <option value ='' ><?php echo $this->Admin_model->translate("All Schools") ; ?></option>
 
                                           <?php foreach ($schools as $svalue) { ?>
 
@@ -355,10 +355,10 @@ button[type="submit"]{
                         </div>
                         <!-- Price Filter Widget -->
                          <div class="widget ltn__price-filter-widget">
-                            <h4 class="ltn__widget-title">Price</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Price") ; ?></h4>
                             <div class="price_filter">
                                 <div class="price_slider_amount">
-                                    <input type="submit"  value="Your range:"/> 
+                                    <input type="submit"  value="<?php echo $this->Admin_model->translate("Your range") ; ?>"/> 
                                     <input type="text" class="amount" name="price"  placeholder="Add Your Price" /> 
                                 </div>
                                 <div class="slider-range"></div>
@@ -366,26 +366,26 @@ button[type="submit"]{
                         </div>
                         <!-- Top Rated Product Widget -->
                          <div class="widget ltn__top-rated-product-widget">
-                        <h4 class="ltn__widget-title ">Gender</h4>
+                        <h4 class="ltn__widget-title "><?php echo $this->Admin_model->translate("Gender") ; ?></h4>
                         <div class="form-check">
   <input class="form-check-input selectgender" type="checkbox" value="1" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-  Male
+  <?php echo $this->Admin_model->translate("Male") ; ?>
   </label>
 </div>
 <div class="form-check">
   <input class="form-check-input selectgender" type="checkbox" value="2" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-  Female
+  <?php echo $this->Admin_model->translate("Female") ; ?>
   </label>
 </div>
 
                         </div>
                         <!-- Search Widget -->
                         <div class="widget ltn__tagcloud-widget ltn__size-widget">
-                            <h4 class="ltn__widget-title">Class</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Class") ; ?></h4>
                             <ul>
-                                <?php if(!empty($sizes)){
+                                <?php if(!empty($standards)){
                                     foreach ($standards as $stds) { ?>
 
                                 <li class="standards" data-id="<?php echo $stds['id'] ?>"><a href="javascript:void(0)"><?php echo $stds['standard_name'] ?></a></li>
@@ -399,7 +399,7 @@ button[type="submit"]{
                         
                        <!-- Color Widget -->
                         <div class="widget ltn__color-widget">
-                            <h4 class="ltn__widget-title ">Product Color</h4>
+                            <h4 class="ltn__widget-title "><?php echo $this->Admin_model->translate("Product Color") ; ?></h4>
                             
 
                             <?php if(!empty($colors)){
@@ -415,7 +415,7 @@ button[type="submit"]{
                     </div>
                         <!-- Size Widget -->
                         <div class="widget ltn__tagcloud-widget ltn__size-widget">
-                            <h4 class="ltn__widget-title">Size</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Size") ; ?></h4>
                             <ul>
                                 <?php if(!empty($sizes)){
                                     foreach ($sizes as $svalue) { ?>

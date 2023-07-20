@@ -57,4 +57,4 @@ legend {
 </style>
 </head>
 
-<?php echo 'direction here' . $this->session->userdata('dir')?>
+ 

@@ -241,7 +241,7 @@
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">Industrial <br> Uniforms</h4>
                            <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?>&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -263,7 +263,7 @@
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in">School  <br> Uniforms</h4>
                            <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?>&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         

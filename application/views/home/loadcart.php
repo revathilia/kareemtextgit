@@ -82,7 +82,8 @@ if($this->session->userdata('lang') == 'ar'){
 
 
                                                
-                                                <?php echo $this->Admin_model->get_type_name_by_id('genders','id',$item['gender'],'gender_name') ;?></small>
+                                                <?php echo $this->Admin_model->translate($this->Admin_model->get_type_name_by_id('genders','id',$item['gender'],'gender_name'))
+                                                 ;?></small>
                                         </td>
                                         <td class="cart-product-price"><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $item['price']; ?></td>
                                         <td class="cart-product-quantity">

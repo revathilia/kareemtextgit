@@ -75,12 +75,12 @@
                                                 <div class="btn_bg">
                                         <a href="#" title="Wishlist" 
                                         class="add_to_wishlist" data-productid="<?php echo $uniformdata->id  ?>" >
-                                            <i class="far fa-heart"></i>Favourites</a>
+                                            <i class="far fa-heart"></i><?php echo $this->Admin_model->translate("Favourites") ; ?></a>
 </div>
 </div>
 <div class="col-md-6">
                                             <div class="btn_wrap">
-        <span>Share</span>
+        <span><?php echo $this->Admin_model->translate("Share") ; ?></span>
         <div class="container">
             <i class="fab fa-facebook-f"></i>
             <i class="fab fa-twitter"></i>
@@ -158,7 +158,7 @@ if($this->session->userdata('lang') == 'ar'){
                                       <div class="box-cat">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <p>School</p>
+                                                <p><?php echo $this->Admin_model->translate("School") ; ?></p>
 </div>
 <div class="col-md-6">
     
@@ -207,7 +207,8 @@ if($this->session->userdata('lang') == 'ar'){
 $genders = $uniformdata->genders ;
 $genders = explode( ',', $genders) ;
                        foreach ($genders as $gender) { ?>
-                        <option value="<?php echo $gender ?>" <?php if(sizeof($genders)==1 ) { echo "selected" ;}?>><?php echo $this->Admin_model->get_type_name_by_id('genders','id',$gender,'gender_name')  ?></option>
+                        <option value="<?php echo $gender ?>" <?php if(sizeof($genders)==1 ) { echo "selected" ;}?>><?php  echo  
+                         $this->Admin_model->translate($this->Admin_model->get_type_name_by_id('genders','id',$gender,'gender_name')) ;  ?></option>
                            
                       <?php   } ?>
                     </select>
@@ -494,7 +495,7 @@ if($this->session->userdata('lang') == 'ar'){
    
   </form>
 </div>
-<div class="col-md-6"><h6 class="forget">Shipping cost</h6></div>
+<div class="col-md-6"><h6 class="forget"><?php echo $this->Admin_model->translate("Shipping cost") ; ?></h6></div>
 <div class="col-md-6">
     <p class="product-pricee">
         <br>
@@ -502,7 +503,7 @@ if($this->session->userdata('lang') == 'ar'){
 </p>
     </div>
 <div class="col-md-12">
-<a href="javascript:void(0)" class="btn btn-orib shippingbtn">Checkout</a>
+<a href="javascript:void(0)" class="btn btn-orib shippingbtn"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
 </div>
 </div>
 </div>

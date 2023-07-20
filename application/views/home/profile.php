@@ -273,7 +273,7 @@ Delivery at 30-10-2023
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingfour">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefour" aria-expanded="false" aria-controls="flush-collapsefour">
-      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/fav.png" width="20px" height="20px">&nbsp;&nbsp;Favourites
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/fav.png" width="20px" height="20px">&nbsp;&nbsp;<?php echo $this->Admin_model->translate("Favourites") ; ?>
       </button>
     </h2>
     <div id="flush-collapsefour" class="accordion-collapse collapse" aria-labelledby="flush-headingfour" data-bs-parent="#accordionFlushExample">

@@ -160,9 +160,9 @@ button[type="submit"]{
                     <div class="blue-back" style="margin-left:-40px">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
-                            <h4 class="section-title-in">School  <br> Uniforms</h4>
-                           <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                            <h4 class="section-title-in"><?php echo $this->Admin_model->translate("School") ; ?>  <br><?php echo $this->Admin_model->translate("Uniforms") ; ?> </h4>
+                           <p class="sec-ab-or"><?php echo $this->Admin_model->translate("School Banner Text") ; ?></p>
+                           <a href="" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?>&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -188,7 +188,7 @@ button[type="submit"]{
                         <div class="row">
                                <div class="col-md-4">
                                <a href="<?php echo base_url() ; ?>home/alluniforms" class="btn-blue2" style="width:40%;padding:20px;">
-                                        All School
+                               <?php echo $this->Admin_model->translate("All Schools") ; ?> 
                                         
             </a>
                                 </div> 
@@ -197,9 +197,9 @@ button[type="submit"]{
                                 
        <label>
             <span class="screen-reader-text">Search for...</span>
-            <input type="search" class="search-field" placeholder="Type here to search.." value=""  title="Type here to search.." id="searchtext" />
+            <input type="search" class="search-field" placeholder="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" value=""  title="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" id="searchtext" />
         </label>
-        <button  type="submit" class="search-submit button"> Search </button>
+        <button  type="submit" class="search-submit button"><?php echo $this->Admin_model->translate("Search") ; ?>  </button>
       
                             </div>
 <div class="col-md-2">
@@ -217,7 +217,7 @@ button[type="submit"]{
 </div>
                     <div class="row">
                 <div class="col-md-5">
-                <h3 style="margin-left:14px;">School</h3>
+                <h3 style="margin-left:14px;"><?php echo $this->Admin_model->translate("School") ; ?></h3>
 </div>
 
 </div>
@@ -321,7 +321,7 @@ button[type="submit"]{
                                             <hr>
                                             <div class="ltn__social-media">
                                                 <ul>
-                                                    <li>Share:</li>
+                                                    <li><?php echo $this->Admin_model->translate("Share") ; ?>:</li>
                                                     <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                                                     <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
                                                     <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>

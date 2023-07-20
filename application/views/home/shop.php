@@ -263,7 +263,7 @@ button[type="submit"]{
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
                             <h4 class="section-title-in"><?php echo $this->Admin_model->translate("Industrial") ; ?>  <br> <?php echo $this->Admin_model->translate("Uniforms") ; ?></h4>
                            <p class="sec-ab-or"><?php echo $this->Admin_model->translate("Industry Uniforms Banner Text") ; ?> </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                           <a href="" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?>&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -504,7 +504,7 @@ if($this->session->userdata('lang') == 'ar'){
                             <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Price") ; ?></h4>
                             <div class="price_filter">
                                 <div class="price_slider_amount">
-                                    <input type="submit"  value="<?php echo $this->Admin_model->translate("Your range:") ; ?>"/> 
+                                    <input type="submit"  value="<?php echo $this->Admin_model->translate("Your range") ; ?>"/> 
                                     <input type="text" class="amount" name="price"  placeholder="Add Your Price" /> 
                                 </div>
                                 <div class="slider-range"></div>
@@ -516,7 +516,7 @@ if($this->session->userdata('lang') == 'ar'){
                         <div class="form-check">
   <input class="form-check-input selectgender" type="checkbox" value="1" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-  Ma<?php echo $this->Admin_model->translate("Male") ; ?>le
+  <?php echo $this->Admin_model->translate("Male") ; ?>
   </label>
 </div>
 <div class="form-check">

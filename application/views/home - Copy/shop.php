@@ -485,7 +485,7 @@ if($this->session->userdata('lang') == 'ar'){
                        
                         <!-- Color Widget -->
                         <div class="widget ltn__color-widget">
-                            <h4 class="ltn__widget-title ">Product Color</h4>
+                            <h4 class="ltn__widget-title "><?php echo $this->Admin_model->translate("Product Color") ; ?></h4>
                             
 
                             <?php if(!empty($colors)){

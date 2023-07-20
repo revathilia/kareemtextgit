@@ -151,7 +151,7 @@ $this->session->set_userdata('dir', 'ltr');
 </div>
 <div class="col-md-6">
                                             <div class="btn_wrap">
-        <span>Share</span>
+        <span><?php echo $this->Admin_model->translate("Share") ; ?></span>
         <div class="container">
             <i class="fab fa-facebook-f"></i>
             <i class="fab fa-twitter"></i>
@@ -273,7 +273,9 @@ if($this->session->userdata('lang') == 'ar'){
                     if(!empty($genders)){
 
                        foreach ($genders as $gender) { ?>
-                        <option value="<?php echo $gender ?>"><?php echo $this->Admin_model->get_type_name_by_id('genders','id',$gender,'gender_name')  ?></option>
+                        <option value="<?php echo $gender ?>"><?php echo  
+                         $this->Admin_model->translate($this->Admin_model->get_type_name_by_id('genders','id',$gender,'gender_name')) ;
+                        ?></option>
                            
                       <?php   } }  ?>
                     </select>   </p>
@@ -474,7 +476,7 @@ if($this->session->userdata('lang') == 'ar'){
                                             <hr>
                                             <div class="ltn__social-media">
                                                 <ul>
-                                                    <li>Share:</li>
+                                                    <li><?php echo $this->Admin_model->translate("Share") ; ?>:</li>
                                                     <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                                                     <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
                                                     <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
@@ -759,7 +761,7 @@ return false ;
 }
 
  if( !$('#address').val() ) {
-toastr.error("<?php echo $this->Admin_model->translate("Add your address") ; ?>");
+toastr.error("Add your address");
 
 return false ;
 }

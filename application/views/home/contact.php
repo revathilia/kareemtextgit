@@ -53,7 +53,7 @@ $this->session->set_userdata('dir', 'ltr');
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ltn__breadcrumb-inner">
-                        <h1 class="page-title">Contact Us</h1>
+                        <h1 class="page-title"><?php echo $this->Admin_model->translate("Contact Us") ; ?></h1>
                         <div class="ltn__breadcrumb-list">
                             <ul>
                                 <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>

@@ -169,12 +169,12 @@ $this->session->set_userdata('dir', 'ltr');
                                                 <div class="btn_bg">
                                         <a href="#" title="Wishlist" 
                                         class="add_to_wishlist" data-productid="<?php echo $product->id  ?>" >
-                                            <i class="far fa-heart"></i>Favourites</a>
+                                            <i class="far fa-heart"></i><?php echo $this->Admin_model->translate("Favourites") ; ?></a>
 </div>
 </div>
 <div class="col-md-6">
                                             <div class="btn_wrap">
-        <span>Share</span>
+        <span><?php echo $this->Admin_model->translate("Share") ; ?></span>
         <div class="container">
             <i class="fab fa-facebook-f"></i>
             <i class="fab fa-twitter"></i>
@@ -265,13 +265,13 @@ if($this->session->userdata('lang') == 'ar'){
                                       <div class="box-cat">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <p>PRODUCT TYPE</p>
+                                                <p><?php echo $this->Admin_model->translate("PRODUCT TYPE") ; ?></p>
 </div>
 <div class="col-md-6">
                                                 <p class="input-box"><?php echo $this->Admin_model->get_type_name_by_id('categories','id',$product->category,'category_name') ; ?></p>
 </div>
 <div class="col-md-6">
-                                                <p>Gender</p>
+                                                <p><?php echo $this->Admin_model->translate("Gender") ; ?></p>
 </div>
 <div class="col-md-6">
                                            <p>
@@ -290,7 +290,7 @@ if($this->session->userdata('lang') == 'ar'){
                     </select>   </p>
 </div>
 <div class="col-md-6">
-                                                <p>Color</p>
+                                                <p><?php echo $this->Admin_model->translate("Color") ; ?></p>
 </div>
 <div class="col-md-6">
 
@@ -314,7 +314,7 @@ $colors = explode( ',', $colors) ;
          </p>                                    
 </div>
 <div class="col-md-6">
-                                                <p>Size</p>
+                                                <p><?php echo $this->Admin_model->translate("Size") ; ?></p>
 </div>
 <div class="col-md-6"><p>
                                                <select name="size_selected" class="size-select sizeval">
@@ -334,7 +334,7 @@ $sizes = explode( ',', $sizes) ;
                                   <div class="col-md-6">
                               <div class="form-group">  
  
-<button type ="button" class="btn-orange single addtocart">  Single product purchase </button>
+<button type ="button" class="btn-orange single addtocart">  <?php echo $this->Admin_model->translate("Single product purchase") ; ?> </button>
 <!-- Button trigger modal -->
 
 </div>
@@ -343,7 +343,7 @@ $sizes = explode( ',', $sizes) ;
                                     <div class="col-md-6">
                                          <div class="form-group">  
                                         <p class="btn-or" >
-                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'">Bulk Purchase</a> 
+                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'"><?php echo $this->Admin_model->translate("Bulk Purchase") ; ?></a> 
                                      </p>
 
                                       
@@ -352,7 +352,7 @@ $sizes = explode( ',', $sizes) ;
                                     <div class="col-md-12">
                                         <p class="input-box con">
                                          <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'">
-                                         Contact Customer Service for Customized Logo</a></p>
+                                         <?php echo $this->Admin_model->translate("Contact Customer Service for Customized Logo") ; ?> </a></p>
 </div>
 </div>
 </div>
@@ -372,7 +372,7 @@ $sizes = explode( ',', $sizes) ;
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="liton_tab_details_1_1">
                                 <div class="ltn__shop-details-tab-content-inner">
-                                    <h4 class="title-2">Description.</h4>
+                                    <h4 class="title-2"> <?php echo $this->Admin_model->translate("Description") ; ?></h4>
                                     <p>
                                         <?php 
 if($this->session->userdata('lang') == 'ar'){
