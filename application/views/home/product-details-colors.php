@@ -528,7 +528,7 @@ if($this->session->userdata('lang') == 'ar'){
                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Cart</p>
                                             <div class="btn-wrapper">
                                                 <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                                                <a href="checkout.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                                                <a href="checkout.html" class="theme-btn-2 btn btn-effect-2"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
                                             </div>
                                          </div>
                                          <!-- additional-info -->
@@ -614,7 +614,7 @@ if($this->session->userdata('lang') == 'ar'){
             <div class="col-lg-12">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Collect from Store</button>
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><?php echo $this->Admin_model->translate("Collect from Store") ; ?></button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Ship</button>
@@ -650,7 +650,7 @@ if($this->session->userdata('lang') == 'ar'){
 </div>
 </div>
 <div class="col-md-12">
-<a href="javascript:void(0)" class="btn btn-ori checkoutbtn">Checkout</a>
+<a href="javascript:void(0)" class="btn btn-ori checkoutbtn"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
 </div>
 </div>
 </div>
@@ -690,7 +690,7 @@ if($this->session->userdata('lang') == 'ar'){
     </div>
 <div class="col-md-12">
  
-<a href="javascript:void(0)" class="btn btn-ori shippingbtn">Checkout</a>
+<a href="javascript:void(0)" class="btn btn-ori shippingbtn"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
 </div>
 </div>
 </div>

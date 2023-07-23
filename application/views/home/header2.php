@@ -164,8 +164,8 @@ if ($cart = $this->cart->contents()):
                     <h5>Subtotal: <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  $subtotal ;?> </span></h5>
                 </div>
                 <div class="btn-wrapper">
-                    <a href="<?php echo base_url() ; ?>home/viewcart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="<?php echo base_url() ; ?>home/checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                    <a href="<?php echo base_url() ; ?>home/viewcart" class="theme-btn-1 btn btn-effect-1"><?php echo $this->Admin_model->translate("View Cart") ; ?></a>
+                    <a href="<?php echo base_url() ; ?>home/checkout" class="theme-btn-2 btn btn-effect-2"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
                 </div>
                  
             </div>

@@ -192,8 +192,8 @@ button[type="submit"]{
                                         
             </a>
                                 </div> 
-                                <div class="col-md-1"></div> 
-                                <div class="col-md-5"> 
+                                
+                                <div class="col-md-6"> 
                                 
        <label>
             <span class="screen-reader-text">Search for...</span>

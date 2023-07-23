@@ -283,12 +283,8 @@ button[type="submit"]{
                 <div class="col-md-12">
                 
                     <div class="row">
-                <div class="col-md-3">
-                <h3><?php echo $this->Admin_model->translate("Industrial Uniforms") ; ?></h3>
-</div>
  
- 
-<div class="col-md-2">
+<div class="col-md-3">
 <select class="nice-select " id="sortby">
      <option><?php echo $this->Admin_model->translate("Sort By") ; ?></option>
                                        
@@ -301,7 +297,7 @@ button[type="submit"]{
 
 </div>
 
- <div class="col-md-5"> 
+ <div class="col-md-6"> 
                                
         <label>
             <span class="screen-reader-text">Search for...</span>
@@ -320,6 +316,11 @@ button[type="submit"]{
                                         <a data-bs-toggle="tab" href="#liton_product_list"><i class="fas fa-list"></i></a>
                                     </div>
                                 </div>
+</div>
+</div>
+<div class="row">
+   <div class="col-md-3">
+                <h3><?php echo $this->Admin_model->translate("Industrial Uniforms") ; ?></h3>
 </div>
 </div>
 <hr>

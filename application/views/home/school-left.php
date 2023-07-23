@@ -808,7 +808,7 @@
                             <h4 class="ltn__widget-title">Price</h4>
                             <div class="price_filter">
                                 <div class="price_slider_amount">
-                                    <input type="submit"  value="<?php echo $this->Admin_model->translate("Your range") ; ?>"/> 
+                                    <input type="submit"  value="Your range:"/> 
                                     <input type="text" class="amount" name="price"  placeholder="Add Your Price" /> 
                                 </div>
                                 <div class="slider-range"></div>

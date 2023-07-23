@@ -299,13 +299,13 @@ if(!empty(   $uniform)){
                  <div class="col-lg-12">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img">
-                        <a href="<?php echo base_url() ; ?>home/uniform_details/<?php echo $uniform->id ?>"><img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $uniform->product_image ?>" alt="#" width="160px" ></a>
+                        <a href="<?php echo base_url() ; ?>home/uniform_det/<?php echo $uniform->id ?>"><img src="<?php echo base_url() ; ?>uploads/images/school/<?php echo $uniform->product_image ?>" alt="#" width="160px" ></a>
                             
                             
                         </div>
                          <div class="product-info">
                                                 
-                                                <h2 class="product-title"><a href="<?php echo base_url() ; ?>home/uniform_details/<?php echo $uniform->id ?>">
+                                                <h2 class="product-title"><a href="<?php echo base_url() ; ?>home/uniform_det/<?php echo $uniform->id ?>">
                                                 
                                                 <?php 
 if($this->session->userdata('lang') == 'ar'){
@@ -380,10 +380,10 @@ if($this->session->userdata('lang') == 'ar'){
             <div class="col-lg-12">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Collect from Store</button>
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><?php echo $this->Admin_model->translate("Collect from Store") ; ?></button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Ship</button>
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"><?php echo $this->Admin_model->translate("Ship") ; ?></button>
   </li>
 </ul>
 </div>
