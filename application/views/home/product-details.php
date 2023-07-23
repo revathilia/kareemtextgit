@@ -135,12 +135,25 @@ $this->session->set_userdata('dir', 'ltr');
 
                                       <?php   array_unshift($product_images,$product->product_image);
   ?>
-                                      <?php if(!empty($product_images)){ foreach ($product_images as $images) { 
-                                            if(!empty($images)){ ?>
+                                      <?php if(!empty($product_images)){ foreach ($product_images as $primages) { 
+                                            if(!empty($primages)){ ?>
                                        
+                                       <?php 
+                                       
+                                    if(strpos($primages, "_color_") !== false){
+                                        $imagename =  explode("_color_",$primages) ;
+                                        $images = $imagename[0] ;
+                                        $colorid = $imagename[1] ;
+
+                                    } else{
+                                        $images = $primages ;
+                                        $colorid = 0 ;
+                                    }                                    
+                                    
+                                       ?>
                                         
 
-                                         <div class="single-large-img" dir="rtl">
+                                         <div class="single-large-img colorimage color_<?php echo $colorid ; ?> " dir="rtl">
                                             <div class="row single-bg">
                                             <div class="col-md-6">
                                                 <div class="btn_bg">
@@ -163,7 +176,7 @@ $this->session->set_userdata('dir', 'ltr');
 </div>
 
                                             <a href="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" data-rel="lightcase:myCollection">
-                                                <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" alt="Image">
+                                                <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>"  alt="Image">
                                             </a>
                                         </div>
 
@@ -175,16 +188,30 @@ $this->session->set_userdata('dir', 'ltr');
                                     </div>
                                     <div class="ltn__shop-details-small-img slick-arrow-2" >
 
-                                          <?php 
- 
-                                         if(!empty($product_images)){ foreach ($product_images as $images) { 
-                                            if(!empty($images)){ ?>
+                                    <?php if(!empty($product_images)){ foreach ($product_images as $primages) { 
+                                            if(!empty($primages)){ ?>
+                                       
+                                       <?php 
+                                       
+                                    if(strpos($primages, "_color_") !== false){
+                                        $imagename =  explode("_color_",$primages) ;
+                                        $images = $imagename[0] ;
+                                        $colorid = $imagename[1] ;
+
+                                    } else{
+                                        $images = $primages ;
+                                        $colorid = 0 ;
+                                    }
+
+
+                                    
+                                       ?>
                                       
 
                                           
 
-                                         <div class="single-small-img">
-                                            <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" alt="Image">
+                                         <div class="single-small-img colorimage color_<?php echo $colorid ; ?>">
+                                            <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>"   alt="Image">
                                         </div>
 
 
@@ -926,6 +953,34 @@ function langAjax($lang){
     });
 
   }
+
+
+   $('.colorselect').change(function() {
+    if ($(this).is(':checked')) {
+        var selectedclass = $(this).data('color') ;
+       // $(".colorimage ").hide();
+        //$(".colorimage ." + selectedclass).show();
+       
+
+        $(".colorimage ").each(function(){
+
+            if (!$(this).hasClass("color_0")) {
+
+            if($(this).hasClass(selectedclass)){
+                $(this).show();
+            }else{
+                $(this).hide();
+            }
+        }
+ 
+        });
+
+      
+    }
+  
+
+    })
+ 
 
 </script>
 

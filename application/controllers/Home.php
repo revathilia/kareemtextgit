@@ -921,14 +921,33 @@ $level = 0 ;
     foreach($product_images as $images){
 
       $colors = explode( ',', $data['product']->colors_available) ;
-
+     
       if(in_array($images['color_id'], $colors)){
-         $pimage .= "," .$images['product_images'];
+
+        $imgs = explode(',',$images['product_images']);
+
+        $pimg = array() ;
+        foreach($imgs as $im){
+if($im){
+  $pimg[] = $im.'_color_'.$images['color_id'] ;
+}
+           
+        
+        }
+
+        $imgs = implode(',', $pimg) ;
+
+     
+       // array_push($pimages,$pimg);
+
+       $pimage .= "," . $imgs;
 
         // $imagelist[] = array('colorid'=>$images['color_id'],'images'=>$images['product_images']) ;
       }
  
     }
+
+  //  print_r($pimages);
 
     $pimages  = explode(',',$pimage) ; 
     $data['product_images'] = $pimages ;
