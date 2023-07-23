@@ -1048,10 +1048,10 @@ if($im){
 
     array_unshift($pimages,$data['product']->product_image);
 
-
-
     $data['product_images'] = $pimages ;
- 
+
+
+ print_r( $pimages );
     $this->load->view('home/product_images', $data);
   }
 

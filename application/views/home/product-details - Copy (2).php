@@ -1,7 +1,7 @@
 <?php
 $session = $this->session->userdata('lang');
 if (empty($session)) {
-  # code...
+	# code...
 $this->session->set_userdata('lang', 'eng');
 $this->session->set_userdata('dir', 'ltr');
 }
@@ -32,9 +32,9 @@ $this->session->set_userdata('dir', 'ltr');
     <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
     <?php if($this->session->userdata('lang') !='eng') {?>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
-    integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
-  <?php } ?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+	<?php } ?>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700'>
  
 <style>
@@ -128,7 +128,7 @@ $this->session->set_userdata('dir', 'ltr');
 
                         <form action="<?php echo base_url() ?>home/addtocart" id="productpage"    >
                         <div class="row">
-                              <div class="col-md-5" id="imagesection">
+                              <div class="col-md-5">
                                 <div class="ltn__shop-details-img-gallery">
                                        <div class="ltn__shop-details-large-img">
 
@@ -842,28 +842,6 @@ $("#cartitem").html( status.items) ;
 }  )          
  
 
-  $(document).on('change',".colorselect", function()
-   { 
-
-
-      if ($(this).is(':checked')) {
-        var selectedcolor = $(this).data('color') ;
-        var product  = <?php echo $product->id ?>;
-
-         $.ajax({  
-    url:"<?php echo base_url(); ?>home/get_images_with_color",  
-    method:"POST",  
-    data:{product:product,color:selectedcolor},  
-    success:function(data)
-    { 
-      $('#imagesection').html(data); 
-    }
-    
-    });
-    }
-   });
-  
-
 
 $(document).on('change',".sizeval", function()
    { 
@@ -976,33 +954,31 @@ function langAjax($lang){
   }
 
 
-   // $('.colorselect').change(function() {
-   //  if ($(this).is(':checked')) {
-   //      var selectedclass = $(this).data('color') ;
-   //     // $(".colorimage ").hide();
-   //      //$(".colorimage ." + selectedclass).show();
+   $('.colorselect').change(function() {
+    if ($(this).is(':checked')) {
+        var selectedclass = $(this).data('color') ;
+       // $(".colorimage ").hide();
+        //$(".colorimage ." + selectedclass).show();
        
 
-   //      $(".colorimage ").each(function(){
+        $(".colorimage ").each(function(){
 
-   //        if (!$(this).hasClass("color_0")) {
+          if (!$(this).hasClass("color_0")) {
 
-   //          if($(this).hasClass(selectedclass)){
-   //              $(this).show();
-   //          }else{
-              
-   //          //  $(this).removeClass('slick-slide');
-   //            $(this).hide();
-   //          }
-   //      }
+            if($(this).hasClass(selectedclass)){
+                $(this).show();
+            }else{
+                $(this).hide();
+            }
+        }
  
-   //      });
+        });
 
       
-   //  }
+    }
   
 
-   //  })
+    })
  
 
 </script>
