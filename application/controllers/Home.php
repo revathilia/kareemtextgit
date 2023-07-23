@@ -947,18 +947,21 @@ if($im){
  
     }
 
-  //  print_r($pimages);
+  
 
     $pimages  = explode(',',$pimage) ; 
-    $data['product_images'] = $pimages ;
+    
+    array_unshift($pimages,$data['product']->product_image);
 
-    // $data['pimages'] = $imagelist ;
- 
+    $data['product_images'] = $pimages ;
 
     $data['product_price'] = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$id,'status'=>'Y'),'product_price asc');  
    //  $data['inventory'] = $this->get_stock_det($id); 
      $this->load->view('home/product-details', $data);
   }
+
+
+
 public function get_price_with_size(){
   $product = $this->input->post('product');
   $size = $this->input->post('size');
@@ -1000,6 +1003,58 @@ exit;
 
 
 }
+
+
+
+  public function get_images_with_color()
+  {   
+     $id = $this->input->post('product') ;
+     $color = $this->input->post('color') ;
+
+    $col = explode( '_', $color) ;
+    $colorid = $col[1];
+
+     $data['product'] = $this->Admin_model->get_single_data('industry_products',array('id'=>$id));
+         
+     $pimages  = array();
+     $pimage = '' ;
+     $product_images = $this->Admin_model->get_all_data('industry_product_images',array('product_id'=>$id,'color_id'=>$colorid)); 
+    foreach($product_images as $images){
+
+      $colors = explode( ',', $data['product']->colors_available) ;
+     
+      if(in_array($images['color_id'], $colors)){
+
+        $imgs = explode(',',$images['product_images']);
+
+        $pimg = array() ;
+        foreach($imgs as $im){
+if($im){
+  $pimg[] = $im.'_color_'.$images['color_id'] ;
+}
+           
+        
+        }
+
+        $imgs = implode(',', $pimg) ;
+
+       $pimage .= "," . $imgs;
+
+      }
+ 
+    } 
+
+    $pimages  = explode(',',$pimage) ; 
+
+    array_unshift($pimages,$data['product']->product_image);
+
+
+
+    $data['product_images'] = $pimages ;
+ 
+    $this->load->view('home/product_images', $data);
+  }
+
 
 function get_school_logo(){
   $school = $this->input->post('school');
