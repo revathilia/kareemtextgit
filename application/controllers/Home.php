@@ -66,13 +66,16 @@ class Home extends CI_Controller {
      exit ;
     }
 
+    $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'wishlist','status'=>'Y')) ;
+
     $data['wishlist'] = $this->Admin_model->get_all_data('wishlist',array('user_id'=>$homesession['user_id']));
     $this->load->view('home/wishlist',$data);
   }
   public function about()
   {   
     $this->session->set_userdata('lastpage', $this->router->fetch_method());
-       $this->load->view('home/home');
+    $data['banner'] = $this->Admin_model->get_all_data('banners',array('type'=>'about','status'=>'Y')) ;
+       $this->load->view('home/home',$data);
   }
    public function profile()
   {   
@@ -102,6 +105,7 @@ class Home extends CI_Controller {
       $data['products'] = $this->Admin_model->get_all_data('industry_products','');
       $data['sizes'] = $this->Admin_model->get_all_data('size_master',array('type'=>'I'));
       $data['colors'] = $this->Admin_model->get_all_data('color_master',array('type'=>'I'));
+      $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'industry','status'=>'Y')) ;
 
 
 if(!empty($this->User_model->getRows())){
@@ -243,6 +247,7 @@ $this->load->view('home/ajaxlisted', $data, false);
       $data['products'] = $this->Admin_model->get_all_data('school_products','');
       $data['sizes'] = $this->Admin_model->get_all_data('size_master',array('type'=>'S'));
       $data['colors'] = $this->Admin_model->get_all_data('color_master',array('type'=>'S'));
+      $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'uniforms','status'=>'Y')) ;
 
  $data['schools'] = $this->Admin_model->get_all_data('school_master','');
  $data['standards'] = $this->Admin_model->get_all_data('standard_master','');
@@ -397,6 +402,7 @@ public function school()
       $this->session->set_userdata('lastpage', $this->router->fetch_method());
       $data['schools'] = $this->Admin_model->get_all_data('school_master',array('status' => 'Y'));
       
+      $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'school','status'=>'Y')) ;
 
 
 if(!empty($this->User_model->getSchools())){
@@ -806,7 +812,9 @@ $level = 0 ;
 
   public function contact()
   {   
-       $this->load->view('home/contact');
+
+      $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'contact','status'=>'Y')) ;
+       $this->load->view('home/contact',$data);
   }
 
  
@@ -1008,50 +1016,52 @@ exit;
 
   public function get_images_with_color()
   {   
-     $id = $this->input->post('product') ;
-     $color = $this->input->post('color') ;
+//      $id = $this->input->post('product') ;
+//      $color = $this->input->post('color') ;
 
-    $col = explode( '_', $color) ;
-    $colorid = $col[1];
+//     $col = explode( '_', $color) ;
+//     $colorid = $col[1];
 
-     $data['product'] = $this->Admin_model->get_single_data('industry_products',array('id'=>$id));
+//      $data['product'] = $this->Admin_model->get_single_data('industry_products',array('id'=>$id));
+
+    
          
-     $pimages  = array();
-     $pimage = '' ;
-     $product_images = $this->Admin_model->get_all_data('industry_product_images',array('product_id'=>$id,'color_id'=>$colorid)); 
-    foreach($product_images as $images){
+//      $pimages  = array();
+//      $pimage = '' ;
+//      $product_images = $this->Admin_model->get_single_data('industry_product_images',array('product_id'=>$id,'color_id'=>$colorid)); 
+  
 
-      $colors = explode( ',', $data['product']->colors_available) ;
+//       $colors = explode( ',', $data['product']->colors_available) ;
      
-      if(in_array($images['color_id'], $colors)){
+//       if(in_array($product_images->color_id, $colors)){
 
-        $imgs = explode(',',$images['product_images']);
+//         $imgs = explode(',',$product_images->product_images);
 
-        $pimg = array() ;
-        foreach($imgs as $im){
-if($im){
-  $pimg[] = $im.'_color_'.$images['color_id'] ;
-}
+//         $pimg = array() ;
+//         foreach($imgs as $im){
+// if($im){
+//   $pimg[] = $im.'_color_'.$product_images->color_id ;
+// }
            
         
-        }
+//         }
 
-        $imgs = implode(',', $pimg) ;
+//         $imgs = implode(',', $pimg) ;
 
-       $pimage .= "," . $imgs;
+//        $pimage .= "," . $imgs;
 
-      }
+//       }
  
-    } 
+    
 
-    $pimages  = explode(',',$pimage) ; 
+//     $pimages  = explode(',',$pimage) ; 
 
-    array_unshift($pimages,$data['product']->product_image);
+//     array_unshift($pimages,$data['product']->product_image);
 
-    $data['product_images'] = $pimages ;
+//     $data['product_images'] = $pimages ;
 
 
- print_r( $pimages );
+//  print_r( $pimages );
     $this->load->view('home/product_images', $data);
   }
 
@@ -1229,6 +1239,8 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
   }
 
 
+
+
   
   function added_tocart(){
      $productid = $this->input->post('productid');
@@ -1252,7 +1264,9 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
         $this->session->set_userdata('prouctType', '');
     }
 
-    $this->load->view('home/cart');
+    $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'cart','status'=>'Y')) ;
+
+    $this->load->view('home/cart',$data);
   }
 
   function loadcartqty()
@@ -1328,7 +1342,7 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
 
     $data['addresses'] = $this->Admin_model->get_single_data('customer_address',array('customer_id'=>$homesession['user_id'])) ;
 
-
+    $data['countries'] = $this->Admin_model->get_all_data('countries');
   
     $this->load->view('home/checkout',$data);
      

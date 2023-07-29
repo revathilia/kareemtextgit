@@ -14,21 +14,21 @@ $this->session->set_userdata('dir', 'ltr');
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
 <?php if($this->session->userdata('lang') !='eng') {?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
 		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
@@ -38,7 +38,7 @@ $this->session->set_userdata('dir', 'ltr');
 <body>
 
 <div class="body-wrapper">    
-<div class="header-blue">
+<div class="<?php if($session == 'eng'){ echo "header-blue" ;} else{ echo "blue-header" ;}?>">
     <!-- HEADER AREA START (header-5) -->
   <?php $this->load->view('home/header2')  ?>
     <!-- HEADER AREA END -->
@@ -48,10 +48,10 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="row">
                     <div class="col-12 col-lg-4">
                         <div class="le-text">
-                      <h6 class="ab">About Kareemtex</h6>
-                      <h5 class="ind">Industrial</h5>
-                      <h3 class="uni">Uniforms</h3>
-                      <a href="<?php echo base_url()?>home/industry" class="btn btn-orange">Shop Now &nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ar-ri.png" width="7px" height="7px"></a>
+                      <h6 class="abk"><?php echo $this->Admin_model->translate("About Kareemtex") ; ?></h6>
+                      <h5 class="ind"><?php echo $this->Admin_model->translate("Industrial") ; ?></h5>
+                      <h3 class="uni"><?php echo $this->Admin_model->translate("Uniforms") ; ?></h3>
+                      <a href="<?php echo base_url() ; ?>home/industry" class="btn btn-orange"><?php echo $this->Admin_model->translate("Shop Now") ; ?> &nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ar-ri.png" width="7px" height="7px"></a>
 </div>
                     </div>
                     <div class="col-md-4 col-lg-4 ">
@@ -59,16 +59,22 @@ $this->session->set_userdata('dir', 'ltr');
                     <div class="col-md-4 col-lg-4 ">
                     <div class="ri-text">
                   
-                      <h5 class="ind">School</h5>
-                      <h3 class="uni"> Uniforms</h3>
-                      <a href="<?php echo base_url()?>home/school" class="btn btn-blue">Shop Now &nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ar-ri.png" width="7px" height="7px"></a>
+                      <h5 class="ind"><?php echo $this->Admin_model->translate("School") ; ?></h5>
+                      <h3 class="uni"> <?php echo $this->Admin_model->translate("Uniforms") ; ?></h3>
+                      <a href="<?php echo base_url() ; ?>home/school" class="btn btn-blue"><?php echo $this->Admin_model->translate("Shop Now") ; ?> &nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ar-ri.png" width="7px" height="7px"></a>
                         </div>
 </div>  
                     </div>
                 </div>
             </div>
              <div class="iphone-mockup">
-						<img src="<?php echo base_url()?>assets/home_assets/img/home/m1.png" class="im-dd">
+             <?php if($_SESSION["lang"]!='eng') {?>
+              <img src="<?php echo base_url() ; ?>assets/home_assets/img/peo.png" class="im-dd">
+    <?php } ?>
+    <?php if($_SESSION["lang"]=='eng') {?>
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/m1.png" class="im-dd">
+    <?php } ?>
+						
                           <!--  <div class="screen">
 							</div>
 							
@@ -77,16 +83,16 @@ $this->session->set_userdata('dir', 'ltr');
      
              <div class="box-header">
           <div class="box-header-title">
-            <h1>OUR EXPERIENCE IS THE BEST</h1>
+            <h1><?php echo $this->Admin_model->translate("OUR EXPERIENCE IS THE BEST") ; ?></h1>
           </div>
         </div>
 </div>
 </section>
     
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
   <script type="text/javascript">
 function langAjax($lang){
  

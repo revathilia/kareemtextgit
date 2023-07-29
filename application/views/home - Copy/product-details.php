@@ -1,27 +1,40 @@
-<!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<?php
+$session = $this->session->userdata('lang');
+if (empty($session)) {
+  # code...
+$this->session->set_userdata('lang', 'eng');
+$this->session->set_userdata('dir', 'ltr');
+}
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->session->userdata('lang') ?>" dir="<?php echo $this->session->userdata('dir') ?>">
+
+
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
- 
+    <?php if($this->session->userdata('lang') !='eng') {?>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+    integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+  <?php } ?>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700'>
  
 <style>
@@ -33,6 +46,9 @@
   border-radius: 30px;
   line-height: 30px;
   display: inline-block;
+}
+.slick-slide img{
+    height:120px;
 }
 .swatch > [type=radio],
 .swatch > [type=checkbox] {
@@ -47,6 +63,7 @@
 .swatch > [type=checkbox] + label {
   width: 30px;
   height: 30px;
+  border: 1px solid #0000001f;
   border-radius: 30px;
   line-height: 30px;
   text-align: center;
@@ -81,6 +98,14 @@
   transition: opacity 0.5s;
 }
 </style>
+
+ <style type="text/css">
+      .pac-container {
+    z-index: 10000 !important;
+}
+
+    </style>
+    
 </head>
 
 <body>
@@ -103,30 +128,42 @@
 
                         <form action="<?php echo base_url() ?>home/addtocart" id="productpage"    >
                         <div class="row">
-                              <div class="col-md-5">
+                              <div class="col-md-5" id="imagesection">
                                 <div class="ltn__shop-details-img-gallery">
                                        <div class="ltn__shop-details-large-img">
 
 
-                                      <?php   array_unshift($product_images,$product->product_image);
-  ?>
-                                      <?php if(!empty($product_images)){ foreach ($product_images as $images) { 
-                                            if(!empty($images)){ ?>
+                                    
+                                      <?php if(!empty($product_images)){ foreach ($product_images as $primages) { 
+                                            if(!empty($primages)){ ?>
                                        
+                                       <?php 
+                                       
+                                    if(strpos($primages, "_color_") !== false){
+                                        $imagename =  explode("_color_",$primages) ;
+                                        $images = $imagename[0] ;
+                                        $colorid = $imagename[1] ;
+
+                                    } else{
+                                        $images = $primages ;
+                                        $colorid = 0 ;
+                                    }                                    
+                                    
+                                       ?>
                                         
 
-                                         <div class="single-large-img">
+                                         <div class="single-large-img colorimage color_<?php echo $colorid ; ?> " dir="rtl">
                                             <div class="row single-bg">
                                             <div class="col-md-6">
                                                 <div class="btn_bg">
                                         <a href="#" title="Wishlist" 
                                         class="add_to_wishlist" data-productid="<?php echo $product->id  ?>" >
-                                            <i class="far fa-heart"></i>Favourites</a>
+                                            <i class="far fa-heart"></i><?php echo $this->Admin_model->translate("Favourites") ; ?></a>
 </div>
 </div>
 <div class="col-md-6">
                                             <div class="btn_wrap">
-        <span>Share</span>
+        <span><?php echo $this->Admin_model->translate("Share") ; ?></span>
         <div class="container">
             <i class="fab fa-facebook-f"></i>
             <i class="fab fa-twitter"></i>
@@ -137,8 +174,8 @@
 </div>
 </div>
 
-                                            <a href="<?php echo base_url()?>uploads/images/industry/<?php echo $images ?>" data-rel="lightcase:myCollection">
-                                                <img src="<?php echo base_url()?>uploads/images/industry/<?php echo $images ?>" alt="Image">
+                                            <a href="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" data-rel="lightcase:myCollection">
+                                                <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>"  alt="Image">
                                             </a>
                                         </div>
 
@@ -148,18 +185,32 @@
 
                                          
                                     </div>
-                                    <div class="ltn__shop-details-small-img slick-arrow-2">
+                                    <div class="ltn__shop-details-small-img slick-arrow-2" >
 
-                                          <?php 
- 
-                                         if(!empty($product_images)){ foreach ($product_images as $images) { 
-                                            if(!empty($images)){ ?>
+                                    <?php if(!empty($product_images)){ foreach ($product_images as $primages) { 
+                                            if(!empty($primages)){ ?>
+                                       
+                                       <?php 
+                                       
+                                    if(strpos($primages, "_color_") !== false){
+                                        $imagename =  explode("_color_",$primages) ;
+                                        $images = $imagename[0] ;
+                                        $colorid = $imagename[1] ;
+
+                                    } else{
+                                        $images = $primages ;
+                                        $colorid = 0 ;
+                                    }
+
+
+                                    
+                                       ?>
                                       
 
                                           
 
-                                         <div class="single-small-img">
-                                            <img src="<?php echo base_url()?>uploads/images/industry/<?php echo $images ?>" alt="Image">
+                                         <div class="single-small-img colorimage color_<?php echo $colorid ; ?>">
+                                            <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>"   alt="Image">
                                         </div>
 
 
@@ -188,11 +239,11 @@ if($this->session->userdata('lang') == 'ar'){
 
                                     </h3>
                                     <div class="product-price" id="price_det1">
-                                        <span>SAR <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
+                                        <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                          
                                          <input type="hidden" name="product_price" value="<?php echo  $product_price->offer_price ? $product_price->offer_price : $product_price->product_price ; ?>">
 
-                                         <?php echo  ($product_price->offer_price != '0') ? '<del>SAR ' . $product_price->product_price .'</del>' :  '' ; ?> 
+                                         <?php echo  ($product_price->offer_price != '0') ? '<del> ' .$this->Admin_model->translate("SAR").' '. $product_price->product_price .'</del>' :  '' ; ?> 
 
 
                                     </div>
@@ -213,13 +264,29 @@ if($this->session->userdata('lang') == 'ar'){
                                       <div class="box-cat">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <p>PRODUCT TYPE</p>
+                                                <p><?php echo $this->Admin_model->translate("PRODUCT TYPE") ; ?> </p>
 </div>
 <div class="col-md-6">
-                                                <p class="input-box"><?php echo $this->Admin_model->get_type_name_by_id('categories','id',$product->category,'category_name')?></p>
+                                                <p class="input-box">
+                                                    
+                                                
+                                                
+
+
+                                                <?php 
+if($this->session->userdata('lang') == 'ar'){
+    echo $this->Admin_model->get_type_name_by_id('categories','id',$product->category,'ar_category_name') ;
+}else{
+    echo $this->Admin_model->get_type_name_by_id('categories','id',$product->category,'category_name')  ;
+}
+                                                    ?>
+
+                                            
+                                            
+                                            </p>
 </div>
 <div class="col-md-6">
-                                                <p>Gender</p>
+                                                <p><?php echo $this->Admin_model->translate("Gender") ; ?> </p>
 </div>
 <div class="col-md-6">
                                            <p>
@@ -232,13 +299,15 @@ if($this->session->userdata('lang') == 'ar'){
                     if(!empty($genders)){
 
                        foreach ($genders as $gender) { ?>
-                        <option value="<?php echo $gender ?>"><?php echo $this->Admin_model->get_type_name_by_id('genders','id',$gender,'gender_name')  ?></option>
+                        <option value="<?php echo $gender ?>"><?php echo  
+                         $this->Admin_model->translate($this->Admin_model->get_type_name_by_id('genders','id',$gender,'gender_name')) ;
+                        ?></option>
                            
                       <?php   } }  ?>
                     </select>   </p>
 </div>
 <div class="col-md-6">
-                                                <p>Color</p>
+                                                <p><?php echo $this->Admin_model->translate("Color") ; ?> </p>
 </div>
 <div class="col-md-6">
 
@@ -250,19 +319,19 @@ $colors = $product->colors_available ;
 $colors = explode( ',', $colors) ;
                        foreach ($colors as $color) { ?>
 
-                       <?php if($this->Admin_model->check_id_exists('color_master',$color)){ ?>
+                     
 
  <div class="swatch" style="background:<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$color,'color_code')  ?>;color:#fff;">
-    <input type="radio" name="color_selected" checked id="swatch_<?php echo $color ?>" value="<?php echo $color ?>" />
+    <input type="radio" name="color_selected" checked class="colorselect" data-color="color_<?php echo $color ?>" id="swatch_<?php echo $color ?>" value="<?php echo $color ?>" />
     <label for="swatch_<?php echo $color ?>"><i class=" fa fa-check" title="<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$color,'color_name')  ?>"></i></label>
   </div>
                            
-                      <?php  } } ?>
+                      <?php   } ?>
                   
          </p>                                    
 </div>
 <div class="col-md-6">
-                                                <p>Size</p>
+                                                <p><?php echo $this->Admin_model->translate("Size") ; ?> </p>
 </div>
 <div class="col-md-6"><p>
                                                <select name="size_selected" class="size-select sizeval">
@@ -272,12 +341,9 @@ $colors = explode( ',', $colors) ;
 $sizes = $product->sizes_available ;
 $sizes = explode( ',', $sizes) ;
                        foreach ($sizes as $size) { ?>
-
-                          <?php if($this->Admin_model->check_id_exists('size_master',$size)){ ?>
-
                         <option value="<?php echo $size ?>"><?php echo $this->Admin_model->get_type_name_by_id('size_master','id',$size,'size')  ?></option>
                            
-                      <?php }  } ?>
+                      <?php   } ?>
                     </select>   </p>
 </div>
 </div>
@@ -285,7 +351,7 @@ $sizes = explode( ',', $sizes) ;
                                   <div class="col-md-6">
                               <div class="form-group">  
  
-<button type ="button" class="btn-orange single addtocart">  Single product purchase </button>
+<button type ="button" class="btn-orange single addtocart"> <?php echo $this->Admin_model->translate("Single product purchase") ; ?>  </button>
 <!-- Button trigger modal -->
 
 </div>
@@ -294,7 +360,7 @@ $sizes = explode( ',', $sizes) ;
                                     <div class="col-md-6">
                                          <div class="form-group">  
                                         <p class="btn-or" >
-                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url()?>home/contact#getQuote'">Bulk Purchase</a> 
+                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'"><?php echo $this->Admin_model->translate("Bulk Purchase") ; ?></a> 
                                      </p>
 
                                       
@@ -302,8 +368,8 @@ $sizes = explode( ',', $sizes) ;
                                 </div>
                                     <div class="col-md-12">
                                         <p class="input-box con">
-                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url()?>home/contact#getQuote'">
-                                         Contact Customer Service for Customized Logo</a></p>
+                                         <a href="javascript:void()" onclick="window.location='<?php echo base_url() ; ?>home/contact#getQuote'">
+                                         <?php echo $this->Admin_model->translate("Contact Customer Service for Customized Logo") ; ?> </a></p>
 </div>
 </div>
 </div>
@@ -323,7 +389,7 @@ $sizes = explode( ',', $sizes) ;
                         <div class="tab-content">
                             <div class="tab-pane fade active show" id="liton_tab_details_1_1">
                                 <div class="ltn__shop-details-tab-content-inner">
-                                    <h4 class="title-2">Description.</h4>
+                                    <h4 class="title-2"><?php echo $this->Admin_model->translate("Description") ; ?>.</h4>
                                     <p>
                                         <?php 
 if($this->session->userdata('lang') == 'ar'){
@@ -369,7 +435,7 @@ if($this->session->userdata('lang') == 'ar'){
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/4.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/4.png" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -436,7 +502,7 @@ if($this->session->userdata('lang') == 'ar'){
                                             <hr>
                                             <div class="ltn__social-media">
                                                 <ul>
-                                                    <li>Share:</li>
+                                                    <li><?php echo $this->Admin_model->translate("Share") ; ?>:</li>
                                                     <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                                                     <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
                                                     <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
@@ -472,21 +538,21 @@ if($this->session->userdata('lang') == 'ar'){
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/1.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/1.png" alt="#">
                                         </div>
                                          <div class="modal-product-info">
                                             <h5><a href="product-details.html">Digital Stethoscope</a></h5>
                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Cart</p>
                                             <div class="btn-wrapper">
                                                 <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                                                <a href="checkout.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                                                <a href="checkout.html" class="theme-btn-2 btn btn-effect-2"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
                                             </div>
                                          </div>
                                          <!-- additional-info -->
                                          <div class="additional-info d-none">
                                             <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
                                             <div class="payment-method">
-                                                <img src="<?php echo base_url()?>assets/home_assets/img/icons/payment.png" alt="#">
+                                                <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/payment.png" alt="#">
                                             </div>
                                          </div>
                                     </div>
@@ -516,7 +582,7 @@ if($this->session->userdata('lang') == 'ar'){
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/7.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/7.png" alt="#">
                                         </div>
                                          <div class="modal-product-info">
                                             <h5><a href="product-details.html">Digital Stethoscope</a></h5>
@@ -529,7 +595,7 @@ if($this->session->userdata('lang') == 'ar'){
                                          <div class="additional-info d-none">
                                             <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
                                             <div class="payment-method">
-                                                <img src="<?php echo base_url()?>assets/home_assets/img/icons/payment.png" alt="#">
+                                                <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/payment.png" alt="#">
                                             </div>
                                          </div>
                                     </div>
@@ -547,9 +613,9 @@ if($this->session->userdata('lang') == 'ar'){
 <!-- Body main wrapper end -->
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -565,10 +631,10 @@ if($this->session->userdata('lang') == 'ar'){
             <div class="col-lg-12">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Collect from Store</button>
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><?php echo $this->Admin_model->translate("Collect from Store") ; ?></button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Ship</button>
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"><?php echo $this->Admin_model->translate("Ship") ; ?></button>
   </li>
 </ul>
 </div>
@@ -579,7 +645,12 @@ if($this->session->userdata('lang') == 'ar'){
   <div class="box-sha">
         <div class="row">
             <div class="col-md-3">
-                <img src="<?php echo base_url()?>assets/home_assets/img/product/1.png" width="80px" height="80px">
+                 <?php
+               $imagename = $this->Admin_model->get_type_name_by_id('industry_products','id',$product->id,'product_image') ;
+                ?>
+
+                        
+                        <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $imagename  ?>">
 </div>
 <div class="col-md-6">
     <h6>
@@ -592,11 +663,11 @@ if($this->session->userdata('lang') == 'ar'){
                                                     ?>
                                                      </h6>
 <div class="product-pricee" id="price_det2">
-<span>SAR  <?php echo ($product_price->offer_price != 0) ? $product_price->offer_price : $product_price->product_price ; ?></span>
+<span><?php echo $this->Admin_model->translate("SAR") ; ?>  <?php echo ($product_price->offer_price != 0) ? $product_price->offer_price : $product_price->product_price ; ?></span>
 </div>
 </div>
 <div class="col-md-12">
-<a href="javascript:void(0)" class="btn btn-ori checkoutbtn">Checkout</a>
+<a href="javascript:void(0)" class="btn btn-ori checkoutbtn"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
 </div>
 </div>
 </div>
@@ -607,28 +678,36 @@ if($this->session->userdata('lang') == 'ar'){
         <div class="row">
            
 <div class="col-md-12">
-<form id="contact" action="" method="post">
+<form id="shipping" action="" method="post">
    
-    <fieldset>
-      <input placeholder="location" type="text" tabindex="1" class="form-control" required autofocus>
-    </fieldset>
+   
+
+ <fieldset>
+      
+      <input id="autocomplete_search" name="autocomplete_search" type="text" class="form-control" placeholder="<?php echo $this->Admin_model->translate("Search Location") ; ?>" />
+
+                    <input type="hidden" name="lat" id="lat">
+
+                    <input type="hidden" name="long" id="long">
+
+  </fieldset>
        <fieldset>
-      <textarea placeholder="add address" tabindex="5" required class="form-control text-ar"></textarea>
-    </fieldset>
+      <textarea placeholder="<?php echo $this->Admin_model->translate("Add address") ; ?>" id="address" name="address" tabindex="5" required class="form-control text-ar"></textarea>
+</fieldset>
 
    
   </form>
 </div>
-<div class="col-md-6"><h6 class="forget">Shipping cost</h6></div>
+<div class="col-md-6"><h6 class="forget"><?php echo $this->Admin_model->translate("Shipping cost") ; ?></h6></div>
 <div class="col-md-6">
     <p class="product-pricee">
         <br>
-        SAR 10
+        <?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ; ?>
 </p>
     </div>
 <div class="col-md-12">
  
-<a href="javascript:void(0)" class="btn btn-ori checkoutbtn">Checkout</a>
+<a href="javascript:void(0)" class="btn btn-ori shippingbtn"><?php echo $this->Admin_model->translate("Checkout") ; ?></a>
 </div>
 </div>
 </div>
@@ -660,7 +739,7 @@ var formdata = $('#formdata').val() ;
 $.ajax({  
 url:"<?php echo base_url() ?>home/addtocart",  
 method:"POST",  
-data:{formdata: formdata,type:'industry',pagetype: 'detail',purchase:'collect' },  
+data:{formdata: formdata,type:'industry',pagetype: 'detail' ,purchase:'collect'},  
 success:function(data){ 
 
 var data = JSON.stringify(data)
@@ -669,6 +748,18 @@ var status = JSON.parse(data);
 //     window.location.href="<?php echo base_url();?>home/login";
 //     return false;
 // }
+
+if (status.error != '') {
+            toastr.error(status.error);
+           
+               setInterval(function() {
+                   window.location.href="<?php echo base_url();?>home/viewcart";
+                }, 3000); //3 seconds
+
+ return false ;
+
+        }
+
 if (status.result = false) {
 toastr.error("Error");
 } else {
@@ -684,6 +775,95 @@ $("#cartitem").html( status.items) ;
 });  
 }  )          
  
+
+ $(document).on('click', '.shippingbtn', function(){  
+
+
+ 
+if( !$('#autocomplete_search').val() ) {
+    
+toastr.error("Please select your shipping address");
+return false ;
+}
+
+ if( !$('#address').val() ) {
+toastr.error("Add your address");
+
+return false ;
+}
+
+
+var formdata = $('#productpage,#shipping').serialize();
+
+ 
+
+
+
+
+$.ajax({  
+url:"<?php echo base_url() ?>home/addtocart",  
+method:"POST",  
+data:{formdata: formdata,type:'industry',pagetype: 'detail',purchase:'shipping' },  
+success:function(data){ 
+
+var data = JSON.stringify(data)
+var status = JSON.parse(data); 
+
+if(status.session == false){
+    window.location.href="<?php echo base_url();?>home/login";
+    return false;
+}
+
+
+if (status.error != '') {
+            toastr.error(status.error);
+           
+               setInterval(function() {
+                   window.location.href="<?php echo base_url();?>home/viewcart";
+                }, 3000); //3 seconds
+
+ return false ;
+
+        }
+
+if (status.result = false) {
+toastr.error("Error");
+} else {
+toastr.success("Selected Item Added to Cart"); 
+$("#cartitem").html( status.items) ;
+//$("#carttext").text(status.items+' Item(s) in Shopping Cart');
+
+   window.location.href="<?php echo base_url();?>home/viewcart";
+
+}
+
+}  
+});  
+}  )          
+ 
+
+  $(document).on('change',".colorselect", function()
+   { 
+
+
+      if ($(this).is(':checked')) {
+        var selectedcolor = $(this).data('color') ;
+        var product  = <?php echo $product->id ?>;
+
+    $.ajax({  
+    url:"<?php echo base_url(); ?>home/get_images_with_color",  
+    method:"POST",  
+    data:{product:product,color:selectedcolor},  
+    success:function(data)
+    {         
+      $('#imagesection').html(data); 
+    }
+    
+    });
+    }
+   });
+  
+
 
 $(document).on('change',".sizeval", function()
    { 
@@ -719,7 +899,7 @@ data:{productid:productid,from:'industry' },
 success:function(html){ 
 
     if(html == false){
-window.location.href="<?php echo base_url()?>home/login"
+window.location.href="<?php echo base_url() ; ?>home/login"
     }else{
     $('#liton_wishlist_modal').html(html);  
     $('#liton_wishlist_modal').modal('show'); 
@@ -749,5 +929,83 @@ function langAjax($lang){
 }
 
 </script>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdN3jFlH_QSn5f3JaHzDYaEoVifCWMsto&libraries=places"></script>
+
+<script>
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+    function initialize() {
+
+      var input = document.getElementById('autocomplete_search');
+
+      var autocomplete = new google.maps.places.Autocomplete(input);
+
+      autocomplete.addListener('place_changed', function () {
+
+      var place = autocomplete.getPlace();
+
+      // place variable will have all the information you are looking for.
+
+      $('#lat').val(place.geometry['location'].lat());
+
+      $('#long').val(place.geometry['location'].lng());
+
+
+      var lat =  $('#lat').val() ;
+      var long = $('#long').val() ;
+
+     
+
+      $.ajax({
+        url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&key=AIzaSyDdN3jFlH_QSn5f3JaHzDYaEoVifCWMsto',
+         success: function(data){
+
+          var response = data.results;
+          $('#address').val(response[0].formatted_address);
+            
+        }
+})
+
+
+
+    });
+
+  }
+
+
+   // $('.colorselect').change(function() {
+   //  if ($(this).is(':checked')) {
+   //      var selectedclass = $(this).data('color') ;
+   //     // $(".colorimage ").hide();
+   //      //$(".colorimage ." + selectedclass).show();
+       
+
+   //      $(".colorimage ").each(function(){
+
+   //        if (!$(this).hasClass("color_0")) {
+
+   //          if($(this).hasClass(selectedclass)){
+   //              $(this).show();
+   //          }else{
+              
+   //          //  $(this).removeClass('slick-slide');
+   //            $(this).hide();
+   //          }
+   //      }
+ 
+   //      });
+
+      
+   //  }
+  
+
+   //  })
+ 
+
+</script>
+
 </html>
 

@@ -1,7 +1,7 @@
 <!-- <link rel="stylesheet" href="<?php echo base_url();?>assets/tagsinput/select2.min.css"> -->
 <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">  Add Uniform To School </h4>
+        <h4 class="modal-title" id="myModalLabel"> <?php echo $this->Admin_model->translate("Add Uniform To School") ?>  </h4>
       </div>
       <div class="modal-body">
 
@@ -145,7 +145,14 @@ $('.save').prop('disabled', false);
  
 //$('#modal-container').remove();
   // $('#boostrapModal-1').modal('toggle');
-    location.reload();
+    //location.reload();
+
+localStorage.setItem("uniformId",  <?php echo $uniformid ; ?>);
+localStorage.setItem("uniform",  'UniformData');
+location.reload();
+
+
+
 } 
 }           
 });

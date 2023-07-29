@@ -39,7 +39,7 @@ foreach ($cart as $item){
   ?>
 
                                     <tr>
-                                        <td class="cart-product-remove"><a href="javascript:void(0)"  onclick="itemremove('<?php echo $item['rowid'] ; ?>');  return false ;">x</a></td>
+                                        <td class="cart-product-remove"><a href="javascript:void(0)"  onclick="itemremove('<?php echo $item['rowid'] ; ?>');  return false ;"><i class="fa fa-times"></i></a></td>
                                         <td class="cart-product-image">
                                             <?php $productID = $item['id'] ;
                                            if($item['type']=='industry'){
@@ -141,17 +141,15 @@ echo form_close();
                                     <tr class="cart-coupon-row">
                                         <td colspan="6">
                                             <div class="cart-coupon">
-                                                <input type="text" name="cart-coupon" placeholder="<?php echo $this->Admin_model->translate("Coupon Code") ; ?>">
-                                                <button type="submit" class="btn theme-btn-2 btn-effect-2"><?php echo $this->Admin_model->translate("Apply Coupon") ; ?></button>
+                                                <input type="text" name="cart-coupon" id="coupon_code" placeholder="<?php echo $this->Admin_model->translate("Coupon Code") ; ?>">
+                                                <button type="button" class="btn theme-btn-2 btn-effect-2 applycoupon"><?php echo $this->Admin_model->translate("Apply Coupon") ; ?></button>
                                             </div>
                                         </td>
                                         <td>
                                             <?php  $prodType = $this->session->userdata('prouctType'); ?>
                                            <a href="<?php echo base_url() ; ?>home/<?php echo $prodType ;?>" class="theme-btn-1 btn btn-effect-1"><?php echo $this->Admin_model->translate("Continue Shopping") ; ?></a>
                                         </td>
-                                        <td>
-                                            <button type="submit" class="btn theme-btn-2 btn-effect-2-- disabled"><?php echo $this->Admin_model->translate("Update Cart") ; ?></button>
-                                        </td>
+                                     
                                     </tr>
                                 </tbody>
                             </table>

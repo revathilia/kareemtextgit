@@ -30,7 +30,7 @@
                             
                             
                             <div class="form-group clearfix">
-                                <a href="javascript:;" class="form-wizard-next-btn float-right"><?php echo $this->Admin_model->translate("Next") ; ?></a>
+                                <a href="javascript:void(0);" class="form-wizard-next-btn float-right"><?php echo $this->Admin_model->translate("Next") ; ?></a>
                             </div>
                         </fieldset> 
                         <fieldset class="wizard-fieldset">
@@ -47,7 +47,7 @@
 </div>
 </div>
 <div class="form-group clearfix next-b">
-                                <a href="javascript:;" class="form-wizard-previous-btn float-left"><?php echo $this->Admin_model->translate("Previous") ; ?> </a>
+                                <a href="javascript:void(0);" class="form-wizard-previous-btn float-left"><?php echo $this->Admin_model->translate("Previous") ; ?> </a>
                                 <a href="javascript:;" class="form-wizard-next-btn float-right"><?php echo $this->Admin_model->translate("Next") ; ?></a>
                             </div>
                             
@@ -240,7 +240,7 @@ success:function(data){
                 }
  
         }else{
-             toastr.error(<?php echo $this->Admin_model->translate("Select gender to proceed") ; ?>);
+             toastr.error('Select gender to proceed');
              return false;
                    
         }
@@ -253,7 +253,7 @@ success:function(data){
                  $('#class').val($(this).next('label').text());
  
         }else{
-             toastr.error('Select class to proceed');
+             toastr.error('Select gender to proceed');
              return false;
                    
         }

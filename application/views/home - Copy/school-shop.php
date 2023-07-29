@@ -1,26 +1,37 @@
-<!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<?php
+$session = $this->session->userdata('lang');
+if (empty($session)) {
+	# code...
+$this->session->set_userdata('lang', 'eng');
+$this->session->set_userdata('dir', 'ltr');
+}
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->session->userdata('lang') ?>" dir="<?php echo $this->session->userdata('dir') ?>">
 
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
-
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
+    <?php if($this->session->userdata('lang') !='eng') {?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+	<?php } ?>
         <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
 </head>
 <style>
@@ -149,9 +160,9 @@ button[type="submit"]{
                     <div class="blue-back" style="margin-left:-40px">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
-                            <h4 class="section-title-in">School  <br> Uniforms</h4>
-                           <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                            <h4 class="section-title-in"><?php echo $this->Admin_model->translate("School") ; ?>  <br><?php echo $this->Admin_model->translate("Uniforms") ; ?> </h4>
+                           <p class="sec-ab-or"><?php echo $this->Admin_model->translate("School Banner Text") ; ?></p>
+                           <a href="" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?>&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -160,7 +171,7 @@ button[type="submit"]{
                 </div>
                 <div class="col-lg-6 align-self-center">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/home/m2.png" alt="About Us Image" class="img-fluid" width="370px" height="370px">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/m2.png" alt="About Us Image" class="img-fluid" width="370px" height="370px">
                     </div>
                 </div>
             </div>
@@ -176,22 +187,19 @@ button[type="submit"]{
                     <div class="ltn__shop-options">
                         <div class="row">
                                <div class="col-md-4">
-                               <select class="nice-select2 btn-blue2">
-                                        <option>All School</option>
-                                        <option>Sort by popularity</option>
-                                        <option>Sort by new arrivals</option>
-                                        <option>Sort by price: low to high</option>
-                                        <option>Sort by price: high to low</option>
-                                    </select>
+                               <a href="<?php echo base_url() ; ?>home/alluniforms" class="btn-blue2" style="width:40%;padding:20px;">
+                               <?php echo $this->Admin_model->translate("All Schools") ; ?> 
+                                        
+            </a>
                                 </div> 
-                                <div class="col-md-1"></div> 
-                                <div class="col-md-5"> 
+                                
+                                <div class="col-md-6"> 
                                 
        <label>
             <span class="screen-reader-text">Search for...</span>
-            <input type="search" class="search-field" placeholder="Type here to search.." value=""  title="Type here to search.." id="searchtext" />
+            <input type="search" class="search-field" placeholder="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" value=""  title="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" id="searchtext" />
         </label>
-        <button  type="submit" class="search-submit button"> Search </button>
+        <button  type="submit" class="search-submit button"><?php echo $this->Admin_model->translate("Search") ; ?>  </button>
       
                             </div>
 <div class="col-md-2">
@@ -209,7 +217,7 @@ button[type="submit"]{
 </div>
                     <div class="row">
                 <div class="col-md-5">
-                <h3 style="margin-left:14px;">School</h3>
+                <h3 style="margin-left:14px;"><?php echo $this->Admin_model->translate("School") ; ?></h3>
 </div>
 
 </div>
@@ -246,7 +254,7 @@ button[type="submit"]{
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-img">
-                                            <img src="<?php echo base_url()?>assets/home_assets/img/product/4.png" alt="#">
+                                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/product/4.png" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -313,7 +321,7 @@ button[type="submit"]{
                                             <hr>
                                             <div class="ltn__social-media">
                                                 <ul>
-                                                    <li>Share:</li>
+                                                    <li><?php echo $this->Admin_model->translate("Share") ; ?>:</li>
                                                     <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                                                     <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
                                                     <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
@@ -357,9 +365,9 @@ button[type="submit"]{
    
 
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
 
     <script type="text/javascript">
       $(document).on('click', ' .addtocart', function(){  
@@ -373,7 +381,7 @@ data:{schoolid:schoolid },
 success:function(html){ 
     if(html == 0){
 
-        toastr.error('No uniform available for the selection, please contact admin !');
+        toastr.error("No uniform available for the selection, please contact admin !");
         // setInterval(function() {
         //     window.location = "<?php echo base_url(); ?>"+'home/school';  
         //         }, 3000); //3 seconds

@@ -10,21 +10,48 @@
 	<img src="<?php echo base_url();?>assets/images/logo.png" alt="">
 </div>
 <!-- /.title -->
-<div class="frm-title"><br>Super Admin Login</div>
-<!-- /.frm-title -->
-<div class="frm-input"><input type="text" name="username" placeholder="Username" class="frm-inp"><i class="fa fa-user frm-ico"></i></div>
-<!-- /.frm-input -->
-<div class="frm-input"><input type="password" name="password" placeholder="Password" class="frm-inp"><i class="fa fa-lock frm-ico"></i></div>
+<div class="frm-title"><br>
 
-<!-- /.clearfix -->
-<button type="submit"  class="frm-submit-admin">Login <i class="fa fa-arrow-circle-right"></i></button>
+<?php if($user_type == 'school'){
+echo $this->Admin_model->translate("School Admin Login") ;
+}else if($user_type == 'industry'){
+	echo $this->Admin_model->translate("Industry Admin Login") ;
+}else{
+	echo $this->Admin_model->translate("Super Admin Login") ;
+} ?>
+
+</div>
+<!-- /.frm-title -->
+<div class="frm-input"><input type="text" name="username" placeholder="<?php echo $this->Admin_model->translate("Username") ?>" class="frm-inp"><i class="fa fa-user frm-ico"></i></div>
+<!-- /.frm-input -->
+<div class="frm-input"><input type="password" name="password" placeholder="<?php echo $this->Admin_model->translate("Password") ?>" class="frm-inp"><i class="fa fa-lock frm-ico"></i></div>
+
+<input type="hidden" name="user_type" value="<?php echo $user_type ?>">
+
+<?php if($user_type == 'school'){ ?>
+	<!-- /.clearfix -->
+<button type="submit"  class="btn btn-primary btn-block btn-sm"><?php echo $this->Admin_model->translate("Login") ?> <i class="fa fa-arrow-circle-right"></i></button>
+ 
+<?php }else if($user_type == 'industry'){ ?>
+	<!-- /.clearfix -->
+<button type="submit"  class=" btn btn-warning btn-block btn-sm"><?php echo $this->Admin_model->translate("Login") ?> <i class="fa fa-arrow-circle-right"></i></button>
+	 
+<?php }else{ ?>
+
+	<!-- /.clearfix -->
+<button type="submit"  class=" btn btn-success btn-block btn-sm"><?php echo $this->Admin_model->translate("Login") ?> <i class="fa fa-arrow-circle-right"></i></button>
+ 
+	<?php } ?>
+	<br>
+
+
 
 
 <!-- /.row -->
-<a href="<?php echo base_url()?>main" class="a-link"><i class="fa fa-home"></i>Back to Home</a>
+<a href="<?php echo base_url()?>main" class="a-link"><i class="fa fa-home"></i><?php echo $this->Admin_model->translate("Back to Home") ?></a>
 
-<div class="pull-right"><a href="<?php echo base_url()	?>admin/forgotpassword">Forgot Password ?</a></div>
-<div class="frm-footer">KareemTex © 2023</div>
+<div class="pull-right"><a href="<?php echo base_url()	?>admin/forgotpassword"><?php echo $this->Admin_model->translate("Forgot Password ?") ?></a></div>
+<div class="frm-footer"><?php echo $this->Admin_model->translate("KareemTex © 2023") ?></div>
 <!-- /.footer -->
 </div>
 <!-- .inside -->

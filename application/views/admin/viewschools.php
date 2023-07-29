@@ -1,17 +1,36 @@
 <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel"><?php echo $this->Admin_model->get_type_name_by_id('school_products','id',$uniformid,'product_name')?></h4>
+
+
+
       </div>
       <div class="modal-body">
+
+         
+
+
+        <div class=" row">
+ 
+    <div class='col-md-8'></div>
+    <div class='col-md-4'> 
+            <a href="javascript:void(0)">&nbsp;&nbsp;<button type="button" class="btn btn-info  btn-sm btn-block waves-effect waves-light addschool" data-uniformid="<?php echo $uniformid ?>"><i class="fa fa-plus"></i> Add School</button></a>
+
+    </div>
+    
+</div>
+
+  <br>
+
 
          <?php if($schools){ ?>
  <table id="example" class="table table-striped table-bordered" style="width:100%">
 
 <thead> 
-<th>SlNo</th>
-<th>School Name</th>
-<th>Class Level</th>
-<th>Remove</th>
+<th><?php echo $this->Admin_model->translate("SlNo") ?> </th>
+<th><?php echo $this->Admin_model->translate("School Name") ?></th>
+<th><?php echo $this->Admin_model->translate("Class Level") ?></th>
+<th><?php echo $this->Admin_model->translate("Remove") ?></th>
 </thead>
        <?php 
 

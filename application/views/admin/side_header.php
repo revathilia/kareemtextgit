@@ -58,13 +58,32 @@ $logged_in_role =  $this->Admin_model->get_type_name_by_id('user_roles','id',$se
 <ul class="menu js__accordion">
 <li class="logo_sec text-center">
  <img src="<?php echo base_url() ?>assets/images/logo.png" alt="" class="ico-img">
+<br><br>
+ <?php 
+
+if($session['usertype'] == 'admin'){ ?>
+
+<button type="button" class="btn btn-success  btn-sm waves-effect waves-light"> 
+
+<?php }else if($session['usertype'] == 'industry'){ ?>
+  <button type="button" class="btn btn-warning btn-sm waves-effect waves-light"> 
+
+<?php }else if($session['usertype'] == 'school'){ ?>
+  <button type="button" class="btn btn-primary  btn-sm waves-effect waves-light"> 
+
+<?php } ?>
+
+<?php echo $this->Admin_model->get_type_name_by_id('user_roles','id',$session['userrole'] ,'role_name') ?> 
+
+</button>
 </li>
 <li id="home">
 <a class="waves-effect" href="<?php echo base_url() ?>admin/dashboard"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/dashboard.png">
 <span> <?php echo $this->Admin_model->translate("Dashboard") ?>  </span></a></li>
 
  
-
+<li id="1_1"><a class="waves-effect parent-item" href="<?php echo base_url()?>admin/banners"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/roles.png"><span> <?php echo $this->Admin_model->translate("Banners") ?> </span> </a>
+</li>
 
 <li id="1"><a class="waves-effect parent-item" href="<?php echo base_url()?>admin/roles"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/roles.png"><span> <?php echo $this->Admin_model->translate("Roles & Permissions") ?> </span> </a>
 </li>
@@ -156,9 +175,20 @@ $logged_in_role =  $this->Admin_model->get_type_name_by_id('user_roles','id',$se
 <a class="waves-effect" href="<?php echo base_url() ?>admin/enquiries"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/dashboard.png">
 <span> <?php echo $this->Admin_model->translate("Enquiries") ?>   </span></a></li>
 
-<li id="8">
-<a class="waves-effect" href="<?php echo base_url() ?>admin/settings"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/settings.png">
-<span> <?php echo $this->Admin_model->translate("Site Settings") ?>   </span></a></li>
+ 
+
+
+<li id="8"><a class="waves-effect parent-item js__control" href="#"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/settings.png"><span><?php echo $this->Admin_model->translate("Site Settings") ?></span><span class="menu-arrow fa fa-angle-down"></span></a>
+<ul class="sub-menu js__content">
+
+<li id="8_1"><a href="<?php echo base_url()?>admin/settings"> <?php echo $this->Admin_model->translate("Settings") ?>  </a></li>
+<li id="8_2"><a href="<?php echo base_url()?>admin/coupons"> <?php echo $this->Admin_model->translate("Coupons") ?> </a></li>
+
+ 
+
+</ul>
+
+</li>
 
 
  <li id="9">

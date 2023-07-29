@@ -1,6 +1,8 @@
 <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel"><?php echo $this->Admin_model->get_type_name_by_id('school_master','id',$schoolId,'school_name')?></h4>
+
+       
       </div>
       <div class="modal-body">
 
@@ -9,9 +11,9 @@
 
 <thead> 
 <th>SlNo</th>
-<th>Class Level</th>
-<th>Added Uniforms</th>
-<th>Image</th>
+<th><?php echo $this->Admin_model->translate("Class Level") ?></th>
+<th><?php echo $this->Admin_model->translate("Added Uniforms") ?></th>
+<th><?php echo $this->Admin_model->translate("Image") ?></th>
  
 </thead>
        <?php 

@@ -118,7 +118,7 @@
                                             <div class="input-item">
                                                
 
-                                                <p> <label class="input-info-save mb-0"> <input type="checkbox" name="include_logo" class="checkbox" placeholder="Company name (optional)"><?php echo $this->Admin_model->translate("Check if you want Company Logo with the uniform.") ; ?> </label></p>
+                                                <p> <label class="input-info-save mb-0"> <input type="checkbox" name="include_logo" class="checkbox" placeholder="Company name (optional)"> <?php echo $this->Admin_model->translate("Check if you want Company Logo with the uniform.") ; ?> </label></p>
                                                 
                                             </div>
                                         </div>
@@ -134,34 +134,82 @@
 
                                     </div>
 
+                                      <?php  
+
+                                       $cart = $this->cart->contents() ;
+                                        $address = '' ;
+                                         foreach($cart as $cartdata){
+                                            $address = $cartdata['address'] ;
+                                         }
+
+                                         $cntry = array()  ;
+                                         $state  = '' ;
+                                         $zip = '' ;
+                                         $town = array() ;
+                                         $addressline1 = array() ;
+                                           $addressline2 = array() ;
+
+
+
+                                         if(!empty( $address)){
+                                            $address = explode(', ', $address) ;
+
+                                          
+
+                                              $cntry = array_slice($address, -1, 1);   ;
+                                         $stzip = array_slice($address, -2, 1); ;
+
+                                         
+if(!empty(  $stzip)){
+
+    $stzip = explode(' ', $stzip[0]) ;
+    $state = array_slice($stzip, 0, -1) ; ;
+    $zip =  array_slice($stzip, -1, 1) ;
+
+
+
+}
+
+$town = array_slice($address, -3, 1);;
+
+$addressline = array_slice($address, 0, -4); 
+
+$addressline1 = array_slice($address, 0, 2); 
+$addressline2 = array_slice($address, 2, -4); 
+
+                                         }
+
+                                       
+
+                                         ?>
+
+
                                     
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-6">
+                                       <!--  <div class="col-lg-4 col-md-6">
                                             <h6>Country</h6>
                                             <div class="input-item">
                                                 <select class="nice-select" name="country">
-                                                    <option>Select Country</option>
-                                                    <option>Australia</option>
-                                                    <option>Canada</option>
-                                                    <option>China</option>
-                                                    <option>Morocco</option>
-                                                    <option>Saudi Arabia</option>
-                                                    <option>United Kingdom (UK)</option>
-                                                    <option>United States (US)</option>
+                                                    <?php foreach ($countries as $cvalue) { ?>
+                                                         <option value="<?php $cvalue['country'] ?>" <?php if(!empty($cntry)){ if($cntry[0] ==$cvalue['country'] ){ echo 'selected' ;}}    ?>  ><?php echo $cvalue['country'] .' / '.$cvalue['ar_country'] ?></option>
+                                                   <?php } ?>
+                                                    
                                                 </select>
                                             </div>
                                         </div>
+ -->
+
                                         <div class="col-lg-12 col-md-12">
                                             <h6><?php echo $this->Admin_model->translate("Address") ; ?> </h6>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="input-item">
-                                                        <input type="text" name="address_line1" placeholder="<?php echo $this->Admin_model->translate("House number and street name") ; ?> ">
+                                                        <input type="text" name="address_line1" placeholder="<?php echo $this->Admin_model->translate("House number and street name") ; ?> " value="<?php echo (!empty($addressline1)) ? implode(', ', $addressline1)  : '' ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="input-item">
-                                                        <input type="text" name="address_line2" placeholder="<?php echo $this->Admin_model->translate("Apartment, suite, unit etc. (optional)") ; ?>">
+                                                        <input type="text" name="address_line2" placeholder="<?php echo $this->Admin_model->translate("Apartment, suite, unit etc. (optional)") ; ?>" value="<?php echo (!empty($addressline2)) ? implode(', ', $addressline2)  : '' ?>" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,23 +217,35 @@
                                         <div class="col-lg-4 col-md-6">
                                             <h6><?php echo $this->Admin_model->translate("Town / City") ; ?> </h6>
                                             <div class="input-item">
-                                                <input type="text" placeholder="<?php echo $this->Admin_model->translate("City") ; ?>" name="city">
+                                                <input type="text" placeholder="<?php echo $this->Admin_model->translate("City") ; ?>" value="<?php echo (!empty($town)) ? $town[0] : '' ?>" name="city">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6">
                                             <h6><?php echo $this->Admin_model->translate("State") ; ?> </h6>
                                             <div class="input-item">
-                                                <input type="text" placeholder="<?php echo $this->Admin_model->translate("State") ; ?>" name="state">
+                                                <input type="text" placeholder="<?php echo $this->Admin_model->translate("State") ; ?>" value="<?php echo (!empty($state)) ? implode(' ', $state) : '' ?>" name="state">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6">
-                                            <h6><?php echo $this->Admin_model->translate("Zip") ; ?></h6>
+                                           
+
+                                             <h6><?php echo $this->Admin_model->translate("Country") ; ?></h6>
                                             <div class="input-item">
-                                                <input type="text" placeholder="<?php echo $this->Admin_model->translate("Zip") ; ?>" name="zip_code">
+                                                <select class="nice-select" name="country">
+                                                    <?php foreach ($countries as $cvalue) { ?>
+                                                         <option value="<?php $cvalue['country'] ?>" <?php if(!empty($cntry)){ if($cntry[0] ==$cvalue['country'] ){ echo 'selected' ;}}    ?>  ><?php echo $cvalue['country'] .' / '.$cvalue['ar_country'] ?></option>
+                                                   <?php } ?>
+                                                    
+                                                </select>
                                             </div>
+
+
+                                           <!--  <div class="input-item">
+                                                <input type="text" placeholder="<?php echo $this->Admin_model->translate("Zip") ; ?>" value="<?php echo (!empty($zip)) ? $zip[0] : '' ?>" name="zip_code">
+                                            </div> -->
                                         </div>
                                     </div>
-                                    <p><label class="input-info-save mb-0"><input type="checkbox" name="agree"> <?php echo $this->Admin_model->translate("Create an account?") ; ?></label></p>
+                                   <!--  <p><label class="input-info-save mb-0"><input type="checkbox" name="agree"> <?php echo $this->Admin_model->translate("Create an account?") ; ?></label></p> -->
                                     <h6><?php echo $this->Admin_model->translate("Order Notes (optional)") ; ?></h6>
                                     <div class="input-item input-item-textarea ltn__custom-icon">
                                         <textarea name="ltn__message" placeholder="<?php echo $this->Admin_model->translate("Notes about your order, e.g. special notes for delivery.") ; ?>"></textarea>

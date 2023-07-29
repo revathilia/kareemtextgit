@@ -46,7 +46,30 @@ foreach ($superadmindet as $value) {
 <!-- <th>User Id</th> -->
 <th><?php echo $value['user_name'] ?></th>
 <th> <?php echo $value['user_email'] ?> </th>
-<th><?php echo $this->Admin_model->get_type_name_by_id('user_roles','id',$value['user_role'],'role_name') ?> - <?php echo ucfirst($this->Admin_model->get_type_name_by_id('user_roles','id',$value['user_role'],'belongs_to')) ?></th>
+<th>
+ 
+
+
+  <?php 
+
+if($value['belongs_to'] == 'admin'){ ?>
+
+<button type="button" class="btn btn-success  btn-xs waves-effect waves-light"> 
+
+<?php }else if($value['belongs_to'] == 'industry'){ ?>
+  <button type="button" class="btn btn-warning btn-xs waves-effect waves-light"> 
+
+<?php }else if($value['belongs_to'] == 'school'){ ?>
+  <button type="button" class="btn btn-primary  btn-xs waves-effect waves-light"> 
+
+<?php } ?>
+
+<?php echo $this->Admin_model->get_type_name_by_id('user_roles','id',$value['user_role'],'role_name') ?> - <?php echo ucfirst($this->Admin_model->get_type_name_by_id('user_roles','id',$value['user_role'],'belongs_to')) ?>
+
+</button>
+
+
+</th>
   
 <th> <a href="<?php echo base_url()?>admin/edituser/<?php echo $value['id']?>">&nbsp;&nbsp;<button type="button" class="btn btn-info btn-circle btn-xs waves-effect waves-light"><i class="ico fa fa-pencil"></i></button></a> 
 

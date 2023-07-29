@@ -260,7 +260,7 @@
                       
             </div>
 
-                   <div class="row">
+                <!--    <div class="row">
   <div class="col-md-12">
   <div class="form-group">
     <label for="first_name">  Description</label>
@@ -276,7 +276,7 @@
         <textarea class="form-control contact" id="content2"   name="ar_description" placeholder="Add description about school"><?php echo $ar_description ;?></textarea>
 </div>
 </div>
-</div>
+</div> -->
 
         
              

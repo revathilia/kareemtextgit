@@ -102,7 +102,7 @@ $(document).ready(function(){
 				toastr.success(JSON.result);
 				$('.save').prop('disabled', false);
 				setInterval(function() {
-					window.location.href="<?php echo base_url();?>admin";
+					window.location.href="<?php echo base_url();?>main";
 				}, 3000); //3 seconds
 
 	 	

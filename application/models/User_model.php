@@ -360,24 +360,29 @@ class User_model extends CI_Model {
         }
     }
 
-    function getServiceScheduleSlots($duration, $start,$end)
-{
-        $start = new DateTime($start);
-        $end = new DateTime($end);
-        $start_time = $start->format('H:i');
-        $end_time = $end->format('H:i');
-        $i=0;
-        while(strtotime($start_time) <= strtotime($end_time)){
-            $start = $start_time;
-            $end = date('H:i',strtotime('+'.$duration.' minutes',strtotime($start_time)));
-            $start_time = date('H:i',strtotime('+'.$duration.' minutes',strtotime($start_time)));
-            $i++;
-            if(strtotime($start_time) <= strtotime($end_time)){
-                $time[$i]['start'] = $start;
-                $time[$i]['end'] = $end;
+  
+    function checkitem_in_wishlist($type,$id){
+
+        $homesession = $this->session->userdata('customerdet');
+        if(!empty($homesession)){ 
+            $exists = $this->Admin_model->get_single_data('wishlist',array('user_id'=> $homesession['user_id'],
+            'type' => $type,
+            'product_id'=> $id)) ;
+    
+            if($exists){
+                return true ;
+            }else{
+                return false ;
             }
+        }else{
+            return false ;
         }
-        return $time;
-  }
+      
+       
+    
+      }
+    
+      
+      
 
 }

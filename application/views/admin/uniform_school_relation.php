@@ -29,8 +29,8 @@
 <th><?php echo $this->Admin_model->translate("Uniform Name") ?></th> 
 <th><?php echo $this->Admin_model->translate("View Linked Schools") ?></th>
  
- 
-<th><?php echo $this->Admin_model->translate("Link School") ?></th>
+<!--  
+<th><?php echo $this->Admin_model->translate("Link School") ?></th> -->
 </tr>
       
 </thead>
@@ -46,7 +46,7 @@
 
 </td> 
    
-<td>
+<!-- <td>
  
 <a href="javascript:void(0)">&nbsp;&nbsp;<button type="button" class="btn btn-info  btn-xs waves-effect waves-light addschool" data-uniformid="<?php echo $value['id'] ?>"><i class="fa fa-plus"></i> Add School</button></a>
 
@@ -54,7 +54,7 @@
 
 
 
-    </td>
+    </td> -->
 </tr>
 
   <?php

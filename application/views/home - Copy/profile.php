@@ -6,21 +6,21 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon"href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon"href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
 </head>
 
 <body>
@@ -35,7 +35,7 @@
     <div class="container">
         <div class="row">
         <div class="col-md-3">
-            <img src="<?php echo base_url()?>assets/home_assets/img/home/profile.svg">&nbsp;&nbsp;My Profile
+            <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/profile.svg">&nbsp;&nbsp;My Profile
 </div>
 <div class="col-md-5">
     
@@ -98,7 +98,7 @@
 <a href="" class="btn btn-r">+ Add</a>
 </div>
 <div class="col-md-2">
-<a href=""  class="btn btn-b"><img src="<?php echo base_url()?>assets/home_assets/img/icons/delete.png" width="10px" height="10px">&nbsp;&nbsp;Delete</a>
+<a href=""  class="btn btn-b"><img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/delete.png" width="10px" height="10px">&nbsp;&nbsp;Delete</a>
 </div>
 </div>
 <hr class="line"> 
@@ -110,17 +110,86 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingOne">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-      <img src="<?php echo base_url()?>assets/home_assets/img/icons/order.png" width="20px" height="20px">&nbsp;&nbsp;My Order
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/order.png" width="20px" height="20px">&nbsp;&nbsp;My Order
       </button>
     </h2>
     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+      <div class="accordion-body">
+      <div class="table-responsive">
+  <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+      <tr>
+<th><?php echo $this->Admin_model->translate("No") ?></th>
+<th><?php echo $this->Admin_model->translate("Created On") ?></th> 
+<th><?php echo $this->Admin_model->translate("Product Name") ?></th> 
+<th><?php echo $this->Admin_model->translate("Specifications") ?></th>
+<th><?php echo $this->Admin_model->translate("Qty") ?></th>
+<th><?php echo $this->Admin_model->translate("Total Amount") ?></th>
+<th><?php echo $this->Admin_model->translate("Status") ?></th>
+ 
+</tr>
+      
+</thead>
+<tbody>
+<?php $i=0 ; foreach ($orders as $value) {
+  $i++ ;
+ $color  = '' ;
+  if($value['include_logo']  != 0 ){
+    $color = '#fa972d' ;
+  }
+  ?>
+ <tr style="background-color: <?php echo $color ;?>">
+<td><?php echo $i  ?></td>
+<td><?php echo date('d-m-Y', strtotime($value['created_on'])) ?></td>
+ 
+<td><?php 
+$details = json_decode($value['order_details'], true);
+ 
+echo $details['name'] ?></td>
+
+
+
+<td><?php if($details['type']== 'industry'){ ?>
+
+  <!-- <div class="swatch" style="background:<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_code')  ?>;color:#fff;">
+    <input type="radio" name="color_selected" checked id="swatch_<?php echo $details['color'] ?>" value="<?php echo $details['color'] ?>" />
+    <label for="swatch_<?php echo $details['color'] ?>" title="<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_name')  ?>"></label>
+  </div> -->
+
+<?php }else{ ?>
+
+  <!-- <div class="swatch" style="background:<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_code')  ?>;color:#fff;">
+    <input type="radio" name="color_selected" checked id="swatch_<?php echo $details['color'] ?>" value="<?php echo $details['color'] ?>" />
+    <label for="swatch_<?php echo $details['color'] ?>" title="<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_name')  ?>"></label>
+  </div> -->
+
+<?php } ?>
+
+<!--   -->
+
+</td>
+<td><?php echo $details['qty'] ?></td>
+<td><?php echo $details['subtotal'] ?></td>
+<td><?php echo $this->Admin_model->get_type_name_by_id('order_status','id',$value['status'],'status_name') ?></td>
+ 
+ 
+</tr>
+
+  <?php
+} ?>
+  
+
+</tbody>
+    
+    </table>
+</div>
+    </div>
     </div>
   </div>
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-      <img src="<?php echo base_url()?>assets/home_assets/img/icons/status.png" width="20px" height="20px">&nbsp;&nbsp;Order Status
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/status.png" width="20px" height="20px">&nbsp;&nbsp;Order Status
       </button>
     </h2>
     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
@@ -145,7 +214,7 @@ Delivery at 30-10-2023
 <hr>
     <div class="row">
             <div class="col-md-3">
-                <img src="<?php echo base_url()?>assets/home_assets/img/home/sh.png" class="shop-car">
+                <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/sh.png" class="shop-car">
 </div>
 <div class="col-md-7">
     <h5>Boys blue striped shirt</h5>
@@ -194,7 +263,7 @@ Delivery at 30-10-2023
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-      <img src="<?php echo base_url()?>assets/home_assets/img/icons/refund.png" width="20px" height="20px">&nbsp;&nbsp; Refund
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/refund.png" width="20px" height="20px">&nbsp;&nbsp; Refund
       </button>
     </h2>
     <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
@@ -204,7 +273,7 @@ Delivery at 30-10-2023
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingfour">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefour" aria-expanded="false" aria-controls="flush-collapsefour">
-      <img src="<?php echo base_url()?>assets/home_assets/img/icons/fav.png" width="20px" height="20px">&nbsp;&nbsp;Favourites
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/fav.png" width="20px" height="20px">&nbsp;&nbsp;<?php echo $this->Admin_model->translate("Favourites") ; ?>
       </button>
     </h2>
     <div id="flush-collapsefour" class="accordion-collapse collapse" aria-labelledby="flush-headingfour" data-bs-parent="#accordionFlushExample">
@@ -218,50 +287,98 @@ Delivery at 30-10-2023
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-      Industrial Uniforms <span> (2)</span>
+      Industrial Uniforms <span> (<?php echo count($wishlist_i) ?>)</span>
       </button>
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        <div class="row">
-            <div class="col-md-3">
-                <img src="<?php echo base_url()?>assets/home_assets/img/home/sh.png" class="shop-car">
+        
+      <?php  if(!empty($wishlist_i)){ foreach ($wishlist_i as $ivalue) { ?>
+
+        <?php 
+          
+          $detailspage = 'product_details' ;
+             $product  = $this->Admin_model->get_single_data('industry_products',array('id'=>$ivalue['product_id'])) ;
+             $product_price = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$product->id,'status'=>'Y'));  
+
+             $stock = $this->Admin_model->get_product_stock($ivalue['type'],$ivalue['product_id'] ) ;
+            ?>
+
+<div class="row">
+      <div class="col-md-3">
+      <a href="<?php echo base_url() ; ?>home/<?php echo $detailspage ?>/<?php echo $product->id ?>"><img src="<?php echo base_url() ; ?>uploads/images/<?php echo $ivalue['type'] ?>/<?php echo $product->product_image ?>" alt="#"></a>
 </div>
 <div class="col-md-4">
-    <h5>Boys blue striped shirt</h5>
-    <p>Model: IBS03</p>
+<h5> <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $product->ar_product_name ;
+}else{
+     echo $product->product_name ;
+}
+                                                    ?></h5>
+<p> </p>
 </div>
 <div class="col-md-2">
-    <span class="or-sa">SAR 50</span>
-    <br>   <br>
-    <span class="add">+Add</span>
+<span class="or-sa"><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?> </span>
+<br>   <br>
+<?php if($stock > 0){  ?>
+<span class="add"> <a href="<?php echo base_url() ; ?>home/<?php echo $detailspage ?>/<?php echo $product->id ?>"> + Add </a></span>
+<?php   } ?>
 </div>
 </div>
+
+<?php } } ?>
+
       </div>
     </div>
   </div>
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-      School <span>(3)</span>
+      School <span>(<?php echo count($wishlist_s) ?>)</span>
       </button>
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+
+
+
       <div class="accordion-body">
-      <div class="row">
-            <div class="col-md-3">
-                <img src="<?php echo base_url()?>assets/home_assets/img/home/sh.png" class="shop-car">
+      <?php  if(!empty($wishlist_s)){ foreach ($wishlist_s as $svalue) { ?>
+
+        <?php 
+          
+          $detailspage = 'uniform_Det' ;
+             $product  = $this->Admin_model->get_single_data('school_products',array('id'=>$svalue['product_id'])) ;
+             $product_price = $this->Admin_model->get_single_data('school_product_price_size_det',array('product_id'=>$product->id,'status'=>'Y'));  
+             $stock = $this->Admin_model->get_product_stock($svalue['type'],$svalue['product_id'] ) ;
+           
+            ?>
+
+<div class="row">
+      <div class="col-md-3">
+      <a href="<?php echo base_url() ; ?>home/<?php echo $detailspage ?>/<?php echo $product->id ?>"><img src="<?php echo base_url() ; ?>uploads/images/<?php echo $svalue['type'] ?>/<?php echo $product->product_image ?>" alt="#"></a>
 </div>
 <div class="col-md-4">
-    <h5>Boys blue striped shirt</h5>
-    <p>Model: IBS03</p>
+<h5> <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $product->ar_product_name ;
+}else{
+     echo $product->product_name ;
+}
+                                                    ?></h5>
+<p> </p>
 </div>
 <div class="col-md-2">
-    <span class="or-sa">SAR 50</span>
-    <br>   <br>
-    <span class="add">+Add</span>
+<span class="or-sa"><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?> </span>
+<br>   <br>
+<?php if($stock > 0){  ?>
+<span class="add"> <a href="<?php echo base_url() ; ?>home/<?php echo $detailspage ?>/<?php echo $product->id ?>"> + Add </a> </span>
+<?php   } ?>
 </div>
 </div>
+
+   <?php } } ?>
+      
       </div>
     </div>
   </div>
@@ -276,7 +393,7 @@ Delivery at 30-10-2023
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingfive">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefive" aria-expanded="false" aria-controls="flush-collapsefive">
-      <img src="<?php echo base_url()?>assets/home_assets/img/icons/wal.png" width="20px" height="20px">&nbsp;&nbsp; Wallet Balance
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/wal.png" width="20px" height="20px">&nbsp;&nbsp; Wallet Balance
       </button>
     </h2>
     <div id="flush-collapsefive" class="accordion-collapse collapse" aria-labelledby="flush-headingfive" data-bs-parent="#accordionFlushExample">
@@ -284,7 +401,7 @@ Delivery at 30-10-2023
         <div class="wallet">
             <div class="row">
             <div class="col-md-3">
-                <img src="<?php echo base_url()?>assets/home_assets/img/home/wallet-pic.svg">
+                <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/wallet-pic.svg">
                 </div>  
                 <div class="col-md-3">
                 <p>Wallet Amount</p>
@@ -310,7 +427,7 @@ Delivery at 30-10-2023
                 <hr>
 </div>
 <div class="col-md-3">
-            <img src="<?php echo base_url()?>assets/home_assets/img/home/down.svg" class="down">
+            <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/down.svg" class="down">
 </div>
 </div>
         <span class="sp-100">100 BD</span>
@@ -329,7 +446,7 @@ Delivery at 30-10-2023
                 <hr>
 </div>
 <div class="col-md-3">
-            <img src="<?php echo base_url()?>assets/home_assets/img/home/red-arrow.svg" class="down">
+            <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/red-arrow.svg" class="down">
 </div>
 </div>
         <span class="sp-100">100 BD</span>
@@ -343,7 +460,7 @@ Delivery at 30-10-2023
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingsix">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsesix" aria-expanded="false" aria-controls="flush-collapsesix">
-      <img src="<?php echo base_url()?>assets/home_assets/img/icons/delete.png" width="20px" height="20px">&nbsp;&nbsp; Delete account
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/delete.png" width="20px" height="20px">&nbsp;&nbsp; Delete account
       </button>
     </h2>
     <div id="flush-collapsesix" class="accordion-collapse collapse" aria-labelledby="flush-headingsix" data-bs-parent="#accordionFlushExample">
@@ -370,9 +487,9 @@ Delivery at 30-10-2023
     <!-- preloader area end -->
   
     <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
   
   <script type="text/javascript">
 function langAjax($lang){

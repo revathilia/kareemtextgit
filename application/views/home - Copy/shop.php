@@ -1,27 +1,39 @@
-<!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir')?>" lang="<?php echo $this->session->userdata('lang')?>">
+<?php
+$session = $this->session->userdata('lang');
+if (empty($session)) {
+	# code...
+$this->session->set_userdata('lang', 'eng');
+$this->session->set_userdata('dir', 'ltr');
+}
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->session->userdata('lang') ?>" dir="<?php echo $this->session->userdata('dir') ?>">
+
 
 
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>kareemtex</title>
+    <title><?php echo $this->Admin_model->translate("KareemTex") ; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon" href="<?php echo base_url()?>assets/home_assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?php echo base_url() ; ?>assets/home_assets/img/favicon.png" type="image/x-icon" />
     <!-- Font Icons css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/font-icons.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/font-icons.css">
     <!-- plugins css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/plugins.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/plugins.css">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/home_assets/css/responsive.css">
-
+    <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
+    <?php if($this->session->userdata('lang') !='eng') {?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
+		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+	<?php } ?>
      <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css'> 
 <style>
@@ -45,13 +57,14 @@
 }
 .swatch > [type=radio] + label,
 .swatch > [type=checkbox] + label {
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
-  line-height: 30px;
-  text-align: center;
-  position: absolute;
-  transition: all 0.5s ease-in-out;
+    width: 30px;
+    border: 1px solid #00000029;
+    height: 30px;
+    border-radius: 30px;
+    line-height: 30px;
+    text-align: center;
+    position: absolute;
+    transition: all 0.5s ease-in-out;
 }
 .swatch > [type=radio] + label i,
 .swatch > [type=checkbox] + label i {
@@ -87,13 +100,36 @@
      background-color: #fc9200 !important ;
         color:  #fff !important ;
 }
-
-
-
-
-</style>
-
-<style>
+.nice-select {
+    -webkit-tap-highlight-color: transparent;
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #e8e8e8;
+    box-sizing: border-box;
+    clear: both;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    height: 42px;
+    line-height: 40px;
+    outline: 0;
+    width: 200px !important;
+    padding-left: 18px;
+    padding-right: 30px;
+    position: relative;
+    text-align: left!important;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    width: auto;
+}
     input[type="search"] {
   -webkit-appearance: none !important;
   background-clip: padding-box;
@@ -104,7 +140,7 @@
   font-size: 1rem;
   position: relative;
   top:-20px;
-  
+  left:10px;
   width: 100%;
   height:40px;
   line-height: 2;
@@ -211,23 +247,23 @@ button[type="submit"]{
 
     <div class="ltn__utilize-overlay"></div>
  <!-- BREADCRUMB AREA START -->
- <div class="ltn__breadcrumb-area2 text-left "  >
+ <div class="ltn__breadcrumb-area2 text-left">
         <div class="container-fluid">
             <div class="row">
             
                
                 <div class="col-lg-6 align-self-center">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url()?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid" width="540px" height="550px">
+                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid" width="540px" height="550px">
                     </div>
                 </div>
-                <div class="col-lg-6 align-self-center">
-                    <div class="orange-back" style="margin-left:-40px">
+                <div class="col-lg-6 align-self-center orange-back">
+                    <div class="">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
-                            <h4 class="section-title-in">Industrial <br> Uniforms</h4>
-                           <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
-                           <a href="" class="btn btn-white-black">Shop Now&nbsp;&nbsp;<img src="<?php echo base_url()?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
+                            <h4 class="section-title-in"><?php echo $this->Admin_model->translate("Industrial") ; ?>  <br> <?php echo $this->Admin_model->translate("Uniforms") ; ?></h4>
+                           <p class="sec-ab-or"><?php echo $this->Admin_model->translate("Industry Uniforms Banner Text") ; ?> </p>
+                           <a href="" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?>&nbsp;&nbsp;<img src="<?php echo base_url() ; ?>assets/home_assets/img/home/ios-arrow-down.svg" width="10px" height="10px"></a>
                         
                         </div>
                         
@@ -247,31 +283,27 @@ button[type="submit"]{
                 <div class="col-md-12">
                 
                     <div class="row">
-                <div class="col-md-3">
-                <h3>Industrial Uniforms</h3>
-</div>
  
- 
-<div class="col-md-2">
+<div class="col-md-3">
 <select class="nice-select " id="sortby">
-     <option>Sort By</option>
+     <option><?php echo $this->Admin_model->translate("Sort By") ; ?></option>
                                        
-                                        <option value="popularity">Popularity</option>
-                                        <option value="latest">New arrivals</option>
-                                        <option value="low_high">Price: low to high</option>
-                                        <option value="high_low">Price: high to low</option>
+                                        <option value="popularity"><?php echo $this->Admin_model->translate("Popularity") ; ?></option>
+                                        <option value="latest"><?php echo $this->Admin_model->translate("New arrivals") ; ?></option>
+                                        <option value="low_high"><?php echo $this->Admin_model->translate("Price: low to high") ; ?> </option>
+                                        <option value="high_low"><?php echo $this->Admin_model->translate("Price: high to low") ; ?></option>
                                     </select>
 
 
 </div>
 
- <div class="col-md-5"> 
+ <div class="col-md-6"> 
                                
         <label>
             <span class="screen-reader-text">Search for...</span>
-            <input type="search" class="search-field" placeholder="Type here to search.." value=""  title="Type here to search.." id="searchtext" />
+            <input type="search" class="search-field" placeholder="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" value=""  title="<?php echo $this->Admin_model->translate("Type here to search..") ; ?>" id="searchtext" />
         </label>
-        <button  type="submit" class="search-submit button"> Search </button>
+        <button  type="submit" class="search-submit button"><?php echo $this->Admin_model->translate("Search") ; ?>  </button>
           
        
                             </div>
@@ -284,6 +316,11 @@ button[type="submit"]{
                                         <a data-bs-toggle="tab" href="#liton_product_list"><i class="fas fa-list"></i></a>
                                     </div>
                                 </div>
+</div>
+</div>
+<div class="row">
+   <div class="col-md-3">
+                <h3><?php echo $this->Admin_model->translate("Industrial Uniforms") ; ?></h3>
 </div>
 </div>
 <hr>
@@ -301,7 +338,7 @@ button[type="submit"]{
                                     <div class="col-xl-4 col-sm-6 col-6">
                                         <div class="ltn__product-item ltn__product-item-3 text-center">
                                             <div class="product-img">
-                                                <a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url()?>uploads/images/industry/<?php echo $product['product_image'] ?>" alt="#" width="160px" ></a>
+                                                <a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $product['product_image'] ?>" alt="#" width="160px" ></a>
                                                 
                                                 <div class="product-action">
                                                     <ul>
@@ -320,7 +357,7 @@ button[type="submit"]{
                                             </div>
                                             <div class="product-info">
                                                
-                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>">
+                                                <h2 class="product-title"><a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product['id'] ?>">
 
                                                     <?php 
 if($this->session->userdata('lang') == 'ar'){
@@ -337,9 +374,9 @@ if($this->session->userdata('lang') == 'ar'){
   ?>
                                                 <div class="product-price">
 <?php  if($product_price){  ?>
-                                                <span>SAR <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
+                                                <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                          
-                                                <?php echo  ($product_price->offer_price != '0') ? '<del>SAR ' . $product_price->product_price .'</del>' :  '' ; ?> 
+                                                <?php echo  ($product_price->offer_price != '0') ? '<del>' .$this->Admin_model->translate("SAR").' '. $product_price->product_price .'</del>' :  '' ; ?> 
 
 <?php } ?>
  
@@ -361,11 +398,11 @@ if($this->session->userdata('lang') == 'ar'){
                                        <div class="col-lg-12">
                                         <div class="ltn__product-item ltn__product-item-3">
                                              <div class="product-img">
-                                                <a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url()?>uploads/images/industry/<?php echo $product['product_image'] ?>" alt="#"></a>
+                                                <a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product['id'] ?>"><img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $product['product_image'] ?>" alt="#"></a>
                                                 
                                             </div>
                                             <div class="product-info">
-                                                <h2 class="product-title"><a href="<?php echo base_url()?>home/product_details/<?php echo $product['id'] ?>">
+                                                <h2 class="product-title"><a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product['id'] ?>">
 
                                                   <?php 
 if($this->session->userdata('lang') == 'ar'){
@@ -384,12 +421,21 @@ if($this->session->userdata('lang') == 'ar'){
 
   
                                                 <div class="product-price">
-                                                   <span>SAR <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
+                                                   <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                          
-                                                <?php echo  ($product_price->offer_price != '0') ? '<del>SAR ' . $product_price->product_price .'</del>' :  '' ; ?> 
+                                                <?php echo  ($product_price->offer_price != '0') ? '<del>'.$this->Admin_model->translate("SAR").' ' . $product_price->product_price .'</del>' :  '' ; ?> 
                                                 </div>
                                                 <div class="product-brief">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores sit odit nesciunt,  aliquid, deleniti non et ut dolorem!</p>
+                                                    <p>
+                                                    <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $product['ar_description'] ;
+}else{
+     echo $product['description'] ;
+}
+                                                    ?>
+
+                                                    </p>
                                                 </div>
                                                 <div class="product-hover-action">
                                                     <ul>
@@ -430,7 +476,7 @@ if($this->session->userdata('lang') == 'ar'){
                     <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
                         <!-- Category Widget -->
                         <div class="widget ltn__menu-widget">
-                            <h4 class="ltn__widget-title">Categories</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Categories") ; ?></h4>
                             <?php foreach ($categories as $cvalue) { ?>
                                 <div class="form-check">
   <input class="form-check-input category" type="checkbox" name="selectcat" value="<?php echo $cvalue['id'] ?>" id="flexCheckDefault">
@@ -456,10 +502,10 @@ if($this->session->userdata('lang') == 'ar'){
                         </div>
                         <!-- Price Filter Widget -->
                         <div class="widget ltn__price-filter-widget">
-                            <h4 class="ltn__widget-title">Price</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Price") ; ?></h4>
                             <div class="price_filter">
                                 <div class="price_slider_amount">
-                                    <input type="submit"  value="Your range:"/> 
+                                    <input type="submit"  value="<?php echo $this->Admin_model->translate("Your range") ; ?>"/> 
                                     <input type="text" class="amount" name="price"  placeholder="Add Your Price" /> 
                                 </div>
                                 <div class="slider-range"></div>
@@ -467,17 +513,17 @@ if($this->session->userdata('lang') == 'ar'){
                         </div>
                         <!-- Top Rated Product Widget -->
                         <div class="widget ltn__top-rated-product-widget">
-                        <h4 class="ltn__widget-title ">Gender</h4>
+                        <h4 class="ltn__widget-title "><?php echo $this->Admin_model->translate("Gender") ; ?></h4>
                         <div class="form-check">
   <input class="form-check-input selectgender" type="checkbox" value="1" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-  Male
+  <?php echo $this->Admin_model->translate("Male") ; ?>
   </label>
 </div>
 <div class="form-check">
   <input class="form-check-input selectgender" type="checkbox" value="2" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
-  Female
+  <?php echo $this->Admin_model->translate("Female") ; ?>
   </label>
 </div>
 
@@ -485,7 +531,7 @@ if($this->session->userdata('lang') == 'ar'){
                        
                         <!-- Color Widget -->
                         <div class="widget ltn__color-widget">
-                            <h4 class="ltn__widget-title "><?php echo $this->Admin_model->translate("Product Color") ; ?></h4>
+                            <h4 class="ltn__widget-title "> <?php echo $this->Admin_model->translate("Product Color") ; ?></h4>
                             
 
                             <?php if(!empty($colors)){
@@ -501,7 +547,7 @@ if($this->session->userdata('lang') == 'ar'){
                     </div>
                         <!-- Size Widget -->
                         <div class="widget ltn__tagcloud-widget ltn__size-widget">
-                            <h4 class="ltn__widget-title">Size</h4>
+                            <h4 class="ltn__widget-title"><?php echo $this->Admin_model->translate("Size") ; ?></h4>
                             <ul>
                                 <?php if(!empty($sizes)){
                                     foreach ($sizes as $svalue) { ?>
@@ -551,9 +597,9 @@ if($this->session->userdata('lang') == 'ar'){
  
    
    <!-- All JS Plugins -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/plugins.js"></script>
     <!-- Main JS -->
-    <script src="<?php echo base_url()?>assets/home_assets/js/main.js"></script>
+    <script src="<?php echo base_url() ; ?>assets/home_assets/js/main.js"></script>
 
     <script type="text/javascript">
 
@@ -588,7 +634,7 @@ data:{productid:productid,from:'industry' },
 success:function(html){ 
 
     if(html == false){
-window.location.href="<?php echo base_url()?>home/login"
+window.location.href="<?php echo base_url() ; ?>home/login"
     }else{
     $('#liton_wishlist_modal').html(html);  
     $('#liton_wishlist_modal').modal('show'); 
@@ -609,7 +655,8 @@ $.ajax({
     data: {
         formdata: formdata,
         type: 'industry',
-        pagetype: 'home',purchase:'collect'
+        pagetype: 'home',
+        purchase:'collect'
     },
     success: function (data) {
 
@@ -620,6 +667,12 @@ $.ajax({
             window.location.href = "<?php echo base_url();?>home/login";
             return false;
         }
+
+        if (status.error !='') {
+            toastr.error(status.error);
+            return false ;
+        }
+
         if (status.result = false) {
             toastr.error("Error");
         } else {

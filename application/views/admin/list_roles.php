@@ -39,7 +39,26 @@
  <tr>
 <td><?php echo $value['id'] ?></td>
 <td><?php echo $value['role_name'] ?></td>
-<td><?php echo ucfirst($value['belongs_to']) ?></td>
+<td><?php 
+
+if($value['belongs_to'] == 'admin'){ ?>
+
+<button type="button" class="btn btn-success  btn-xs waves-effect waves-light"> 
+
+<?php }else if($value['belongs_to'] == 'industry'){ ?>
+  <button type="button" class="btn btn-warning btn-xs waves-effect waves-light"> 
+
+<?php }else if($value['belongs_to'] == 'school'){ ?>
+  <button type="button" class="btn btn-primary  btn-xs waves-effect waves-light"> 
+
+<?php }
+
+echo ucfirst($value['belongs_to']) ;
+
+?>
+</button>
+
+</td>
    
 <td>
  

@@ -41,7 +41,38 @@ class Admin extends CI_Controller {
     $this->session->set_userdata('dir', 'ltr');
     } 
 
-    $this->load->view('admin/login');
+    $data['user_type'] = 'admin' ;
+
+    $this->load->view('admin/login',$data);
+  }
+
+  public function school_login()
+  {   
+   
+    $session = $this->session->userdata('lang');
+    if(empty($session)){ 
+    $this->session->set_userdata('lang', 'eng');
+    $this->session->set_userdata('dir', 'ltr');
+    } 
+
+    $data['user_type'] = 'school' ;
+
+    $this->load->view('admin/login',$data);
+  }
+
+
+  public function industry_login()
+  {   
+   
+    $session = $this->session->userdata('lang');
+    if(empty($session)){ 
+    $this->session->set_userdata('lang', 'eng');
+    $this->session->set_userdata('dir', 'ltr');
+    } 
+
+    $data['user_type'] = 'industry' ;
+
+    $this->load->view('admin/login',$data);
   }
 
   
@@ -60,7 +91,7 @@ class Admin extends CI_Controller {
   
     $username = $this->input->post('username');
     $password = $this->input->post('password');
-    $type = 'admin' ;
+    $type = $this->input->post('user_type');  
     /* Define return | here result is used to return user data and error for error message */
     $Return = array('result'=>'', 'error'=>'');
     
@@ -84,6 +115,7 @@ $userdata = $this->Admin_model->get_single_data('users',array('user_name'=>$user
         'username' => $userdata->user_name,
         'useremail' => $userdata->user_email,
         'userrole' => $userdata->user_role,
+        'usertype' => $userdata->belongs_to,
          
         );
 
@@ -139,7 +171,7 @@ $userdata = $this->Admin_model->get_single_data('users',array('user_name'=>$user
       redirect('admin');
     } 
     
-    $data['roledet'] = $this->Admin_model->get_all_data('user_roles',''); 
+    $data['roledet'] = $this->Admin_model->get_all_data('user_roles','','belongs_to asc'); 
 
      
 
@@ -333,6 +365,7 @@ $this->load->view('admin/edit_role', $data);
          
    
     'role_name' => $this->input->post('role_name'),
+    'status' => 'Y',
      
     );
 
@@ -584,6 +617,211 @@ $this->load->view('admin/edit_module', $data);
     exit;
   }
    
+
+   public function banners()
+  {   
+    
+
+    $data['title'] = 'Dashboard';
+    $data['data'] = $this->Admin_model->get_all_data('banners') ;
+    $this->load->view('admin/banners', $data);
+  }
+      
+public function new_banner()
+  {   
+    $data['title'] = 'Dashboard';
+    $data['pages'] = $this->Admin_model->get_all_data('menu_controller_relation') ;
+    $this->load->view('admin/add_banner', $data);
+  }
+
+
+        public function add_banner()
+      {   
+         $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+       $Return = array('result'=>'', 'error'=>'');
+           
+        if(empty($_FILES['image']['name'])){
+          $Return['error'] = "Image Required ";
+        }else if($this->input->post('page_type')==='') {
+            $Return['error'] = "Select type";
+        } 
+            
+        if($Return['error']!=''){
+              $this->output($Return);
+               exit ;
+          }
+          
+      
+    
+        if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array( 'png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json','json');
+        $filename = $_FILES['image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["image"]["tmp_name"];
+          $profile = "uploads/images/banners/";
+          
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["image"]["name"]);
+          $newfilename = 'banner_'.round(microtime(true)).'.'.$ext;
+  
+          //$newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image  = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+        
+    
+ 
+       
+        $data = array(   
+         
+        'image' => $image,
+        'type' => $this->input->post('type'),
+        // 'banner_title' => $this->input->post('banner_title'),
+        // 'banner_title_ar' => $this->input->post('banner_title_ar'),
+        'banner_content' => $this->input->post('banner_content'),
+      'banner_content_ar' => $this->input->post('banner_content_ar'),
+      // 'banner_btn_text' => $this->input->post('banner_btn_text'),
+      // 'banner_btn_text_ar' => $this->input->post('banner_btn_text_ar'),
+        'status' => 'Y'
+          );
+      //  $result = $this->Admin_model->insert_data('supp_org', $data);
+        $result = $this->db->insert('banners',$data);
+       $inserid =  $this->db->insert_id();
+    
+     
+    
+        if ($result == TRUE) {
+          
+          //get setting info 
+           
+           $Return['result'] = 'Banner added successfully.';
+          
+        } else {
+          $Return['error'] =  'Bug. Something went wrong, please try again';
+        }
+        $this->output($Return);
+        exit;
+      }
+        public function edit_banner()
+        {
+        $session = $this->session->userdata('superadmindet');
+            if(empty($session)){ 
+              redirect('admin');
+            }
+
+         $data['pages'] = $this->Admin_model->get_all_data('menu_controller_relation') ;
+         $id = $this->uri->segment(3) ;
+         $data['data'] = $this->Admin_model->get_single_data('banners',array('id'=>$id)) ;
+    
+           $this->load->view('admin/edit_banner', $data);
+            
+        }
+
+      public function update_banner()
+      {   
+         $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+    
+        $id = $this->input->post('id');
+    
+       $Return = array('result'=>'', 'error'=>'');
+           
+        /* Server side PHP input validation */    
+         
+         $image = $this->input->post('old_image') ;
+        
+         if(empty($_FILES['image']['name']) && empty($image)) {
+          $Return['error'] = "Image Required ";
+        }else if($this->input->post('page_type')==='') {
+            $Return['error'] = "Select type";
+        } 
+            
+        if($Return['error']!=''){
+              $this->output($Return);
+               exit ;
+          }
+          
+      
+    
+        if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["image"]["tmp_name"];
+          $profile = "uploads/images/banners/";
+          $set_img = base_url()."uploads/images";
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["image"]["name"]);
+         $newfilename = 'banner_'.round(microtime(true)).'.'.$ext;
+  
+         // $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image  = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+        
+    
+ 
+       
+        $data = array(   
+         
+        'image' => $image,
+        'type' => $this->input->post('type'),
+        // 'banner_title' => $this->input->post('banner_title'),
+        // 'banner_title_ar' => $this->input->post('banner_title_ar'),
+        'banner_content' => $this->input->post('banner_content'),
+        'banner_content_ar' => $this->input->post('banner_content_ar'),
+        // 'banner_btn_text' => $this->input->post('banner_btn_text'),
+        // 'banner_btn_text_ar' => $this->input->post('banner_btn_text_ar'),
+        'status' => 'Y'
+          );
+ 
+        $result = $this->Admin_model->update_data('banners',array('id'=>$id),$data);
+      
+       $inserid =  $this->db->insert_id();
+    
+       
+    
+        if ($result == TRUE) {
+          
+          //get setting info 
+           
+           $Return['result'] = 'Banner updated successfully.';
+          
+        } else {
+          $Return['error'] =  'Bug. Something went wrong, please try again';
+        }
+        $this->output($Return);
+        exit;
+      }
+
+
 
   public function categories()
   {  
@@ -3334,8 +3572,8 @@ $levels_standards[] = array('class_levels' => $levels[$i],
     'standards' => implode(',', $standard_details),
     'levels_standards' => json_encode($levels_standards),
     'school_type' => $this->input->post('school_type'),
-    'description' => $this->input->post('description'),
-    'ar_description' => $this->input->post('ar_description'),
+    // 'description' => $this->input->post('description'),
+    // 'ar_description' => $this->input->post('ar_description'),
     'status' => 'Y',
     'school_logo' => $fname  ,
     'created_by'=>$session['user_id'],
@@ -3369,7 +3607,7 @@ $levels_standards[] = array('class_levels' => $levels[$i],
  
  $data = array();
 if (isset($school)){
-    $data  = array('id'=>$school->id,'school_name'=>$school->school_name,'ar_school_name'=>$school->ar_school_name,'class_levels'=>$school->class_levels,'standards'=>$school->standards,'levels_standards'=>$school->levels_standards,'school_type'=>$school->school_type, 'school_logo'=>$school->school_logo,'description' => $school->description,'ar_description' => $school->ar_description);
+    $data  = array('id'=>$school->id,'school_name'=>$school->school_name,'ar_school_name'=>$school->ar_school_name,'class_levels'=>$school->class_levels,'standards'=>$school->standards,'levels_standards'=>$school->levels_standards,'school_type'=>$school->school_type, 'school_logo'=>$school->school_logo);
 }
 
 $data['levels'] =  $this->Admin_model->get_all_data('class_type_master');
@@ -3503,8 +3741,8 @@ $levels_standards[] = array('class_levels' => $levels[$i],
       'standards' => implode(',', $standard_details),
       'levels_standards' => json_encode($levels_standards),
       'school_type' => $this->input->post('school_type'),
-      'description' => $this->input->post('description'),
-      'ar_description' => $this->input->post('ar_description'),
+      // 'description' => $this->input->post('description'),
+      // 'ar_description' => $this->input->post('ar_description'),
       'school_logo' => $fname  ,
       
      
@@ -4913,7 +5151,7 @@ $users = $this->Admin_model->get_single_data('users',array('id'=>$id));
 
  $data = array();
 if (isset($users)){
-    $data  = array('id'=>$users->id,'user_name'=>$users->user_name,'email'=>$users->user_email);
+    $data  = array('id'=>$users->id,'user_name'=>$users->user_name,'user_email'=>$users->user_email);
 }
 //print_r($data);
  $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
@@ -4946,7 +5184,7 @@ if($Return['error']!=''){
 $this->output($Return);
 }
 
-$data  = $this->Admin_model->get_single_data('users',array('email'=>$email)) ;
+$data  = $this->Admin_model->get_single_data('users',array('user_email'=>$email)) ;
 
 if(empty($data)){
    $Return['error'] = $this->Admin_model->translate("Email Id does not exists");
@@ -4977,7 +5215,7 @@ if($Return['error']!=''){
 $this->output($Return);
 }
 
-$conditions = array('email'=>$email) ;
+$conditions = array('user_email'=>$email) ;
 
 $userid = $this->input->post('userid') ;
 if($userid){
@@ -5019,7 +5257,7 @@ $this->output($Return);
 }
 
 
-$data  = $this->Admin_model->get_single_data('users',array('email'=>$email)) ;
+$data  = $this->Admin_model->get_single_data('users',array('user_email'=>$email)) ;
  
 if($data->id !=  $id){
   $Return['error'] =$this->Admin_model->translate("Enter your registered Email ID") ;
@@ -5070,7 +5308,7 @@ public function update_password()
      
     $result = $this->Admin_model->update_data('users',array('id'=>$id),$data);
 
-   $email = $this->Admin_model->get_single_data('users',array('id'=>$id))->email;
+   $email = $this->Admin_model->get_single_data('users',array('id'=>$id))->user_email;
   
             $subject ='Password changed successfully - KareemTex ';
             
@@ -5137,7 +5375,7 @@ if(empty($userdata)){
     if($Return['error']!=''){
           $this->output($Return);
       }
-      $password = rand(1000 , 9999);
+      $password = rand(100000 , 999999);
 
     $data = array
     (
@@ -5146,30 +5384,35 @@ if(empty($userdata)){
      
     $result = $this->Admin_model->update_data('users',array('id'=>$userdata->id),$data);
 
-
+    
 
             $email = $this->input->post('email');
   
-            $subject ='Password changed successfully - KareemTex ';
+            $subject ='Forgot Password - KareemTex ';
             
-            $message ='Your request for new password has been processed, Your new password is <b>'.$password.'</b>.';   
+            
+            // $message ='Your request for new password has been processed successfully.<br> Your new password is <b>'.$password.'</b>.'; 
+            
+            $message =" Hi, ".$userdata->user_name.", <br><br>" ;
+            $message .=" There was recently a request for password for your KareemTex account.<br><br>
 
-            $message  .= ' <a href="'. base_url()  .'/admin">Click here to login</a> ' ;        
-            $this->load->library('email');
-            $this->email->set_newline("\r\n");
-            $this->email->set_mailtype("html");
-            $this->email->from('liai.revathikv@gmail.com', 'KareemTex ');
-            $this->email->to($email); 
-            $this->email->subject($subject);
-            $this->email->message($message);  
-            $this->email->send();
+            Please, keep this in your records so you do not forget it.<br><br>
+            
+            Your username: <b>$userdata->user_name</b><br>
+            Your email address: <b> $userdata->user_email </b><br>
+            Your new password: <b> $password </b><br><br>" ;
 
-// if(!$this->email->send()) {
-//     echo 'Message could not be sent.';
-//     echo 'Mailer Error: ' . $this->email->ErrorInfo;
-// } else {
-//     echo 'Message has been sent';
-// }
+            $message .=' <a href="'. base_url()  .$userdata->belongs_to.'">Click here to login</a> <br><br>' ; 
+            
+            $message  .="Thank you,<br>
+            Team KareemTex " ;
+
+
+            $message  .= ' <a href="'. base_url()  .$userdata->belongs_to.'">Click here to login</a> ' ;        
+           
+           $send = $this->sendemail($email, $subject, $message) ;
+
+ 
 
    if($result == TRUE)
     {
@@ -5184,6 +5427,66 @@ if(empty($userdata)){
 
 
 
+function sendemail($to, $subject, $message){
+  /* Load PHPMailer library */
+  
+
+  $this->load->library("phpmailer_library");
+  $mail = $this->phpmailer_library->load();
+
+
+ 
+
+  /* SMTP configuration */
+  $mail->isSMTP();
+ $mail->Priority = 1;
+// MS Outlook custom header
+// May set to "Urgent" or "Highest" rather than "High"
+$mail->AddCustomHeader("X-MSMail-Priority: High");
+// Not sure if Priority will also set the Importance header:
+$mail->AddCustomHeader("Importance: High");
+  $mail->Host     = 'smtp.gmail.com';
+  $mail->SMTPAuth = true;
+  $mail->Username = 'kareemtex007@gmail.com';
+  $mail->Password = 'rawkbxmgmjbnmkkp';
+  $mail->SMTPSecure = 'ssl';
+  $mail->Port     = 465;
+ 
+  $mail->setFrom('kareemtex007@gmail.com', 'KareemTex');
+  $mail->addReplyTo('kareemtex007@gmail.com', 'KareemTex');
+  //$mail->AddBCC("liai.revathikv@gmail.com", 'KareemTex');
+ 
+  /* Add a recipient */
+  $mail->addAddress($to);
+
+ 
+   
+  /* Email subject */
+  $mail->Subject = $subject ;
+ 
+  /* Set email format to HTML */
+  //$mail->isHTML(true);
+  $mail->isHTML();
+ 
+  /* Email body content */
+  $mailContent = $message  ;
+    
+  //$mail->AddEmbeddedImage("uploads/services/madeen.png", "my-attach", "Instructions.png");
+  $mail->Body =  $mailContent ;
+
+ 
+  /* Send email */
+  if(!$mail->send()){
+      echo 'Mail could not be sent.';
+      echo 'Mailer Error: ' . $mail->ErrorInfo;
+
+  }else{
+      return true;
+  }
+}
+
+
+
  public function users()
   {  
    $session = $this->session->userdata('superadmindet');
@@ -5191,7 +5494,7 @@ if(empty($userdata)){
       redirect('admin');
     } 
     $data['title'] = 'User List';
-    $data['superadmindet'] = $this->Admin_model->get_all_data('users','') ;
+    $data['superadmindet'] = $this->Admin_model->get_all_data('users','','belongs_to asc') ;
 
     $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
     if( $getval){
@@ -5214,7 +5517,7 @@ if(empty($userdata)){
     }
     
           
-    $data['roles']=$this->Admin_model->get_all_data('user_roles','') ;
+    $data['roles']=$this->Admin_model->get_all_data('user_roles','','belongs_to asc') ;
 
     
     $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
@@ -5275,11 +5578,7 @@ if(empty($userdata)){
  
 
     $password = md5($this->input->post('password'));
-if(!empty($this->input->post('psy_role'))){
-  $psychoroles = implode(',', $this->input->post('psy_role')) ;
-}else{
-  $psychoroles = '' ;
-}
+ 
   
   
     $data = array(
@@ -5291,6 +5590,7 @@ if(!empty($this->input->post('psy_role'))){
     'password' => $password,
     'status' => 'Y',
     'user_role' => $this->input->post('role'),
+    'belongs_to' => $this->Admin_model->get_type_name_by_id('user_roles','id',$this->input->post('role'),'belongs_to'),
     
     'created_on' => date('Y-m-d')
       
@@ -5332,7 +5632,7 @@ if (isset($users)){
     $data  = array('id'=>$users->id,'username'=>$users->user_name,'email'=>$users->user_email, 'role'=>$users->user_role);
 }
     
-    $data['roles']=$this->Admin_model->get_all_data('user_roles','') ;
+    $data['roles']=$this->Admin_model->get_all_data('user_roles','','belongs_to asc') ;
   
 
   $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
@@ -5365,7 +5665,7 @@ if (isset($users)){
        $Return['error'] = "Email required";
     } else if (!filter_var($this->input->post('email'), FILTER_VALIDATE_EMAIL)) {
       $Return['error'] = "Invalid email format";
-    }else if(!empty($this->Admin_model->get_single_data('users',array('email'=>$this->input->post('email'),'id !='=>$this->input->post('userid'))))){
+    }else if(!empty($this->Admin_model->get_single_data('users',array('user_email'=>$this->input->post('email'),'id !='=>$this->input->post('userid'))))){
       $Return['error'] = "Email Id already exists";
     } else if($this->input->post('contactno')==='') {
        $Return['error'] = "Contact number required";;
@@ -5395,10 +5695,12 @@ if (isset($users)){
          
     'user_name' => $username,
     'user_email' => $this->input->post('email'),
-    'userrole' => $this->input->post('role'), 
+    'user_role' => $this->input->post('role'), 
+    
+    'belongs_to' => $this->Admin_model->get_type_name_by_id('user_roles','id',$this->input->post('role'),'belongs_to'),
         
     );
-
+ 
      
         $result = $this->Admin_model->update_data('users',array('id'=>$id), $data);
 
@@ -6133,7 +6435,7 @@ $permissions = $this->Admin_model->get_single_data('permissions',array('role'=>$
     $sess_array = array('superadmindet' => '');
     $this->session->sess_destroy();
     $Return['result'] = 'Successfully Logout.';
-    redirect('admin', 'refresh');
+    redirect('main', 'refresh');
   }
 
 
@@ -7091,6 +7393,328 @@ $image1 = $this->input->post('oldimage');
     
     $data['news'] = $this->Admin_model->get_all_data('news_and_events');
     $this->load->view('admin/news', $data);
+  }
+
+
+ public function coupons()
+  {  
+   $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    } 
+    
+    
+    $data['coupondet'] = $this->Admin_model->get_all_data('coupons',array('status !='=>'D')) ;
+   
+    $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
+    if( $getval){
+     $this->load->view('admin/list_coupons', $data);
+    }else{
+      redirect('admin/accessdenied');
+    }
+
+   
+  }
+ 
+   
+
+
+ public function newcoupon()
+  {   
+     $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+
+
+$bytes = random_bytes(5);
+$code =strtoupper( bin2hex($bytes));
+
+$exists = $this->Admin_model->get_type_name_by_id('coupons','coupon_code',$code,'coupon_code') ;
+
+ 
+
+while(!empty($exists)) {
+
+$bytes = random_bytes(10);
+$code =strtoupper( bin2hex($bytes));
+
+$exists = $this->Admin_model->get_type_name_by_id('coupons','coupon_code',$code,'coupon_code') ;
+
+}
+
+
+
+    $data['coupon_code'] =  $code ;
+   
+     $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
+    if( $getval){
+    $this->load->view('admin/add_coupon',$data);
+    }else{
+      redirect('admin/accessdenied');
+    }
+
+    
+  }
+
+
+  public function addcoupon()
+  {   
+     $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+   $Return = array('result'=>'', 'error'=>'');
+
+   
+       
+    /* Server side PHP input validation */    
+    if($this->input->post('coupon_name')==='') {
+          $Return['error'] = $this->Admin_model->translate("Coupon name required");
+    }else if($this->input->post('applicable_for')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select applicable for");
+    }else if($this->input->post('discount_type')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select discount type");
+    }else if($this->input->post('discount_value')==='') {
+          $Return['error'] = $this->Admin_model->translate("Add discount value");
+    }else if($this->input->post('starts_from')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select Start date");
+    }else if($this->input->post('ends_on')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select Expiry Date");
+    }else if($this->input->post('applicable_for')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select applicable for");
+    }else if( empty($_FILES['coupon_image']['name'])){
+      $Return['error'] = $this->Admin_model->translate("Coupon Image Required");
+    } 
+    
+
+
+        
+    if($Return['error']!=''){
+          $this->output($Return);
+      }
+ 
+ 
+  
+
+  $fname = "";
+      
+       if(is_uploaded_file($_FILES['coupon_image']['tmp_name'])) {
+      //checking image type
+      $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF');
+      $filename = $_FILES['coupon_image']['name'];
+      $ext = pathinfo($filename, PATHINFO_EXTENSION);
+      if(in_array($ext,$allowed)){
+        $tmp_name = $_FILES["coupon_image"]["tmp_name"];
+        $profile = "uploads/images/coupons/";
+        $set_img = base_url()."uploads/images/";
+        // basename() may prevent filesystem traversal attacks;
+        // further validation/sanitation of the filename may be appropriate
+        $name = basename($_FILES["coupon_image"]["name"]);
+       // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+
+        $newfilename = round(microtime(true)).'_'.$name ;
+        move_uploaded_file($tmp_name, $profile.$newfilename);
+        $fname = $newfilename;
+         
+ 
+  }else {
+        $Return['error'] = $this->Admin_model->translate("Invalid file format");
+      }
+    if($Return['error']!=''){
+      $this->output($Return);
+    }
+  }
+
+
+  if($this->input->post('shipping_free')){
+    $shipping = 'Y' ;
+  }else{
+     $shipping = 'N' ;
+  }
+
+
+if($this->input->post('unlimited_usage')){
+    $unlimited = 'Y' ;
+  }else{
+     $unlimited = 'N' ;
+  }
+
+    
+    $data = array(   
+    
+      'coupon_code' => $this->input->post('coupon_code'),
+      'coupon_name' => $this->input->post('coupon_name'),
+      'discount_type' => $this->input->post('discount_type'),    
+      'discount_value' => $this->input->post('discount_value'),
+      'applicable_for' => $this->input->post('applicable_for'),
+      'starts_from' => $this->input->post('starts_from'),    
+      'ends_on' => $this->input->post('ends_on'),
+      'shipping_free' => $shipping,    
+      'unlimited_usage' => $unlimited,
+
+      'coupon_image' => $fname  ,
+    'created_by'=>$session['user_id'],
+    'created_on'=>date('Y-m-d')
+      );
+    $result = $this->Admin_model->insert_data('coupons', $data);
+
+
+    if ($result == TRUE) {
+      
+      //get setting info 
+       
+       $Return['result'] = $this->Admin_model->translate('Coupon added successfully');
+      
+    } else {
+      $Return['error'] =  $this->Admin_model->translate('Bug. Something went wrong, please try again');
+    }
+    $this->output($Return);
+    exit;
+  }
+
+   public function editcoupon()
+  {
+    $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+        
+ $id = $this->uri->segment(3) ;
+ 
+
+$data['coupon'] =  $this->Admin_model->get_single_data('coupons',array('id'=>$id));
+$data['data_standards'] =  $this->Admin_model->get_all_data('standard_master');
+
+ $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
+    if( $getval){
+   $this->load->view('admin/edit_coupon', $data);
+    }else{
+      redirect('admin/accessdenied');
+    }
+  
+    
+  }
+
+
+
+  public function update_coupon()
+  {   
+     $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+
+   $Return = array('result'=>'', 'error'=>'');
+
+    $fname =  $this->input->post('iconname') ;
+ 
+
+       
+    /* Server side PHP input validation */    
+    if($this->input->post('coupon_name')==='') {
+          $Return['error'] = $this->Admin_model->translate("Coupon name required");
+    }else if($this->input->post('applicable_for')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select applicable for");
+    }else if($this->input->post('discount_type')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select discount type");
+    }else if($this->input->post('discount_value')==='') {
+          $Return['error'] = $this->Admin_model->translate("Add discount value");
+    }else if($this->input->post('starts_from')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select Start date");
+    }else if($this->input->post('ends_on')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select Expiry Date");
+    }else if($this->input->post('applicable_for')==='') {
+          $Return['error'] = $this->Admin_model->translate("Select applicable for");
+    }else if(empty($fname) && empty($_FILES['coupon_image']['name'])){
+      $Return['error'] = $this->Admin_model->translate("Coupon Image Required");
+    } 
+
+        
+    if($Return['error']!=''){
+          $this->output($Return);
+      }
+  
+ 
+  $id =$this->input->post('couponid') ;
+     
+
+    
+ if(!empty($_FILES['coupon_image']['name'])){
+  if(is_uploaded_file($_FILES['coupon_image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF');
+        $filename = $_FILES['coupon_image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["coupon_image"]["tmp_name"];
+          $profile = "uploads/images/coupons/";
+          $set_img = base_url()."uploads/images/";
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["coupon_image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = round(microtime(true)).'_'.$name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $fname = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = $this->Admin_model->translate("Invalid file format");
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+ }
+      
+    
+ 
+
+    if($this->input->post('shipping_free')){
+    $shipping = 'Y' ;
+  }else{
+     $shipping = 'N' ;
+  }
+
+
+if($this->input->post('unlimited_usage')){
+    $unlimited = 'Y' ;
+  }else{
+     $unlimited = 'N' ;
+  }
+
+    
+    $data = array(   
+    
+      'coupon_code' => $this->input->post('coupon_code'),
+      'coupon_name' => $this->input->post('coupon_name'),
+      'discount_type' => $this->input->post('discount_type'),    
+      'discount_value' => $this->input->post('discount_value'),
+      'applicable_for' => $this->input->post('applicable_for'),
+      'starts_from' => $this->input->post('starts_from'),    
+      'ends_on' => $this->input->post('ends_on'),
+      'shipping_free' => $shipping,    
+      'unlimited_usage' => $unlimited,
+
+      'coupon_image' => $fname  ,
+    
+      );
+
+    
+    $result = $this->Admin_model->update_data('coupons',array('id'=>$id), $data);
+    if ($result == TRUE) {
+      
+      //get setting info 
+       
+       $Return['result'] = $this->Admin_model->translate('Coupon updated successfully');
+      
+    } else {
+      $Return['error'] =  $this->Admin_model->translate('Bug. Something went wrong, please try again');
+    }
+    $this->output($Return);
+    exit;
   }
 
 

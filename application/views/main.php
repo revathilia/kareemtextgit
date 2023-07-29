@@ -7,19 +7,21 @@
 <div class="inside">
 
 <div class="title">
-<!-- 	<img src="<?php echo base_url();?>assets/images/logo.png" alt="">
- --></div>
+	<img src="<?php echo base_url();?>assets/images/logo.png" alt="">
+</div>
+<div class="frm-title"><br>
+</div>
 
 <!-- /.clearfix -->
-<button type="submit"  class=" btn btn-success btn-block btn-sm" ><a class=" btn btn-success btn-block btn-sm" href="<?php echo base_url()?>admin">Super Admin Login <i class="fa fa-arrow-circle-right"></i></a></button>
+<button type="submit"  class=" btn btn-success btn-block btn-sm" ><a class=" btn btn-success btn-block btn-sm" href="<?php echo base_url()?>admin"><?php echo $this->Admin_model->translate("Super Admin Login")  ?>  <i class="fa fa-arrow-circle-right"></i></a></button>
 
-<button type="submit"  class="btn btn-primary btn-block btn-sm"><a class=" btn btn-primary btn-block btn-sm" href="<?php echo base_url()?>school">School Admin Login <i class="fa fa-arrow-circle-right"></i></a></button>
+<button type="submit"  class="btn btn-primary btn-block btn-sm"><a class=" btn btn-primary btn-block btn-sm" href="<?php echo base_url()?>school"><?php echo $this->Admin_model->translate("School Admin Login")  ?> <i class="fa fa-arrow-circle-right"></i></a></button>
 
-<button type="submit"  class="btn btn-warning btn-block btn-sm"><a class=" btn btn-warning btn-block btn-sm" href="<?php echo base_url()?>industry">Industry Admin Login <i class="fa fa-arrow-circle-right"></i></a></button>
+<button type="submit"  class="btn btn-warning btn-block btn-sm"><a class=" btn btn-warning btn-block btn-sm" href="<?php echo base_url()?>industry"><?php echo $this->Admin_model->translate("Industry Admin Login")  ?> <i class="fa fa-arrow-circle-right"></i></a></button>
 
  
 
- <div class="frm-footer">KareemTex © 2023</div>
+ <div class="frm-footer"><?php echo $this->Admin_model->translate("KareemTex © 2023")  ?></div>
 <!-- /.footer -->
 </div>
 <!-- .inside -->

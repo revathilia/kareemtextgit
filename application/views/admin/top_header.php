@@ -1,17 +1,41 @@
 <div class="fixed-navbar">
 <div class="pull-left">
 <button type="button" class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>
-<!-- <h1 class="page-title">Home</h1> -->
+
 <!-- /.page-title -->
 </div>
+ 
+ 
 <!-- /.pull-left -->
 <div class="pull-right">
 <div class="ico-item "><a href="javascript:void(0)"  >
  <?php  $session = $this->session->userdata('superadmindet');
-if(!empty($session)){
-	echo "Logged in as ".$session['username'];
-}
- 	  ?> </a>
+if(!empty($session)){ ?>
+
+
+
+  <?php 
+
+if($session['usertype'] == 'admin'){ ?>
+
+<button type="button" class="btn btn-success  btn-sm waves-effect waves-light"> 
+
+<?php }else if($session['usertype'] == 'industry'){ ?>
+  <button type="button" class="btn btn-warning btn-sm waves-effect waves-light"> 
+
+<?php }else if($session['usertype'] == 'school'){ ?>
+  <button type="button" class="btn btn-primary  btn-sm waves-effect waves-light"> 
+
+<?php } ?>
+<?php 	echo "Logged in as ".$session['username'] ; ?>
+</button>
+
+<?php }
+ 	  ?>
+    
+ 
+
+</a>
  	 
  	
  </div>
