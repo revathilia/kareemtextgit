@@ -31,6 +31,8 @@ $this->session->set_userdata('dir', 'ltr');
     <!-- Responsive css -->
     <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
 
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
+
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700'>
     <?php if($this->session->userdata('lang') !='eng') {?>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css"
@@ -223,6 +225,33 @@ data: {qty:$quantity,rowid:$rowid,price:$price,viewname:'viewcart'},
 });
 
 }
+
+$(document).on('click', ' .applycoupon', function(){  
+
+ 
+   var couponcode = $('#coupon_code').val() ;
+
+if(couponcode =='' ) {
+toastr.error("Add coupon code to apply");
+
+return false ;
+}
+
+
+ 
+    
+   $.ajax({  
+   url:"<?php echo base_url() ?>home/check_coupon",  
+   method:"POST",  
+   data:{coupon_code:couponcode  },  
+   success:function(html){ 
+    
+    location.reload();
+    
+   }  
+   }); 
+   } ); 
+
 </script>
   
 </body>

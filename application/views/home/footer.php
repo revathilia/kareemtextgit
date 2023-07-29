@@ -234,6 +234,10 @@ cartupdate();
 
 }
 
+
+
+
+
 </script>
 <script type="text/javascript">
 function langAjax($lang){

@@ -43,15 +43,7 @@
                         <div class="ltn__checkout-single-content ltn__returning-customer-wrap">
                              
                              <h5>Have a coupon? <a class="ltn__secondary-color" href="#ltn__coupon-code" data-bs-toggle="collapse"><?php echo $this->Admin_model->translate("Click here to enter your code") ; ?> </a></h5>
-                            <div id="ltn__coupon-code" class="collapse ltn__checkout-single-content-info">
-                                <div class="ltn__coupon-code-form">
-                                    <p><?php echo $this->Admin_model->translate("If you have a coupon code, please apply it below.") ; ?> </p>
-                                    <form action="#" >
-                                        <input type="text" name="coupon-code" placeholder="Coupon code">
-                                        <button class="btn theme-btn-2 btn-effect-2 text-uppercase"><?php echo $this->Admin_model->translate("Apply Coupon") ; ?> </button>
-                                    </form>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="ltn__checkout-single-content ltn__coupon-code-wrap">
                             <h5>Have a coupon? <a class="ltn__secondary-color" href="#ltn__coupon-code" data-bs-toggle="collapse"><?php echo $this->Admin_model->translate("Click here to enter your code") ; ?> </a></h5>
@@ -59,8 +51,8 @@
                                 <div class="ltn__coupon-code-form">
                                     <p><?php echo $this->Admin_model->translate("If you have a coupon code, please apply it below.") ; ?> </p>
                                     <form action="#" >
-                                        <input type="text" name="coupon-code" placeholder="Coupon code">
-                                        <button class="btn theme-btn-2 btn-effect-2 text-uppercase"><?php echo $this->Admin_model->translate("Apply Coupon") ; ?> </button>
+                                        <input type="text" id="coupon_code" name="coupon-code" placeholder="Coupon code">
+                                        <button type="button" class="btn theme-btn-2 btn-effect-2 text-uppercase applycoupon"  ><?php echo $this->Admin_model->translate("Apply Coupon") ; ?> </button>
                                     </form>
                                 </div>
                             </div>
@@ -309,6 +301,27 @@ $subtotal = 0 ; ?>
                                         $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
                                         $vat = 0 ;
 
+                                        $discount =  0 ;
+                                        $cname = '' ;
+                                        $couponcode  = $this->session->userdata('coupon_code');
+
+                                        if(!empty($couponcode)){
+                                            
+                                            $coupon = $this->Admin_model->get_single_data('coupons',array('coupon_code'=>$couponcode)) ;
+                                           $cname = $coupon->coupon_name ;
+                                           $dtype = $coupon->discount_type ;
+                                           $dval  =  $coupon->discount_value ;
+                                        
+if($dtype == 'percent'){
+
+    $discount =  $subtotal * $dval/100 ;
+
+}elseif($dtype=='amount'){
+    $discount = $dval ;
+}
+                                        }
+
+
                                         if(!empty($vat_percentage) && $vat_percentage != 0 ){
                                             $vat = $subtotal * $vat_percentage /100 ;
                                         }
@@ -327,10 +340,20 @@ $subtotal = 0 ; ?>
                                     <td><?php echo $this->Admin_model->translate("VAT") ; ?></td>
                                     <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $vat ?></td>
                                 </tr>
+
+                                <?php if($discount >0){ ?>
+
+<tr>
+<td><?php echo $this->Admin_model->translate("Discount") ; ?>  <small style="color:green"> <i class="fa fa-check" aria-hidden="true" ></i> <?php echo $cname ?> applied </small> </td>
+<td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $discount ; ?></td>
+</tr>
+
+<?php } ?>
+
                                 <tr>
                                     <td><strong><?php echo $this->Admin_model->translate("Order Total") ; ?></strong></td>
 
-                                    <?php $total =  $subtotal + $shipping+ $vat  ;
+                                    <?php $total =  ($subtotal + $shipping+ $vat) - $discount ;
                                        ?>
 
                                     <td><strong><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $total ;?></strong></td>
@@ -524,6 +547,31 @@ $(document).ready(function(){
 });
 
 
+
+$(document).on('click', ' .applycoupon', function(){  
+   
+   var couponcode = $('#coupon_code').val() ;
+
+if(couponcode =='' ) {
+toastr.error("Add coupon code to apply");
+
+return false ;
+}
+
+
+ 
+    
+   $.ajax({  
+   url:"<?php echo base_url() ?>home/check_coupon",  
+   method:"POST",  
+   data:{coupon_code:couponcode  },  
+   success:function(html){ 
+    
+    location.reload();
+    
+   }  
+   }); 
+   } ); 
 
 
 

@@ -124,6 +124,27 @@ echo form_close();
                                         $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
                                         $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
                                         $vat = 0 ;
+                                        $discount =  0 ;
+                                        $cname = '' ;
+                                        $couponcode  = $this->session->userdata('coupon_code');
+
+                                        if(!empty($couponcode)){
+                                            
+                                            $coupon = $this->Admin_model->get_single_data('coupons',array('coupon_code'=>$couponcode)) ;
+
+                                           $dtype = $coupon->discount_type ;
+                                           $dval  =  $coupon->discount_value ;
+
+                                           $cname = $coupon->coupon_name ;
+                                        
+if($dtype == 'percent'){
+
+    $discount =  $sutotal * $dval/100 ;
+
+}elseif($dtype=='amount'){
+    $discount = $dval ;
+}
+                                        }
 
                                         if(!empty($vat_percentage) && $vat_percentage != 0 ){
                                             $vat = $sutotal * $vat_percentage /100 ;
@@ -171,10 +192,19 @@ echo form_close();
                                         <td><?php echo $this->Admin_model->translate("VAT") ; ?></td>
                                         <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $vat ; ?></td>
                                     </tr>
+
+                                    <?php if($discount >0){ ?>
+
+                                        <tr>
+                                        <td><?php echo $this->Admin_model->translate("Discount") ; ?> <small style="color:green"> <i class="fa fa-check" aria-hidden="true" ></i> <?php echo $cname ?> applied </small> </td>
+                                        <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $discount ; ?></td>
+                                    </tr>
+
+                                   <?php } ?>
                                     <tr>
                                         <td><strong><?php echo $this->Admin_model->translate("Order Total") ; ?></strong></td>
 
-                                         <?php $total =  $sutotal + $shipping+ $vat  ;
+                                         <?php $total =  ($sutotal + $shipping+ $vat) - $discount ;
                                        ?>
 
                                         <td><strong><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  $total ; ?></strong></td>

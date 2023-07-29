@@ -1425,12 +1425,38 @@ $this->Admin_model->update_data('customer_address',array('customer_id'=> $custId
           }
 
 
+          $couponcode  = $this->session->userdata('coupon_code');
+
+                                        
+
+
+
+
 $paymentType = $this->input->post('paymentType') ;
 
 if($paymentType == 'check'){
 
 $cart = $this->cart->contents() ;
           foreach($cart as $cartdata){
+
+$discount = 0 ;
+$coupon = array() ;
+            if(!empty($couponcode)){
+                                            
+             $coupon = $this->Admin_model->get_single_data('coupons',array('coupon_code'=>$couponcode)) ;
+             $cname = $coupon->coupon_name ;
+             $dtype = $coupon->discount_type ;
+             $dval  =  $coupon->discount_value ;
+          
+            if($dtype == 'percent'){
+
+              $discount =  $cartdata['subtotal'] * $dval/100 ;
+
+            }elseif($dtype=='amount'){
+                $discount = $dval ;
+            }
+          }
+
                $order_data = array(
                     'customer_id' => $custId   ,
                     'order_details' => json_encode($cartdata),
@@ -1443,6 +1469,8 @@ $cart = $this->cart->contents() ;
                     'payment_status' => 'N',
                     'vat_amount' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val'),
                     'shipping_charge' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge'),
+                    'discount' => $discount,
+                    'coupon_id' => (!empty($coupon) ?  $coupon->id : '' ) ,
                     'created_on' => date('Y-m-d H:i:s'), 
                     'status' => 1,
                     'notes' => $this->input->post('ltn__message')
@@ -1466,6 +1494,25 @@ $cart = $this->cart->contents() ;
   $cart = $this->cart->contents() ;
   $total = 0 ;
           foreach($cart as $cartdata){
+
+            $discount = 0 ;
+            $coupon = array() ;
+            if(!empty($couponcode)){
+                                            
+             $coupon = $this->Admin_model->get_single_data('coupons',array('coupon_code'=>$couponcode)) ;
+             $cname = $coupon->coupon_name ;
+             $dtype = $coupon->discount_type ;
+             $dval  =  $coupon->discount_value ;
+          
+            if($dtype == 'percent'){
+
+              $discount =  $cartdata['subtotal'] * $dval/100 ;
+
+            }elseif($dtype=='amount'){
+                $discount = $dval ;
+            }
+          }
+
                $order_data = array(
                     'customer_id' => $custId   ,
                     'order_details' => json_encode($cartdata),
@@ -1478,6 +1525,8 @@ $cart = $this->cart->contents() ;
                     'payment_status' => 'N',
                     'vat_amount' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val'),
                     'shipping_charge' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge'),
+                    'discount' => $discount,
+                    'coupon_id' => (!empty($coupon) ?  $coupon->id : '' ) ,
                     'created_on' => date('Y-m-d H:i:s'), 
                     'status' => 1,
                     'notes' => $this->input->post('ltn__message')
@@ -1851,6 +1900,64 @@ public function delete_entry()
     
   }
 
+  public function check_coupon(){
+
+    $session = $this->session->userdata('customerdet');
+    if(empty($session)){ 
+      redirect('home');
+    } 
+
+   $userid = $session['user_id'] ;
+   $couponcode = $this->input->post('coupon_code');
+
+  $coupon = $this->Admin_model->get_single_data('coupons',array('coupon_code'=>$couponcode,'ends_on >=' => date('Y-m-d'), 'status'=>'Y')) ;
+if(!empty($coupon )){
+
+ $unlimited = $coupon->unlimited_usage  ;
+ $shipping = $coupon->shipping_free  ;
+ $prodType = $this->session->userdata('prouctType');
+
+ $applicable = $coupon->applicable_for  ;
+
+ if( $applicable !='both'){
+if( $prodType != $applicable){
+  $Return['error'] = "Invalid Coupon";
+  if($Return['error']!=''){
+        $this->output($Return);
+        exit ;
+    }
+
+}
+}
+
+ 
+
+ $coupon = $this->Admin_model->get_single_data('coupon_usage',array('coupon_code'=>$couponcode,'user_id >=' => $userid  )) ;
+
+ if(!empty($coupon)){
+  if($unlimited =='N'){
+    $Return['error'] = "Coupon already used !";
+    if($Return['error']!=''){
+          $this->output($Return);
+          exit ;
+      }
+  }
+ }
+
+ $this->session->set_userdata('coupon_code', $couponcode);
+   
+}else{
+
+  
+  $Return['error'] = "Invalid Coupon";
+  if($Return['error']!=''){
+        $this->output($Return);
+        exit ;
+    }
+
+}
+    
+  }
 
 public function logout() {
   $session = $this->session->userdata('customerdet'); 
