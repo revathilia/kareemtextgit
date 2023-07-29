@@ -41,26 +41,14 @@
                 <div class="col-lg-12">
                     <div class="ltn__checkout-inner">
                         <div class="ltn__checkout-single-content ltn__returning-customer-wrap">
-                            <h5><?php echo $this->Admin_model->translate("Returning customer?") ; ?> <a class="ltn__secondary-color" href="#ltn__returning-customer-login" data-bs-toggle="collapse"><?php echo $this->Admin_model->translate("Click here to login") ; ?></a></h5>
-                            <div id="ltn__returning-customer-login" class="collapse ltn__checkout-single-content-info">
-                                <div class="ltn_coupon-code-form ltn__form-box">
-                                    <p><?php echo $this->Admin_model->translate("Please login your accont.") ; ?> </p>
-                                    <form action="<?php echo base_url()   ?>home/place_order" >
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="input-item input-item-name ltn__custom-icon">
-                                                    <input type="text" name="ltn__name" placeholder="<?php echo $this->Admin_model->translate("Enter your name") ; ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="input-item input-item-email ltn__custom-icon">
-                                                    <input type="email" name="ltn__email" placeholder="<?php echo $this->Admin_model->translate("Enter email address") ; ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button class="btn theme-btn-1 btn-effect-1 text-uppercase">Login</button>
-                                        <label class="input-info-save mb-0"><input type="checkbox" name="agree"><?php echo $this->Admin_model->translate("Remember me") ; ?>   </label>
-                                        <p class="mt-30"><a href="register.html"><title><?php echo $this->Admin_model->translate("Lost your password?") ; ?></title> </a></p>
+                             
+                             <h5>Have a coupon? <a class="ltn__secondary-color" href="#ltn__coupon-code" data-bs-toggle="collapse"><?php echo $this->Admin_model->translate("Click here to enter your code") ; ?> </a></h5>
+                            <div id="ltn__coupon-code" class="collapse ltn__checkout-single-content-info">
+                                <div class="ltn__coupon-code-form">
+                                    <p><?php echo $this->Admin_model->translate("If you have a coupon code, please apply it below.") ; ?> </p>
+                                    <form action="#" >
+                                        <input type="text" name="coupon-code" placeholder="Coupon code">
+                                        <button class="btn theme-btn-2 btn-effect-2 text-uppercase"><?php echo $this->Admin_model->translate("Apply Coupon") ; ?> </button>
                                     </form>
                                 </div>
                             </div>

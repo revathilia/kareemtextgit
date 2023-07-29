@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" dir="<?php echo $this->session->userdata('dir') ; ?>" lang="<?php echo $this->session->userdata('lang') ; ?>">
+<html class="no-js"  lang="<?php echo $this->session->userdata('lang') ; ?>">
 
 
 <!-- Mirrored from tunatheme.com/tf/html/vicodin-preview/vicodin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 07 Mar 2023 08:39:14 GMT -->
