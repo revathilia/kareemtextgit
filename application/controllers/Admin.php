@@ -1899,7 +1899,7 @@ $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method()
     $data = array(   
     'product_name' => $this->input->post('product_name'),
     'ar_product_name' => $this->input->post('ar_product_name'),
-    //'product_code' => $this->input->post('product_code'),
+    'product_code' => $this->input->post('product_code'),
     'category'=>$this->input->post('category_name'),
     'related_products'=>$related_products,
     // 'is_unisex'=>$this->input->post('is_unisex'),  
@@ -1948,7 +1948,7 @@ if (isset($products)){
     $data['product']  = array('id'=>$products->id,'product_name'=>$products->product_name,'ar_product_name'=>$products->ar_product_name,'product_code'=>$products->product_code, 'category'=>$products->category,'related_products'=>$products->related_products, 'colors_available' => $products->colors_available,'sizes_available' => $products->sizes_available,'tags'=>$products->tags,'genders'=>$products->genders, 
       'description'=>$products->description, 'long_description'=>$products->long_description, 
       'ar_description'=>$products->ar_description, 'ar_long_description'=>$products->ar_long_description,
-    'product_image'=>$products->product_image,'measurements'=>$products->measurements);
+    'product_image'=>$products->product_image,'measurements'=>$products->measurements,'product_code'=>$products->product_code);
 }
  
     $data['sizes'] = $this->Admin_model->get_all_data('size_master',array('belongs_to'=>'admin','type'=>'I')); 
@@ -2084,7 +2084,7 @@ if (isset($products)){
     $data = array(   
       'product_name' => $this->input->post('product_name'),
       'ar_product_name' => $this->input->post('ar_product_name'),
-     // 'product_code' => $this->input->post('product_code'),
+      'product_code' => $this->input->post('product_code'),
        'category'=>$this->input->post('category_name'),
        'product_image' => $fname  ,
        'related_products'=> $related_products,
@@ -4146,7 +4146,7 @@ $result = $this->Admin_model->insert_data('uniform_school_relation',$data);
  $data = array();
 if (isset($products)){
     $data['product']  = array('id'=>$products->id,'product_name'=>$products->product_name,'ar_product_name'=>$products->ar_product_name,'category'=>$products->category,
-    'product_code'=>$products->product_code,  'is_unisex'=>$products->is_unisex, 'product_image'=>$products->product_image,'related_products'=>$products->related_products, 'colors_available' => $products->colors_available,'sizes_available' => $products->sizes_available,'tags'=>$products->tags,'genders'=>$products->genders, 'description'=>$products->description, 'long_description'=>$products->long_description,'ar_description'=>$products->ar_description, 'ar_long_description'=>$products->ar_long_description, 'measurements' =>$products->measurements  );
+    'product_code'=>$products->product_code,  'is_unisex'=>$products->is_unisex, 'product_image'=>$products->product_image,'related_products'=>$products->related_products, 'colors_available' => $products->colors_available,'sizes_available' => $products->sizes_available,'tags'=>$products->tags,'genders'=>$products->genders, 'description'=>$products->description, 'long_description'=>$products->long_description,'ar_description'=>$products->ar_description, 'ar_long_description'=>$products->ar_long_description, 'measurements' =>$products->measurements,'product_code'=> $products->product_code );
 }
    $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
 
@@ -4376,6 +4376,7 @@ if(!empty($insertimages)){
     $data = array(   
       'product_name' => $this->input->post('product_name'),
       'ar_product_name' => $this->input->post('ar_product_name'),
+      'product_code' => $this->input->post('product_code'),
       'category' => $this->input->post('category_name'),
       'product_image' => $fname  ,
       'related_products'=>$related_products,
@@ -5937,7 +5938,7 @@ public function  viewschools(){
     $this->output($Return);
     }  
 
-    $data = array('status' => $this->input->post('status'),
+    $data = array('order_status' => $this->input->post('status'),
                   'notes' => $this->input->post('remarks')
                   );
    $result = $this->Admin_model->update_data('order_master', array('id'=> $orderid),$data);
@@ -7716,6 +7717,657 @@ if($this->input->post('unlimited_usage')){
     $this->output($Return);
     exit;
   }
+
+  // CMS starting
+
+  public function about()
+  {
+  $session = $this->session->userdata('superadmindet');
+      if(empty($session)){ 
+        redirect('admin');
+      }
+          
+   $data['data'] = $this->Admin_model->get_single_data('about_us',array('id'=>'1')) ;
+   $data['corporate'] = $this->Admin_model->get_all_data('about_offers') ;
+
+   
+
+     $this->load->view('admin/edit_about', $data);
+         
+    }
+  
+
+   
+    public function update_about()
+    {   
+      $session = $this->session->userdata('superadmindet');
+      if(empty($session)){ 
+        redirect('admin');
+      }
+     $Return = array('result'=>'', 'error'=>'');
+         
+      /* Server side PHP input validation */    
+      if($this->input->post('sec2_title')==='') {
+            $Return['error'] = "Section 2 title Required ";
+      }else if($this->input->post('sec2_title_ar')==='') {
+            $Return['error'] = "Section 2 title arabic Required ";
+      }else if($this->input->post('sec2_content')==='') {
+            $Return['error'] = "Section 2 content Required ";
+      }else if($this->input->post('sec2_content_ar')==='') {
+            $Return['error'] = "Section 2 content arabic Required ";
+      }else if($this->input->post('sec3_title1')==='') {
+            $Return['error'] = "Section 3 title 1 Required ";
+      }else if($this->input->post('sec3_title1_ar')==='') {
+            $Return['error'] = "Section 3 title 1 arabic Required ";
+      }else if($this->input->post('sec3_title2')==='') {
+        $Return['error'] = "Section 3 title 2 Required ";
+  }else if($this->input->post('sec3_title2_ar')==='') {
+        $Return['error'] = "Section 3 title 2 arabic Required ";
+  }else if($this->input->post('sec3_content1')==='') {
+            $Return['error'] = "Section 3 content Required ";
+      }else if($this->input->post('sec3_content1_ar')==='') {
+            $Return['error'] = "Section 2 content arabic Required ";
+      }else if($this->input->post('sec3_content2')==='') {
+        $Return['error'] = "Section 3 content 2 Required ";
+  }else if($this->input->post('sec3_content2_ar')==='') {
+        $Return['error'] = "Section 3 content 2 arabic Required ";
+  }  
+ 
+       
+          
+      if($Return['error']!=''){
+            $this->output($Return);
+        }
+  
+  
+         $image1 =  $this->input->post('sec2_old_image');
+         $image2 =  $this->input->post('sec3_old_image');
+         $image3 =  $this->input->post('sec4_old_image');
+         $image4 =  $this->input->post('sec5_old_image');
+        
+        
+         if(is_uploaded_file($_FILES['sec2_image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['sec2_image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["sec2_image"]["tmp_name"];
+          $profile = "uploads/images/";
+          $set_img = base_url()."uploads/images/about/";
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["sec2_image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image1 = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+ 
+  if(is_uploaded_file($_FILES['sec3_image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['sec3_image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["sec3_image"]["tmp_name"];
+          $profile = "uploads/images/about/";
+          
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["sec3_image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image2 = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+  
+
+    
+    if(is_uploaded_file($_FILES['sec4_image']['tmp_name'])) {
+      //checking image type
+      $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+      $filename = $_FILES['sec4_image']['name'];
+      $ext = pathinfo($filename, PATHINFO_EXTENSION);
+      if(in_array($ext,$allowed)){
+        $tmp_name = $_FILES["sec4_image"]["tmp_name"];
+        $profile = "uploads/images/about/";
+        
+        // basename() may prevent filesystem traversal attacks;
+        // further validation/sanitation of the filename may be appropriate
+        $name = basename($_FILES["sec4_image"]["name"]);
+       // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+
+        $newfilename = $name ;
+        move_uploaded_file($tmp_name, $profile.$newfilename);
+        $image3 = $newfilename;
+         
+ 
+  }else {
+        $Return['error'] = "Invalid file format";
+      }
+    if($Return['error']!=''){
+      $this->output($Return);
+    }
+  }
+     
+
+     if(is_uploaded_file($_FILES['sec5_image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['sec5_image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["sec5_image"]["tmp_name"];
+          $profile = "uploads/images/about/";
+          
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["sec5_image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image4 = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+  
+  
+  
+      
+        
+      
+      $homedata = array(   
+     
+     
+      'sec2_title' => $this->input->post('sec2_title'),
+      'sec2_title_ar' => $this->input->post('sec2_title_ar'),
+      'sec2_content' => $this->input->post('sec2_content'),
+      'sec2_content_ar' => $this->input->post('sec2_content_ar'),
+
+       
+      'sec3_title1' => $this->input->post('sec3_title1'),
+      'sec3_title1_ar' => $this->input->post('sec3_title1_ar'),
+      'sec3_title2' => $this->input->post('sec3_title2'),
+      'sec3_title2_ar' => $this->input->post('sec3_title2_ar'),
+      
+      'sec3_content1' => $this->input->post('sec3_content1'),
+      'sec3_content1_ar' => $this->input->post('sec3_content1_ar'),
+      'sec3_content2' => $this->input->post('sec3_content2'),
+      'sec3_content2_ar' => $this->input->post('sec3_content2_ar'),
+     
+
+       'sec2_image' => $image1,
+       'sec3_image' => $image2,
+       'sec4_image' => $image3,
+       'sec5_image' => $image4,
+     
+       
+      
+
+        );
+      //print_r($data);
+      $result = $this->Admin_model->update_data('about_us',array('id'=>1), $homedata);
+      if ($result == TRUE) {
+        
+         $Return['result'] = 'About page updated successfully.';
+        
+      } else {
+        $Return['error'] =  'Bug. Something went wrong, please try again';
+      }
+      $this->output($Return);
+      exit;
+    }
+
+
+    public function footer()
+  {
+  $session = $this->session->userdata('superadmindet');
+      if(empty($session)){ 
+        redirect('admin');
+      }
+          
+   $data['data'] = $this->Admin_model->get_single_data('footer_page',array('id'=>'1')) ;
+
+   $data['social'] = $this->Admin_model->get_single_data('social_media_links',array('id'=>'1')) ;
+  
+   $this->load->view('admin/edit_footer', $data);
+         
+    }
+
+    public function update_footer()
+    {   
+      $session = $this->session->userdata('superadmindet');
+      if(empty($session)){ 
+        redirect('admin');
+      }
+     $Return = array('result'=>'', 'error'=>'');
+
+      $image1 =  $this->input->post('old_image');
+         
+      /* Server side PHP input validation */    
+      if(empty($_FILES['image']['name']) && empty($image1)) {
+          $Return['error'] = "Image Required ";
+      }else if($this->input->post('footer_text')==='') {
+            $Return['error'] = "Footer text Required";
+      }else if($this->input->post('footer_text_ar')==='') {
+            $Return['error'] = "Footer text arabic Required ";
+      }else if($this->input->post('links_title')==='') {
+            $Return['error'] = "Links title Required ";
+      }else if($this->input->post('links_title_ar')==='') {
+            $Return['error'] = "Links title arabic Required ";
+      }else if($this->input->post('contactus_title')==='') {
+            $Return['error'] = "Contact us title Required ";
+      }else if($this->input->post('contactus_title_ar')==='') {
+            $Return['error'] = "Contact us title arabic Required ";
+      }else if($this->input->post('service_title')==='') {
+            $Return['error'] = "Services title Required ";
+      }else if($this->input->post('service_title_ar')==='') {
+            $Return['error'] = "Services title arabic Required ";
+      }
+      else if($this->input->post('address')==='') {
+            $Return['error'] = "Address Required ";
+      }else if($this->input->post('address_ar')==='') {
+            $Return['error'] = "Address arabic Required ";
+      } else if($this->input->post('email')==='') {
+            $Return['error'] = "Email Required ";
+      }else if($this->input->post('phone')==='') {
+            $Return['error'] = "Phone Required ";
+      } else if($this->input->post('follow_us')==='') {
+            $Return['error'] = "Follow us button text Required ";
+      }else if($this->input->post('follow_us_ar')==='') {
+            $Return['error'] = "Follow us button text arabic Required ";
+      } 
+ 
+ 
+       
+          
+      if($Return['error']!=''){
+            $this->output($Return);
+        }
+  
+  
+       
+      
+         if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["image"]["tmp_name"];
+          $profile = "uploads/images/";
+          $set_img = base_url()."uploads/images/";
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image1 = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+ 
+  
+      
+        
+      
+      $data = array(   
+      'footer_text' => $this->input->post('footer_text'),
+      'footer_text_ar' => $this->input->post('footer_text_ar'),
+      'links_title' => $this->input->post('links_title'),
+      'links_title_ar' => $this->input->post('links_title_ar'),
+      'contactus_title' => $this->input->post('contactus_title'),
+      'contactus_title_ar' => $this->input->post('contactus_title_ar'),
+      'services_title' => $this->input->post('services_title'),
+      'services_title_ar' => $this->input->post('services_title_ar'),
+      'address' => $this->input->post('address'),
+      'address_ar' => $this->input->post('address_ar'),
+      'email' => $this->input->post('email'),
+      'phone' => $this->input->post('phone'),
+      'follow_us' => $this->input->post('follow_us'),
+      'follow_us_ar' => $this->input->post('follow_us_ar'),         
+      'logo' => $image1,
+      
+      
+
+        );
+      //print_r($data);
+      $result = $this->Admin_model->update_data('footer_page',array('id'=>1), $data);
+
+$social = array(
+      'facebook' => $this->input->post('facebook'),
+      'twitter' => $this->input->post('twitter'),
+      'instagram' => $this->input->post('instagram'),
+      'youtube' => $this->input->post('youtube'),
+      'whatsapp' => $this->input->post('whatsapp'),
+);
+ $result1 = $this->Admin_model->update_data('social_media_links',array('id'=>1), $social);
+
+      if ($result == TRUE) {
+        
+         $Return['result'] = 'Footer section updated successfully.';
+        
+      } else {
+        $Return['error'] =  'Bug. Something went wrong, please try again';
+      }
+      $this->output($Return);
+      exit;
+    }
+
+
+    
+public function contact()
+{
+$session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+        
+ $data['data'] = $this->Admin_model->get_single_data('contact_us_page',array('id'=>'1')) ;
+ //$data['addresses'] = $this->Admin_model->get_all_data('addresses') ;
+
+ 
+ $this->load->view('admin/edit_contact', $data);
+       
+  }
+
+  public function update_contact()
+  {   
+    $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+   $Return = array('result'=>'', 'error'=>'');
+
+    
+       
+    /* Server side PHP input validation */    
+    if($this->input->post('box1_title')==='') {
+          $Return['error'] = "Box 1 title Required";
+    }else if($this->input->post('box1_title_ar')==='') {
+          $Return['error'] = "Box 1 title arabic Required ";
+    }else if($this->input->post('box2_title')==='') {
+      $Return['error'] = "Box 2 title Required";
+}else if($this->input->post('box2_title_ar')==='') {
+      $Return['error'] = "Box 2 title arabic Required ";
+} else if($this->input->post('box3_title')==='') {
+  $Return['error'] = "Box 3 title Required";
+}else if($this->input->post('box3_title_ar')==='') {
+  $Return['error'] = "Box 3 title arabic Required ";
+}
+
+
+     
+        
+    if($Return['error']!=''){
+          $this->output($Return);
+      }
+
+
+      $image1 =  $this->input->post('box1_old_image');
+      $image2 =  $this->input->post('box2_old_image');
+      $image3 =  $this->input->post('box3_old_image'); 
+   
+        
+        
+      if(is_uploaded_file($_FILES['box1_icon']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['box1_icon']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["box1_icon"]["tmp_name"];
+          $profile = "uploads/images/about/";
+        //  $set_img = base_url()."uploads/images/about/";
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["box1_icon"]["name"]);
+        //  $newfilename =  round(microtime(true)).'.'.$ext;
+  
+          $newfilename = round(microtime(true)).'_'.$name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image1 = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+ 
+  if(is_uploaded_file($_FILES['box2_icon']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['box2_icon']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["box2_icon"]["tmp_name"];
+          $profile = "uploads/images/about/";
+          
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["box2_icon"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+         $newfilename = round(microtime(true)).'_'.$name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image2 = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+  
+
+    
+    if(is_uploaded_file($_FILES['box3_icon']['tmp_name'])) {
+      //checking image type
+      $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+      $filename = $_FILES['box3_icon']['name'];
+      $ext = pathinfo($filename, PATHINFO_EXTENSION);
+      if(in_array($ext,$allowed)){
+        $tmp_name = $_FILES["box3_icon"]["tmp_name"];
+        $profile = "uploads/images/about/";
+        
+        // basename() may prevent filesystem traversal attacks;
+        // further validation/sanitation of the filename may be appropriate
+        $name = basename($_FILES["box3_icon"]["name"]);
+       // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+
+       $newfilename = round(microtime(true)).'_'.$name ;
+        move_uploaded_file($tmp_name, $profile.$newfilename);
+        $image3 = $newfilename;
+         
+ 
+  }else {
+        $Return['error'] = "Invalid file format";
+      }
+    if($Return['error']!=''){
+      $this->output($Return);
+    }
+  }
+     
+ 
+    
+      
+    
+    $data = array( 
+
+     
+ 
+    'box1_title' => $this->input->post('box1_title'),
+    'box1_title_ar' => $this->input->post('box1_title_ar'),
+    'box1_value1' => $this->input->post('box1_value1'),
+    'box1_value1' => $this->input->post('box1_value1'),
+    'box2_title' => $this->input->post('box2_title'),
+    'box2_title_ar' => $this->input->post('box2_title_ar'),
+    'box2_title' => $this->input->post('box2_title'),
+    'box2_value1' => $this->input->post('box2_value1'),
+    'box2_value2' => $this->input->post('box2_value2'),
+    'box3_title_ar' => $this->input->post('box3_title_ar'),
+    'box3_value' => $this->input->post('box3_value'),
+    'box1_icon' => $image1,
+    'box2_icon' => $image2,
+    'box3_icon' => $image3,
+
+        
+
+      );
+    //print_r($data);
+    $result = $this->Admin_model->update_data('contact_us_page',array('id'=>1), $data);
+
+
+    if ($result == TRUE) {
+      
+       $Return['result'] = 'Contact us page updated successfully.';
+      
+    } else {
+      $Return['error'] =  'Bug. Something went wrong, please try again';
+    }
+    $this->output($Return);
+    exit;
+  }
+
+  
+  public function edit_value()
+  {
+  $session = $this->session->userdata('superadmindet');
+      if(empty($session)){ 
+        redirect('admin');
+      }
+   $id = $this->uri->segment(3) ;
+   $data['data'] = $this->Admin_model->get_single_data('about_offers',array('id'=>$id)) ;
+
+     $this->load->view('admin/edit_value', $data);
+      
+  }
+
+
+  public function update_value()
+{   
+   $session = $this->session->userdata('superadmindet');
+  if(empty($session)){ 
+    redirect('admin');
+  }
+
+  $id = $this->input->post('id');
+
+ $Return = array('result'=>'', 'error'=>'');
+     
+  /* Server side PHP input validation */    
+   
+   $image = $this->input->post('old_image');
+  
+  if(empty($_FILES['image']['tmp_name']) && empty($image) ){
+    $Return['error'] = "Image Required ";
+  }else if($this->input->post('title')==='') {
+      $Return['error'] = "Title Required ";
+}else if($this->input->post('title_ar')==='') {
+      $Return['error'] = "Title arabic Required ";
+}
+      
+  if($Return['error']!=''){
+        $this->output($Return);
+         exit ;
+    }
+    
+
+
+  if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+  //checking image type
+  $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+  $filename = $_FILES['image']['name'];
+  $ext = pathinfo($filename, PATHINFO_EXTENSION);
+  if(in_array($ext,$allowed)){
+    $tmp_name = $_FILES["image"]["tmp_name"];
+    $profile = "uploads/images/";
+    $set_img = base_url()."uploads/images/";
+    // basename() may prevent filesystem traversal attacks;
+    // further validation/sanitation of the filename may be appropriate
+    $name = basename($_FILES["image"]["name"]);
+   // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+
+    $newfilename = $name ;
+    move_uploaded_file($tmp_name, $profile.$newfilename);
+    $image  = $newfilename;
+     
+
+}else {
+    $Return['error'] = "Invalid file format";
+  }
+if($Return['error']!=''){
+  $this->output($Return);
+}
+}
+ 
+ 
+  $data = array(   
+   
+  'logo' => $image,
+   'title' => $this->input->post('title'),
+   'title_ar' => $this->input->post('title_ar'),
+   'content' => $this->input->post('content'),
+   'content_ar' => $this->input->post('content_ar'),
+    );
+//  $result = $this->Admin_model->insert_data('supp_org', $data);
+  $result = $this->Admin_model->update_data('about_offers',array('id'=>$id),$data);
+
+ 
+
+  if ($result == TRUE) {
+    
+    //get setting info 
+     
+     $Return['result'] = 'Benefits updated successfully.';
+    
+  } else {
+    $Return['error'] =  'Bug. Something went wrong, please try again';
+  }
+  $this->output($Return);
+  exit;
+}
+
+  // CMS end
 
 
  

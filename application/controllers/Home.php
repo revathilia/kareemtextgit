@@ -74,8 +74,59 @@ class Home extends CI_Controller {
   public function about()
   {   
     $this->session->set_userdata('lastpage', $this->router->fetch_method());
+   
+    $home = $this->Admin_model->get_single_data('about_us',array('id'=>'1')) ;
+
+   $session = $this->session->userdata('lang') ;
+  
+
+    if($session =='eng'){
+    $data = array(
+      
+    
+      'sec2_title' => $home->sec2_title,
+      'sec2_content' => $home->sec2_content,
+      'sec3_title1' => $home->sec3_title1,
+      'sec3_title2' => $home->sec3_title2,
+      'sec3_content1' => $home->sec3_content1,
+      'sec3_content2' => $home->sec3_content2
+       
+      ) ;
+
+    }else{
+$data = array(
+  
+  'sec2_title' => $home->sec2_title_ar,
+  'sec2_content' => $home->sec2_content_ar,
+  'sec3_title1' => $home->sec3_title1_ar,
+  'sec3_title2' => $home->sec3_title2_ar,
+  'sec3_content1' => $home->sec3_content1_ar,
+  'sec3_content2' => $home->sec3_content2_ar
+
+    );
+
+    }
+
+    $data['sec2_image'] =   $home->sec2_image ;
+    $data['sec3_image'] = $home->sec3_image; 
+    $data['sec4_image'] = $home->sec4_image; 
+    $data['sec5_image'] = $home->sec5_image; 
+       
+  
+    
+    $data['values'] = $this->Admin_model->get_all_data('about_offers') ;
+    $data['links'] = $this->Admin_model->get_all_data('menu_controller_relation') ;
+    $data['footer'] = $this->Admin_model->get_single_data('footer_page',array('id'=>'1')) ;
+    $data['social'] = $this->Admin_model->get_single_data('social_media_links',array('id'=>'1')) ;
     $data['banner'] = $this->Admin_model->get_all_data('banners',array('type'=>'about','status'=>'Y')) ;
-       $this->load->view('home/home',$data);
+
+    $data['news'] = $this->Admin_model->get_all_data('news_and_events',array('date >=' => date('Y-m-d')) ) ;
+     
+    $data['clients'] = $this->Admin_model->get_all_data('client_logos') ;
+
+
+    
+    $this->load->view('home/home',$data);
   }
    public function profile()
   {   
@@ -91,6 +142,8 @@ class Home extends CI_Controller {
     $data['addresses'] = $this->Admin_model->get_single_data('customer_address',array('customer_id'=>$homesession['user_id'])) ;
 
     $data['orders'] = $this->Admin_model->get_all_data('order_master',array('customer_id'=>$homesession['user_id']),'id desc');
+
+    $data['active_orders'] = $this->Admin_model->get_all_data('order_master',array('customer_id'=>$homesession['user_id'],'order_status !='=> 4 ),'id desc');
     
     $data['wishlist_i'] = $this->Admin_model->get_all_data('wishlist',array('user_id'=>$homesession['user_id'],'type'=>'industry')) ;
     $data['wishlist_s'] = $this->Admin_model->get_all_data('wishlist',array('user_id'=>$homesession['user_id'],'type'=>'school')) ;
@@ -813,8 +866,49 @@ $level = 0 ;
   public function contact()
   {   
 
-      $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'contact','status'=>'Y')) ;
-       $this->load->view('home/contact',$data);
+    $session = $this->session->userdata('lang') ;
+
+    $contact  = $this->Admin_model->get_single_data('contact_us_page',array('id'=>'1')) ;
+
+    if($session == 'eng'){
+     $data = array(
+      'box1_title' => $contact->box1_title,
+      'box1_value1' => $contact->box1_value1,
+      'box1_value2' => $contact->box1_value2,
+      'box2_title' => $contact->box2_title,
+      'box2_value1' => $contact->box2_value1,
+      'box2_value2' => $contact->box2_value2,
+      'box3_title' => $contact->box3_title,
+      'box3_value' => $contact->box3_value,
+      'map_url' => $contact->map_url,
+      'box1_icon' => $contact->box1_icon,
+      'box2_icon' => $contact->box2_icon,
+      'box3_icon' => $contact->box3_icon 
+      ) ;
+    }else{
+      $data = array(
+        'box1_title' => $contact->box1_title_ar,
+        'box1_value1' => $contact->box1_value1,
+        'box1_value2' => $contact->box1_value2,
+        'box2_title' => $contact->box2_title_ar,
+        'box2_value1' => $contact->box2_value1,
+        'box2_value2' => $contact->box2_value2,
+        'box3_title' => $contact->box3_title_ar,
+        'box3_value' => $contact->box3_value,
+        'map_url' => $contact->map_url,
+        'box1_icon' => $contact->box1_icon,
+        'box2_icon' => $contact->box2_icon,
+        'box3_icon' => $contact->box3_icon 
+      ) ;
+    }
+
+    $data['links'] = $this->Admin_model->get_all_data('menu_controller_relation') ;
+    $data['footer'] = $this->Admin_model->get_single_data('footer_page',array('id'=>'1')) ;
+    $data['social'] = $this->Admin_model->get_single_data('social_media_links',array('id'=>'1')) ;
+     
+
+    $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'contact','status'=>'Y')) ;
+    $this->load->view('home/contact',$data);
   }
 
  
@@ -1153,6 +1247,11 @@ $this->cart->product_name_rules = '[:print:]';
    $data['lat'] = $data_array['lat'];
    $data['long'] = $data_array['long'];
    $data['address'] = $data_array['address'];
+    }else{
+      $data['location'] = '';
+   $data['lat'] = 0;
+   $data['long'] = 0;
+   $data['address'] = '' ;
     }
  
     
@@ -1260,8 +1359,9 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
   {
     $this->session->set_userdata('lastpage', $this->router->fetch_method());
 
-    if(count($this->cart->contents()) ==0){
+    if(count($this->cart->contents()) == 0){
         $this->session->set_userdata('prouctType', '');
+        $this->session->set_userdata('coupon_code', '');
     }
 
     $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'cart','status'=>'Y')) ;
@@ -1288,6 +1388,11 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
       );
       // Update cart data, after cancle.
       $this->cart->update($data);
+      }
+
+      if(count($this->cart->contents()) == 0){
+        $this->session->set_userdata('prouctType', '');
+        $this->session->set_userdata('coupon_code', '');
       }
 
       
@@ -1472,7 +1577,10 @@ $coupon = array() ;
                     'discount' => $discount,
                     'coupon_id' => (!empty($coupon) ?  $coupon->id : '' ) ,
                     'created_on' => date('Y-m-d H:i:s'), 
-                    'status' => 1,
+                    'delivery_date' => date("Y-m-d", strtotime("+ 10 day")),                 
+                   
+
+                    'order_status' => 1,
                     'notes' => $this->input->post('ltn__message')
                  ) ;
             $result = $this->Admin_model->insert_data('order_master', $order_data);
@@ -1528,7 +1636,8 @@ $coupon = array() ;
                     'discount' => $discount,
                     'coupon_id' => (!empty($coupon) ?  $coupon->id : '' ) ,
                     'created_on' => date('Y-m-d H:i:s'), 
-                    'status' => 1,
+                    'delivery_date' => date("Y-m-d", strtotime("+ 10 day")),        
+                    'order_status' => 1,
                     'notes' => $this->input->post('ltn__message')
                  ) ;
             $cardpayment = $this->Admin_model->insert_data('order_master', $order_data);
@@ -1910,7 +2019,12 @@ public function delete_entry()
    $userid = $session['user_id'] ;
    $couponcode = $this->input->post('coupon_code');
 
+ 
+
   $coupon = $this->Admin_model->get_single_data('coupons',array('coupon_code'=>$couponcode,'ends_on >=' => date('Y-m-d'), 'status'=>'Y')) ;
+ 
+
+ 
 if(!empty($coupon )){
 
  $unlimited = $coupon->unlimited_usage  ;
@@ -1932,9 +2046,9 @@ if( $prodType != $applicable){
 
  
 
- $coupon = $this->Admin_model->get_single_data('coupon_usage',array('coupon_code'=>$couponcode,'user_id >=' => $userid  )) ;
+ $coupon_usage = $this->Admin_model->get_single_data('coupon_usage',array('coupon_code'=>$couponcode,'user_id >=' => $userid  )) ;
 
- if(!empty($coupon)){
+ if(!empty($coupon_usage)){
   if($unlimited =='N'){
     $Return['error'] = "Coupon already used !";
     if($Return['error']!=''){
@@ -1964,6 +2078,16 @@ public function logout() {
   $sess_array = array('customerdet' => '');
   $this->session->sess_destroy();
   $Return['result'] = 'Successfully Logout.';
+  redirect(base_url().'home', 'refresh');
+}
+
+public function delete_account() {
+  $session = $this->session->userdata('customerdet'); 
+  $this->Admin_model->update_data('customer_master',array('id'=>$session['user_id']),array('status'=>'D'));
+  $sess_array = array('customerdet' => '');
+  $this->session->sess_destroy();
+
+  $Return['result'] = 'Successfully Deleted the account.';
   redirect(base_url().'home', 'refresh');
 }
    

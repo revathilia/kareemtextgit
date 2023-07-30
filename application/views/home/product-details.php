@@ -213,6 +213,8 @@ if($this->session->userdata('lang') == 'ar'){
 
 
                                     </h3>
+
+                                    <h5><?php echo  $product->product_code ;?></h5>
                                     <div class="product-price" id="price_det1">
                                         <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                          

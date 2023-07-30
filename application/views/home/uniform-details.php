@@ -352,6 +352,7 @@ if($this->session->userdata('lang') == 'ar'){
                                                     ?>
                                               
                                               </a></h2>
+                                              <h5><?php echo  $product->product_code ;?></h5>
                                                 <?php  $product_price = $this->Admin_model->get_single_data('school_product_price_size_det',array('product_id'=>$uniform->id,'status'=>'Y'),'product_price asc');  
   ?>
                                                 <div class="product-price">

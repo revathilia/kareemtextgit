@@ -119,14 +119,14 @@ echo form_close();
  </td>
                                         <td class="cart-product-subtotal"><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $item['subtotal']; ?></td>
                                     </tr>
-
+                                    <?php $couponcode  = $this->session->userdata('coupon_code'); ?>
                                      <?php $sutotal = $item['subtotal'] + $sutotal ;
                                         $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
                                         $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
                                         $vat = 0 ;
                                         $discount =  0 ;
                                         $cname = '' ;
-                                        $couponcode  = $this->session->userdata('coupon_code');
+                                        
 
                                         if(!empty($couponcode)){
                                             
@@ -157,13 +157,37 @@ if($dtype == 'percent'){
                                    <?php }  ?>
                                     
 
-                                   
+                                 
                                    
                                     <tr class="cart-coupon-row">
                                         <td colspan="6">
                                             <div class="cart-coupon">
-                                                <input type="text" name="cart-coupon" id="coupon_code" placeholder="<?php echo $this->Admin_model->translate("Coupon Code") ; ?>">
+                                               
+<?php 
+
+ 
+ 
+if(!empty( $couponcode )){ ?>
+
+    <h5>Have a coupon? <a class="ltn__secondary-color" href="#ltn__coupon-code" data-bs-toggle="collapse"><?php echo $this->Admin_model->translate("Click here to change coupon") ; ?> </a></h5>
+                             
+
+                            <div id="ltn__coupon-code" class="collapse ltn__checkout-single-content-info">
+                                        <input type="text" id="coupon_code" name="coupon-code" placeholder="Coupon code">
+                                        <button type="button" class="btn theme-btn-2 btn-effect-2 text-uppercase applycoupon"  ><?php echo $this->Admin_model->translate("Apply Coupon") ; ?> </button>
+                                    </div>
+
+
+
+<?php } else{ ?>
+
+    <input type="text" name="cart-coupon" id="coupon_code" placeholder="<?php echo $this->Admin_model->translate("Coupon Code") ; ?>">
                                                 <button type="button" class="btn theme-btn-2 btn-effect-2 applycoupon"><?php echo $this->Admin_model->translate("Apply Coupon") ; ?></button>
+
+    <?php } ?>
+                                               
+
+
                                             </div>
                                         </td>
                                         <td>

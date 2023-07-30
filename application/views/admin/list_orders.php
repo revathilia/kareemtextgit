@@ -58,7 +58,7 @@ echo $details['name'] ?></td>
 <td><?php echo $details['id'] ?></td>
 <td><?php echo $details['qty'] ?></td>
 <td><?php echo $details['subtotal'] ?></td>
-<td><?php echo $this->Admin_model->get_type_name_by_id('order_status','id',$value['status'],'status_name') ?></td>
+<td><?php echo $this->Admin_model->get_type_name_by_id('order_status','id',$value['order_status'],'status_name') ?></td>
 <td><a href="javascript:void(0)"> <button type="button" class="btn btn-primary  btn-xs waves-effect waves-light status_update" data-orderid="<?php echo $value['id'] ?>" ><i class="fa fa-edit"></i> Status Update</button></a></td>
  
 </tr>

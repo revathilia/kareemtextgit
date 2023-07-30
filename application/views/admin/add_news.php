@@ -147,7 +147,7 @@ $('.save').prop('disabled', false);
 } else {
 toastr.success(JSON.result);
 $('.save').prop('disabled', false);
-window.location.href="<?php echo base_url();?>admin/clients";
+window.location.href="<?php echo base_url();?>admin/news";
 }
 },
 error: function() 

@@ -23,7 +23,7 @@
     </div>
 </div>
 
- <div class="card-content">
+   <div class="card-content">
 
       <?php $attributes = array('name' => 'edit_driver', 'id' => 'xin-form', 'autocomplete' => 'off');?>
         <?php $hidden = array('_user' => $session['user_id']);?>
@@ -43,6 +43,14 @@
                     <input class="form-control" placeholder="<?php echo $this->Admin_model->translate("Product name") ?>" name="ar_product_name" type="text" value="<?php echo $product['ar_product_name'] ?>">
                   </div>
                 </div>
+
+                <div class="col-md-12">
+<div class="form-group">
+<label for="first_name"><?php echo $this->Admin_model->translate("SKU") ?></label>
+<input class="form-control" placeholder="<?php echo $this->Admin_model->translate("SKU") ?>" name="product_code" type="text" value="<?php echo $product['product_code'] ?>">
+</div>
+</div>
+
             </div>
  
        

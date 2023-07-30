@@ -50,6 +50,12 @@
 </div>
 </div>
 
+<div class="col-md-12">
+<div class="form-group">
+<label for="first_name"><?php echo $this->Admin_model->translate("SKU") ?></label>
+<input class="form-control" placeholder="<?php echo $this->Admin_model->translate("SKU") ?>" name="product_code" type="text" value="">
+</div>
+</div>
 
 </div>
 

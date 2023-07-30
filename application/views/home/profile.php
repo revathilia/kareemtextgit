@@ -42,7 +42,7 @@
                 <div class="accordion-item">
     <h2 class="accordion-header" id="myprofile-headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#myprofile" aria-expanded="false" aria-controls="flush-collapseTwo">
-      <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/profile.svg" width="20px" height="20px">&nbsp;&nbsp;My Profile
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/profile.svg" width="20px" height="20px">&nbsp;&nbsp;<?php echo $this->Admin_model->translate("My Profile") ; ?>
       </button>
     </h2>
 
@@ -58,10 +58,10 @@
     
 </div>
 <div class="col-md-2">
-    <a href="" class="btn btn-b">Cancel</a>
+    <a href="" class="btn btn-b"><?php echo $this->Admin_model->translate("Cancel") ; ?></a>
 </div>
     <div class="col-md-2">
-    <a href="javascript:void(0)" id="btnsubmit" class="btn btn-blue">Save</a>
+    <a href="javascript:void(0)" id="btnsubmit" class="btn btn-blue"><?php echo $this->Admin_model->translate("Save") ; ?></a>
 </div>
 
 </div>
@@ -71,7 +71,7 @@
 <form id="profileform" action="" method="post">
 <div class="row">
 <div class="col-md-3">
-  <h6 class="forget" style="margin-left:20px">First Name</h6>
+  <h6 class="forget" style="margin-left:20px"><?php echo $this->Admin_model->translate("First Name") ; ?></h6>
 </div>
 <div class="col-md-4">
 <input placeholder="" class="form-control-new" type="text" name="first_name" value="<?php echo $profile->first_name ?>" tabindex="1" required autofocus>
@@ -80,7 +80,7 @@
 <hr class="line">
 <div class="row">
 <div class="col-md-3">
-  <h6 class="forget" style="margin-left:20px">Last Name</h6>
+  <h6 class="forget" style="margin-left:20px"><?php echo $this->Admin_model->translate("Last Name") ; ?></h6>
 </div>
 <div class="col-md-4">
 <input placeholder="" class="form-control-new" type="text" name="last_name" value="<?php echo $profile->last_name ?>" tabindex="1" required autofocus>
@@ -89,7 +89,7 @@
 <hr class="line">
 <div class="row">
 <div class="col-md-3">
-  <h6 class="forget" style="margin-left:20px">Email Address</h6>
+  <h6 class="forget" style="margin-left:20px"><?php echo $this->Admin_model->translate("Email Address") ; ?></h6>
 </div>
 <div class="col-md-4">
 <input placeholder="" class="form-control-new" type="text" tabindex="1" name="email" value="<?php echo $profile->email_address ?>" required autofocus>
@@ -98,7 +98,7 @@
 <hr class="line">
 <div class="row">
 <div class="col-md-3">
-  <h6 class="forget"style="margin-left:20px">Phone Number</h6>
+  <h6 class="forget"style="margin-left:20px"><?php echo $this->Admin_model->translate("Phone Number") ; ?> </h6>
 </div>
 <div class="col-md-4">
 <input placeholder="" name="phone" value="<?php echo $profile->phone_no ?>" class="form-control-new" type="text" tabindex="1" required autofocus>
@@ -107,17 +107,22 @@
 <hr class="line">
 <div class="row">
 <div class="col-md-3">
-  <h6 class="forget" style="margin-left:20px">Address</h6>
+  <h6 class="forget" style="margin-left:20px"><?php echo $this->Admin_model->translate("Address") ; ?> </h6>
 </div>
 <div class="col-md-4">
 <textarea placeholder="" class="form-control-new"tabindex="5" required></textarea>
+
+
+
+
+
 </div>
 <div class="col-md-1"></div>
 <div class="col-md-2">
-<a href="" class="btn btn-r">+ Add</a>
+<a href="" class="btn btn-r">+ <?php echo $this->Admin_model->translate("Add") ; ?></a>
 </div>
 <div class="col-md-2">
-<a href=""  class="btn btn-b"><img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/delete.png" width="10px" height="10px">&nbsp;&nbsp;Delete</a>
+<a href=""  class="btn btn-b"><img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/delete.png" width="10px" height="10px">&nbsp;&nbsp;<?php echo $this->Admin_model->translate("Delete") ; ?></a>
 </div>
 </div>
 <hr class="line"> 
@@ -131,7 +136,7 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingOne">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/order.png" width="20px" height="20px">&nbsp;&nbsp;My Order
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/order.png" width="20px" height="20px">&nbsp;&nbsp;<?php echo $this->Admin_model->translate("My Order") ; ?>
       </button>
     </h2>
     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -191,7 +196,7 @@ echo $details['name'] ?></td>
 </td>
 <td><?php echo $details['qty'] ?></td>
 <td><?php echo $details['subtotal'] ?></td>
-<td><?php echo $this->Admin_model->get_type_name_by_id('order_status','id',$value['status'],'status_name') ?></td>
+<td><?php echo $this->Admin_model->get_type_name_by_id('order_status','id',$value['order_status'],'status_name') ?></td>
  
  
 </tr>
@@ -210,78 +215,131 @@ echo $details['name'] ?></td>
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/status.png" width="20px" height="20px">&nbsp;&nbsp;Order Status
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/status.png" width="20px" height="20px">&nbsp;&nbsp;<?php echo $this->Admin_model->translate("Order Status") ; ?>
       </button>
     </h2>
     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
     <br><br>
-    <div class="row">
+    <?php if(!empty($active_orders)){
 
-    <div class="col-md-3">
-                <h6>Order ID : 12345</h6>
-</div>
-<div class="col-md-2"></div>
-<div class="col-md-2">
-<h6>Order Placed</h6>
-</div>
-<div class="col-md-2">
-<p>07-09-2022</p>
-</div>
+foreach($active_orders as $aorders){ ?>
+
+<div class="row">
+
 <div class="col-md-3">
-Delivery at 30-10-2023
+  <?php  
+  
+ $prefix = strtoupper( substr($aorders['type'], 0, 2));
+
+ $orderid = str_pad($aorders['id'], 5, "0", STR_PAD_LEFT) ;
+  
+  ?>
+      <h6><?php echo $this->Admin_model->translate("Order ID") ?>: KT<?php echo $prefix. $orderid ?></h6>
 </div>
+ 
+<div class="col-md-2">
+<h6><?php echo $this->Admin_model->translate("Order Placed") ?></h6>
+</div>
+<div class="col-md-2">
+<p><?php echo date('d-m-Y', strtotime($aorders['created_on'])) ?></p>
+</div>
+ 
+
+<div class="col-md-2">
+<h6><?php echo $this->Admin_model->translate("Delivery at") ?></h6>
+</div>
+<div class="col-md-2">
+<p><?php echo date('d-m-Y', strtotime($aorders['delivery_date'])) ?></p>
+</div>
+
+
 </div>
 
 <hr>
-    <div class="row">
-            <div class="col-md-3">
-                <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/sh.png" class="shop-car">
+
+<?php $details = json_decode($aorders['order_details'], true);
+if($aorders['type'] == 'idustry'){
+  $product = $this->Admin_model->get_single_data('industry_products',array('id'=>$details['id'])) ;
+
+
+}else{
+  $product = $this->Admin_model->get_single_data('school_products',array('id'=>$details['id'])) ;
+
+}
+
+$orderstatus = $this->Admin_model->get_all_data('status_update_history',array('order_id'=>$aorders['id'])) ;
+
+?>
+
+
+<div class="row">
+  <div class="col-md-3">
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/sh.png" class="shop-car">
 </div>
 <div class="col-md-7">
-    <h5>Boys blue striped shirt</h5>
-    <p>Model: IBS03</p>
-    <div class="container">
-  <div class="row">
-            <div class="col-12 col-md-10 hh-grayBox pt45 pb20">
-              <div class="row justify-content-between">
-                <div class="order-tracking completed">
-                  <span class="is-complete"></span>
-                  <p>Ordered<br><span>Mon, June 24</span></p>
-                </div>
-                <div class="order-tracking completed">
-                  <span class="is-complete"></span>
-                  <p>Shipped<br><span>Tue, June 25</span></p>
-                </div>
-                <div class="order-tracking">
-                  <span class="is-complete"></span>
-                  <p>Delivered<br><span>Fri, June 28</span></p>
-                </div>
-              </div>
-            </div>
-          </div>
+<h5><?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $product->ar_product_name ;
+}else{
+     echo $product->product_name ;
+}  ?>
+                                                    </h5>
+<p><?php echo $this->Admin_model->translate("Model") ; ?>: <?php echo $product->product_code ; ?></p>
+<div class="container">
+<div class="row">
+  <div class="col-12 col-md-10 hh-grayBox pt45 pb20">
+    <div class="row justify-content-between">
+
+     
+  <div class="order-tracking completed ">
+    <span class="is-complete"></span>
+    <p>Ordered<br><span><?php echo date('D, M d',strtotime($aorders['created_on'])) ; ?></span></p>
+  </div>
+  
+  <?php $shipped = $this->Admin_model->get_single_data('status_update_history',array('order_id'=>$aorders['id'],'status'=>3),'id desc ') ;  ?>
+  <div class="order-tracking <?php if(!empty($shipped)){ echo 'completed' ; } ?>">
+    <span class="is-complete"></span>
+    <p><?php echo $this->Admin_model->translate("Shipped") ; ?><br><span><?php if(!empty($shipped)){ echo date('D, M d',strtotime( $shipped->created_date)) ; } ?></span></p>
+  </div>
+
+  <?php $delivered = $this->Admin_model->get_single_data('status_update_history',array('order_id'=>$aorders['id'],'status'=>4),'id desc ') ; ?>
+
+  <div class="order-tracking <?php if(!empty($delivered)){ echo 'completed' ; } ?> ">
+    <span class="is-complete"></span>
+    <p><?php echo $this->Admin_model->translate("Delivered") ; ?><br><span><?php if(!empty($delivered)){ echo date('D, M d',strtotime( $delivered->created_date)) ; } ?></span></p>
+  </div>
+
+
+    </div>
+  </div>
+</div>
 </div>
 </div>
 <div class="col-md-2">
-    <span class="or-sa">SAR 50</span>
-   
-  
+<span class="or-sa"><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $aorders['total_amount']+$aorders['vat_amount']+$aorders['shipping_charge'] - $aorders['discount'] ?></span>
+
+
 </div>
 </div>
 <hr>
 <div class="row">
 
-    <div class="col-md-3">
-        <h5>Total Amount</h5>
-        <h6>SAR 50</h6>
+<div class="col-md-3">
+<h5><?php echo $this->Admin_model->translate("Total Amount") ; ?></h5>
+<h6><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $aorders['total_amount']+$aorders['vat_amount']+$aorders['shipping_charge'] - $aorders['discount'] ?></h6>
 </div>
 <div class="col-md-5"></div>
 <div class="col-md-3">
-    <p class="text-right">Invoice</p>
+<p class="text-right"><?php echo $this->Admin_model->translate("Invoice") ; ?></p>
 </div>
 </div>
+<hr style="border: 1px solid black;">
+<?php } }  ?>
+  
+   
     </div>
   </div>
-  <div class="accordion-item">
+  <!-- <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
       <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/refund.png" width="20px" height="20px">&nbsp;&nbsp; Refund
@@ -290,7 +348,7 @@ Delivery at 30-10-2023
     <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
     </div>
-  </div>
+  </div> -->
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingfour">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefour" aria-expanded="false" aria-controls="flush-collapsefour">
@@ -414,7 +472,7 @@ if($this->session->userdata('lang') == 'ar'){
 </div>
     </div>
   </div>
-  <div class="accordion-item">
+ <!-- <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingfive">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefive" aria-expanded="false" aria-controls="flush-collapsefive">
       <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/wal.png" width="20px" height="20px">&nbsp;&nbsp; Wallet Balance
@@ -459,7 +517,7 @@ if($this->session->userdata('lang') == 'ar'){
 </div>
 </div>
 </div>
-<!-- ...last... -->
+ 
 <br><br>
 <div class="box-r">
 <div class="row">
@@ -481,14 +539,17 @@ if($this->session->userdata('lang') == 'ar'){
       </div>
     </div>
   </div>
+  -->
   <div class="accordion-item">
     <h2 class="accordion-header" id="flush-headingsix">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsesix" aria-expanded="false" aria-controls="flush-collapsesix">
-      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/delete.png" width="20px" height="20px">&nbsp;&nbsp; Delete account
+      <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/delete.png" width="20px" height="20px">&nbsp;&nbsp; <?php echo $this->Admin_model->translate("Delete account") ?>
       </button>
     </h2>
     <div id="flush-collapsesix" class="accordion-collapse collapse" aria-labelledby="flush-headingsix" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+      <div class="accordion-body">
+<a href="<?php echo base_url()?>home/delete_account" class="btn btn-danger btn-sm"><?php echo $this->Admin_model->translate("Click to delete your account") ?></a>
+      </div>
     </div>
   </div>
 </div>

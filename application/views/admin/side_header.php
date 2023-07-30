@@ -156,15 +156,14 @@ if($session['usertype'] == 'admin'){ ?>
 <li id="6"><a class="waves-effect parent-item js__control" href="#"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/settings.png"><span><?php echo $this->Admin_model->translate("Website CMS") ?></span><span class="menu-arrow fa fa-angle-down"></span></a>
 <ul class="sub-menu js__content">
 
-<li id="6_1"><a href="<?php echo base_url()?>admin/users"> <?php echo $this->Admin_model->translate("Home") ?>  </a></li>
-<li id="6_2"><a href="<?php echo base_url()?>admin/changepassword"> <?php echo $this->Admin_model->translate("About Us") ?> </a></li>
+ 
+<li id="6_2"><a href="<?php echo base_url()?>admin/about"> <?php echo $this->Admin_model->translate("About Us") ?> </a></li>
 
 <li id="6_3_1"><a href="<?php echo base_url()?>admin/clients"> <?php echo $this->Admin_model->translate("Client Logos") ?> </a></li>
 <li id="6_3_2"><a href="<?php echo base_url()?>admin/news"> <?php echo $this->Admin_model->translate("News & Events") ?> </a></li>
-
-<li id="6_3"><a href="<?php echo base_url()?>admin/changepassword"> <?php echo $this->Admin_model->translate("Industry") ?> </a></li>
-<li id="6_4"><a href="<?php echo base_url()?>admin/changepassword"> <?php echo $this->Admin_model->translate("School") ?> </a></li>
-<li id="6_5"><a href="<?php echo base_url()?>admin/changepassword"> <?php echo $this->Admin_model->translate("Contact Us") ?> </a></li>
+ 
+<li id="6_5"><a href="<?php echo base_url()?>admin/contact"> <?php echo $this->Admin_model->translate("Contact Us") ?> </a></li>
+<li id="6_6"><a href="<?php echo base_url()?>admin/footer"> <?php echo $this->Admin_model->translate("Footer") ?> </a></li>
 
 </ul>
 

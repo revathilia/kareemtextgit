@@ -93,30 +93,30 @@ $this->session->set_userdata('dir', 'ltr');
                 <div class="col-lg-4">
                     <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                         <div class="ltn__contact-address-icon">
-                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/10.svg" alt="Icon Image">
+                            <img src="<?php echo base_url() ; ?>uploads/images/about/<?php echo $box1_icon ?>" alt="Icon Image">
                         </div>
-                        <h3><?php echo $this->Admin_model->translate("Email Address") ; ?></h3>
-                        <p>Kareemtex@webmail.com <br>
-                        Kareemtex@webexample.com</p>
+                        <h3><?php echo $box1_title ?></h3>
+                        <p><?php echo $box1_value1 ?> <br>
+                        <?php echo $box1_value2 ?></p>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                         <div class="ltn__contact-address-icon">
-                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/11.svg" alt="Icon Image">
+                            <img src="<?php echo base_url() ; ?>uploads/images/about/<?php echo $box2_icon ?>" alt="Icon Image">
                         </div>
-                        <h3><?php echo $this->Admin_model->translate("Phone Number") ; ?></h3>
-                        <p>+0123-456789 <br> +987-6543210</p>
+                        <h3><?php echo $box2_title ?></h3>
+                        <p><?php echo $box2_value1 ?> <br>
+                        <?php echo $box2_value2 ?></p>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="ltn__contact-address-item ltn__contact-address-item-3 box-shadow">
                         <div class="ltn__contact-address-icon">
-                            <img src="<?php echo base_url() ; ?>assets/home_assets/img/icons/12.svg" alt="Icon Image">
+                            <img src="<?php echo base_url() ; ?>uploads/images/about/<?php echo $box3_icon ?>" alt="Icon Image">
                         </div>
-                        <h3><?php echo $this->Admin_model->translate("Office Address") ; ?></h3>
-                        <p>18/A, New Born Town Hall <br>
-                        Kareemtex, US</p>
+                        <h3><?php echo $box3_title ?></h3>
+                        <p><?php echo $box3_value ?></p>
                     </div>
                 </div>
             </div>
@@ -191,7 +191,7 @@ $this->session->set_userdata('dir', 'ltr');
     
     <div class="google-map mb-120">
     <br><br><br><br>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9334.271551495209!2d-73.97198251485975!3d40.668170674982946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25b0456b5a2e7%3A0x68bdf865dda0b669!2sBrooklyn%20Botanic%20Garden%20Shop!5e0!3m2!1sen!2sbd!4v1590597267201!5m2!1sen!2sbd" width="100%" height="100%" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <iframe src="<?php echo $map_url ?>" width="100%" height="100%" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 
     </div>
     </div>

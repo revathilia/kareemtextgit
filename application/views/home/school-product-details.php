@@ -139,6 +139,7 @@ if($this->session->userdata('lang') == 'ar'){
 
 
                                     </h3>
+                                    <h5><?php echo  $product->product_code ;?></h5>
                                     <div class="product-price" id="price_det1">
                                     <?php if($product_price){ ?>
                                         <span class="blue"><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo 

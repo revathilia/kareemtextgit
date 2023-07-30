@@ -26,7 +26,7 @@
 <label class="control-label mb-10 text-left"><?php echo $this->Admin_model->translate("Status") ?> </label>
 <select class="form-control" id="field_type" name="status"><option value="">--Select--</option>
    <?php foreach ($statuses as  $value) {?>
-    <option value="<?php echo $value['id'] ?>" <?php if($order->status == $value['id']) { echo 'selected' ; } ?>><?php echo $value['status_name'] ?></option>
+    <option value="<?php echo $value['id'] ?>" <?php if($order->order_status == $value['id']) { echo 'selected' ; } ?>><?php echo $value['status_name'] ?></option>
   <?php } ?>
 </select>
 </div>

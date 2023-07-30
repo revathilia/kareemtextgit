@@ -102,42 +102,31 @@ if($this->session->userdata('lang') == 'ar'){
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
-                        <div class="col-md-3">
+                        <?php foreach($values as $offers){ ?>
+
+                            <div class="col-md-3">
                             <div class="ltn__feature-icon">
-                              <p class="text-center">  <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/icon1.png" alt="#"></p>
+                              <p class="text-center">  <img src="<?php echo base_url() ; ?>uploads/images/<?php echo $offers['logo'] ?>" alt="#"></p>
                             </div>
                             <div class="ltn__feature-info">
-                                <h4  class="text-center">Pickup at any Store</h4>
-                                <p  class="text-center">Free shipping on orders over $65</p>
+                                <h4  class="text-center"> <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $offers['title_ar'] ;
+}else{
+     echo $offers['title'] ;
+}
+                                                    ?></h4>
+                                <p  class="text-center"> <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $offers['content_ar'] ;
+}else{
+     echo $offers['content'] ;
+}
+                                                    ?></p>
                             </div>
                          </div>
-                       <div class="col-md-3">
-                            <div class="ltn__feature-icon">
-                            <p class="text-center">  <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/icon2.png" alt="#"></p>
-                            </div>
-                            <div class="ltn__feature-info">
-                                <h4 class="text-center">Free returns</h4>
-                                <p class="text-center">10-days free return policy.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="ltn__feature-icon">
-                            <p class="text-center"> <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/icon3.png" alt="#"></p>
-                            </div>
-                            <div class="ltn__feature-info">
-                                <h4  class="text-center">Secured payments</h4>
-                                <p  class="text-center">We accept all major credit cards.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="ltn__feature-icon">
-                            <p class="text-center">  <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/icon4.png" alt="#"></p>
-                            </div>
-                            <div class="ltn__feature-info">
-                                <h4  class="text-center">Customer service</h4>
-                                <p  class="text-center">Top notch customer service.</p>
-                            </div>
-                        </div>
+
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -152,15 +141,15 @@ if($this->session->userdata('lang') == 'ar'){
             <div class="row">
                 <div class="col-lg-6 align-self-center">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/f1.png" alt="About Us Image" class="img-fluid">
+                        <img src="<?php echo base_url() ; ?>uploads/images/about/<?php echo $sec2_image ?>" alt="About Us Image" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-6 align-self-center">
                     <div class="about-us-info-wrap">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
-                            <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">About Us</h6>
-                            <h4 class="section-title">Who We Are</h4>
-                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+                            <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none"><?php echo $this->Admin_model->translate("About Us") ; ?></h6>
+                            <h4 class="section-title"><?php echo $sec2_title ?></h4>
+                           <p><?php echo $sec2_content ?></p>
                         </div>
                         
                        
@@ -179,10 +168,10 @@ if($this->session->userdata('lang') == 'ar'){
                     <div class="col-md-11">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Vision</button>
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><?php echo $sec3_title1 ?></button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Mission</button>
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"><?php echo $sec3_title2 ?></button>
   </li>
 </ul>
 </div>
@@ -193,14 +182,14 @@ if($this->session->userdata('lang') == 'ar'){
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
   <div class="row">
   <div class="col-md-12"> 
-   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+   <p><?php echo $sec3_content1 ?></p>
 </div>
 </div>
   </div>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="row">
   <div class="col-md-12"> 
-   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+   <p><?php echo $sec3_content2 ?></p>
 </div>
 </div>
 </div>
@@ -210,7 +199,7 @@ if($this->session->userdata('lang') == 'ar'){
 
 <div class="col-md-6">
 
-        <img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/1.jpg">
+        <img src="<?php echo base_url() ; ?>uploads/images/about/<?php echo $sec2_image ?>">
 
 <br><br>
 
@@ -278,16 +267,16 @@ if($this->session->userdata('lang') == 'ar'){
         <div class="row">
             <div class="col-md-12">
                 <div class="subscribe">
-                    <h5 class="text-center">Let’s stay in touch</h5>
-            <p class="text-center">Keep up to date with our latest news and special offers.</p>
+                    <h5 class="text-center"><?php echo $this->Admin_model->translate("Let's stay in touch") ?></h5>
+            <p class="text-center"><?php echo $this->Admin_model->translate("Keep up to date with our latest news and special offers.") ?></p>
                             <div class="footer-newsletter">
                                 <div class="row">
                                 <div class="col-md-3"></div>
                                     <div class="col-md-7">
                                 <form action="#">
-                                    <input type="email" name="email" placeholder="Enter your email address*">
+                                    <input type="email" name="email" placeholder="<?php echo $this->Admin_model->translate("Enter your email address*") ?>">
                                     <div class="btn-wrapper">
-                                        <button class="theme-btn-1 btn" type="submit">Subscribe</button>
+                                        <button class="theme-btn-1 btn" type="submit"><?php echo $this->Admin_model->translate("Subscribe") ?></button>
                                     </div>
                                                                 </form>
 </div>
@@ -311,130 +300,20 @@ if($this->session->userdata('lang') == 'ar'){
     <!-- ABOUT US AREA END -->
     <div class="ltn__blog-area pt-115 pb-45">
         <div class="container">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title-area ltn__section-title-2--- text-center">
-                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none">News & Blogs</h6>
+                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none"><?php echo $this->Admin_model->translate("News & Blogs") ?></h6>
                        
                    
-                <h3 class="text-center">News and Events</h3>
+                <h3 class="text-center"><?php echo $this->Admin_model->translate("News and Events") ?></h3>
 
 <hr>
 <hr class="li-orangee">
                     </div>
                 </div>
-            </div>
-            <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal" dir="rtl">
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/1.jpg" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                            
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">10 Brilliant Ways To Decorate Your Home</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>June 24, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/2.jpg" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                           
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">The Most Inspiring Interior Design Of 2021</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>July 23, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/3.jpg" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                           
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">Recent Commercial Real Estate Transactions</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>May 22, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/4.jpg" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                          
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">Renovating a Living Room? Experts Share Their Secrets</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>June 24, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details.html"><img src="<?php echo base_url() ; ?>assets/home_assets/img/blog/5.jpg" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                          
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">7 home trends that will shape your house in 2021</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>June 24, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div> -->
+            
                 <!--  -->
             </div>
         </div>
@@ -446,42 +325,24 @@ if($this->session->userdata('lang') == 'ar'){
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
-                <h3>Our Clients</h3>
+                <h3><?php echo $this->Admin_model->translate("Our Clients") ?> </h3>
 </div>
 </div>
 <hr>
 <hr class="li-orange">
             <div class="row ltn__brand-logo-active"  dir="rtl">
-                <div class="col-lg-12">
+                <?php foreach($clients as $client){ ?>
+
+                    <div class="col-lg-12">
                     <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/1.png" alt="Brand Logo">
+                        <img src="<?php echo base_url() ; ?>uploads/images/clients/<?php echo $client['image']   ?>" alt="Brand Logo">
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/2.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/3.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/4.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/5.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="<?php echo base_url() ; ?>assets/home_assets/img/brand-logo/3.png" alt="Brand Logo">
-                    </div>
-                </div>
+
+                <?php } ?> 
+                
+                 
+                
             </div>
         </div>
     </div>
