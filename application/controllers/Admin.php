@@ -8320,7 +8320,7 @@ $session = $this->session->userdata('superadmindet');
   $ext = pathinfo($filename, PATHINFO_EXTENSION);
   if(in_array($ext,$allowed)){
     $tmp_name = $_FILES["image"]["tmp_name"];
-    $profile = "uploads/images/about/";
+    $profile = "uploads/images/";
     $set_img = base_url()."uploads/images/";
     // basename() may prevent filesystem traversal attacks;
     // further validation/sanitation of the filename may be appropriate
