@@ -45,8 +45,40 @@ function if_column_exists( $table, $column ) {
     }
 }
 
+public function get_OrderTotal($type='',$date = ''){
+    $this->db->select('coalesce(sum(total_amount + vat_amount+shipping_charge-discount),0)totalAmount , count(id)totalCount from order_master') ;
+  if($type !=''){
+    $this->db->where('type',$type);
+  }
+   
+if($date !=''){
+    $this->db->where('created_on',date('Y-m-d'));
+}
+return  $this->db->get()->row() ;
+
+}
 
 
+public function get_customers_list($type='',$date = ''){
+    
+    $session = $this->session->userdata('superadmindet');
+    $logged_in_role =  $this->Admin_model->get_type_name_by_id('user_roles','id',$session['userrole'],'belongs_to')  ;
+   
+
+    $this->db->select('*') ;
+    $this->db->from('customer_master a');
+    $this->db->join('order_master b', 'a.id = b.customer_id and a.status ="Y"');
+      
+
+ if($logged_in_role == 'school'){
+    $this->db->where('b.type','school');
+ }else if($logged_in_role == 'industry'){
+    $this->db->where('b.type','industry');
+ }
+
+return  $this->db->get()->result_array() ;
+
+}
 
 //get all data from table with conditions
 public function get_all_data($table,$condition= '',$orderby = ''){

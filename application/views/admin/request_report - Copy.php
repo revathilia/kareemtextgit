@@ -69,15 +69,12 @@
 
 <?php  $session = $this->session->userdata('superadmindet');
 $logged_in_role =  $this->Admin_model->get_type_name_by_id('user_roles','id',$session['userrole'],'belongs_to')  ;
-
-
      
 if($logged_in_role == 'school' || $logged_in_role == 'industry' ){
   $type = $logged_in_role ;
 }
     
     ?>
-
 
 <div id="wrapper">
 <div class="main-content">
@@ -106,28 +103,11 @@ if($logged_in_role == 'school' || $logged_in_role == 'industry' ){
 <label for="first_name"><?php echo $this->Admin_model->translate("Select service") ?></label>
 
 <select class="form-control" name="service_name" id="type">
- <?php if($type !='industry' && $type !='school'){ ?>
-
   <option value="all">All</option>
-
- <?php } ?>
-  <?php if($type !='industry'){ ?>
-
-  <option value="school"  <?php if($type=='school'){echo 'selected' ; }elseif($type=='industry'){ echo 'disabled' ; } ?> > <?php echo $this->Admin_model->translate("School") ?> </option>
-
- <?php } ?>
-
-
-  <?php if($type !='school'){ ?>
-
- <option value="industry"  <?php if($type=='industry'){echo 'selected' ; }elseif($type=='school'){ echo 'disabled' ; } ?> ><?php echo $this->Admin_model->translate("Industry") ?></option>
-
- <?php } ?>
-
-
-
- 
-    
+  
+  <option value="school"  <?php if($type=='school'){echo 'selected' ; } ?> > <?php echo $this->Admin_model->translate("School") ?> </option>
+  <option value="industry"  <?php if($type=='industry'){echo 'selected' ; } ?> ><?php echo $this->Admin_model->translate("Industry") ?></option>
+   
   
 </select>
  
@@ -140,12 +120,12 @@ if($logged_in_role == 'school' || $logged_in_role == 'industry' ){
  <div class="row">
     <div class="col-md-4">
  <div class="form-group">
-  <label><?php echo $this->Admin_model->translate("From Date") ?></label><input type="date" id="fromdate" class="form-control" value="<?php if($date=='today'){echo date('Y-m-d') ; } ?>" name="">
+  <label><?php echo $this->Admin_model->translate("From Date") ?></label><input type="date" id="fromdate" class="form-control" value="<?php if($date=='today'){ echo date('Y-m-d') ; }?>" name="">
 </div>
 </div>
 <div class="col-md-4">
  <div class="form-group">
-  <label><?php echo $this->Admin_model->translate("To Date") ?></label><input type="date" id="todate" class="form-control" name="">
+  <label><?php echo $this->Admin_model->translate("To Date") ?></label><input type="date" id="todate" class="form-control" value="<?php if($date=='today'){ echo date('Y-m-d') ; }?>" name="">
 </div>
 </div>
 <div class="col-md-4">
@@ -165,7 +145,6 @@ if($logged_in_role == 'school' || $logged_in_role == 'industry' ){
 
 
 <div id="questionlist">
-
   
 </div>
 
@@ -188,6 +167,7 @@ if($logged_in_role == 'school' || $logged_in_role == 'industry' ){
 </div>
 </div>
 </div>
+ 
 
 
 
@@ -258,7 +238,7 @@ $('#questionlist').html(data);
  
 
 $( document ).ready(function() {
-   // filterdata();
+    filterdata();
 });
 
 

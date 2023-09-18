@@ -147,7 +147,87 @@ $userdata = $this->Admin_model->get_single_data('users',array('user_name'=>$user
     if(empty($session)){ 
       redirect('admin');
     }
+
+    $logged_in_role =  $this->Admin_model->get_type_name_by_id('user_roles','id',$session['userrole'],'belongs_to')  ;
+  
+
+    if ($logged_in_role == 'admin'){
+
+      $data['totalCustomers'] = $this->Admin_model->get_all_data('customer_master',array('status'=>'Y'));
+      $data['totalSales'] = $this->Admin_model->get_OrderTotal();
+      $data['totalOrders'] = $this->Admin_model->get_OrderTotal();
+      $data['totalenquiries'] = $this->Admin_model->get_all_data('enquiry_messages');
+  
+      $data['industryOrders'] = $this->Admin_model->get_OrderTotal('industry');
+      $data['schoolOrders'] = $this->Admin_model->get_OrderTotal('school');
+
+
+      $data['totalSalesToday'] = $this->Admin_model->get_OrderTotal('','today');
+      $data['totalOrdersToday'] = $this->Admin_model->get_OrderTotal('','today');
+      $data['totalenquiriesToday'] = $this->Admin_model->get_all_data('enquiry_messages',array( 'created_on'  => date('Y-m-d')));
+      $data['industryOrdersToday'] = $this->Admin_model->get_OrderTotal('industry','today'); 
+      $data['schoolOrdersToday'] = $this->Admin_model->get_OrderTotal('school','today'); 
  
+
+      
+      $data['pendingEnquiries'] = $this->Admin_model->get_all_data('enquiry_messages',array('status !='=>3));    
+      $data['pendingschoolOrders'] = $this->Admin_model->get_all_data('order_master',array('type'=>'school','order_status'=>1));
+      $data['pendingindustryOrders'] = $this->Admin_model->get_all_data('order_master',array('type'=>'industry','order_status'=>1));
+            
+    }else if ($logged_in_role == 'school' ){
+
+      $data['totalCustomers'] = $this->Admin_model->get_all_data('customer_master',array('status'=>'Y'));
+      $data['totalSales'] = $this->Admin_model->get_OrderTotal();
+      $data['totalOrders'] = $this->Admin_model->get_OrderTotal();
+      $data['totalenquiries'] = $this->Admin_model->get_all_data('enquiry_messages');
+  
+      $data['industryOrders'] = $this->Admin_model->get_OrderTotal('industry');
+      $data['schoolOrders'] = $this->Admin_model->get_OrderTotal('school');
+
+
+      $data['totalSalesToday'] = $this->Admin_model->get_OrderTotal('','today');
+      $data['totalOrdersToday'] = $this->Admin_model->get_OrderTotal('','today');
+      $data['totalenquiriesToday'] = $this->Admin_model->get_all_data('enquiry_messages',array( 'created_on'  => date('Y-m-d')));
+      $data['industryOrdersToday'] = $this->Admin_model->get_OrderTotal('industry','today'); 
+      $data['schoolOrdersToday'] = $this->Admin_model->get_OrderTotal('school','today'); 
+ 
+
+      
+      $data['pendingEnquiries'] = $this->Admin_model->get_all_data('enquiry_messages',array('status !='=>3));    
+      $data['pendingschoolOrders'] = $this->Admin_model->get_all_data('order_master',array('type'=>'school','order_status'=>1));
+      $data['pendingindustryOrders'] = $this->Admin_model->get_all_data('order_master',array('type'=>'industry','order_status'=>1));
+    
+    
+    }else if ($logged_in_role == 'industry' ){
+
+      $data['totalCustomers'] = $this->Admin_model->get_all_data('customer_master',array('status'=>'Y'));
+      $data['totalSales'] = $this->Admin_model->get_OrderTotal('industry');
+      $data['totalOrders'] = $this->Admin_model->get_OrderTotal('industry');
+      $data['totalenquiries'] = $this->Admin_model->get_all_data('enquiry_messages');
+  
+      $data['industryOrders'] = $this->Admin_model->get_OrderTotal('industry');
+      $data['schoolOrders'] = $this->Admin_model->get_OrderTotal('school');
+
+
+      $data['totalSalesToday'] = $this->Admin_model->get_OrderTotal('industry','today');
+      $data['totalOrdersToday'] = $this->Admin_model->get_OrderTotal('industry','today');
+      $data['totalenquiriesToday'] = $this->Admin_model->get_all_data('enquiry_messages',array( 'created_on'  => date('Y-m-d')));
+      $data['industryOrdersToday'] = $this->Admin_model->get_OrderTotal('industry','today'); 
+      $data['schoolOrdersToday'] = $this->Admin_model->get_OrderTotal('school','today'); 
+ 
+
+      
+      $data['pendingEnquiries'] = $this->Admin_model->get_all_data('enquiry_messages',array('status !='=>3));    
+      $data['pendingschoolOrders'] = $this->Admin_model->get_all_data('order_master',array('type'=>'school','order_status'=>1));
+      $data['pendingindustryOrders'] = $this->Admin_model->get_all_data('order_master',array('type'=>'industry','order_status'=>1));
+    
+
+    }
+
+      
+    $data['pendingEnquiries'] = $this->Admin_model->get_all_data('enquiry_messages',array('status !='=>3));
+    $data['closedEnquiries'] = $this->Admin_model->get_all_data('enquiry_messages',array('status'=>3));
+
 
     $data['title'] = 'Dashboard';
     $this->load->view('admin/dashboard', $data);
@@ -5773,7 +5853,31 @@ public function reset_pass()
    
 
 
- 
+  public function order_report()
+  {
+  
+    $session = $this->session->userdata('superadmindet');
+    if(empty($session)){
+      redirect('admin');
+    }
+    $data['statuses'] =  $this->Admin_model->get_all_data('order_status');
+
+    $data['status']=($this->input->get('status')) ? $this->input->get('status') : '';
+    $data['type']=($this->input->get('type')) ? $this->input->get('type') : '';
+    $data['date']=($this->input->get('date')) ? $this->input->get('date') : '';
+
+
+    
+    $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
+    if( $getval){
+       $this->load->view('admin/request_report', $data);
+    }else{
+      redirect('admin/accessdenied');
+    }
+
+    
+  }
+
 
 
 public function request_det()
@@ -5781,19 +5885,19 @@ public function request_det()
    $session = $this->session->userdata('superadmindet');
    $fromdate = $this->input->post('fromdate');
    $todate = $this->input->post('todate');
-   $serviceid = $this->input->post('serviceid');
+   $type = $this->input->post('type');
    $status = $this->input->post('status');
 
-   $data['questions'] = $this->Admin_model->get_all_data('questions',array('service_id'=>$serviceid));
+//$data['orders'] = $this->Admin_model->get_all_data('order_master',array('type'=>$type));
 
 $conditions = array() ;  
 
-if($serviceid<>'all'){
-  $conditions['service_id'] =    $serviceid ;
+if($type<>'all'){
+  $conditions['type'] =    $type ;
 }
 
 if($status){
-  $conditions['status'] =    $status ;
+  $conditions['order_status'] =    $status ;
 }
 
 if($fromdate){
@@ -5805,9 +5909,9 @@ if($todate){
 
  $orderby = ' created_on desc ' ;
 
-  $data['requests'] = $this->Admin_model->get_all_data('service_request',$conditions,$orderby );
-   
-    $this->load->view('admin/request_result',$data) ;
+  $data['orders'] = $this->Admin_model->get_all_data('order_master',$conditions,$orderby );
+
+  $this->load->view('admin/request_result',$data) ;
 
   
 }
@@ -6651,9 +6755,22 @@ $data['briefdet'] = $this->Admin_model->get_single_data('brief',array('id'=>'1')
   }
 
   function industry_orders(){
+
+    
+
     $data['orders'] = $this->Admin_model->get_all_data('order_master',array('type'=>'industry'),'id desc');
     $this->load->view('admin/list_orders',$data);
   }
+
+   public function invoice() {
+
+    $id = $this->uri->segment(3) ;
+
+$data['order'] = $this->Admin_model->get_single_data('order_master',array('id'=> $id ) );
+    
+$data['address'] = $this->Admin_model->get_single_data('contact_us_page',array('id'=>1))->box3_value ;     $this->load->view('home/invoice',$data);
+  }
+  
  
   function order_status(){
 
@@ -6690,7 +6807,20 @@ $data['briefdet'] = $this->Admin_model->get_single_data('brief',array('id'=>'1')
       redirect('admin');
     } 
 
-     $data['enquiries'] = $this->Admin_model->get_all_data('enquiry_messages','','id desc'); 
+
+ $date =($this->input->get('date')) ? $this->input->get('date') : '';
+ $status =($this->input->get('status')) ? $this->input->get('status') : '';
+
+ if(!empty($date)){
+   $filter['DATE(created_on)'] = date('Y-m-d') ;
+ }else if(!empty($status)){
+  $filter['status'] =  $status ;
+ } else{
+  $filter = '' ;
+ }
+
+     $data['enquiries'] = $this->Admin_model->get_all_data('enquiry_messages',$filter,'id desc'); 
+     
      $this->load->view('admin/list_enquiries', $data);
   }
 
@@ -7175,6 +7305,184 @@ $this->output($Return);
           //get setting info 
            
            $Return['result'] = 'Logo updated successfully.';
+          
+        } else {
+          $Return['error'] =  'Bug. Something went wrong, please try again';
+        }
+        $this->output($Return);
+        exit;
+      }
+
+
+    public function payment_icons()
+      {
+       
+       $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+          $data['data'] = $this->Admin_model->get_all_data('payment_icons'); 
+        $this->load->view('admin/weaccept', $data);
+        
+      }
+
+      
+      
+    
+        public function add_icon()
+      {   
+         $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+       $Return = array('result'=>'', 'error'=>'');
+           
+         if(empty($_FILES['image']['name'])){
+          $Return['error'] = "Image Required ";
+        }
+            
+        if($Return['error']!=''){
+              $this->output($Return);
+               exit ;
+          }
+          
+      
+    
+        if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["image"]["tmp_name"];
+          $profile = "uploads/images/icons/";
+          $set_img = base_url()."uploads/images//";
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image  = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+        
+    
+ 
+       
+        $data = array(   
+         
+        'image' => $image,
+        'status' => 'Y'
+          );
+      //  $result = $this->Admin_model->insert_data('supp_org', $data);
+        $result = $this->db->insert('payment_icons',$data);
+       $inserid =  $this->db->insert_id();
+    
+     
+    
+        if ($result == TRUE) {
+          
+          //get setting info 
+           
+           $Return['result'] = 'Icon added successfully.';
+          
+        } else {
+          $Return['error'] =  'Bug. Something went wrong, please try again';
+        }
+        $this->output($Return);
+        exit;
+      }
+        public function edit_icon()
+        {
+        $session = $this->session->userdata('superadmindet');
+            if(empty($session)){ 
+              redirect('admin');
+            }
+         $id = $this->uri->segment(3) ;
+         $data['data'] = $this->Admin_model->get_single_data('payment_icons',array('id'=>$id)) ;
+    
+           $this->load->view('admin/edit_icon', $data);
+            
+        }
+
+      public function update_icon()
+      {   
+         $session = $this->session->userdata('superadmindet');
+        if(empty($session)){ 
+          redirect('admin');
+        }
+    
+        $id = $this->input->post('id');
+    
+       $Return = array('result'=>'', 'error'=>'');
+           
+        /* Server side PHP input validation */    
+         
+        
+         if(empty($_FILES['image']['name'])){
+          $Return['error'] = "Image Required ";
+        }
+            
+        if($Return['error']!=''){
+              $this->output($Return);
+               exit ;
+          }
+          
+      
+      $image = $this->input->post('old_image');
+        if(is_uploaded_file($_FILES['image']['tmp_name'])) {
+        //checking image type
+        $allowed =  array('png','jpg','jpeg','pdf','gif','PNG','JPG','JPEG','PDF','GIF','svg','webp','json');
+        $filename = $_FILES['image']['name'];
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        if(in_array($ext,$allowed)){
+          $tmp_name = $_FILES["image"]["tmp_name"];
+          $profile = "uploads/images/icons/";
+      
+          // basename() may prevent filesystem traversal attacks;
+          // further validation/sanitation of the filename may be appropriate
+          $name = basename($_FILES["image"]["name"]);
+         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+  
+          $newfilename = $name ;
+          move_uploaded_file($tmp_name, $profile.$newfilename);
+          $image  = $newfilename;
+           
+   
+    }else {
+          $Return['error'] = "Invalid file format";
+        }
+      if($Return['error']!=''){
+        $this->output($Return);
+      }
+    }
+       
+       
+        $data = array(   
+         
+        'image' => $image,
+        'status' => 'Y'
+          );
+      //  $result = $this->Admin_model->insert_data('supp_org', $data);
+        $result = $this->Admin_model->update_data('payment_icons',array('id'=>$id),$data);
+       $inserid =  $this->db->insert_id();
+    
+       
+    
+        if ($result == TRUE) {
+          
+          //get setting info 
+           
+           $Return['result'] = 'Icon updated successfully.';
           
         } else {
           $Return['error'] =  'Bug. Something went wrong, please try again';
@@ -7720,6 +8028,125 @@ if($this->input->post('unlimited_usage')){
 
   // CMS starting
 
+  public function privacy()
+  {
+  $session = $this->session->userdata('superadmindet');
+      if(empty($session)){ 
+        redirect('admin');
+      }
+          
+   $data['data'] = $this->Admin_model->get_single_data('privacy_policy',array('id'=>'1')) ;
+   
+   
+
+     $this->load->view('admin/edit_privacy', $data);
+         
+    }
+  
+
+
+    public function update_privacy()
+  {   
+    $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+   $Return = array('result'=>'', 'error'=>'');
+       
+    /* Server side PHP input validation */    
+     if($this->input->post('privacy_policy')==='') {
+          $Return['error'] = "Content Required ";
+    }else if($this->input->post('privacy_policy_ar')==='') {
+          $Return['error'] = "Arabic Content Required ";
+    } 
+        
+    if($Return['error']!=''){
+          $this->output($Return);
+      }
+
+ 
+ 
+    $data = array(   
+    'privacy_policy' => $this->input->post('privacy_policy'),
+      'privacy_policy_ar' => $this->input->post('privacy_policy_ar'),
+  
+   
+      );
+    //print_r($data);
+    $result = $this->Admin_model->update_data('privacy_policy',array('id'=>1), $data);
+    if ($result == TRUE) {
+      
+      //get setting info 
+       
+       $Return['result'] = 'Details updated successfully.';
+      
+    } else {
+      $Return['error'] =  'Bug. Something went wrong, please try again';
+    }
+    $this->output($Return);
+    exit;
+  }
+
+
+    public function terms()
+  {
+  $session = $this->session->userdata('superadmindet');
+      if(empty($session)){ 
+        redirect('admin');
+      }
+          
+   $data['data'] = $this->Admin_model->get_single_data('terms_conditions',array('id'=>'1')) ;
+   
+   
+
+     $this->load->view('admin/edit_terms', $data);
+         
+    }
+
+    
+    public function update_terms()
+  {   
+    $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+   $Return = array('result'=>'', 'error'=>'');
+       
+    /* Server side PHP input validation */    
+     if($this->input->post('privacy_policy')==='') {
+          $Return['error'] = "Content Required ";
+    }else if($this->input->post('privacy_policy_ar')==='') {
+          $Return['error'] = "Arabic Content Required ";
+    } 
+        
+    if($Return['error']!=''){
+          $this->output($Return);
+      }
+
+ 
+ 
+    $data = array(   
+    'terms' => $this->input->post('terms'),
+      'terms_ar' => $this->input->post('terms_ar'),
+  
+   
+      );
+    //print_r($data);
+    $result = $this->Admin_model->update_data('terms_conditions',array('id'=>1), $data);
+    if ($result == TRUE) {
+      
+      //get setting info 
+       
+       $Return['result'] = 'Details updated successfully.';
+      
+    } else {
+      $Return['error'] =  'Bug. Something went wrong, please try again';
+    }
+    $this->output($Return);
+    exit;
+  }
+  
+
   public function about()
   {
   $session = $this->session->userdata('superadmindet');
@@ -7771,7 +8198,23 @@ if($this->input->post('unlimited_usage')){
         $Return['error'] = "Section 3 content 2 Required ";
   }else if($this->input->post('sec3_content2_ar')==='') {
         $Return['error'] = "Section 3 content 2 arabic Required ";
-  }  
+  }  else if($this->input->post('sec4_title')==='') {
+    $Return['error'] = "Section 4 title Required ";
+}else if($this->input->post('sec4_title_ar')==='') {
+    $Return['error'] = "Section 4 title arabic Required ";
+}else if($this->input->post('sec4_content')==='') {
+        $Return['error'] = "Section 4 content Required ";
+  }else if($this->input->post('sec4_content_ar')==='') {
+        $Return['error'] = "Section 4 content arabic Required ";
+  }else if($this->input->post('sec4_title')==='') {
+    $Return['error'] = "Section 5 title Required ";
+}else if($this->input->post('sec5_title_ar')==='') {
+    $Return['error'] = "Section 5 title arabic Required ";
+}else if($this->input->post('sec5_content')==='') {
+        $Return['error'] = "Section 5 content Required ";
+  }else if($this->input->post('sec5_content_ar')==='') {
+        $Return['error'] = "Section 5 content arabic Required ";
+  }
  
        
           
@@ -7800,7 +8243,7 @@ if($this->input->post('unlimited_usage')){
           $name = basename($_FILES["sec2_image"]["name"]);
          // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
   
-          $newfilename = $name ;
+          $newfilename = round(microtime(true)).$name ;
           move_uploaded_file($tmp_name, $profile.$newfilename);
           $image1 = $newfilename;
            
@@ -7827,7 +8270,7 @@ if($this->input->post('unlimited_usage')){
           $name = basename($_FILES["sec3_image"]["name"]);
          // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
   
-          $newfilename = $name ;
+          $newfilename = round(microtime(true)).$name ;
           move_uploaded_file($tmp_name, $profile.$newfilename);
           $image2 = $newfilename;
            
@@ -7856,7 +8299,7 @@ if($this->input->post('unlimited_usage')){
         $name = basename($_FILES["sec4_image"]["name"]);
        // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
 
-        $newfilename = $name ;
+        $newfilename = round(microtime(true)).$name ;
         move_uploaded_file($tmp_name, $profile.$newfilename);
         $image3 = $newfilename;
          
@@ -7884,7 +8327,7 @@ if($this->input->post('unlimited_usage')){
           $name = basename($_FILES["sec5_image"]["name"]);
          // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
   
-          $newfilename = $name ;
+          $newfilename = round(microtime(true)).$name ;
           move_uploaded_file($tmp_name, $profile.$newfilename);
           $image4 = $newfilename;
            
@@ -7921,6 +8364,14 @@ if($this->input->post('unlimited_usage')){
       'sec3_content2' => $this->input->post('sec3_content2'),
       'sec3_content2_ar' => $this->input->post('sec3_content2_ar'),
      
+       
+      'sec4_content' => $this->input->post('sec4_content'),
+      'sec4_content_ar' => $this->input->post('sec4_content_ar'),
+
+      
+      'sec5_content' => $this->input->post('sec5_content'),
+      'sec5_content_ar' => $this->input->post('sec5_content_ar'),
+
 
        'sec2_image' => $image1,
        'sec3_image' => $image2,
@@ -7955,6 +8406,8 @@ if($this->input->post('unlimited_usage')){
    $data['data'] = $this->Admin_model->get_single_data('footer_page',array('id'=>'1')) ;
 
    $data['social'] = $this->Admin_model->get_single_data('social_media_links',array('id'=>'1')) ;
+   $data['icons'] = $this->Admin_model->get_all_data('payment_icons'); 
+
   
    $this->load->view('admin/edit_footer', $data);
          
@@ -8026,7 +8479,7 @@ if($this->input->post('unlimited_usage')){
           // basename() may prevent filesystem traversal attacks;
           // further validation/sanitation of the filename may be appropriate
           $name = basename($_FILES["image"]["name"]);
-         // $newfilename = 'cat_'.round(microtime(true)).'.'.$ext;
+       $newfilename = 'footer_'.round(microtime(true)).'.'.$ext;
   
           $newfilename = $name ;
           move_uploaded_file($tmp_name, $profile.$newfilename);
@@ -8071,7 +8524,7 @@ if($this->input->post('unlimited_usage')){
 $social = array(
       'facebook' => $this->input->post('facebook'),
       'twitter' => $this->input->post('twitter'),
-      'instagram' => $this->input->post('instagram'),
+      'linkedin' => $this->input->post('linkedin'),
       'youtube' => $this->input->post('youtube'),
       'whatsapp' => $this->input->post('whatsapp'),
 );
@@ -8320,7 +8773,7 @@ $session = $this->session->userdata('superadmindet');
   $ext = pathinfo($filename, PATHINFO_EXTENSION);
   if(in_array($ext,$allowed)){
     $tmp_name = $_FILES["image"]["tmp_name"];
-    $profile = "uploads/images/";
+    $profile = "uploads/images/about/";
     $set_img = base_url()."uploads/images/";
     // basename() may prevent filesystem traversal attacks;
     // further validation/sanitation of the filename may be appropriate
@@ -8369,6 +8822,206 @@ if($Return['error']!=''){
 
   // CMS end
 
+
+  public function customers()
+  {
+    $session = $this->session->userdata('superadmindet');
+    if(empty($session)){
+      redirect('admin');
+    }
+    $data['custdet'] = $this->Admin_model->get_customers_list() ;
+    
+    $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
+    if( $getval){
+       $this->load->view('admin/listcustomer', $data);
+    }else{
+      redirect('admin/accessdenied');
+    }
+
+    
+  }
+
+
+  public function addresses()
+  {  
+   $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    } 
+
+
+$data['addresses'] = $this->Admin_model->get_all_data('shop_addresses'); 
+ 
+
+$getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
+
+    if( $getval){
+    $this->load->view('admin/list_addresses', $data);
+    }else{
+      redirect('admin/accessdenied');
+    }
+      
+  }
+   
+  
+
+ public function new_address()
+  {   
+     $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+
+    
+    $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
+    $data['addresses'] = $this->Admin_model->get_all_data('shop_addresses',''); 
+
+
+    if( $getval){
+    $this->load->view('admin/add_address',$data);
+    }else{
+      redirect('admin/accessdenied');
+    }
+    
+
+   
+  }
+
+
+  public function add_address()
+  {   
+     $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+   $Return = array('result'=>'', 'error'=>'');
+       
+    /* Server side PHP input validation */    
+    if($this->input->post('address')==='') {
+          $Return['error'] = "Add Address ";
+    }  
+        
+    
+  if($Return['error']!=''){
+          $this->output($Return);
+      }
+
+         
+    $data = array(   
+     
+    'address'=>$this->input->post('address'),
+    'created_on'=>date('Y-m-d'),
+    'created_by'=>$session['user_id']
+     
+      );
+
+      $exists = $this->Admin_model->get_single_data('shop_addresses',array('address'=> $this->input->post('address') )); 
+    if(!empty($exists)){
+       $Return['error'] = "Address already exists!!";       
+    
+    if($Return['error']!=''){
+      $this->output($Return);
+      exit ;
+    }      
+    }else{
+       $result = $this->Admin_model->insert_data('shop_addresses', $data);
+    }
+   
+    if ($result == TRUE) {
+      
+      //get setting info 
+       
+       $Return['result'] = 'Address added successfully.';
+      
+    } else {
+      $Return['error'] =  'Bug. Something went wrong, please try again';
+    }
+    $this->output($Return);
+    exit;
+  }
+
+   public function edit_address()
+  {
+    $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+        
+ $id = $this->uri->segment(3) ;
+  $data['address'] = $this->Admin_model->get_single_data('shop_addresses',array('id'=>$id));
+
+ 
+   $getval = $this->checkaccess($session['userrole'] ,$this->router->fetch_method(),'admin');
+   
+    if( $getval){
+    $this->load->view('admin/edit_address', $data);
+  
+    }else{
+      redirect('admin/accessdenied');
+    }
+
+
+    
+  }
+
+
+
+  public function update_address()
+  {   
+     $session = $this->session->userdata('superadmindet');
+    if(empty($session)){ 
+      redirect('admin');
+    }
+
+   $Return = array('result'=>'', 'error'=>'');
+
+     $id =$this->input->post('addressid') ;
+       
+    /* Server side PHP input validation */    
+    if($this->input->post('address')==='') {
+          $Return['error'] = "Add address ";
+    } 
+         
+    if($Return['error']!=''){
+          $this->output($Return);
+      }
+  
+ 
+    
+       
+    $data = array(   
+      'address' => $this->input->post('address') 
+       
+      );
+
+       $exists = $this->Admin_model->get_single_data('addresses',array('address'=> $this->input->post('address'), 'id !='=>$id )); 
+    if(!empty($exists)){
+       $Return['error'] = "Address already exists!!";       
+    
+    if($Return['error']!=''){
+      $this->output($Return);
+      exit ;
+    }      
+    }else{
+       $result = $this->Admin_model->update_data('addresses',array('id'=>$id), $data);
+    }
+   
+
+    
+   
+    if ($result == TRUE) {
+      
+      //get setting info 
+       
+       $Return['result'] = 'Address updated successfully.';
+      
+    } else {
+      $Return['error'] =  'Bug. Something went wrong, please try again';
+    }
+    $this->output($Return);
+    exit;
+  }
+   
 
  
 }

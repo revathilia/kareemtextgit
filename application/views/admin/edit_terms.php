@@ -19,7 +19,7 @@
 
   <div class="box-content card white">
 <div class="box-title row">
-    <div class='col-md-4'><h4><?php echo $this->Admin_model->translate("Brief Screen Data") ?></h4></div>
+    <div class='col-md-4'><h4><?php echo $this->Admin_model->translate("Terms and Conditions") ?></h4></div>
     <div class='col-md-6'></div>
     <div class='col-md-2'> 
           
@@ -35,93 +35,22 @@
      
          <?php $attributes = array('name' => 'edit_driver', 'id' => 'xin-form', 'autocomplete' => 'off');?>
         <?php $hidden = array('_user' => $session['user_id']);?>
-        <?php echo form_open('admin/update_brief', $attributes, $hidden);?>
+        <?php echo form_open('admin/update_terms', $attributes, $hidden);?>
         <div class="form-body">
-
-<?php $briefvalue =  json_decode($briefdet->brief,true);
-
-?>
-              <div class="row">
-              <div class="col-md-6">
-                  <div class="form-group"> 
-                    <label for="first_name"><?php echo $this->Admin_model->translate("Title(English)") ?></label>
-                   <input class="form-control"  type="text" name="title" value="<?php echo $briefvalue['title']?>" >
-                  </div>
-                </div>
-
-                 <div class="col-md-6">
-                  <div class="form-group"> 
-                    <label for="first_name"><?php echo $this->Admin_model->translate("Title(Arabic)") ?></label>
-                   <input class="form-control"  type="text" name="ar_title" value="<?php echo $briefvalue['ar_title']?>" >
-                  </div>
-                </div>
-
-              </div>
-
-
-            <div class="row"> 
-                <div class="col-md-6">
- <div class="form-group">
-                  
-                     
-                      <label for="first_name"><?php echo $this->Admin_model->translate("Brief Icon") ?></label>
  
-                      <input type="file" id="imgInp" name="service_icon" onchange="readURL(this);" class="form-control " >
-                      <small>Select files only: gif,png,jpg,jpeg</small>
+             
 
-     
-      <input type="hidden" name="iconname" id="iconname" value="<?php echo $briefvalue['logo'];?>">
-
-      <br/> <br/>
-       <?php if($briefvalue['logo']!='' && $briefvalue['logo']!='no file') {?>
-                        <img   class="img-thumb" src="<?php echo base_url().'uploads/images/'.$briefvalue['logo'];?>" style="height:100px !important;width:100px !important;background-color: blue " id="image">
-                        
-                      <br/> <br/>
-                           <a class="btn btn-xs btn-success downloadicon" href="<?php echo site_url()?>download?type=images&filename=<?php echo $briefvalue['logo'];?>"><i class="fa fa-download"></i></a>
-                          <a class="btn btn-xs btn-danger downloadicon" href="javascript:void(0);" onclick="removeicon();return false;"><i class="fa fa-trash"></i></a>
-                        
-
-                        
-                        <?php } else {?>
-                        <img   class="img-thumb" src=""   id="image">  
-                    
-                        <?php } ?>
-                 </div> 
-                </div>
-
-                  
-
-
-                <div class="col-md-6">
-                      <!-- <div class="form-group">
-                         <label for="first_name"><?php echo $this->Admin_model->translate("Video title - English") ?></label>              
-                   <input type="text" class="form-control" placeholder="<?php echo $this->Admin_model->translate("Video title - English") ?>" name="desc" value="<?php echo $briefdet->description; ?>">
-                      </div>
-                     
-                         <div class="form-group">
-                         <label for="first_name"><?php echo $this->Admin_model->translate("Video title - Arabic") ?></label>
-                
-                 <input type="text" class="form-control" placeholder="<?php echo $this->Admin_model->translate("Video title - Arabic") ?>" name="ar_desc" value="<?php echo $briefdet->ar_description; ?>">
-                       </div> -->
-
-                       <div class="form-group">
-                         <label for="first_name"><?php echo $this->Admin_model->translate("Video URL") ?></label>
-                 <input type="text" class="form-control" placeholder="<?php echo $this->Admin_model->translate("Reference URL") ?>" name="url" value="<?php echo $briefdet->url ?>">
-                       </div>
-
-                </div>
-
-              </div>
+            
 
           <div class="row"> 
  
                
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="first_name"><?php echo $this->Admin_model->translate("Brief content") ?></label>
+                    <label for="first_name"><?php echo $this->Admin_model->translate("Content") ?></label>
                    
 
-                     <textarea class="form-control" id="content1"  placeholder="<?php echo $this->Admin_model->translate("Brief (English)") ?>" name="basic"><?php echo $briefvalue['content']?></textarea>
+                     <textarea class="form-control" id="content1"  placeholder="<?php echo $this->Admin_model->translate("Content") ?>" name="terms"><?php echo  $data->terms ?></textarea>
               
 
 
@@ -130,9 +59,9 @@
                
                   <div class="col-md-12">
                   <div class="form-group">
-                    <label for="first_name"><?php echo $this->Admin_model->translate("Brief content (Arabic)") ?></label>
+                    <label for="first_name"><?php echo $this->Admin_model->translate("Content (Arabic)") ?></label>
                     
-                    <textarea class="form-control" id="content2" placeholder="<?php echo $this->Admin_model->translate("Brief (Arabic)") ?>" name="ar_basic"><?php echo $briefvalue['ar_content'] ?></textarea>
+                    <textarea class="form-control" id="content2" placeholder="<?php echo $this->Admin_model->translate("Content - Arabic") ?>" name="terms_ar"><?php echo  $data->terms_ar ?></textarea>
               
 
 
@@ -142,51 +71,12 @@
                
                </div>
 
-
-              
-
-              <br><br>
-            <div class="row"> 
-              <div class="col-md-6">
-                <div class="form-group">
-                   
-                 <label for="first_name"><?php echo $this->Admin_model->translate("Address - English") ?></label>
-                 <textarea class="form-control" id="content3"  name="address" placeholder="<?php echo $this->Admin_model->translate("Address") ?>"><?php echo $briefdet->address; ?></textarea>                   
-                </div>
-                <br/>
-
-                 <div class="form-group">
-                   
-                 <label for="first_name"><?php echo $this->Admin_model->translate("Address - Arabic") ?></label>
-                 <textarea class="form-control" id="content4"  name="ar_address" placeholder="<?php echo $this->Admin_model->translate("Address") ?>"><?php echo $briefdet->ar_address; ?></textarea>                   
-                </div>
-              </div>
-
-               <div class="col-md-6">
-                <div class="form-group">
-                           
-                           <label for="first_name"><?php echo $this->Admin_model->translate("Select Location") ?></label>
-             <input type="hidden" name="langlat" id="langlat" value="<?php echo $briefdet->location;?>">
-
-           <?php 
-            $this->load->view('admin/editmap');
-            ?>
-
-                </div>
-              </div>
-
+          
+           
             </div>
+        
+           
          
-
-           
-           
-            </div>
-        
-           
-        
-             
-            <br><br>
-           
         </div>
         <div class="form-actions"> <?php echo form_button(array('name' => 'hrsale_form', 'type' => 'submit', 'class' => 'btn btn-primary btn-block', 'content' => '<i class="fa fa fa-check-square-o"></i>'.$this->Admin_model->translate("Save"))); ?> </div>
         <?php echo form_close(); ?> </div>

@@ -164,22 +164,93 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Follow Us Button text</label>
+                    <label for="first_name">We accept text</label>
                    <input class="form-control"  type="text" name="follow_us" value="<?php echo $data->follow_us ?>" >
                   </div>
                 </div>
 
                  <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Follow Us Button text - Arabic</label>
+                    <label for="first_name">We accept - Arabic</label>
                    <input class="form-control"  type="text" name="follow_us_ar" value="<?php echo $data->follow_us_ar ?>" >
                   </div>
                 </div>
  
               </div>
+ 
+        <div class="col-md-12">
+
+<div class="box-title row">
+    <div class='col-md-4'><h4><b><?php echo  $this->Admin_model->translate("Payment method Icons") ?></b></h4></div>
+    <div class='col-md-6'></div>
+    <div class='col-md-2'> 
+          
+    </div>
+</div>
+
+ <div class="table-responsive">
+  <table id="example2" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+      <tr>
+<th>No.</th>
+<!-- <th>User Id</th> -->
+<th> <?php $this->Admin_model->translate("Icon") ?></th> 
+   
+ 
+<th> Action </th>
+</tr>
+      
+</thead>
+<tbody>
+<?php 
+$i= 0 ;
+foreach ($icons as $value) {
+  $i++ ;
+  ?>
+ <tr>
+<td><?php echo $i ; ?></td>
+<!-- <th>User Id</th> -->
+<td> 
+  <img  class="img-thumb" src="<?php echo base_url()?>uploads/images/icons/<?php echo $value['image'] ?>" style="height:50px !important;width:50px !important;background-color: black"  >  
+
+</td>
+ 
+    
+<td> 
+<a href="<?php echo base_url()?>admin/edit_icon/<?php echo $value['id']?>">&nbsp;&nbsp;<button type="button" class="btn btn-info btn-circle btn-xs waves-effect waves-light"><i class="ico fa fa-pencil"></i></button></a>
+
+<?php if($value['status']=='Y'){ ?>
+
+    <a onclick="statusupdate(<?php echo $value['id'] ?>,'N');  return false ;" href="javascript:void(0)"  class="btn btn-success btn-xs"><?php echo $this->Admin_model->translate('Enabled') ?> </a>
+
+    
+
+  <?php } else { ?>
+     
+    <a onclick="statusupdate(<?php echo $value['id'] ?>,'Y');  return false ;" href="javascript:void(0)"  class="btn btn-danger btn-xs"><?php echo $this->Admin_model->translate('Disabled') ?> </a>
+
+   
+    
+  <?php } ?>
+
+</td>
+</tr>
+
+  <?php
+} ?>
+  
+
+</tbody>
+    
+    </table>
+</div>
+
+</div>
+
+
 
               <div class="box-title row">
-    <div class='col-md-4'><h4><b>Social Media Links</b></h4></div>
+    <div class='col-md-4'><h4><b><?php echo $this->Admin_model->translate("Social Media Links") ?></b></h4></div>
     <div class='col-md-6'></div>
     <div class='col-md-2'> 
           
@@ -194,35 +265,35 @@
 
                 <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Facebook</label>
+                    <label for="first_name"><?php $this->Admin_model->translate("Facebook") ?></label>
                    <input class="form-control"  type="text" name="facebook" value="<?php echo $social->facebook ?>" >
                   </div>
                 </div>
 
                  <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Twitter</label>
+                    <label for="first_name"><?php $this->Admin_model->translate("Twitter") ?></label>
                    <input class="form-control"  type="text" name="twitter" value="<?php echo $social->twitter ?>" >
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Instagram</label>
-                   <input class="form-control"  type="text" name="instagram" value="<?php echo $social->instagram ?>" >
+                    <label for="first_name"><?php $this->Admin_model->translate("LinkedIn") ?></label>
+                   <input class="form-control"  type="text" name="linkedin" value="<?php echo $social->linkedin ?>" >
                   </div>
                 </div>
 
                  <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">YouTube</label>
+                    <label for="first_name"><?php $this->Admin_model->translate("YouTube") ?></label>
                    <input class="form-control"  type="text" name="youtube" value="<?php echo $social->youtube ?>" >
                   </div>
                 </div>
 
                  <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Whatsapp</label>
+                    <label for="first_name"><?php $this->Admin_model->translate("Whatsapp") ?> </label>
                    <input class="form-control"  type="text" name="whatsapp" value="<?php echo $social->whatsapp ?>" >
                   </div>
                 </div>
@@ -321,6 +392,27 @@
 
   });
  
+
+function statusupdate($id,$status){
+
+ 
+$.ajax({ 
+type: "POST",
+url: "<?php echo base_url(); ?>"+'admin/change_status/',
+data: {id:$id,status:$status,table:'payment_icons'},
+}).done(function(response){
+
+ if(response=='false'){
+   toastr.error("Access denied");
+ }
+
+location.reload();
+
+});
+
+}
+
+
 </script>
 
  

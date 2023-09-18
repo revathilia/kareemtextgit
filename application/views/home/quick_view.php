@@ -18,14 +18,14 @@
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-info">
                                             <div class="product-ratting">
-                                                <ul>
+                                               <!--  <ul>
                                                     <li><a href="#"><i class="fas fa-star"></i></a></li>
                                                     <li><a href="#"><i class="fas fa-star"></i></a></li>
                                                     <li><a href="#"><i class="fas fa-star"></i></a></li>
                                                     <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
                                                     <li><a href="#"><i class="far fa-star"></i></a></li>
                                                     <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
-                                                </ul>
+                                                </ul> -->
                                             </div>
                                             <h3> 
 
@@ -36,6 +36,8 @@ if($this->session->userdata('lang') == 'ar'){
      echo $product->product_name ;
 }
                                                     ?>
+
+
 
                                         
                                         </h3>
@@ -55,11 +57,21 @@ if($this->session->userdata('lang') == 'ar'){
                                                     </li>
                                                 </ul>
                                             </div>
+                                            <?php 
+
+
+if($folder == 'industry'){
+    $url ='product_details' ;
+}else{
+    $url = 'uniform_det' ;
+}
+
+?>
                                             <div class="ltn__product-details-menu-2">
                                                 <ul>
                                                     
                                                     <li>
-                                                        <a href="<?php echo base_url() ; ?>home/product_details/<?php echo $product->id ?>" class="theme-btn-1 btn btn-effect-1" title="View Details">
+                                                        <a href="<?php echo base_url() ; ?>home/<?php echo $url ?>/<?php echo $product->id ?>" class="theme-btn-1 btn btn-effect-1" title="View Details">
                                                             <i class="fas fa-eye"></i>
                                                             <span><?php echo $this->Admin_model->translate("VIEW PRODUCT") ; ?></span>
                                                         </a>
@@ -82,7 +94,21 @@ if($this->session->userdata('lang') == 'ar'){
                                             <div class="ltn__social-media">
                                                 <ul>
                                                     <li><?php echo $this->Admin_model->translate("Share") ; ?>:</li>
-                                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+
+                                                    <?php 
+
+$actual_link = base_url() .'home/'.$url.'/'.$product->id ; 
+
+ 
+                                                    ?>
+                                                    <li>
+
+                                                        
+
+                                                    <a name="fb_share" type="button" href="https://www.facebook.com/sharer.php?u=<?php echo urlencode(  $actual_link) ?>&t=<?php echo $product->product_name ?>"><i class="fab fa-facebook-f"></i></a>
+
+
+</li>
                                                     <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
                                                     <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
                                                     <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>

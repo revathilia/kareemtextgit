@@ -21,7 +21,81 @@
     <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
+
+
+
+<style>
+  .swatch {
+    position: relative;
+    margin: 0.1rem;
+    width: 30px;
+    top: 10px;
+    height: 30px;
+    border-radius: 30px;
+    line-height: 30px;
+    display: inline-block;
+}
+.swatch > [type=radio],
+.swatch > [type=checkbox] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.swatch > [type=radio] + label,
+.swatch > [type=checkbox] + label {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  border: 1px solid #00000029;
+  line-height: 30px;
+  text-align: center;
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+}
+.swatch > [type=radio] + label i,
+.swatch > [type=checkbox] + label i {
+  opacity: 0;
+  font-size: 1rem;
+  transition: opacity 0.5s;
+}
+.swatch > [type=radio]:checked + label i,
+.swatch > [type=checkbox]:checked + label i {
+  opacity: 1;
+}
+ 
+
+.swatch > [type=radio]:checked + label,
+.swatch > [type=checkbox]:checked + label {
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+  line-height: 36px;
+  top: -3px;
+  left: -3px;
+  transition: all 0.5s ease-in-out;
+}
+.swatch > [type=radio]:checked + label i,
+.swatch > [type=checkbox]:checked + label i {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.shop-car {
+    background: #EFEFEF 0% 0% no-repeat padding-box;
+    border-radius: 9px;
+    opacity: 1;
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+</style>
+
 </head>
+
 
 <body>
 
@@ -61,7 +135,7 @@
     <a href="" class="btn btn-b"><?php echo $this->Admin_model->translate("Cancel") ; ?></a>
 </div>
     <div class="col-md-2">
-    <a href="javascript:void(0)" id="btnsubmit" class="btn btn-blue"><?php echo $this->Admin_model->translate("Save") ; ?></a>
+    <a href="javascript:void(0)" id="btnsubmit" class="btn btn-b"><?php echo $this->Admin_model->translate("Save") ; ?></a>
 </div>
 
 </div>
@@ -163,43 +237,57 @@
   if($value['include_logo']  != 0 ){
     $color = '#fa972d' ;
   }
-  ?>
+  
+
+
+  $orderdet = $this->Admin_model->get_all_data('order_details',array('order_id'=>$value['id'])) ;
+
+foreach ($orderdet as  $ovalue) {  ?>
+
+  
+
  <tr style="background-color: <?php echo $color ;?>">
 <td><?php echo $i  ?></td>
 <td><?php echo date('d-m-Y', strtotime($value['created_on'])) ?></td>
  
 <td><?php 
-$details = json_decode($value['order_details'], true);
+
+
+
+
+$details = json_decode($ovalue['order_details'], true);
  
 echo $details['name'] ?></td>
 
 
 
-<td><?php if($details['type']== 'industry'){ ?>
+<td>
 
-  <!-- <div class="swatch" style="background:<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_code')  ?>;color:#fff;">
-    <input type="radio" name="color_selected" checked id="swatch_<?php echo $details['color'] ?>" value="<?php echo $details['color'] ?>" />
-    <label for="swatch_<?php echo $details['color'] ?>" title="<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_name')  ?>"></label>
-  </div> -->
+  <?php echo $this->Admin_model->get_type_name_by_id('size_master','id',$details['size'],'size') ?>,
+
+  <?php if($value['type'] == 'industry'){ ?>
+
+<div class="swatch" style="background:<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_code')  ?>;color:#fff;">
+  <input type="radio" name="color_selected" checked id="swatch_<?php echo $details['color'] ?>" value="<?php echo $details['color'] ?>" />
+  <label for="swatch_<?php echo $details['color'] ?>" title="<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_name')  ?>"></label>
+</div>
 
 <?php }else{ ?>
 
-  <!-- <div class="swatch" style="background:<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_code')  ?>;color:#fff;">
-    <input type="radio" name="color_selected" checked id="swatch_<?php echo $details['color'] ?>" value="<?php echo $details['color'] ?>" />
-    <label for="swatch_<?php echo $details['color'] ?>" title="<?php echo $this->Admin_model->get_type_name_by_id('color_master','id',$details['color'],'color_name')  ?>"></label>
-  </div> -->
+ 
 
-<?php } ?>
-
-<!--   -->
+<?php } ?> <?php echo $this->Admin_model->get_type_name_by_id('genders','id',$details['gender'],'gender_name') ?> 
 
 </td>
 <td><?php echo $details['qty'] ?></td>
-<td><?php echo $details['subtotal'] ?></td>
+<td><?php echo $details['total_amount'] ?></td>
 <td><?php echo $this->Admin_model->get_type_name_by_id('order_status','id',$value['order_status'],'status_name') ?></td>
  
  
 </tr>
+
+<?php } ?>
+
 
   <?php
 } ?>
@@ -257,8 +345,16 @@ foreach($active_orders as $aorders){ ?>
 
 <hr>
 
-<?php $details = json_decode($aorders['order_details'], true);
-if($aorders['type'] == 'idustry'){
+
+
+<?php
+
+$orderdet = $this->Admin_model->get_all_data('order_details',array('order_id'=>$aorders['id'])) ;
+
+foreach ($orderdet as  $ovalue) {  
+
+   $details = json_decode($ovalue['order_details'], true);
+if($aorders['type'] == 'industry'){
   $product = $this->Admin_model->get_single_data('industry_products',array('id'=>$details['id'])) ;
 
 
@@ -274,7 +370,7 @@ $orderstatus = $this->Admin_model->get_all_data('status_update_history',array('o
 
 <div class="row">
   <div class="col-md-3">
-      <img src="<?php echo base_url() ; ?>assets/home_assets/img/home/sh.png" class="shop-car">
+      <img src="<?php echo base_url() ; ?>uploads/images/<?php echo $aorders['type'] ?>/<?php echo $product->product_image ?>" class="shop-car">
 </div>
 <div class="col-md-7">
 <h5><?php 
@@ -321,6 +417,10 @@ if($this->session->userdata('lang') == 'ar'){
 
 </div>
 </div>
+
+<?php } ?>
+ 
+
 <hr>
 <div class="row">
 
@@ -330,7 +430,7 @@ if($this->session->userdata('lang') == 'ar'){
 </div>
 <div class="col-md-5"></div>
 <div class="col-md-3">
-<p class="text-right"><?php echo $this->Admin_model->translate("Invoice") ; ?></p>
+<p class="text-right"><a target="_blank" href="<?php echo base_url()  ?>home/invoice/<?php echo $aorders['id'] ; ?>"><?php echo $this->Admin_model->translate("Invoice") ; ?></a></p>
 </div>
 </div>
 <hr style="border: 1px solid black;">
@@ -548,7 +648,10 @@ if($this->session->userdata('lang') == 'ar'){
     </h2>
     <div id="flush-collapsesix" class="accordion-collapse collapse" aria-labelledby="flush-headingsix" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
-<a href="<?php echo base_url()?>home/delete_account" class="btn btn-danger btn-sm"><?php echo $this->Admin_model->translate("Click to delete your account") ?></a>
+
+      <button id="deleteaccount"  class="btn btn-danger btn-sm" ><?php echo $this->Admin_model->translate("Click to delete your account") ?></button>
+        
+        <!-- <a href="<?php echo base_url()?>home/delete_account" class="btn btn-danger btn-sm"><?php echo $this->Admin_model->translate("Click to delete your account") ?></a> -->
       </div>
     </div>
   </div>
@@ -591,6 +694,10 @@ function langAjax($lang){
     });
 
 }
+
+
+
+
 
 </script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
@@ -667,6 +774,68 @@ $("#btnsubmit").on('click',(function(e){
   }));
  
 });
+
+$(document).on('click',"#deleteaccount", function()
+   { 
+
+
+ 
+swal({
+    
+    title: 'Delete account ?',
+    text: 'Once deleted, You will not be able to revert this!',
+    icon: 'warning',
+    buttons: true,
+    dangerMode: true,
+    buttons: ['No, Cancel', 'Yes, Delete']
+
+}).then(function(isConfirm){
+
+  if (isConfirm) {
+
+
+      $.ajax({  
+    url:"<?php echo base_url(); ?>home/delete_account",  
+    method:"POST",  
+     
+    success:function(data)
+    { 
+      if(data){
+        swal({
+            title: 'Account Deleted',
+            text: 'You have deleted your account successfully',
+            icon: "success",
+            button: "Ok",
+      })
+
+setInterval(function() {
+  window.location = "<?php echo base_url(); ?>"+'home';
+}, 2000); //3 seconds
+
+      }
+     // windows.location.href =  data ;
+    }
+    
+    });
+
+
+        
+    } else {
+        swal("Cancelled", "Delete cancelled", "error");
+    }
+
+
+
+ 
+
+}).catch(function(reason){
+    alert("The alert was dismissed by the user: "+reason);
+});
+
+ 
+
+
+   });
 </script>
 
 

@@ -180,9 +180,9 @@ location.reload();
 
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
    $(document).ready( function() {
-  $( '#example' ).DataTable( {
+  $( '#example' ).dataTable( {
             lengthChange: false,
             buttons: [ 'copy', 'excel', 'csv', 'pdf' ],
             "bDestroy": true,
@@ -191,9 +191,52 @@ location.reload();
             stateSave: true
  } );
  } );
- </script>
+ </script> -->
 
+<!--  
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script> -->
+
+    
+<script>
+    // $(document).ready(function() {
+    //     var table = $('#example3').DataTable( {
+    //           dom:  "<<'col-sm-12'B>>"+"<'row'<'col-sm-4 pull-right'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+	// 	"buttons": ['csv', 'excel', 'pdf', 'print'],
+    //     stateSave: true
+
+    //       //  buttons: [ 'copy', 'excel', 'csv', 'pdf' ]
+    //     } );
+     
+    //     table.buttons().container()
+    //         .appendTo( '#example3_wrapper .col-md-6:eq(0)' );
+    // });
+     </script>
+<!-- <script>
  
+
+   $(document).ready( function() {
+  $( '#example' ).dataTable( {
+            lengthChange: false,
+            buttons: [ 'copy', 'excel', 'csv', 'pdf' ],
+            "bDestroy": true,
+            "paging":   true,
+            "ordering": false,
+            stateSave: true
+ } );
+ } );
+
+</script> -->
 
 
 </html>

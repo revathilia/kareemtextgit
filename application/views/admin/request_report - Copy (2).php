@@ -1,6 +1,6 @@
  <?php $this->load->view('admin/header');?>
  
-   
+  <!--  
    
 <style>
   .swatch {
@@ -61,7 +61,7 @@
   transition: opacity 0.5s;
 }
 </style>
-
+ -->
  
 <body>
 <?php $this->load->view('admin/top_header');?>
@@ -69,8 +69,6 @@
 
 <?php  $session = $this->session->userdata('superadmindet');
 $logged_in_role =  $this->Admin_model->get_type_name_by_id('user_roles','id',$session['userrole'],'belongs_to')  ;
-
-
      
 if($logged_in_role == 'school' || $logged_in_role == 'industry' ){
   $type = $logged_in_role ;
@@ -79,115 +77,6 @@ if($logged_in_role == 'school' || $logged_in_role == 'industry' ){
     ?>
 
 
-<div id="wrapper">
-<div class="main-content">
-<div class="row small-spacing">
-<div class="col-xs-12">
-     <div class="box-content card white">
-<div class="box-title row">
-    <div class='col-md-4'><h4><?php echo $this->Admin_model->translate("Order Report") ?></h4></div>
-    <div class='col-md-6'></div>
-    
-</div>
-
- 
-<div class="card-content">
-
-
-
- 
-<div class="form-body">
-<div class="row"> 
-
-
-
-<div class="col-md-12">
-<div class="form-group">
-<label for="first_name"><?php echo $this->Admin_model->translate("Select service") ?></label>
-
-<select class="form-control" name="service_name" id="type">
- <?php if($type !='industry' && $type !='school'){ ?>
-
-  <option value="all">All</option>
-
- <?php } ?>
-  <?php if($type !='industry'){ ?>
-
-  <option value="school"  <?php if($type=='school'){echo 'selected' ; }elseif($type=='industry'){ echo 'disabled' ; } ?> > <?php echo $this->Admin_model->translate("School") ?> </option>
-
- <?php } ?>
-
-
-  <?php if($type !='school'){ ?>
-
- <option value="industry"  <?php if($type=='industry'){echo 'selected' ; }elseif($type=='school'){ echo 'disabled' ; } ?> ><?php echo $this->Admin_model->translate("Industry") ?></option>
-
- <?php } ?>
-
-
-
- 
-    
-  
-</select>
- 
-</div>
-
-</div>
-
-</div>
-
- <div class="row">
-    <div class="col-md-4">
- <div class="form-group">
-  <label><?php echo $this->Admin_model->translate("From Date") ?></label><input type="date" id="fromdate" class="form-control" value="<?php if($date=='today'){echo date('Y-m-d') ; } ?>" name="">
-</div>
-</div>
-<div class="col-md-4">
- <div class="form-group">
-  <label><?php echo $this->Admin_model->translate("To Date") ?></label><input type="date" id="todate" class="form-control" name="">
-</div>
-</div>
-<div class="col-md-4">
- <div class="form-group">
-  <label><?php echo $this->Admin_model->translate("Status") ?></label>
-  <select class="form-control" id="status" name="status"><option value="">--Select--</option>
-   <?php foreach ($statuses as  $value) {?>
-    <option value="<?php echo $value['id'] ?>" <?php if($status == $value['id']) { echo 'selected' ; } ?>><?php echo $value['status_name'] ?></option>
-  <?php } ?>
-</select>
-</div>
-</div>
- </div>
- 
- 
-
-
-
-<div id="questionlist">
-
-  
-</div>
-
- 
-
-
-</div>
- 
-  </div>
-
-
- 
-
- 
-<!-- /.col-lg-6 col-xs-12 -->
-</div>
-</div>
- 
-
-</div>
-</div>
-</div>
 
 
 
@@ -202,7 +91,7 @@ if($logged_in_role == 'school' || $logged_in_role == 'industry' ){
 
  <?php $this->load->view('admin/footer');?>
 
-
+<!-- 
 <script type="text/javascript">
 
    if( $('#type').has('option').length > 0 ) {
@@ -233,7 +122,7 @@ filterdata() ;
 });
 
 
-  function filterdata(){
+  function filterdata1(){
 
 var type = document.getElementById("type").value  ;
 var status = document.getElementById("status").value  ;
@@ -373,4 +262,4 @@ $('#dataModal').modal('show');
 
 
 
-</script>
+</script> -->

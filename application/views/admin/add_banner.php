@@ -3,7 +3,7 @@
 <?php $this->load->view('admin/top_header');?>
 <?php $this->load->view('admin/side_header');?>
 
-<?php $session = $this->session->userdata('userdet');?>
+<?php $session = $this->session->userdata('superadmindet');?>
 
 <div id="wrapper">
 <div class="main-content">

@@ -154,7 +154,7 @@ if ($cart = $this->cart->contents()):
 
 
 
-                        <span class="mini-cart-item-delete" onclick="itemremove('<?php echo $item['rowid'] ; ?>');  return false ;" ><i class="icon-cancel"></i></span>
+                       <!--  <span class="mini-cart-item-delete" onclick="itemremove('<?php echo $item['rowid'] ; ?>');  return false ;" ><i class="icon-cancel"></i></span> -->
                     </div>
                     <div class="mini-cart-info">
                         <h6><a href="<?php echo base_url() ; ?>home/<?php echo $detailspage ?>/<?php echo $item['id'] ?>">
@@ -216,6 +216,14 @@ if($this->session->userdata('lang') == 'ar'){
                       
                     </li>
                     
+
+                     <li ><a href="<?php echo base_url() ; ?>home/industry"><?php echo $this->Admin_model->translate("Industrial Uniforms") ?></a>
+                                            
+                                        </li>
+                                        <li ><a href="<?php echo base_url() ; ?>home/school"><?php echo $this->Admin_model->translate("School Uniforms") ?></a>
+                                           
+                                        </li>
+
                     <li><a href="<?php echo base_url() ; ?>home/contact"><?php echo $this->Admin_model->translate("Contact") ; ?></a></li>
                 </ul>
             </div>
@@ -223,19 +231,20 @@ if($this->session->userdata('lang') == 'ar'){
                 <ul>
                    
                     <li>
-                        <a href="<?php echo base_url() ; ?>home/wishlist" title="Wishlist">
-                            <span class="utilize-btn-icon">
+                        <a href="<?php echo base_url() ; ?>home/wishlist">
+                             <span class="utilize-btn-icon">
                                 <i class="far fa-heart"></i>
-                                <sup>3</sup>
+                                <!-- <sup>3</sup> -->
                             </span>
-                            <?php echo $this->Admin_model->translate("Wishlist") ; ?>
-                        </a>
+                            <?php echo $this->Admin_model->translate("Wishlist") ; ?></a>
+
+
                     </li>
                     <li>
                         <a href="<?php echo base_url() ; ?>home/viewcart" title="<?php echo $this->Admin_model->translate("Shopping Cart") ; ?>">
                             <span class="utilize-btn-icon">
                                 <i class="fas fa-shopping-cart"></i>
-                                <sup>5</sup>
+                                <sup id="cartitem2"></sup>
                             </span>
                             <?php echo $this->Admin_model->translate("Shopping Cart") ; ?>
                         </a>

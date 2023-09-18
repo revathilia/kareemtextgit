@@ -26,12 +26,14 @@
   <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
       <tr>
-<th><?php echo $this->Admin_model->translate("Customer List") ?>No</th>
+<th><?php echo $this->Admin_model->translate("No") ?>No</th>
 <th><?php echo $this->Admin_model->translate("Registration Date") ?></th>
 <!-- <th>User Id</th> -->
-<th><?php echo $this->Admin_model->translate("Username") ?></th>
+<th><?php echo $this->Admin_model->translate("Name") ?></th>
+<th><?php echo $this->Admin_model->translate("Phone No.") ?></th>
 
- <th><?php echo $this->Admin_model->translate("No. of requests") ?></th>
+
+ <th><?php echo $this->Admin_model->translate("No. of orders") ?></th>
 
 </tr>
       
@@ -45,11 +47,12 @@ foreach ($custdet as $value) {
  <tr>
 <th><?php echo $i ?></th>
 <!-- <th>User Id</th> -->
-<th><?php echo date("d-m-Y", strtotime($value['creation_date'])) ?></th>
-<th><?php echo $value['username']  ?></th>
+<th><?php echo date("d-m-Y", strtotime($value['created_on'])) ?></th>
+<th><?php echo $value['first_name'].' '.$value['last_name']  ?></th>
+<th><?php echo $value['phone_no']   ?></th>
 
-<th><?php if(count($this->Admin_model->get_all_data('service_request',array('cust_id'=>$value['id'])))){
-  echo count($this->Admin_model->get_all_data('service_request',array('cust_id'=>$value['id']))) ;
+<th><?php if(count($this->Admin_model->get_all_data('order_master',array('customer_id'=>$value['id'])))){
+  echo count($this->Admin_model->get_all_data('order_master',array('customer_id'=>$value['id']))) ;
 }   ?></th>
   
 
@@ -76,5 +79,6 @@ foreach ($custdet as $value) {
 
 
 
-
  <?php $this->load->view('admin/footer');?>
+
+ 

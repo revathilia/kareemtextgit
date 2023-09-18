@@ -22,6 +22,13 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/toastr/toastr.min.css">
+
+    <style>
+        .border-primary {
+    border-color: #007bff!important;
+}
+
+    </style>
 </head>
 
 <body>
@@ -57,6 +64,23 @@
                                 </div>
                             </div>
                         </div>
+
+                        <?php 
+                        $ship = false ;
+                        $cart = $this->cart->contents() ;
+
+                        foreach ($cart as $item){ ?>
+
+<?php
+
+if($item['purchaseType'] == 'shipping'){
+    $ship = true ;
+
+} } ?>
+
+
+<?php if($ship){ ?>
+
                         <div class="ltn__checkout-single-content mt-50">
                             <h4 class="title-2"><?php echo $this->Admin_model->translate("Billing Details") ; ?> </h4>
                             <div class="ltn__checkout-single-content-info">
@@ -66,22 +90,22 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" name="ltn__name" value="<?php echo $profile->first_name ?>" placeholder="<?php echo $this->Admin_model->translate("First name") ; ?>">
+                                                <input type="text" name="ltn__name" value="<?php echo $addresses->first_name ?>" placeholder="<?php echo $this->Admin_model->translate("First name") ; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" name="ltn__lastname" value="<?php echo $profile->last_name ?>" placeholder="<?php echo $this->Admin_model->translate("Last name") ; ?>">
+                                                <input type="text" name="ltn__lastname" value="<?php echo $addresses->last_name ?>" placeholder="<?php echo $this->Admin_model->translate("Last name") ; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-item input-item-email ltn__custom-icon">
-                                                <input type="email" value="<?php echo $profile->email_address ?>" name="ltn__email" placeholder="<?php echo $this->Admin_model->translate("Email address") ; ?>">
+                                                <input type="email" value="<?php echo $addresses->email_address ?>" name="ltn__email" placeholder="<?php echo $this->Admin_model->translate("Email address") ; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-item input-item-phone ltn__custom-icon">
-                                                <input type="text" value="<?php echo $profile->phone_no ?>" name="ltn__phone" placeholder="<?php echo $this->Admin_model->translate("Phone number") ; ?>">
+                                                <input type="text" value="<?php echo $addresses->phone_no ?>" name="ltn__phone" placeholder="<?php echo $this->Admin_model->translate("Phone number") ; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -236,6 +260,44 @@ $addressline2 = array_slice($address, 2, -4);
                         </div>
                     </div>
                 </div>
+                <?php }else{ ?>
+
+                    <div class="ltn__checkout-single-content mt-50">
+                            <h4 class="title-2"><?php echo $this->Admin_model->translate("Pickup Address") ; ?> </h4>
+                            <div class="ltn__checkout-single-content-info">
+ 
+<div class="row pt-2 pb-2">
+ <?php foreach($pickupaddresses as $addresses){ ?>
+    <div class="col-md-6">
+    <a href="javascript:void(0)">
+   
+<div class="bg-white card addresses-item mb-4 selectaddress shadow " data-addressid="address_<?php echo $addresses['id'] ?>">
+<div class="gold-members p-4">
+<div class="media">
+<div class="mr-3"><i class="icofont-location-pin icofont-3x"></i></div>
+<div class="media-body">
+ 
+<p><?php echo $addresses['address'] ;?>
+</p>
+ 
+</div>
+</div>
+</div>
+</div>
+
+
+    </a>
+    </div>
+
+
+ <?php } ?>
+
+</div>
+                </div>
+                </div>
+
+
+               <?php } ?>
                 <div class="col-lg-6">
                     <div class="ltn__checkout-payment-method mt-50">
                         <h4 class="title-2"><?php echo $this->Admin_model->translate("Payment Method") ; ?></h4>
@@ -278,13 +340,23 @@ $addressline2 = array_slice($address, 2, -4);
 if ($cart = $this->cart->contents()):
 
 $total = 0;
-$subtotal = 0 ; ?>
+$subtotal = 0 ; 
+$shipping = 0 ;
+$ship = false ;
+?>
 
   <h4 class="title-2">Cart Totals</h4>
                         <table class="table">
                             <tbody>
  
 <?php foreach ($cart as $item){ ?>
+
+                                <?php
+                                
+                                if($item['purchaseType'] == 'shipping'){
+                                    $ship = true ;
+                            
+                                }  ?>
 
 
                                 <tr>
@@ -296,9 +368,11 @@ $subtotal = 0 ; ?>
  
                                      <?php $subtotal = $item['subtotal'] + $subtotal ;
                                         
+                                        if($ship){
+                                            $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
+                                        }
 
-                                        $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
-                                        $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
+                                         $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
                                         $vat = 0 ;
 
                                         $discount =  0 ;
@@ -331,11 +405,12 @@ if($dtype == 'percent'){
                                    <?php }  ?>
 
                       
-                               
+                                 <?php   if($ship){ ?>
                                 <tr>
                                     <td><?php echo $this->Admin_model->translate("Shipping") ; ?></td>
                                     <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $shipping ?></td>
                                 </tr>
+                                <?php } ?>
                                 <tr>
                                     <td><?php echo $this->Admin_model->translate("VAT") ; ?></td>
                                     <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $vat ?></td>
@@ -523,7 +598,7 @@ data: {rowid:$rowid,viewname:'cart'},
  
 //$("#cart").html(response);
 cartupdate();
-window.location = "<?php echo base_url(); ?>"+'home/viewcart';
+window.location = "<?php echo base_url(); ?>"+'home/profile';
 
  
 });
@@ -572,6 +647,36 @@ return false ;
    }  
    }); 
    } ); 
+
+
+
+   
+ $(document).on( "click", ".selectitem", function(e) {
+
+$categoryid = $(this).data('category_id');
+$itemid = $(this).data('item_id');
+$category = $(this).data('category');   
+$item  = $(this).data('item');
+$listid = 'list'+$itemid;
+
+$catid = 'address'+$categoryid;
+
+if($(this).hasClass('selectedhighlight')) { 
+$(this).removeClass('selectedhighlight');
+return false;
+} 
+
+ 
+
+ $('#'+$catid).find('.selectitem').removeClass("selectedhighlight");
+
+
+
+    $(this).addClass("selectedhighlight");
+    
+
+return false ;
+});
 
 
 

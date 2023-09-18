@@ -185,43 +185,48 @@ if ($cart = $this->cart->contents()):
                 </div>
                 <button class="ltn__utilize-close">×</button>
             </div>
-            <div class="ltn__utilize-menu-search-form">
-                <form action="#">
-                    <input type="text" placeholder="Search...">
-                    <button><i class="fas fa-search"></i></button>
-                </form>
-            </div>
+           
             <div class="ltn__utilize-menu">
                 <ul>
-                    <li><a href="home.php">Home</a>
-                      
-                    </li>
-                    <li><a href="#about">About</a>
-                       
-                    </li>
-                   
-                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="<?php echo base_url() ; ?>home"><?php echo $this->Admin_model->translate("Home") ; ?></a>
+                            
+                                        </li>
+                                        <li ><a href="<?php echo base_url() ; ?>home/about"> <?php echo $this->Admin_model->translate("About Us") ; ?></a>
+                                          
+                                        </li>
+
+                                         <li ><a href="<?php echo base_url() ; ?>home/industry"><?php echo $this->Admin_model->translate("Industrial Uniforms") ?></a>
+                                            
+                                        </li>
+                                        <li ><a href="<?php echo base_url() ; ?>home/school"><?php echo $this->Admin_model->translate("School Uniforms") ?></a>
+                                           
+                                        </li>
+                                        
+                                        
+                                        <li><a href="<?php echo base_url() ; ?>home/contact"><?php echo $this->Admin_model->translate("Contact Us") ; ?></a></li>
+                                 
                 </ul>
             </div>
             <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
                 <ul>
                    
                     <li>
-                        <a href="wishlist.php" title="Wishlist">
-                            <span class="utilize-btn-icon">
+                        <a href="<?php echo base_url() ; ?>home/wishlist">
+                             <span class="utilize-btn-icon">
                                 <i class="far fa-heart"></i>
-                                <sup>3</sup>
+                                <!-- <sup>3</sup> -->
                             </span>
-                            Wishlist
-                        </a>
+                            <?php echo $this->Admin_model->translate("Wishlist") ; ?></a>
+
+
                     </li>
                     <li>
-                        <a href="<?php echo base_url() ; ?>home/viewcart" title="Shoping Cart">
+                          <a href="<?php echo base_url() ; ?>home/viewcart" title="<?php echo $this->Admin_model->translate("Shopping Cart") ; ?>">
                             <span class="utilize-btn-icon">
                                 <i class="fas fa-shopping-cart"></i>
-                                <sup>5</sup>
+                                <sup id="cartitem2"></sup>
                             </span>
-                            Shoping Cart
+                            <?php echo $this->Admin_model->translate("Shopping Cart") ; ?>
                         </a>
                     </li>
                 </ul>

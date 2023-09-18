@@ -32,6 +32,9 @@ if ($cart = $this->cart->contents()): ?>
 $total = 0;
  $sutotal = 0 ;
 $i = 1;
+$shipping  =  0 ;
+
+$ship  = false ;
  
 foreach ($cart as $item){
 
@@ -121,8 +124,14 @@ echo form_close();
                                     </tr>
                                     <?php $couponcode  = $this->session->userdata('coupon_code'); ?>
                                      <?php $sutotal = $item['subtotal'] + $sutotal ;
+
+                                     if($ship){
+                                        
                                         $shipping = $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
-                                        $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
+                                   
+                                     }
+                                     
+                                            $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
                                         $vat = 0 ;
                                         $discount =  0 ;
                                         $cname = '' ;
@@ -154,7 +163,12 @@ if($dtype == 'percent'){
                                        
 
 
-                                   <?php }  ?>
+                                   <?php
+                                
+                                if($item['purchaseType'] == 'shipping'){
+                                    $ship = true ;
+                                } 
+                                }  ?>
                                     
 
                                  
@@ -208,10 +222,20 @@ if(!empty( $couponcode )){ ?>
                                         <td><?php echo $this->Admin_model->translate("Cart Subtotal") ; ?></td>
                                         <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  $sutotal  ;?></td>
                                     </tr>
+
+                                  <?php
+                                  if($ship){ ?>
+
                                     <tr>
                                         <td><?php echo $this->Admin_model->translate("Shipping and Handing") ; ?></td>
                                         <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $shipping ; ?></td>
                                     </tr>
+                                    
+                                        
+                                   <?php } ?>  
+
+
+                                   
                                     <tr>
                                         <td><?php echo $this->Admin_model->translate("VAT") ; ?></td>
                                         <td><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo $vat ; ?></td>

@@ -162,8 +162,8 @@ button[type="submit"]{
 
   } ?> 
 
-                <div class="col-lg-6 align-self-center">
-                    <div class="blue-back" style="margin-left:-40px">
+                <div class="col-lg-6 align-self-center blue-back">
+                    <div class="" style="margin-left:-40px">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none"><?php echo $this->Admin_model->translate("About Us") ; ?> </h6>
                             <h4 class="section-title-in"><?php echo $this->Admin_model->translate("School") ; ?>  <br><?php echo $this->Admin_model->translate("Uniforms") ; ?> </h4>
@@ -189,12 +189,10 @@ button[type="submit"]{
                        
                     </div>
                 </div>
-                <div class="col-lg-6 align-self-center">
+                <div class="col-lg-6 align-self-center" style="background:url(<?php echo base_url() ; ?>uploads/images/banners/<?php echo $banner->image ?>);background-size:cover;height:410px;">
                     <div class="about-us-img-wrap about-img-left">
                        
-                           <?php if($imageexists){ ?> 
- <img src="<?php echo base_url() ; ?>uploads/images/banners/<?php echo $banner->image ?>" alt="About Us Image" class="img-fluid" width="370px" height="370px">
-                      <?php } ?>
+                           
 
                     </div>
                 </div>

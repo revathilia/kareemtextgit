@@ -128,14 +128,14 @@ foreach ($corporate as $value) {
                 <div class="col-md-6">
                   <div class="form-group"> 
                     <label for="first_name">Section 2 - Content</label>
-                    <textarea class="form-control"  type="text" name="sec2_content"><?php echo $data->sec2_content1 ?></textarea>
+                    <textarea class="form-control"  type="text" name="sec2_content"><?php echo $data->sec2_content ?></textarea>
                   </div>
                 </div>
 
                    <div class="col-md-6">
                   <div class="form-group"> 
                     <label for="first_name">Section 2 - Content - Arabic</label>
-                    <textarea class="form-control"  type="text" name="sec2_content_ar"><?php echo $data->sec2_content1_ar ?></textarea>
+                    <textarea class="form-control"  type="text" name="sec2_content_ar"><?php echo $data->sec2_content_ar ?></textarea>
                   </div>
                 </div>
 
@@ -185,56 +185,58 @@ foreach ($corporate as $value) {
 
                 <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Section 3 - Title 1</label>
+                    <label for="first_name">Vision - Title</label>
                    <input class="form-control"  type="text" name="sec3_title1" value="<?php echo $data->sec3_title1 ?>" >
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Section 3 Title 1 - Arabic</label>
+                    <label for="first_name">Vision Title - Arabic</label>
                    <input class="form-control"  type="text" name="sec3_title1_ar" value="<?php echo $data->sec3_title1_ar ?>" >
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Section 3 - Title 2</label>
-                   <input class="form-control"  type="text" name="sec3_title2" value="<?php echo $data->sec3_title2 ?>" >
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group"> 
-                    <label for="first_name">Section 3 Title 2 - Arabic</label>
-                   <input class="form-control"  type="text" name="sec3_title2_ar" value="<?php echo $data->sec3_title2_ar ?>" >
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group"> 
-                    <label for="first_name">Section 3 - Content 1</label>
+                    <label for="first_name">Vision Content</label>
                     <textarea class="form-control"  type="text" name="sec3_content1"><?php echo $data->sec3_content1 ?></textarea>
                   </div>
                 </div>
 
                    <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Section 3 -  Content 1- Arabic</label>
+                    <label for="first_name">Vision Content - Arabic</label>
                     <textarea class="form-control"  type="text" name="sec3_content1_ar"><?php echo $data->sec3_content1_ar ?></textarea>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Section 3 - Content 2</label>
+                    <label for="first_name">Mission - Title</label>
+                   <input class="form-control"  type="text" name="sec3_title2" value="<?php echo $data->sec3_title2 ?>" >
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Mission Title - Arabic</label>
+                   <input class="form-control"  type="text" name="sec3_title2_ar" value="<?php echo $data->sec3_title2_ar ?>" >
+                  </div>
+                </div>
+
+               
+
+                <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Mission - Content </label>
                     <textarea class="form-control"  type="text" name="sec3_content2"><?php echo $data->sec3_content2 ?></textarea>
                   </div>
                 </div>
 
                    <div class="col-md-6">
                   <div class="form-group"> 
-                    <label for="first_name">Section 3 -  Content 2- Arabic</label>
+                    <label for="first_name">Mission -  Content - Arabic</label>
                     <textarea class="form-control"  type="text" name="sec3_content2_ar"><?php echo $data->sec3_content2_ar ?></textarea>
                   </div>
                 </div>
@@ -319,6 +321,34 @@ foreach ($corporate as $value) {
                 </div>
 
 
+                <!-- <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Section 4 - Title</label>
+                   <input class="form-control"  type="text" name="sec4_title" value="<?php echo $data->sec4_title ?>" >
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Section 4 - Title - Arabic</label>
+                   <input class="form-control"  type="text" name="sec4_title_ar" value="<?php echo $data->sec4_title_ar ?>" >
+                  </div>
+                </div> -->
+
+                <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Section 4 Content</label>
+                    <textarea class="form-control"  type="text" name="sec4_content"><?php echo $data->sec4_content ?></textarea>
+                  </div>
+                </div>
+
+                   <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Section 4 Content - Arabic</label>
+                    <textarea class="form-control"  type="text" name="sec4_content_ar"><?php echo $data->sec4_content_ar ?></textarea>
+                  </div>
+                </div>
+
  
  
 
@@ -365,6 +395,34 @@ foreach ($corporate as $value) {
                 </div>
 
 
+
+                <!-- <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Section 5 - Title</label>
+                   <input class="form-control"  type="text" name="sec5_title" value="<?php echo $data->sec5_title ?>" >
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Section 5 - Title - Arabic</label>
+                   <input class="form-control"  type="text" name="sec5_title_ar" value="<?php echo $data->sec5_title_ar ?>" >
+                  </div>
+                </div> -->
+
+                <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Section 5 Content</label>
+                    <textarea class="form-control"  type="text" name="sec5_content"><?php echo $data->sec5_content ?></textarea>
+                  </div>
+                </div>
+
+                   <div class="col-md-6">
+                  <div class="form-group"> 
+                    <label for="first_name">Section 5 Content - Arabic</label>
+                    <textarea class="form-control"  type="text" name="sec5_content_ar"><?php echo $data->sec5_content_ar ?></textarea>
+                  </div>
+                </div>
 
                 
                 

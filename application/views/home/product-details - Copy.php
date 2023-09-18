@@ -36,6 +36,7 @@ $this->session->set_userdata('dir', 'ltr');
 		integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
 	<?php } ?>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700'>
+
  
 <style>
   .swatch {
@@ -128,32 +129,19 @@ $this->session->set_userdata('dir', 'ltr');
 
                         <form action="<?php echo base_url() ?>home/addtocart" id="productpage"    >
                         <div class="row">
-                              <div class="col-md-5" >
-
-                                     <div class="ltn__shop-details-img-gallery">
+                              <div class="col-md-5">
+                                <div class="ltn__shop-details-img-gallery">
                                        <div class="ltn__shop-details-large-img">
 
 
-                                     
-                                      <?php if(!empty($product_images)){ foreach ($product_images as $primages) { 
-                                            if(!empty($primages)){ ?>
+                                      <?php   array_unshift($product_images,$product->product_image);
+  ?>
+                                      <?php if(!empty($product_images)){ foreach ($product_images as $images) { 
+                                            if(!empty($images)){ ?>
                                        
-                                       <?php 
-                                       
-                                    if(strpos($primages, "_color_") !== false){
-                                        $imagename =  explode("_color_",$primages) ;
-                                        $images = $imagename[0] ;
-                                        $colorid = $imagename[1] ;
-
-                                    } else{
-                                        $images = $primages ;
-                                        $colorid = 0 ;
-                                    }                                    
-                                    
-                                       ?>
                                         
 
-                                         <div class="single-large-img colorimage color_<?php echo $colorid ; ?> " dir="rtl">
+                                         <div class="single-large-img" dir="rtl">
                                             <div class="row single-bg">
                                             <div class="col-md-6">
                                                 <div class="btn_bg">
@@ -176,7 +164,7 @@ $this->session->set_userdata('dir', 'ltr');
 </div>
 
                                             <a href="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" data-rel="lightcase:myCollection">
-                                                <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>"  alt="Image">
+                                                <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" alt="Image">
                                             </a>
                                         </div>
 
@@ -186,57 +174,29 @@ $this->session->set_userdata('dir', 'ltr');
 
                                          
                                     </div>
+                                    <div class="ltn__shop-details-small-img slick-arrow-2" >
 
-                            
-
-                           
-                            
-                                 <div class="ltn__shop-details-small-img slick-arrow-2"   >
-
-                              <!--  <?php 
-                            $img['product_images'] = $product_images ;
-                            $this->load->view("home/product_images", $img) ; ?> -->
-
-                             <?php if(!empty($product_images)){ foreach ($product_images as $primages) { 
-                                            if(!empty($primages)){ ?>
-                                       
-                                       <?php 
-                                       
-                                    if(strpos($primages, "_color_") !== false){
-                                        $imagename =  explode("_color_",$primages) ;
-                                        $images = $imagename[0] ;
-                                        $colorid = $imagename[1] ;
-
-                                    } else{
-                                        $images = $primages ;
-                                        $colorid = 0 ;
-                                    }
-
-
-                                    
-                                       ?>
+                                          <?php 
+ 
+                                         if(!empty($product_images)){ foreach ($product_images as $images) { 
+                                            if(!empty($images)){ ?>
                                       
 
                                           
 
-                                         <div class="single-small-img colorimage color_<?php echo $colorid ; ?>">
-
-
-                                            <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>"   alt="Image">
+                                         <div class="single-small-img">
+                                            <img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $images ?>" alt="Image">
                                         </div>
 
 
                                                  
                                        <?php } }} ?>    
 
-                             
-
-                             </div>
-                          
-
-
+                                       
+                                        
+                                    </div>
+                                </div>
                             </div>
-                             </div>
                             <div class="col-md-6">
                                 <div class="modal-product-info shop-details-info pl-0">
                                     <input type="hidden" name="product_id" value="<?php echo $product->id ; ?> ">
@@ -253,6 +213,8 @@ if($this->session->userdata('lang') == 'ar'){
 
 
                                     </h3>
+
+                                    <h5><?php echo  $product->product_code ;?></h5>
                                     <div class="product-price" id="price_det1">
                                         <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
                                          
@@ -429,7 +391,77 @@ if($this->session->userdata('lang') == 'ar'){
     <!-- SHOP DETAILS AREA END -->
 
 
+ <!-- PRODUCT SLIDER AREA START -->
+    <div class="ltn__product-slider-area ltn__product-gutter pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2">
+                        <h4 class="title-2"><?php echo $this->Admin_model->translate("Related Products") ; ?></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row ltn__related-product-slider-one-active slick-arrow-1">
+                 <?php if( !empty($product->related_products)  ){
+
+                    $relatedProducts = explode(',', $product->related_products);
+
+                    foreach ($relatedProducts as  $products) { 
+
+                        $industryuniform = $this->Admin_model->get_single_data('industry_products',array('id'=>$products)) ;
+if(!empty(   $industryuniform)){
+
+
+                        ?>
+
+                         <!-- ltn__product-item -->
+                 <div class="col-lg-12">
+                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                        <div class="product-img">
+                        <a href="<?php echo base_url() ; ?>home/product_details/<?php echo $industryuniform->id ?>"><img src="<?php echo base_url() ; ?>uploads/images/industry/<?php echo $industryuniform->product_image ?>" alt="#" width="160px" ></a>
+                            
+                            
+                        </div>
+                         <div class="product-info">
+                                                
+                                                <h2 class="product-title"><a href="<?php echo base_url() ; ?>home/product_details/<?php echo $industryuniform->id ?>">
+                                                 
+
+                                                <?php 
+if($this->session->userdata('lang') == 'ar'){
+     echo $industryuniform->ar_product_name ;
+}else{
+     echo $industryuniform->product_name ;
+}
+                                                    ?>
+                                              
+                                              </a></h2>
+                                                <?php  $product_price = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$industryuniform->id,'status'=>'Y'),'product_price asc');  
+  ?>
+                                                <div class="product-price">
+<?php  if($product_price){  ?>
+                                                <span><?php echo $this->Admin_model->translate("SAR") ; ?> <?php echo  ($product_price->offer_price != '0') ? $product_price->offer_price : $product_price->product_price ; ?></span>
+                                         
+                                                <?php echo  ($product_price->offer_price != '0') ? '<del>'.$this->Admin_model->translate("SAR").' ' .$product_price->product_price .'</del>' :  '' ; ?> 
+
+<?php } ?>
  
+                                                </div>
+                                            </div>
+                    </div>
+                </div>
+                       
+                  <?php    } 
+                  }
+
+                 } ?>
+               
+                 
+                <!--  -->
+            </div>
+        </div>
+    </div>
+    <!-- PRODUCT SLIDER AREA END -->
 
    <?php $this->load->view('home/footer')  ?>
 
@@ -678,6 +710,9 @@ if($this->session->userdata('lang') == 'ar'){
                                                     ?>
                                                      </h6>
 <div class="product-pricee" id="price_det2">
+
+<?php  $product_price = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$product->id,'status'=>'Y'),'product_price asc'); 
+    ?>
 <span><?php echo $this->Admin_model->translate("SAR") ; ?>  <?php echo ($product_price->offer_price != 0) ? $product_price->offer_price : $product_price->product_price ; ?></span>
 </div>
 </div>
@@ -881,36 +916,6 @@ $(document).on('change',".sizeval", function()
    });
  
 
- $(document).on('change',".colorselect", function()
-   { 
-
-
-      if ($(this).is(':checked')) {
-        var selectedcolor = $(this).data('color') ;
-        var product  = <?php echo $product->id ?>;
-
-         $.ajax({  
-    url:"<?php echo base_url(); ?>home/get_images_with_color",  
-    method:"POST",  
-    data:{product:product,color:selectedcolor},  
-    success:function(data)
-    { 
-      $('#imagesection').html(data); 
-    }
-    
-    });
-
- 
-
-      
-    }
-
-   
- 
-
-
-   });
-
  $(document).on('click', ' .add_to_wishlist', function(){  
    
 var productid = $(this).data('productid') ;
@@ -998,8 +1003,6 @@ function langAjax($lang){
 
   }
 
-
- 
 </script>
 
 </html>

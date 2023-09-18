@@ -256,11 +256,9 @@ button[type="submit"]{
   $imageexists = true ;
 
   } ?> 
-                <div class="col-lg-6 align-self-center">
+                <div class="col-lg-6 align-self-center" style="background:url(<?php echo base_url() ; ?>uploads/images/banners/<?php echo $banner->image ?>);background-size:cover; height:410px;">
                     <div class="about-us-img-wrap about-img-left">
-                      <?php if($imageexists){ ?> 
-<img src="<?php echo base_url() ; ?>uploads/images/banners/<?php echo $banner->image ?>" alt="About Us Image" class="img-fluid" width="540px" height="550px">
-                      <?php } ?>
+                      
 
 
                         
@@ -659,6 +657,7 @@ window.location.href="<?php echo base_url() ; ?>home/login"
     }else{
     $('#liton_wishlist_modal').html(html);  
     $('#liton_wishlist_modal').modal('show'); 
+    searchFilter();
     }
 
 

@@ -129,14 +129,13 @@ $this->session->set_userdata('dir', 'ltr');
 
                         <form action="<?php echo base_url() ?>home/addtocart" id="productpage"    >
                         <div class="row">
-                              <div class="col-md-5">
-                                <div class="ltn__shop-details-img-gallery">
+                            <div class="col-md-5" >
+                               <div class="ltn__shop-details-img-gallery" id="imagegallery" >
+
                                        <div class="ltn__shop-details-large-img">
 
 
-                                      <?php   array_unshift($product_images,$product->product_image);
-  ?>
-                                      <?php if(!empty($product_images)){ foreach ($product_images as $images) { 
+                                          <?php if(!empty($product_images)){ foreach ($product_images as $images) { 
                                             if(!empty($images)){ ?>
                                        
                                         
@@ -146,7 +145,7 @@ $this->session->set_userdata('dir', 'ltr');
                                             <div class="col-md-6">
                                                 <div class="btn_bg">
                                         <a href="#" title="Wishlist" 
-                                        class="add_to_wishlist" data-productid="<?php echo $product->id  ?>" >
+                                        class="add_to_wishlist" data-productid="<?php echo $product->id ?>" >
                                             <i class="far fa-heart"></i><?php echo $this->Admin_model->translate("Favourites") ; ?></a>
 </div>
 </div>
@@ -157,7 +156,7 @@ $this->session->set_userdata('dir', 'ltr');
             <i class="fab fa-facebook-f"></i>
             <i class="fab fa-twitter"></i>
             <i class="fab fa-instagram"></i>
-            <i class="fab fa-github"></i>
+            <i class="fab fa-github"></i> 
         </div>
     </div>
 </div>
@@ -195,7 +194,9 @@ $this->session->set_userdata('dir', 'ltr');
                                        
                                         
                                     </div>
-                                </div>
+                        
+                               </div>
+                               
                             </div>
                             <div class="col-md-6">
                                 <div class="modal-product-info shop-details-info pl-0">
@@ -550,7 +551,7 @@ if($this->session->userdata('lang') == 'ar'){
                                             <div class="ltn__social-media">
                                                 <ul>
                                                     <li><?php echo $this->Admin_model->translate("Share") ; ?>:</li>
-                                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                                    <li><a class="fbtn share gplus" href="https://plus.google.com/share?url=url"  title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                                                     <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
                                                     <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
                                                     <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
@@ -710,6 +711,9 @@ if($this->session->userdata('lang') == 'ar'){
                                                     ?>
                                                      </h6>
 <div class="product-pricee" id="price_det2">
+
+<?php  $product_price = $this->Admin_model->get_single_data('industry_product_price_size_det',array('product_id'=>$product->id,'status'=>'Y'),'product_price asc'); 
+    ?>
 <span><?php echo $this->Admin_model->translate("SAR") ; ?>  <?php echo ($product_price->offer_price != 0) ? $product_price->offer_price : $product_price->product_price ; ?></span>
 </div>
 </div>
@@ -911,6 +915,41 @@ $(document).on('change',".sizeval", function()
 
 
    });
+
+$( document ).ready(function() {
+
+getImageswithColor();
+
+});
+
+$('input[type=radio][name=color_selected]').change(function() {
+getImageswithColor();
+     
+});
+
+
+function getImageswithColor(){
+
+    var color  = $('input[name="color_selected"]:checked').val();
+    var product  = <?php echo $product->id ?>;
+    
+    $.ajax({  
+    url:"<?php echo base_url(); ?>home/get_images_with_color",  
+    method:"POST",  
+    data:{color:color,product:product},  
+    success:function(data)
+    { 
+
+      $('#imagegallery').html(data);
+       
+    }
+    
+    });
+ 
+
+}
+
+
  
 
  $(document).on('click', ' .add_to_wishlist', function(){  

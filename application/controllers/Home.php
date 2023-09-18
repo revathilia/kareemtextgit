@@ -62,8 +62,7 @@ class Home extends CI_Controller {
   $this->session->set_userdata('lastpage', $this->router->fetch_method());
    $homesession = $this->session->userdata('customerdet');
     if(empty($homesession)){ 
-     echo false ;
-     exit ;
+     redirect('home/login');
     }
 
     $data['banner'] = $this->Admin_model->get_single_data('banners',array('type'=>'wishlist','status'=>'Y')) ;
@@ -89,7 +88,11 @@ class Home extends CI_Controller {
       'sec3_title1' => $home->sec3_title1,
       'sec3_title2' => $home->sec3_title2,
       'sec3_content1' => $home->sec3_content1,
-      'sec3_content2' => $home->sec3_content2
+      'sec3_content2' => $home->sec3_content2,
+
+  
+      'sec4_content' => $home->sec4_content,
+      'sec5_content' => $home->sec5_content
        
       ) ;
 
@@ -101,7 +104,11 @@ $data = array(
   'sec3_title1' => $home->sec3_title1_ar,
   'sec3_title2' => $home->sec3_title2_ar,
   'sec3_content1' => $home->sec3_content1_ar,
-  'sec3_content2' => $home->sec3_content2_ar
+  'sec3_content2' => $home->sec3_content2_ar,
+
+ 
+      'sec4_content' => $home->sec4_content_ar,
+      'sec5_content' => $home->sec5_content_ar
 
     );
 
@@ -128,14 +135,32 @@ $data = array(
     
     $this->load->view('home/home',$data);
   }
+
+  public function terms(){
+    $data['terms'] = $this->Admin_model->get_single_data('terms_conditions',array('id'=>'1')) ;
+    $this->load->view('home/terms',$data);
+  }
+
+   public function privacy(){
+     $data['privacy'] = $this->Admin_model->get_single_data('privacy_policy',array('id'=>'1')) ;
+     $this->load->view('home/privacy',$data);
+  }
+  
    public function profile()
   {   
      
-    $homesession = $this->session->userdata('customerdet');
+     $this->session->set_userdata('lastpage', $this->router->fetch_method());
+   $homesession = $this->session->userdata('customerdet');
     if(empty($homesession)){ 
-     echo false ;
-     exit ;
+     redirect('home/login');
     }
+
+
+    // $homesession = $this->session->userdata('customerdet');
+    // if(empty($homesession)){ 
+    //  echo false ;
+    //  exit ;
+    // }
 
     $data['profile'] = $this->Admin_model->get_single_data('customer_master',array('id'=>$homesession['user_id'])) ;
 
@@ -994,8 +1019,7 @@ $level = 0 ;
 
    $insert =  $this->db->insert('enquiry_messages',$data);
      
-       
-                
+                      
       
       if($insert){
          $output['status'] = 'SUCCESS';
@@ -1031,13 +1055,14 @@ $level = 0 ;
         $pimg = array() ;
         foreach($imgs as $im){
 if($im){
-  $pimg[] = $im.'_color_'.$images['color_id'] ;
+  //$pimg[] = $im.'_color_'.$images['color_id'] ;
+  $pimg[] = $im ;
 }
            
         
         }
 
-        $imgs = implode(',', $pimg) ;
+  $imgs = implode(',', $pimg) ;
 
      
        // array_push($pimages,$pimg);
@@ -1110,52 +1135,52 @@ exit;
 
   public function get_images_with_color()
   {   
-//      $id = $this->input->post('product') ;
-//      $color = $this->input->post('color') ;
+     $id = $this->input->post('product') ;
+     $colorid = $this->input->post('color') ;
 
-//     $col = explode( '_', $color) ;
-//     $colorid = $col[1];
+     
 
-//      $data['product'] = $this->Admin_model->get_single_data('industry_products',array('id'=>$id));
+     $data['product'] = $this->Admin_model->get_single_data('industry_products',array('id'=>$id));
 
     
          
-//      $pimages  = array();
-//      $pimage = '' ;
-//      $product_images = $this->Admin_model->get_single_data('industry_product_images',array('product_id'=>$id,'color_id'=>$colorid)); 
+     $pimages  = array();
+     $pimage = '' ;
+     $product_images = $this->Admin_model->get_single_data('industry_product_images',array('product_id'=>$id,'color_id'=>$colorid)); 
   
 
-//       $colors = explode( ',', $data['product']->colors_available) ;
-     
-//       if(in_array($product_images->color_id, $colors)){
+      $colors = explode( ',', $data['product']->colors_available) ;
+      $pimage = '' ;
+     if(!empty($product_images)){
+      if(in_array($product_images->color_id, $colors)){
 
-//         $imgs = explode(',',$product_images->product_images);
+        $imgs = explode(',',$product_images->product_images);
 
-//         $pimg = array() ;
-//         foreach($imgs as $im){
-// if($im){
-//   $pimg[] = $im.'_color_'.$product_images->color_id ;
-// }
+        $pimg = array() ;
+        foreach($imgs as $im){
+if($im){
+  $pimg[] = $im  ;
+}
            
         
-//         }
+        }
 
-//         $imgs = implode(',', $pimg) ;
+        $imgs = implode(',', $pimg) ;
 
-//        $pimage .= "," . $imgs;
+       $pimage .= "," . $imgs;
 
-//       }
+      }
  
+     }
+      
     
 
-//     $pimages  = explode(',',$pimage) ; 
+    $pimages  = explode(',',$pimage) ; 
+   // array_unshift($pimages,$data['product']->product_image);
+    $data['product_id'] = $id ;
 
-//     array_unshift($pimages,$data['product']->product_image);
-
-//     $data['product_images'] = $pimages ;
-
-
-//  print_r( $pimages );
+ 
+    $data['product_images'] = $pimages ;
     $this->load->view('home/product_images', $data);
   }
 
@@ -1242,16 +1267,20 @@ $this->cart->product_name_rules = '[:print:]';
         );   
     }
 
-    if($purchaseType == 'shipping'){
+    
+    
+  if($purchaseType == 'shipping'){
    $data['location'] = $data_array['autocomplete_search'];
    $data['lat'] = $data_array['lat'];
    $data['long'] = $data_array['long'];
    $data['address'] = $data_array['address'];
+   $data['purchaseType'] = 'shipping';
     }else{
       $data['location'] = '';
    $data['lat'] = 0;
    $data['long'] = 0;
    $data['address'] = '' ;
+   $data['purchaseType'] = 'collect';
     }
  
     
@@ -1445,7 +1474,8 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
 
      $data['profile'] = $this->Admin_model->get_single_data('customer_master',array('id'=>$homesession['user_id'])) ;
 
-    $data['addresses'] = $this->Admin_model->get_single_data('customer_address',array('customer_id'=>$homesession['user_id'])) ;
+    $data['addresses'] = $this->Admin_model->get_single_data('customer_address',array('customer_id'=>$homesession['user_id'],'default_address'=>'Y')) ;
+    $data['pickupaddresses'] = $this->Admin_model->get_all_data('shop_addresses',array('status'=> 'Y')) ;
 
     $data['countries'] = $this->Admin_model->get_all_data('countries');
   
@@ -1478,7 +1508,7 @@ $this->Admin_model->insert_data('wishlist',$wishlist) ;
           'address_line2'=>$this->input->post('address_line2'),
           'city'=>$this->input->post('city'),
           'state'=>$this->input->post('state'),
-          'zip_code'=>$this->input->post('zip_code'),
+          //'zip_code'=>$this->input->post('zip_code'),
           'country'=>$this->input->post('country'),
           );
 
@@ -1539,14 +1569,76 @@ $this->Admin_model->update_data('customer_address',array('customer_id'=> $custId
 
 $paymentType = $this->input->post('paymentType') ;
 
+$this->load->library("phpmailer_library");
+$mail = $this->phpmailer_library->load();
+
+
 if($paymentType == 'check'){
 
 $cart = $this->cart->contents() ;
-          foreach($cart as $cartdata){
+
+$subtotal = 0 ;
 
 $discount = 0 ;
 $coupon = array() ;
-            if(!empty($couponcode)){
+
+
+$productData = array() ;
+
+          foreach($cart as $cartdata){
+
+
+
+ if($cartdata['type'] == 'industry'){
+  $product = $this->Admin_model->get_single_data('industry_products',array('id'=>$cartdata['id'])) ;
+
+$url = 'product_details' ;
+}else{
+  $product = $this->Admin_model->get_single_data('school_products',array('id'=>$cartdata['id'])) ;
+$url = 'uniform_det' ;
+
+}
+
+  
+
+ $productData[] = array('name'=> $product->product_name,'code'=>$product->product_code,'image'=>'uploads/images/'.$cartdata['type'].'/'.$product->product_image,'imgname'=>$product->product_image,'url'=> base_url().'home/'.$url.'/'.$product->id ) ;
+
+           
+
+//$order_details[] = json_encode($cartdata) ;
+
+
+
+$order_details['cartdata'][] = json_encode($cartdata) ;
+$order_details['purchaseType'][] = $cartdata['purchaseType'];
+
+
+$subtotal = $subtotal + $cartdata['subtotal'] ;
+
+              
+          }
+
+
+
+
+                        $vat = 0 ;
+                        $discount =  0 ;
+                        $cname = '' ;
+                        $shipping = 0 ;
+
+
+ $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
+
+    if(!empty($vat_percentage) && $vat_percentage != 0 ){
+          $vat = $subtotal * $vat_percentage /100 ;
+    }
+
+  $shipping =   $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
+
+
+
+
+ if(!empty($couponcode)){
                                             
              $coupon = $this->Admin_model->get_single_data('coupons',array('coupon_code'=>$couponcode)) ;
              $cname = $coupon->coupon_name ;
@@ -1555,36 +1647,150 @@ $coupon = array() ;
           
             if($dtype == 'percent'){
 
-              $discount =  $cartdata['subtotal'] * $dval/100 ;
+              $discount =  $subtotal * $dval/100 ;
 
             }elseif($dtype=='amount'){
                 $discount = $dval ;
             }
           }
 
-               $order_data = array(
+
+
+$totalAmt =  ($subtotal + $vat + $shipping) - $discount ;
+                  $order_data = array(
                     'customer_id' => $custId   ,
-                    'order_details' => json_encode($cartdata),
+                    //'order_details' => json_encode($cartdata),
                     'address_details' => json_encode($data),
-                    'total_amount' => $cartdata['subtotal'],
-                    'type' => $cartdata['type'],
+                    'sub_total' => $subtotal,
+                    'total_amount' => $totalAmt,
+                    'type' => $this->session->userdata('prouctType'),
                     'include_logo' => $include_logo,
                     'identity_card' => $fname ,
                     'paymentType' => $paymentType ,
                     'payment_status' => 'N',
-                    'vat_amount' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val'),
-                    'shipping_charge' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge'),
+                    'vat_amount' => $vat,
+                    'shipping_charge' => $shipping ,
                     'discount' => $discount,
                     'coupon_id' => (!empty($coupon) ?  $coupon->id : '' ) ,
                     'created_on' => date('Y-m-d H:i:s'), 
-                    'delivery_date' => date("Y-m-d", strtotime("+ 10 day")),                 
-                   
-
+                    'delivery_date' => date("Y-m-d", strtotime("+ 10 day")),                   
                     'order_status' => 1,
                     'notes' => $this->input->post('ltn__message')
                  ) ;
+ 
+
             $result = $this->Admin_model->insert_data('order_master', $order_data);
-          }
+ 
+
+foreach ($order_details as  $ovalue) {
+
+
+  $odet = array('order_id' => $result ,
+  'order_details' => $ovalue['cartdata'],
+  'purchaseType' => $ovalue['purchaseType'],
+  'o_status' =>1 
+   ) ;
+
+$odetails = $this->Admin_model->insert_data('order_details', $odet);
+}
+
+
+  
+
+
+ 
+
+  /* SMTP configuration */
+  $mail->isSMTP();
+ $mail->Priority = 1;
+// MS Outlook custom header
+// May set to "Urgent" or "Highest" rather than "High"
+$mail->AddCustomHeader("X-MSMail-Priority: High");
+// Not sure if Priority will also set the Importance header:
+$mail->AddCustomHeader("Importance: High");
+  $mail->Host     = 'smtp.gmail.com';
+  $mail->SMTPAuth = true;
+  $mail->Username = 'kareemtex007@gmail.com';
+  $mail->Password = 'rawkbxmgmjbnmkkp';
+  $mail->SMTPSecure = 'ssl';
+  $mail->Port     = 465;
+ 
+  $mail->setFrom('kareemtex007@gmail.com', 'KareemTex');
+  $mail->addReplyTo('kareemtex007@gmail.com', 'KareemTex');
+  //$mail->AddBCC("liai.revathikv@gmail.com", 'KareemTex');
+  /* Add a recipient */
+  $mail->addAddress($this->input->post('ltn__email'));  
+
+$prefix = strtoupper( substr($this->session->userdata('prouctType'), 0, 2));
+
+$orderid = str_pad($result, 5, "0", STR_PAD_LEFT) ;
+
+
+  /* Email subject */
+  $mail->Subject = 'KareemTex - Order Placed Successfully - #' . 'KT'. $prefix. $orderid  ;
+ 
+  /* Set email format to HTML */
+  //$mail->isHTML(true);
+  $mail->isHTML();
+
+
+  $message = '<b>Hello '.  $this->input->post('ltn__name') .' '.  $this->input->post('ltn__lastname').',</b><br> ' .'
+    Thank you for your order. We’ll send a confirmation when your order ships.<br>If you would like to view the status of your order, please visit Your Orders on '  ;
+
+    $message .= "<a href='".base_url().'home/profile'."'>KareemTex</a>" ;
+
+
+
+  $message .='<h3><u>Order Summary</u></h3><br>' ; 
+  $message .='<b>Order ID </b>'.'KT'. $prefix. $orderid .'<br>' ;
+  $message .='<b>Placed on </b>'.date('l, F d Y h:i:s') .'<br>' ;
+
+ 
+ 
+
+foreach ($productData as $pvalue) {
+   
+  $message .= '<br><table>' ;
+
+ 
+
+$imgPath = $pvalue['image'];
+$cid = md5($imgPath);
+$mail->AddEmbeddedImage($imgPath,'imagehere'.$cid, $pvalue['imgname']);
+
+ 
+
+ $message .='<tr><td><a target="_blank" href="'.$pvalue['url'].'">
+
+ 
+<img  style="height:100px !important;width:100px !important;"  src="cid:imagehere'.$cid.'" alt="'.$pvalue['name'].'"/>
+
+ </td>';
+ $message .= '<th>'.$pvalue['name'].'<br>'.$pvalue['code'].'</th></tr>' ;
+
+
+         $message .= '</table><br>';
+
+}
+
+$message .= 'Item Subtotal : SAR '. $subtotal  .'<br>'  ;
+$message .='VAT : SAR '.  $vat .'<br>';
+$message .='Shipping & Handling : SAR '.  $shipping .'<br>';
+$message .='Coupon Applied : SAR '. $discount .'<br>';
+$message .='<b>Order Total : SAR ' . $totalAmt .'</b><br><br>';
+
+
+
+ 
+  /* Email body content */
+  $mailContent = $message   ;
+    
+  //$mail->AddEmbeddedImage("uploads/services/madeen.png", "my-attach", "Instructions.png");
+  $mail->Body =  $mailContent ;
+
+ 
+  /* Send email */
+   $mail->send() ;
 
     if ($result == TRUE) {     
       //get setting info 
@@ -1599,13 +1805,67 @@ $coupon = array() ;
 
 }else{
 
-  $cart = $this->cart->contents() ;
-  $total = 0 ;
+   
+      $cart = $this->cart->contents() ;
+
+$subtotal = 0 ;
+
+$discount = 0 ;
+$coupon = array() ;
+
+
+$productData = array() ;
+
           foreach($cart as $cartdata){
 
-            $discount = 0 ;
-            $coupon = array() ;
-            if(!empty($couponcode)){
+
+
+ if($cartdata['type'] == 'industry'){
+  $product = $this->Admin_model->get_single_data('industry_products',array('id'=>$cartdata['id'])) ;
+
+$url = 'product_details' ;
+}else{
+  $product = $this->Admin_model->get_single_data('school_products',array('id'=>$cartdata['id'])) ;
+$url = 'uniform_det' ;
+
+}
+
+  
+
+ $productData[] = array('name'=> $product->product_name,'code'=>$product->product_code,'image'=>base_url().'uploads/images/'.$cartdata['type'].$product->product_image,'url'=> base_url().'home/'.$url.'/'.$product->id ) ;
+
+           
+
+$order_details['cartdata'][] = json_encode($cartdata) ;
+$order_details['purchaseType'][] = $cartdata['purchaseType'];
+
+
+$subtotal = $subtotal + $cartdata['subtotal'] ;
+
+              
+          }
+
+
+
+
+                        $vat = 0 ;
+                        $discount =  0 ;
+                        $cname = '' ;
+                        $shipping = 0 ;
+
+
+ $vat_percentage = $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val') ;
+
+    if(!empty($vat_percentage) && $vat_percentage != 0 ){
+          $vat = $subtotal * $vat_percentage /100 ;
+    }
+
+  $shipping =   $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge') ;
+
+
+
+
+ if(!empty($couponcode)){
                                             
              $coupon = $this->Admin_model->get_single_data('coupons',array('coupon_code'=>$couponcode)) ;
              $cname = $coupon->coupon_name ;
@@ -1614,38 +1874,55 @@ $coupon = array() ;
           
             if($dtype == 'percent'){
 
-              $discount =  $cartdata['subtotal'] * $dval/100 ;
+              $discount =  $subtotal * $dval/100 ;
 
             }elseif($dtype=='amount'){
                 $discount = $dval ;
             }
           }
 
-               $order_data = array(
+
+
+$totalAmt =  ($subtotal + $vat + $shipping) - $discount ;
+                  $order_data = array(
                     'customer_id' => $custId   ,
-                    'order_details' => json_encode($cartdata),
+                    //'order_details' => json_encode($cartdata),
                     'address_details' => json_encode($data),
-                    'total_amount' => $cartdata['subtotal'],
-                    'type' => $cartdata['type'],
+                    'sub_total' => $subtotal,
+                    'total_amount' => $totalAmt,
+                    'type' => $this->session->userdata('prouctType'),
                     'include_logo' => $include_logo,
                     'identity_card' => $fname ,
-                    'payment_type' => $paymentType ,
+                    'paymentType' => $paymentType ,
                     'payment_status' => 'N',
-                    'vat_amount' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','vat_val'),
-                    'shipping_charge' => $this->Admin_model->get_type_name_by_id('site_settings','id','1','shipping_charge'),
+                    'vat_amount' => $vat,
+                    'shipping_charge' => $shipping ,
                     'discount' => $discount,
                     'coupon_id' => (!empty($coupon) ?  $coupon->id : '' ) ,
                     'created_on' => date('Y-m-d H:i:s'), 
-                    'delivery_date' => date("Y-m-d", strtotime("+ 10 day")),        
+                    'delivery_date' => date("Y-m-d", strtotime("+ 10 day")),                   
                     'order_status' => 1,
                     'notes' => $this->input->post('ltn__message')
                  ) ;
-            $cardpayment = $this->Admin_model->insert_data('order_master', $order_data);
-            $total = $total + $cartdata['subtotal'] ;
-          }
+ 
 
-$checkoutId = $this->payment($total) ;
+            $result = $this->Admin_model->insert_data('order_master', $order_data);
+ 
 
+foreach ($order_details as  $ovalue) {
+
+
+$odet = array('order_id' => $result ,
+'order_details' => $ovalue['cartdata'],
+'purchaseType' => $ovalue['purchaseType'],
+'o_status' =>1 
+ ) ;
+
+$odetails = $this->Admin_model->insert_data('order_details', $odet);
+}
+
+
+$checkoutId = $this->payment($totalAmt) ;
 $checkout = array('result'=>'payment','checkoutId'=> $checkoutId) ;
 echo json_encode($checkout) ;
 exit ;
@@ -1747,10 +2024,11 @@ if(!empty(  $responseData)){
         }
       $data = array(   
       // 'name' => $this->input->post('name'),
-      // 'email' => $this->input->post('email'),
+      'created_on' => date('Y-m-d'),
+      'status'=>'Y',
       'phone_no' => $this->input->post('phone'),
         );
-$exists = $this->db->get_where('customer_master',array('phone_no'=>$this->input->post('phone')))->row();
+$exists = $this->db->get_where('customer_master',array('status'=>'Y','phone_no'=>$this->input->post('phone')))->row();
 
 
 if(!empty($exists)){
@@ -1846,7 +2124,7 @@ $Return['result'] = 'User already signed-up. Please Login';
     if($this->input->post('phone')==='') {
       $Return['error'] = "Phone number Required";
     } 
-    
+    $this->db->where('status','Y');
     $this->db->where('phone_no',$this->input->post('phone'));
     $query = $this->db->get('customer_master');
     if ($query->num_rows() == 0){
@@ -1866,9 +2144,11 @@ $Return['result'] = 'User already signed-up. Please Login';
         );
 
         $this->db->where('phone_no',$this->input->post('phone'));
+        $this->db->where('status','Y');
         $queryres = $this->db->get('customer_master')->row();
 
         $this->db->where('id',$queryres->id);
+        $this->db->where('status','Y');
         $result = $this->db->update('customer_master',$data);
        
 
@@ -1907,9 +2187,10 @@ $Return['result'] = 'User already signed-up. Please Login';
       exit ;
     }else{
       $this->db->where('phone_no',$phone);
+      $this->db->where('status','Y');
       $this->db->update('customer_master',array('verified'=>1));
 
-      $userdata = $this->Admin_model->get_single_data('customer_master',array('phone_no'=>$phone,'otp'=>$resotp,'verified'=>1));
+      $userdata = $this->Admin_model->get_single_data('customer_master',array('phone_no'=>$phone,'status'=>'Y','otp'=>$resotp,'verified'=>1));
      
     if (!empty($userdata)) {
       
@@ -2073,6 +2354,15 @@ if( $prodType != $applicable){
     
   }
 
+  public function invoice() {
+
+    $id = $this->uri->segment(3) ;
+
+$data['order'] = $this->Admin_model->get_single_data('order_master',array('id'=> $id ) );
+    
+$data['address'] = $this->Admin_model->get_single_data('contact_us_page',array('id'=>1))->box3_value ;     $this->load->view('home/invoice',$data);
+  }
+
 public function logout() {
   $session = $this->session->userdata('customerdet'); 
   $sess_array = array('customerdet' => '');
@@ -2088,7 +2378,8 @@ public function delete_account() {
   $this->session->sess_destroy();
 
   $Return['result'] = 'Successfully Deleted the account.';
-  redirect(base_url().'home', 'refresh');
+  echo true ;
+//  redirect(base_url().'home', 'refresh');
 }
    
  

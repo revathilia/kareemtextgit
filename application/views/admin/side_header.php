@@ -113,7 +113,7 @@ if($session['usertype'] == 'admin'){ ?>
  <li   id="s4_2" ><a href="<?php echo base_url()?>admin/industry_products"><?php echo $this->Admin_model->translate("Products") ?> </a></li>
   <li   id="s4_3"><a href="<?php echo base_url()?>admin/industry_inventory"><?php echo $this->Admin_model->translate("Inventory") ?></a></li>
   <li   id="s4_4"><a href="<?php echo base_url()?>admin/industry_orders"><?php echo $this->Admin_model->translate("Orders") ?></a></li>
-  <li   id="s4_5"><a href="<?php echo base_url()?>admin/industry_report"><?php echo $this->Admin_model->translate("Report") ?></a></li>
+  <li   id="s4_5"><a href="<?php echo base_url()?>admin/order_report"><?php echo $this->Admin_model->translate("Report") ?></a></li>
 
 
 </ul>
@@ -143,7 +143,7 @@ if($session['usertype'] == 'admin'){ ?>
   
   <li   id="s5_8"><a href="<?php echo base_url()?>admin/school_inventory"><?php echo $this->Admin_model->translate("Inventory") ?></a></li>
   <li   id="s5_9"><a href="<?php echo base_url()?>admin/uniform_orders"><?php echo $this->Admin_model->translate("Orders") ?></a></li>
-  <li   id="s5_10"><a href="<?php echo base_url()?>admin/school_report"><?php echo $this->Admin_model->translate("Report") ?></a></li>
+  <li   id="s5_10"><a href="<?php echo base_url()?>admin/order_report"><?php echo $this->Admin_model->translate("Report") ?></a></li>
 
 
 </ul>
@@ -165,6 +165,11 @@ if($session['usertype'] == 'admin'){ ?>
 <li id="6_5"><a href="<?php echo base_url()?>admin/contact"> <?php echo $this->Admin_model->translate("Contact Us") ?> </a></li>
 <li id="6_6"><a href="<?php echo base_url()?>admin/footer"> <?php echo $this->Admin_model->translate("Footer") ?> </a></li>
 
+
+<li id="6_7"><a href="<?php echo base_url()?>admin/privacy"> <?php echo $this->Admin_model->translate("Privacy Policy") ?> </a></li>
+
+<li id="6_8"><a href="<?php echo base_url()?>admin/terms"> <?php echo $this->Admin_model->translate("Terms & Conditions") ?> </a></li>
+
 </ul>
 
 </li>
@@ -174,6 +179,15 @@ if($session['usertype'] == 'admin'){ ?>
 <a class="waves-effect" href="<?php echo base_url() ?>admin/enquiries"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/dashboard.png">
 <span> <?php echo $this->Admin_model->translate("Enquiries") ?>   </span></a></li>
 
+<?php if ($logged_in_role == 'admin' ){ ?>
+
+<li id="7_1">
+<a class="waves-effect" href="<?php echo base_url() ?>admin/customers"><img class="menu-icon " src="<?php echo base_url()?>assets/images/sideheader_icons/dashboard.png">
+<span> <?php echo $this->Admin_model->translate("Customers") ?>   </span></a></li>
+
+<?php } ?>
+
+
  
 
 
@@ -182,7 +196,7 @@ if($session['usertype'] == 'admin'){ ?>
 
 <li id="8_1"><a href="<?php echo base_url()?>admin/settings"> <?php echo $this->Admin_model->translate("Settings") ?>  </a></li>
 <li id="8_2"><a href="<?php echo base_url()?>admin/coupons"> <?php echo $this->Admin_model->translate("Coupons") ?> </a></li>
-
+<li id="8_3"><a href="<?php echo base_url()?>admin/addresses"> <?php echo $this->Admin_model->translate("Shop Addresses") ?>  </a></li>
  
 
 </ul>

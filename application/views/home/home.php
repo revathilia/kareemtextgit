@@ -32,6 +32,23 @@ $this->session->set_userdata('dir', 'ltr');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
         <?php } ?>
     <link rel="stylesheet" href="<?php echo base_url() ; ?>assets/home_assets/css/responsive.css">
+<style>
+input[type="email"]{
+    background-color: var(--white);
+    border: 2px solid;
+    border-color: var(--border-color-9);
+    height: 65px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding-left: 40px;
+    font-size: 16px;
+    color: var(--ltn__paragraph-color);
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 0;
+    padding-right: 40px;
+}
+</style>
 </head>
 
 <body>
@@ -106,7 +123,7 @@ if($this->session->userdata('lang') == 'ar'){
 
                             <div class="col-md-3">
                             <div class="ltn__feature-icon">
-                              <p class="text-center">  <img src="<?php echo base_url() ; ?>uploads/images/<?php echo $offers['logo'] ?>" alt="#"></p>
+                              <p class="text-center">  <img src="<?php echo base_url() ; ?>uploads/images/about/<?php echo $offers['logo'] ?>" alt="#"></p>
                             </div>
                             <div class="ltn__feature-info">
                                 <h4  class="text-center"> <?php 
@@ -211,19 +228,19 @@ if($this->session->userdata('lang') == 'ar'){
    
  <!-- ABOUT US AREA START -->
     <div class="ltn__about-us-area pt-25  ">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6 align-self-center">
+                <div class="col-lg-6 align-self-center"  style="background:url(<?php echo base_url() ; ?>uploads/images/about/<?php echo $sec4_image ?>);background-size:cover; height:410px;">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url() ; ?>uploads/images/about/<?php echo $sec4_image ?>" alt="About Us Image" class="img-fluid">
+ 
                     </div>
                 </div>
-                <div class="col-lg-6 align-self-center">
-                    <div class="orange-back">
+                <div class="col-lg-6 align-self-center orange-back">
+                    <div class="">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none"><?php echo $this->Admin_model->translate("About Us") ; ?></h6>
                             <h4 class="section-title-in"><?php echo $this->Admin_model->translate("Industrial") ; ?> <br> <?php echo $this->Admin_model->translate("Uniforms") ; ?></h4>
-                           <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
+                           <p class="sec-ab-or"><?php echo  $sec4_content ?> </p>
                            <a href="<?php echo base_url() ; ?>home/industry" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?></a>
                         
                         </div>
@@ -237,15 +254,15 @@ if($this->session->userdata('lang') == 'ar'){
  
 
      <!-- ABOUT US AREA START -->
-     <div class="ltn__about-us-area pt-25 " style="margin-bottom:30px">
-        <div class="container">
+     <div class="ltn__about-us-area pt-25" style="margin-top:-30px;">
+        <div class="container-fluid">
             <div class="row">
-            <div class="col-lg-6 align-self-center">
-                    <div class="blue-back">
+            <div class="col-lg-6 align-self-center blue-back" >
+                    <div class="">
                         <div class="section-title-area ltn__section-title-2--- mb-30">
                             <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color d-none"><?php echo $this->Admin_model->translate("About Us") ; ?></h6>
                             <h4 class="section-title-in"><?php echo $this->Admin_model->translate("School") ; ?>  <br> <?php echo $this->Admin_model->translate("Uniforms") ; ?></h4>
-                           <p class="sec-ab-or">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </p>
+                           <p class="sec-ab-or"><?php echo  $sec5_content ?></p>
                            <a href="<?php echo base_url() ; ?>home/school" class="btn btn-white-black"><?php echo $this->Admin_model->translate("Shop Now") ; ?></a>
                         
                         </div>
@@ -253,9 +270,9 @@ if($this->session->userdata('lang') == 'ar'){
                        
                     </div>
                 </div>
-                <div class="col-lg-6 align-self-center">
+                <div class="col-lg-6 align-self-center" style="background:url(<?php echo base_url() ; ?>uploads/images/about/<?php echo $sec5_image ?>);background-size:cover; height:410px;">
                     <div class="about-us-img-wrap about-img-left">
-                        <img src="<?php echo base_url() ; ?>uploads/images/about/<?php echo $sec5_image ?>" alt="About Us Image" class="img-fluid" width="350px" height="350px">
+                        
                     </div>
                 </div>
                
@@ -298,7 +315,7 @@ if($this->session->userdata('lang') == 'ar'){
     <!-- BLOG AREA START (blog-3) -->
    
     <!-- ABOUT US AREA END -->
-    <div class="ltn__blog-area pt-115 pb-45">
+    <div class="ltn__blog-area pt-115">
         <div class="container">
             <!-- <div class="row">
                 <div class="col-lg-12">
@@ -321,7 +338,7 @@ if($this->session->userdata('lang') == 'ar'){
     <!-- BLOG AREA END -->
 
     <!-- BRAND LOGO AREA START -->
-    <div class="ltn__brand-logo-area ltn__brand-logo-1 section-bg-1--- pt-110--- pb-95 plr--9--- d-none---">
+    <div class="ltn__brand-logo-area ltn__brand-logo-1 section-bg-1---pb-95 plr--9--- d-none---">
         <div class="container">
             <div class="row">
                 <div class="col-md-5">

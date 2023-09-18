@@ -10,16 +10,31 @@
  * @It will helps to integrate Ajax pagination with loading image in CodeIgniter application.
  * @TutorialLink http://www.codexworld.com/ajax-pagination-in-codeigniter-framework/
  */
+
+ 
 class Ajax_pagination{
 
+    public function __construct()
+    {
+        $this->CI =& get_instance();
+
+        $this->CI->load->model('Admin_model'); 
+
+        $lang = $this->CI->session->userdata('lang') ;
+         
+ 
+
+    }
+    
+    
     var $base_url        = ''; // The page we are linking to
     var $total_rows      = ''; // Total number of items (database results)
     var $per_page        = ''; // Max number of items you want shown per page
     var $num_links       =  2; // Number of "digit" links to show before/after the currently viewed page
     var $cur_page        =  0; // The current page being viewed
     var $first_link      = '&laquo;';
-    var $next_link       = '<i class="fas fa-angle-double-right"></i>';
-    var $prev_link       = '<i class="fas fa-angle-double-left"></i>';
+    var  $next_link       = '<i class="fas fa-angle-double-right"></i>';
+    var  $prev_link       = '<i class="fas fa-angle-double-left"></i>';
     var $last_link       = '&raquo;';
     var $uri_segment     = '';
     var $full_tag_open   = '<ul>';
@@ -81,6 +96,10 @@ class Ajax_pagination{
      * @return    string
      */    
     function create_links(){
+
+        $lang = $this->CI->session->userdata('lang') ;
+
+         
         // If our item count or per-page total is zero there is no need to continue.
         if ($this->total_rows == 0 OR $this->per_page == 0){
            return '';
@@ -91,7 +110,7 @@ class Ajax_pagination{
 
         // Is there only one page? Hm... nothing more to do here then.
         if ($num_pages == 1){
-            $info = 'Showing : ' . $this->total_rows.' Results';
+            $info = $this->CI->Admin_model->translate("Showing"). ' : ' . $this->total_rows.' '.$this->CI->Admin_model->translate("Results");
            // return $info;
              return '';
         }
@@ -137,14 +156,14 @@ class Ajax_pagination{
         // SHOWING LINKS
         if ($this->show_count){
             $curr_offset = $CI->uri->segment($this->uri_segment);
-            $info = 'Showing ' . ( $curr_offset + 1 ) . ' to ' ;
+            $info = $this->CI->Admin_model->translate("Showing"). ' ' . ( $curr_offset + 1 ) . ' '.$this->CI->Admin_model->translate("to").' ' ;
 
             if( ( $curr_offset + $this->per_page ) < ( $this->total_rows -1 ) )
             $info .= $curr_offset + $this->per_page;
             else
             $info .= $this->total_rows;
 
-            $info .= ' of ' . $this->total_rows . ' Results ';
+            $info .= ' ' .$this->CI->Admin_model->translate("of").' ' . $this->total_rows . ' '.$this->CI->Admin_model->translate("Results");
             
         }
 
@@ -160,7 +179,7 @@ class Ajax_pagination{
             $i = $uri_page_number - $this->per_page;
             if ($i == 0) $i = '';
             $output .= $this->prev_tag_open 
-                    . $this->getAJAXlink( $i, $this->prev_link )
+                    . $this->getAJAXlink( $i, ($lang == 'eng') ? $this->prev_link : $this->next_link )
                     . $this->prev_tag_close;
         }
 
@@ -182,7 +201,7 @@ class Ajax_pagination{
         // Render the "next" link
         if ($this->cur_page < $num_pages){
             $output .= $this->next_tag_open 
-                . $this->getAJAXlink( $this->cur_page * $this->per_page , $this->next_link )
+                . $this->getAJAXlink( $this->cur_page * $this->per_page , ($lang == 'eng') ? $this->next_link : $this->prev_link )
                 . $this->next_tag_close;
         }
 
@@ -221,6 +240,10 @@ class Ajax_pagination{
 
 
      function show_links(){
+          $lang = $this->CI->session->userdata('lang') ;
+
+         
+
         // If our item count or per-page total is zero there is no need to continue.
         if ($this->total_rows == 0 OR $this->per_page == 0){
            return '';
@@ -231,7 +254,7 @@ class Ajax_pagination{
 
         // Is there only one page? Hm... nothing more to do here then.
         if ($num_pages == 1){
-            $info = 'Showing : ' . $this->total_rows.' Results';
+            $info = $this->CI->Admin_model->translate("Showing"). ' : ' . $this->total_rows.' '.$this->CI->Admin_model->translate("Results").' ';
             return $info;
         }
 
@@ -276,14 +299,14 @@ class Ajax_pagination{
         // SHOWING LINKS
         if ($this->show_count){
             $curr_offset = $CI->uri->segment($this->uri_segment);
-            $info = 'Showing ' . ( $curr_offset + 1 ) . ' to ' ;
+            $info = $this->CI->Admin_model->translate("Showing"). ' ' . ( $curr_offset + 1 ) . ' ' . $this->CI->Admin_model->translate("to").' ';
 
             if( ( $curr_offset + $this->per_page ) < ( $this->total_rows -1 ) )
             $info .= $curr_offset + $this->per_page;
             else
             $info .= $this->total_rows;
 
-            $info .= ' of ' . $this->total_rows . ' Results ';
+            $info .= ' '.$this->CI->Admin_model->translate("of").' ' . $this->total_rows . ' '.$this->CI->Admin_model->translate("Results");
             
         }
 
@@ -299,7 +322,7 @@ class Ajax_pagination{
             $i = $uri_page_number - $this->per_page;
             if ($i == 0) $i = '';
             $output .= $this->prev_tag_open 
-                    . $this->getAJAXlink( $i, $this->prev_link )
+                    . $this->getAJAXlink( $i, ($lang == 'eng') ? $this->prev_link : $this->next_link  )
                     . $this->prev_tag_close;
         }
 
@@ -321,7 +344,7 @@ class Ajax_pagination{
         // Render the "next" link
         if ($this->cur_page < $num_pages){
             $output .= $this->next_tag_open 
-                . $this->getAJAXlink( $this->cur_page * $this->per_page , $this->next_link )
+                . $this->getAJAXlink( $this->cur_page * $this->per_page , ($lang == 'eng') ? $this->next_link : $this->prev_link)
                 . $this->next_tag_close;
         }
 

@@ -1,3 +1,10 @@
+<?php $footer = $this->Admin_model->get_single_data('footer_page',array('id'=>'1')) ;
+$social = $this->Admin_model->get_single_data('social_media_links',array('id'=>'1')) ;
+$paymenticons = $this->Admin_model->get_all_data('payment_icons',array('status'=>'Y')) ;
+$session = $this->session->userdata('lang'); 
+ ?>
+      
+ 
 <footer class="ltn__footer-area  ">
         <div class="footer-top-area  section-bg-1 plr--5">
             <div class="container-fluid">
@@ -6,31 +13,45 @@
                         <div class="footer-widget footer-about-widget">
                             <div class="footer-logo">
                                 <div class="site-logo">
-                                    <img src="<?php echo base_url() ; ?>assets/home_assets/img/foo-logo.png" alt="Logo" style="margin-top:-15px;">
+                                    <img src="<?php echo base_url() ; ?>uploads/images/<?php echo $footer->logo ?>" alt="Logo" style="margin-top:-15px;">
                                     
                                 </div>
                             </div>
+
+                            
                           
-                                                       <p style="margin-top:10px">Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.</p>
+                            <p style="margin-top:10px">
+                            <?php 
+                            if($session =='eng') { 
+                                echo $footer->footer_text ; 
+                            }else{
+                                echo $footer->footer_text_ar ;
+                                } ?>
+                          </p>
                            
                             <div class="ltn__social-media mt-20">
                                 <ul>
-                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                                    <li><a href="<?php echo $social->facebook ; ?>" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="<?php echo $social->twitter ; ?>" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="<?php echo $social->linkedin ; ?>" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                    <li><a href="<?php echo $social->youtube ; ?>" title="Youtube"><i class="fab fa-youtube"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-2 col-md-6 col-sm-6 col-12">
                         <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Home</h4>
+                            <h4 class="footer-title"> <?php 
+                            if($session =='eng') { 
+                                echo $footer->links_title ; 
+                            }else{
+                                echo $footer->links_title_ar ;
+                                } ?></h4>
                             <div class="footer-menu">
                                 <ul>
                                     <li><a href="<?php echo base_url() ; ?>home/about"><?php echo $this->Admin_model->translate("About Us") ; ?></a></li>
-                                    <li><a href="#"><?php echo $this->Admin_model->translate("Privacy Policy") ; ?></a></li>
-                                    <li><a href="#"><?php echo $this->Admin_model->translate("Terms & Condition") ; ?></a></li>
+                                    <li><a href="<?php echo base_url() ; ?>home/privacy"><?php echo $this->Admin_model->translate("Privacy Policy") ; ?></a></li>
+                                    <li><a href="<?php echo base_url() ; ?>home/terms"><?php echo $this->Admin_model->translate("Terms & Condition") ; ?></a></li>
                                    
                                 </ul>
                             </div>
@@ -38,7 +59,12 @@
                     </div>
                     <div class="col-xl-2 col-md-6 col-sm-6 col-12">
                         <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title"><?php echo $this->Admin_model->translate("Categories") ; ?></h4>
+                            <h4 class="footer-title"> <?php 
+                            if($session =='eng') { 
+                                echo $footer->services_title ; 
+                            }else{
+                                echo $footer->services_title_ar ;
+                                } ?></h4>
                             <div class="footer-menu">
                                 <ul>
                                     <li><a href="<?php echo base_url() ; ?>home/industry"><?php echo $this->Admin_model->translate("Industrial Uniforms") ; ?></a></li>
@@ -52,7 +78,12 @@
                    
                     <div class="col-xl-4 col-md-6 col-sm-12 col-12">
                         <div class="footer-widget footer-newsletter-widget">
-                            <h4 class="footer-title"><?php echo $this->Admin_model->translate("Support") ; ?></h4>
+                            <h4 class="footer-title"><?php 
+                            if($session =='eng') { 
+                                echo $footer->contactus_title ; 
+                            }else{
+                                echo $footer->contactus_title_ar ;
+                                } ?></h4>
                             <div class="footer-address">
                                 <ul>
                                     <li>
@@ -60,14 +91,19 @@
                                             <i class="icon-placeholder"></i>
                                         </div>
                                         <div class="footer-address-info">
-                                            <p>Brooklyn, New York, United States</p>
+                                            <p><?php 
+                            if($session =='eng') { 
+                                echo $footer->address ; 
+                            }else{
+                                echo $footer->address_ar ;
+                                } ?></p>
                                         </div>
                                          <li>
                                         <div class="footer-address-icon">
                                             <i class="icon-call"></i>
                                         </div>
                                         <div class="footer-address-info">
-                                            <p><a href="tel:+0123-456789">+0123-456789</a></p>
+                                            <p><a href="tel:+<?php echo $footer->phone ?>">+<?php echo $footer->phone ?></a></p>
                                         </div>
                                     </li>
                                     <li>
@@ -75,7 +111,7 @@
                                             <i class="icon-mail"></i>
                                         </div>
                                         <div class="footer-address-info">
-                                            <p><a href="mailto:example@example.com">example@example.com</a></p>
+                                            <p><a href="mailto:<?php echo $footer->email ?>"><?php echo $footer->email ?></a></p>
                                         </div>
                                     </li>
                                     </li>
@@ -83,12 +119,23 @@
                                 </ul>
                             </div>
                             <br>
-                            <p class="accept"><?php echo $this->Admin_model->translate("We accept : ") ; ?></p >
+                            <p class="accept">
+                            <?php 
+                            if($session =='eng') { 
+                                echo $footer->follow_us ; 
+                            }else{
+                                echo $footer->follow_us_ar ;
+                                } ?> : 
+                                </p >
                             <ul class="visa">
-                              <li><img src="<?php echo base_url() ; ?>assets/home_assets/img/home/master1.svg"></li>  
-                              <li><img src="<?php echo base_url() ; ?>assets/home_assets/img/home/visa.svg"></li> 
-                              <li><img src="<?php echo base_url() ; ?>assets/home_assets/img/home/master1.svg"></li>  
-                              <li><img src="<?php echo base_url() ; ?>assets/home_assets/img/home/visa.svg"></li> 
+
+                                <?php if(!empty($paymenticons)){
+                                    foreach ($paymenticons as  $pvalue) { ?>
+                                        <li><img src="<?php echo base_url() ; ?>uploads/images/icons/<?php echo $pvalue['image'] ?>"></li>  
+                                  <?php  }
+                                } ?>
+                             
+                             
 </ul>
                         </div>
                     </div>
@@ -170,6 +217,8 @@ url: '<?php echo base_url(); ?>'+'home/loadcartqty',
 success: function (data) {
   
 $("#cartitem").html(data) ;
+$("#cartitem2").html(data) ;
+
  
 
 },
